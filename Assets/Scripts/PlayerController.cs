@@ -20,26 +20,13 @@ public class Controller : MonoBehaviour
     {
         direction = new Vector2(0.0f, 0.0f);
         bool keypressed = false;
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            direction += new Vector2(1.0f, 0.0f);
-            keypressed = true;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            direction += new Vector2(-1.0f, 0.0f);
-            keypressed = true;
-        }
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            direction += new Vector2(0.0f, 1.0f);
-            keypressed = true;
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            direction += new Vector2(0.0f, -1.0f);
-            keypressed = true;
-        }
+
+        float controlx = Input.GetAxisRaw("Horizontal");
+        float controly = Input.GetAxisRaw("Vertical");
+
+        direction = new Vector2(controlx, controly);
+        keypressed = controlx != 0 || controly != 0;
+        
 
         direction = direction.normalized;
         if (keypressed) {
@@ -49,7 +36,7 @@ public class Controller : MonoBehaviour
             rb.velocity += saved_direction * dash * Time.deltaTime;
         }
 
-        rb.velocity *= damper;
+        rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f); ;
         rb.velocity += direction * speed * Time.deltaTime; 
     }
 }
