@@ -8,7 +8,7 @@ public class Controller : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float dash;
     [SerializeField, Range(0,1)] private float damper;
-
+    [SerializeField] private weapon weapon;
     private Vector2 direction;
     private Vector2 saved_direction;
 
@@ -47,6 +47,10 @@ public class Controller : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space)) {
             rb.velocity += saved_direction * dash * Time.deltaTime;
+        }
+
+        if (Input.GetMouseButtonDown(0)) {
+            weapon.Fire();
         }
 
         rb.velocity *= damper;
