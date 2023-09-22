@@ -2,25 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class weapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     public int offset = 16;
     public int ammo;
+    //public int projectileSpeed;
     public GameObject projectileType;
-    public float projectileSpeed;
+    
+    //public 
 
-    [SerializeField] private GameObject parent;
+    private GameObject parent;
     SpriteRenderer sr;
-    
-    
-    /*weapon (int weaponType, GameObject projectileType) {
-        this.weaponType = weaponType;
-        this.projectileType = projectileType;
-    }*/
 
     // Start is called before the first frame update
     void Start()
     {
+        parent = transform.parent.gameObject;
         sr = GetComponent<SpriteRenderer>();
     }
 
@@ -46,8 +43,7 @@ public class weapon : MonoBehaviour
         
         
         GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
-        Debug.Log(Mathf.Cos(transform.rotation.z));
-        bullet.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(projectileSpeed*Mathf.Cos(transform.rotation.eulerAngles.z*Mathf.Deg2Rad), projectileSpeed*Mathf.Sin(transform.rotation.eulerAngles.z*Mathf.Deg2Rad),0));
+        bullet.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(bullet.GetComponent<Bullet>().projectileSpeed*Mathf.Cos(transform.rotation.eulerAngles.z*Mathf.Deg2Rad), bullet.GetComponent<Bullet>().projectileSpeed*Mathf.Sin(transform.rotation.eulerAngles.z*Mathf.Deg2Rad),0));
 
         ammo--;
         return true;

@@ -8,7 +8,7 @@ public class Controller : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float dash;
     [SerializeField, Range(0,1)] private float damper;
-    [SerializeField] private weapon weapon;
+    [SerializeField] private Weapon weapon;
     private Vector2 direction;
     private Vector2 saved_direction;
 
