@@ -25,7 +25,7 @@ public class TrackerController : MonoBehaviour
         else if (ai == AI.Range) 
         {
             transform.position = target.transform.position;
-            var dir = parent.transform.position - Camera.main.WorldToScreenPoint(transform.position);
+            var dir = transform.parent.transform.position - transform.position;
             var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
             transform.position += dir.normalized * offset;
