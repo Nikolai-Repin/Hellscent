@@ -54,6 +54,6 @@ public class Controller : MonoBehaviour
         }
 
         rb.velocity *= damper;
-        rb.velocity += direction * speed * Time.deltaTime;        
+        rb.velocity += direction * speed * Time.deltaTime; 
     }
 }
