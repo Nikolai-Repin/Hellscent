@@ -52,6 +52,7 @@ public class TrackerController : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
             transform.position += dir.normalized * offset;
 
+            // Tests for walls in between the enemy and the player
             RaycastHit2D hit = Physics2D.Raycast(target.position, dir.normalized, offset, walls.value);
             if (hit.collider != null)
             {
