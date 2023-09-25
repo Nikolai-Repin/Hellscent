@@ -8,7 +8,7 @@ public class Controller : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float dash;
     [SerializeField, Range(0,1)] private float damper;
-
+    [SerializeField] private Weapon weapon;
     private Vector2 direction;
     private Vector2 saved_direction;
 
@@ -37,6 +37,9 @@ public class Controller : MonoBehaviour
         }
 
         rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f); ;
+        if (Input.GetMouseButtonDown(0)) {
+            weapon.Fire();
+        }
         rb.velocity += direction * speed * Time.deltaTime; 
     }
 }

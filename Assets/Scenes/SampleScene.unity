@@ -72,21 +72,21 @@ LightmapSettings:
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
-    m_BakeBackend: 0
+    m_BakeBackend: 1
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
-    m_PVRSampleCount: 500
+    m_PVRSampleCount: 512
     m_PVRBounces: 2
-    m_PVREnvironmentSampleCount: 500
+    m_PVREnvironmentSampleCount: 256
     m_PVREnvironmentReferencePointCount: 2048
-    m_PVRFilteringMode: 2
-    m_PVRDenoiserTypeDirect: 0
-    m_PVRDenoiserTypeIndirect: 0
-    m_PVRDenoiserTypeAO: 0
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
     m_PVRFilterTypeDirect: 0
     m_PVRFilterTypeIndirect: 0
     m_PVRFilterTypeAO: 0
-    m_PVREnvironmentMIS: 0
+    m_PVREnvironmentMIS: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &242093719
+--- !u!1 &57988564
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,24 +214,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
+--- !u!81 &57988565
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
+  m_GameObject: {fileID: 57988564}
   m_Enabled: 1
---- !u!20 &519420031
+--- !u!20 &57988566
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
+  m_GameObject: {fileID: 57988564}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -257,7 +257,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.390837
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -265,21 +265,21 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 0
+  m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 0
+  m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &519420032
+--- !u!4 &57988567
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
+  m_GameObject: {fileID: 57988564}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.74, y: -2.34, z: -10}
@@ -522,16 +522,68 @@ PrefabInstance:
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: -3558676805350794031, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: damper
-      value: 0.95
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 936644168}
+    - target: {fileID: 2376104330443926614, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.846
       objectReference: {fileID: 0}
-    - target: {fileID: 808921467763219813, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: m_Interpolate
+    - target: {fileID: 2376104330443926614, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2376104330443926614, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2376104330443926614, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2376104330443926614, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2376104330443926614, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3246128399018723868, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102891628024463206, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: ammo
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102891628024463206, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: offset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102891628024463206, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: projectileType
+      value: 
+      objectReference: {fileID: 6942168956635508771, guid: deb5f71d6141a4c43a11e4fbb2295da7, type: 3}
+    - target: {fileID: 4102891628024463206, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: projectileSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5047985348422371586, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: m_Size.x
+      value: 1.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5047985348422371586, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: m_Size.y
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 5047985348422371586, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9e03ac6d9f61d514d8a78dd8ac08ad01, type: 3}
+    - target: {fileID: 5047985348422371586, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8428924622005797696, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_LocalPosition.x
