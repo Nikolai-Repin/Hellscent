@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
     //public 
 
     private GameObject parent;
-    SpriteRenderer sr;
+    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour
         
         GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
         bullet.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(bullet.GetComponent<Bullet>().projectileSpeed*Mathf.Cos(transform.rotation.eulerAngles.z*Mathf.Deg2Rad), bullet.GetComponent<Bullet>().projectileSpeed*Mathf.Sin(transform.rotation.eulerAngles.z*Mathf.Deg2Rad),0));
-
+    
         ammo--;
         return true;
     }
