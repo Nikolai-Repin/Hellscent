@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
     {
        if (healthAmount <= 0){
 
-        Log.Break();
+        Debug.Break();
        } 
       
     }
