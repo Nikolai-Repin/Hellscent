@@ -7,16 +7,15 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Image healthbar;
-    public float healthAmount = 100;
-
+     public float healthAmount = 100;
+        public Image healthbar;
     
     
     void Start()
     
     
     {
-        Debug.Log("start: " + healthbar);
+      
     }
 
     // Update is called once per frame
@@ -24,29 +23,21 @@ public class Health : MonoBehaviour
     {
        if (healthAmount <= 0){
 
-        Application.LoadLevel("Your Dead");
+        Log.Break();
        } 
-       if (Input.GetKeyDown(KeyCode.E)){
-
-        TakeDamage(20);
-       }
+      
     }
 
     public void TakeDamage(float damage){
       
        healthAmount -= damage;
-       
-       try {
-        Debug.Log("before");
-   healthbar.fillAmount = healthAmount / 100;
-   Debug.Log("after");
+      
+
+      healthbar.fillAmount = healthAmount / 100;
+
        }
-       catch (NullReferenceException ex){
-        Debug.Log("caught exception");
-        Debug.Log(ex);
-       }
-        Debug.Log("healthAmount :: " + (healthAmount/100.0));
+
         
     }
     
-}
+

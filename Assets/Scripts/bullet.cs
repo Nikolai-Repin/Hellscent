@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     
     public int maxLife; //How long a bullet should exist for
+    
 
     public int projectileSpeed;
 
