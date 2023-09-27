@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
 
     private float lifeTime = 0f;
 
+
     void Update() {
         lifeTime += Time.deltaTime;
 
@@ -22,6 +23,12 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) 
     {
+        
+        
+        if (other.gameObject.tag == "Enemy") {
+          Health health =  other.gameObject.GetComponent<Health>();
+         health.TakeDamage(20);
+        }
         Destroy(gameObject);
     }
 
