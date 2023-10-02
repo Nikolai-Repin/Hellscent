@@ -11,9 +11,9 @@ public class Health : MonoBehaviour
    
    void Update()
    {
-       if (healthAmount <= 0) {
-        Debug.Break();
-       } 
+      if (healthAmount <= 0) {
+         Debug.Break();
+      } 
    }
 
    public void TakeDamage(float damage) {

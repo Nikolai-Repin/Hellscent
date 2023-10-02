@@ -9,11 +9,13 @@ public class Controller : MonoBehaviour
     [SerializeField] private float dash;
     [SerializeField, Range(0,1)] private float damper;
     [SerializeField] private Weapon weapon;
+    [SerializeField] private static int damage;
     private Vector2 direction;
     private Vector2 saved_direction;
 
     void Start () {
         rb = GetComponent<Rigidbody2D>();
+        damage = 20;
     }
 
     void Update()
@@ -27,7 +29,6 @@ public class Controller : MonoBehaviour
         direction = new Vector2(controlx, controly);
         keypressed = controlx != 0 || controly != 0;
         
-
         direction = direction.normalized;
         if (keypressed) {
             saved_direction = direction;
@@ -40,6 +41,20 @@ public class Controller : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) {
             weapon.Fire();
         }
-        rb.velocity += direction * speed * Time.deltaTime; 
+        rb.velocity += direction * speed * Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.J)) {
+            Debug.Log(GetDamage());
+        }
     }
+
+    public static int GetDamage() {
+        return damage;
+    }
+
+    // Method to increase the damage that the player deals using a weapon.
+    public static void AddDamage(int BonusDamage) {
+        damage += BonusDamage;
+    }
+
 }
