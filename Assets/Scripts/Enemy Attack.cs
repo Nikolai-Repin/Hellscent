@@ -13,6 +13,15 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Attacking();
     }
+function Attacking(){
+
+var Shoot = Instantiate(bullet)
+
+
+
+
 }
+}
+
