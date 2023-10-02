@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Enemy") {
             Health health =  other.gameObject.GetComponent<Health>();
-            health.TakeDamage(damage);
+            health.TakeDamage(20);
         }
         if (other.GetComponent<Bullet>() == null) { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
             Destroy(gameObject);
