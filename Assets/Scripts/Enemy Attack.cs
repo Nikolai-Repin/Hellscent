@@ -12,6 +12,7 @@ public class EnemyAttack : MonoBehaviour
     private SpriteRenderer sr;
     private Controller controller;
     public int NextAttackTimer = 5;
+    public GameObject target;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,9 @@ public class EnemyAttack : MonoBehaviour
     void Update()
     {
       transform.position = parent.transform.position;
+      Vector3 Look = transform.InverseTransformPoint(target.transform.position);
+      float Angle = Mathf.Atan2(Look.y, Look.x) * Mathf.Rad2Deg;
+      transform.Rotate(0,0, Angle);
        if(NextAttackTimer > 5){
         Attacking();
        NextAttackTimer = -1;
