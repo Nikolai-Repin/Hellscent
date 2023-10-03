@@ -1,45 +1,104 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Controller : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    [SerializeField] private float speed;
-    [SerializeField] private float dash;
-    [SerializeField, Range(0,1)] private float damper;
-    [SerializeField] private Weapon weapon;
-    private Vector2 direction;
-    private Vector2 saved_direction;
 
-    void Start () {
+    public float moveSpeed = 1f;
+    public float collisionOffset = 0.05f;
+    public ContactFilter2D movementFilter;
+
+    Vector2 movementInput;
+    SpriteRenderer spriteRenderer;
+    Rigidbody2D rb;
+    Animator animator;
+    List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+    bool canMove = true;
+
+    // Start is called before the first frame update
+    void Start() {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
-    {
-        direction = new Vector2(0.0f, 0.0f);
-        bool keypressed = false;
+    private void FixedUpdate() {
+        if(canMove) {
 
-        float controlx = Input.GetAxisRaw("Horizontal");
-        float controly = Input.GetAxisRaw("Vertical");
+        // If movement input is not 0 try to move
+        if(movementInput != Vector2.zero) {
+            bool success = TryMove(movementInput);
 
-        direction = new Vector2(controlx, controly);
-        keypressed = controlx != 0 || controly != 0;
-        
+            if(!success) {
+                success = TryMove(new Vector2(movementInput.x, 0));
 
-        direction = direction.normalized;
-        if (keypressed) {
-            saved_direction = direction;
+                if(!success) {
+                    success = TryMove(new Vector2(0, movementInput.y));
+                }
+            }
+
+            animator.SetBool("isMoving", success);
         }
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            rb.velocity += saved_direction * dash * Time.deltaTime;
-        }
+            else {
+                animator.SetBool("isMoving", false);
+            }
 
-        rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f); ;
-        if (Input.GetMouseButtonDown(0)) {
-            weapon.Fire();
+            // Set direction of Sprite to movement direction (Right and Left)
+            if(movementInput.x < 0) {
+               spriteRenderer.flipX = true;
+            }
+            else if(movementInput.x > 0) {
+                spriteRenderer.flipX = false;
+            }
+
+            // Set direction of Sprite to movement direction (Up and Down)
+            if(movementInput.y > 0) {
+                animator.SetBool("movingUp", true);
+            }
+            else {
+                animator.SetBool("movingUp", false);
+            }
+            if(movementInput.y < 0) {
+                animator.SetBool("movingDown", true);
+            }
+            else {
+                animator.SetBool("movingDown", false);
+            }
         }
-        rb.velocity += direction * speed * Time.deltaTime; 
+    }
+
+    private bool TryMove(Vector2 direction) {
+        if(direction != Vector2.zero) {
+        int count = rb.Cast(
+            direction,
+            movementFilter,
+            castCollisions,
+            moveSpeed * Time.fixedDeltaTime + collisionOffset);
+
+        if(count == 0) {
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    else {
+        // Can't move if there's no directin to move in
+        return false;
+    }
+}
+    void OnMove(InputValue movementValue) {
+        movementInput = movementValue.Get<Vector2>();
+    }
+
+    public void LockMovement() {
+        canMove = false;
+    }
+
+    public void UnlockMovement() {
+        canMove = true;
     }
 }
