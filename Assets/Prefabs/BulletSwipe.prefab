@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 107568188245360982}
   - component: {fileID: 7779259379107536370}
   - component: {fileID: 1413869230194000966}
+  - component: {fileID: 9217917699912712129}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BulletSwipe
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 6942168956635508771}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.72, y: -2.12, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,10 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ba1dc8c0b46274ca825bede3f379f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 5
-  damage: 1
-  projectileSpeed: 500
-  pierce: 1
+  maxLife: 1
+  damage: 50
+  projectileSpeed: 0
+  pierce: 1000
+  reflectable: 0
   creator: {fileID: 0}
 --- !u!212 &107568188245360982
 SpriteRenderer:
@@ -93,12 +95,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 298bf6a893cfdc945a1071882af8416b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -136,9 +138,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.11
 --- !u!50 &1413869230194000966
 Rigidbody2D:
   serializedVersion: 4
@@ -166,3 +168,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9217917699912712129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6942168956635508771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666317ef1be0e934ba0fce0e099bbd28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 0
+  damage: 0
+  projectileSpeed: 0
+  pierce: 0
+  reflectable: 0
+  creator: {fileID: 0}
+  reflect: 0

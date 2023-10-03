@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
     
-    public float maxLife; //How long a bullet should exist for, in seconds, I think.
-    public float damage;
-    public int projectileSpeed;
+    [SerializeField] private float maxLife; //How long a bullet should exist for, in seconds, I think.
+    [SerializeField] private float damage;
+    [SerializeField] private int projectileSpeed;
+    [SerializeField] private int pierce;
+    [SerializeField] private bool reflectable;
 
     public GameObject creator;
     private float lifeTime = 0f;
 
+    public void LaunchProjectile(Quaternion rotation) {
+        GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(projectileSpeed*Mathf.Cos(rotation.eulerAngles.z*Mathf.Deg2Rad), projectileSpeed*Mathf.Sin(rotation.eulerAngles.z*Mathf.Deg2Rad),0));
+    }
 
     void Update() {
         lifeTime += Time.deltaTime;
@@ -18,6 +23,7 @@ public class Bullet : MonoBehaviour {
         //This being called every frame could be laggy, it's likely that there's a better way to do this
         if (lifeTime >= maxLife) {
             Destroy(gameObject);
+            Debug.Log("age");
         }
     }
 
@@ -25,9 +31,16 @@ public class Bullet : MonoBehaviour {
         if (other.gameObject.tag == "Enemy") {
             Health health =  other.gameObject.GetComponent<Health>();
             health.TakeDamage(damage);
+            pierce--;
         }
-        if (other.GetComponent<Bullet>() == null) { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
+        if (other.gameObject.tag == "Wall") { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
+            pierce--;
+        }
+        if (pierce <= 0) {
             Destroy(gameObject);
         }
     }
+
+    public int getProjectileSpeed() {return projectileSpeed;}
+    public bool getReflectable() {return reflectable;}
 }
