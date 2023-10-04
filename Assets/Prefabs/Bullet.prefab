@@ -49,8 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLife: 5
   damage: 1
-  projectileSpeed: 500
+  projectileSpeed: 5
   pierce: 1
+  reflectable: 0
   creator: {fileID: 0}
 --- !u!212 &107568188245360982
 SpriteRenderer:
@@ -93,7 +94,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e3a47a53c76dc35449e1e4c1e6f77d3e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
