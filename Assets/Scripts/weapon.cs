@@ -28,7 +28,6 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         transform.position = parent.transform.position;
-        //var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.parent.position);
         var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
@@ -53,7 +52,6 @@ public class Weapon : MonoBehaviour
             bulletScript.creator = transform.gameObject;
             bulletScript.LaunchProjectile(transform.rotation);
             
-
             ammo--;
             cooldown = cooldownTime;
             return true;

@@ -13,15 +13,22 @@ public class Bullet : MonoBehaviour {
     public GameObject creator; //Who created this bullet
     private float lifeTime = 0f; //How long the bullet has existed for
 
+    //Defines how the bullet should move when the bullet is first fired
     public virtual void LaunchProjectile(Quaternion rotation) {
-        GetComponent<Rigidbody2D>().velocity = (new Vector3(projectileSpeed*Mathf.Cos(rotation.eulerAngles.z*Mathf.Deg2Rad), projectileSpeed*Mathf.Sin(rotation.eulerAngles.z*Mathf.Deg2Rad),0)); //This line is ***rough*** but I can't be bothered to add more variables to this
+        SetProjectileVelocity(rotation, projectileSpeed);
     }
 
+    //Sets bullet velocity based on rotation, using bullet speed
     public virtual void SetProjectileVelocity(Quaternion rotation) {
-        GetComponent<Rigidbody2D>().velocity = new Vector3(projectileSpeed * Mathf.Cos(rotation.eulerAngles.z * Mathf.Deg2Rad), projectileSpeed * Mathf.Sin(rotation.eulerAngles.z * Mathf.Deg2Rad), 0);
+        SetProjectileVelocity(rotation, projectileSpeed);
     }
+
+    //Sets bullet velocity based on rotation and how fast it should move
     public virtual void SetProjectileVelocity(Quaternion rotation, float strength) {
-        GetComponent<Rigidbody2D>().velocity = new Vector3(strength * Mathf.Cos(rotation.eulerAngles.z * Mathf.Deg2Rad), strength * Mathf.Sin(rotation.eulerAngles.z * Mathf.Deg2Rad), 0);
+        Vector2 newVelocity = new Vector2();
+        newVelocity.x = strength * Mathf.Cos(rotation.eulerAngles.z * Mathf.Deg2Rad);
+        newVelocity.y = strength * Mathf.Sin(rotation.eulerAngles.z * Mathf.Deg2Rad);
+        GetComponent<Rigidbody2D>().velocity = newVelocity;
     }
 
     void Update() {
