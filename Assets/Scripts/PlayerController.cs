@@ -9,13 +9,13 @@ public class Controller : MonoBehaviour
     [SerializeField] private float dash;
     [SerializeField, Range(0,1)] private float damper;
     [SerializeField] private Weapon weapon;
-    [SerializeField] private static int damage;
+    [SerializeField] private static double damage;
     private Vector2 direction;
     private Vector2 saved_direction;
 
     void Start () {
         rb = GetComponent<Rigidbody2D>();
-        damage = 20;
+        damage = 20d;
     }
 
     void Update()
@@ -48,12 +48,12 @@ public class Controller : MonoBehaviour
         }
     }
 
-    public static int GetDamage() {
+    public static double GetDamage() {
         return damage;
     }
 
     // Method to increase the damage that the player deals using a weapon.
-    public static void AddDamage(int BonusDamage) {
+    public static void AddDamage(double BonusDamage) {
         damage += BonusDamage;
     }
 

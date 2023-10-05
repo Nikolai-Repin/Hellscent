@@ -5,9 +5,9 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     
-    public int maxLife; //How long a bullet should exist for
+    [SerializeField] private double damage;
     public int projectileSpeed;
-    public int damage;
+    public int maxLife; //How long a bullet should exist for
 
     private float lifeTime = 0f;
 
@@ -17,7 +17,6 @@ public class Bullet : MonoBehaviour
 
     void Update() {
         lifeTime += Time.deltaTime;
-        damage = Controller.GetDamage();
         //This being called every frame could be laggy, it's likely that there's a better way to do this
         if (lifeTime >= maxLife) {
             Destroy(gameObject);
@@ -27,6 +26,8 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.gameObject.tag == "Enemy") {
+            // Enemy Health doesn't work for some reason, so I commented it for now.
+
             //Health health =  other.gameObject.GetComponent<Health>();
             //health.TakeDamage(damage);
         }
