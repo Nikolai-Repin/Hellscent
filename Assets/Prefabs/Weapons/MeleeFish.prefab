@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2112838046428369762}
   - component: {fileID: 7182153838417077510}
   m_Layer: 0
-  m_Name: SunLauncher
+  m_Name: MeleeFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9e1e625ec35dee8419a8d30db4d08ffa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ab7ba4bca2030874187e99441d4a754b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9f1a44a96814ba583364c39cc1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 2
-  ammo: -1
-  projectileType: {fileID: 6942168956635508771, guid: 45417f9a9eea53a459be0d7aff50990f, type: 3}
-  cooldownTime: 2
-  kickback: 5
+  offset: 0.2
+  ammo: 500
+  projectileType: {fileID: 6942168956635508771, guid: eec1fe8b1ba09e64b977905a9c79f0e0, type: 3}
+  cooldownTime: 0.3
+  kickback: -0.5

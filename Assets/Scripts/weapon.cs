@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] public int offset = 2;
+    [SerializeField] public float offset = 2F;
     [SerializeField] public int ammo = -1;
     [SerializeField] public GameObject projectileType;
     [SerializeField] public float cooldownTime = 0.5F;
@@ -21,15 +21,14 @@ public class Weapon : MonoBehaviour
         parent = transform.parent.gameObject;
         sr = GetComponent<SpriteRenderer>();
         controller = parent.GetComponent<Controller>();
-        controller.heldWeapons.Add(GetComponent<Weapon>());
-        controller.ChangeWeapon(controller.heldWeapons.Count-1);
+        controller.NewWeapon(GetComponent<Weapon>());
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position = parent.transform.position;
-        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.parent.position);
         var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
         transform.position += dir.normalized * offset;
@@ -50,9 +49,9 @@ public class Weapon : MonoBehaviour
         if (cooldown <= 0) {
             GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
             Bullet bulletScript = bullet.GetComponent<Bullet>();
-            bullet.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(bulletScript.projectileSpeed*Mathf.Cos(transform.rotation.eulerAngles.z*Mathf.Deg2Rad), bulletScript.projectileSpeed*Mathf.Sin(transform.rotation.eulerAngles.z*Mathf.Deg2Rad),0));
             bulletScript.creator = transform.gameObject;
-
+            bulletScript.LaunchProjectile(transform.rotation);
+            
             ammo--;
             cooldown = cooldownTime;
             return true;
@@ -60,6 +59,8 @@ public class Weapon : MonoBehaviour
 
         return false;
     }
+
+    public float GetOffset() {return offset;}
 
 
 }
