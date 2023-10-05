@@ -44,8 +44,8 @@ public class EnemyWeapon : MonoBehaviour
     {
         GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bullet.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(bulletScript.projectileSpeed*Mathf.Cos(transform.rotation.eulerAngles.z*Mathf.Deg2Rad), bulletScript.projectileSpeed*Mathf.Sin(transform.rotation.eulerAngles.z*Mathf.Deg2Rad),0));
         bulletScript.creator = transform.gameObject;
+        bulletScript.LaunchProjectile(transform.rotation);
         cooldown = cooldownTime;
     }
 }
