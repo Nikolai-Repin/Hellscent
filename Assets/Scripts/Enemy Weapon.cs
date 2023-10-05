@@ -20,11 +20,8 @@ public class EnemyWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        parent = transform.parent.gameObject;
-        sr = GetComponent<SpriteRenderer>();
-        controller = parent.GetComponent<Controller>();
-        controller.heldWeapons.Add(GetComponent<Weapon>());
-        controller.ChangeWeapon(controller.heldWeapons.Count-1);
+        parent = transform.parent.gameObject;      
+
     }
 
     // Update is called once per frame
