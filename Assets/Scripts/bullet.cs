@@ -50,6 +50,7 @@ public class Bullet : MonoBehaviour {
         }
         if (other.gameObject.tag == "Wall") { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
             pierce--;
+
         }
         if (pierce <= 0) {
             Destroy(gameObject);
