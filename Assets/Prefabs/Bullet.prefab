@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 107568188245360982}
   - component: {fileID: 7779259379107536370}
   - component: {fileID: 1413869230194000966}
-  - component: {fileID: -3921362050810542062}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -49,7 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 5
-  projectileSpeed: 550
+  damage: 1
+  projectileSpeed: 500
 --- !u!212 &107568188245360982
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -164,17 +164,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-3921362050810542062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6942168956635508771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2c12ac99abb1884288686486b87afad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthbar: {fileID: 0}
-  healthAmount: 100
