@@ -7,6 +7,9 @@ public class EnemyAttack : MonoBehaviour
 
 
 {
+     [SerializeField] public int offset = 2;
+    [SerializeField] public int ammo = -1;
+    [SerializeField] public GameObject projectileType;
     private float cooldown;
     private GameObject parent;
     private SpriteRenderer sr;
@@ -26,7 +29,7 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      transform.position = parent.transform.position;
+      transform.position = parent.transform.position * offset;
       Vector3 Look = transform.InverseTransformPoint(target.transform.position);
       float Angle = Mathf.Atan2(Look.y, Look.x) * Mathf.Rad2Deg;
       transform.Rotate(0,0, Angle);
@@ -38,7 +41,10 @@ public class EnemyAttack : MonoBehaviour
     }
 public void Attacking(){
 
-
+            GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bullet.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(bulletScript.projectileSpeed*Mathf.Cos(transform.rotation.eulerAngles.z*Mathf.Deg2Rad), bulletScript.projectileSpeed*Mathf.Sin(transform.rotation.eulerAngles.z*Mathf.Deg2Rad),0));
+            bulletScript.creator = transform.gameObject;
 
 }
 }
