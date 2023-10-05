@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttack : MonoBehaviour
+public class EnemyWeapon : MonoBehaviour
 
 
 
 {
-     [SerializeField] public int offset = 2;
+    [SerializeField] public int offset = 2;
     [SerializeField] public int ammo = -1;
     [SerializeField] public GameObject projectileType;
-    private float cooldown;
+    // cooldownTime is set to fire once per second
+    [SerializeField] public int cooldownTime = 600;
+    public int cooldown;
     private GameObject parent;
     private SpriteRenderer sr;
     private Controller controller;
-    public int NextAttackTimer = 5;
     public GameObject target;
     // Start is called before the first frame update
     void Start()
@@ -27,25 +28,28 @@ public class EnemyAttack : MonoBehaviour
     }
 
     // Update is called once per frame
+    //Used to have weapon face towards player
     void Update()
     {
       transform.position = parent.transform.position * offset;
       Vector3 Look = transform.InverseTransformPoint(target.transform.position);
       float Angle = Mathf.Atan2(Look.y, Look.x) * Mathf.Rad2Deg;
       transform.Rotate(0,0, Angle);
-       if(NextAttackTimer > 5){
-        Attacking();
-       NextAttackTimer = -1;
+       if(cooldown <= 5)
+       {
+            Attacking();
        }
-       NextAttackTimer++;
+       cooldown--;
     }
-public void Attacking(){
 
-            GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
-            Bullet bulletScript = bullet.GetComponent<Bullet>();
-            bullet.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(bulletScript.projectileSpeed*Mathf.Cos(transform.rotation.eulerAngles.z*Mathf.Deg2Rad), bulletScript.projectileSpeed*Mathf.Sin(transform.rotation.eulerAngles.z*Mathf.Deg2Rad),0));
-            bulletScript.creator = transform.gameObject;
-
-}
+    //Taken from weapon.cs, might make a child of weapon.cs to just call the attack from there;
+    public void Attacking()
+    {
+        GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bullet.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(bulletScript.projectileSpeed*Mathf.Cos(transform.rotation.eulerAngles.z*Mathf.Deg2Rad), bulletScript.projectileSpeed*Mathf.Sin(transform.rotation.eulerAngles.z*Mathf.Deg2Rad),0));
+        bulletScript.creator = transform.gameObject;
+        cooldown = cooldownTime;
+    }
 }
 

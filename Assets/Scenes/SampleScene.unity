@@ -395,9 +395,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 523742109}
     - target: {fileID: 7528520584060275958, guid: 3a7d3169ceb12c745a9c4573fc8f3a5d, type: 3}
+      propertyPath: cooldownTime
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528520584060275958, guid: 3a7d3169ceb12c745a9c4573fc8f3a5d, type: 3}
       propertyPath: projectileType
       value: 
       objectReference: {fileID: 6942168956635508771, guid: deb5f71d6141a4c43a11e4fbb2295da7, type: 3}
+    - target: {fileID: 7528520584060275958, guid: 3a7d3169ceb12c745a9c4573fc8f3a5d, type: 3}
+      propertyPath: NextAttackTimer
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8909767832380388918, guid: 3a7d3169ceb12c745a9c4573fc8f3a5d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
