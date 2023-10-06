@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float cooldownTime = 0.5F;
     [SerializeField] public float kickback = 0F;
 
-    private float cooldown;
+    protected float cooldown;
     private GameObject parent;
     private SpriteRenderer sr;
     private Controller controller;
@@ -62,5 +62,6 @@ public class Weapon : MonoBehaviour
 
     public float GetOffset() {return offset;}
 
+    public float getCoolDown(){return cooldown;}
 
 }
