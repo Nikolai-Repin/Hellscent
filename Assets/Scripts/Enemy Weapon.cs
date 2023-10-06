@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; 
 
-public class EnemyWeapon : MonoBehaviour
+public class EnemyWeapon : Weapon
 
 
 
@@ -34,19 +34,9 @@ public class EnemyWeapon : MonoBehaviour
       transform.Rotate(0,0, Angle);
        if(cooldown <= 5)
        {
-            Attacking();
+            Fire();
        }
        cooldown--;
-    }
-
-    //Taken from weapon.cs, might make a child of weapon.cs to just call the attack from there;
-    public void Attacking()
-    {
-        GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.creator = transform.gameObject;
-        bulletScript.LaunchProjectile(transform.rotation);
-        cooldown = cooldownTime;
     }
 }
 
