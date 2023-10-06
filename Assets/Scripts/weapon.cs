@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour
         parent = transform.parent.gameObject;
         sr = GetComponent<SpriteRenderer>();
         controller = parent.GetComponent<Controller>();
-        controller.NewWeapon(GetComponent<Weapon>());
+        controller.NewWeapon(transform.gameObject);
     }
 
     // Update is called once per frame
@@ -42,6 +42,7 @@ public class Weapon : MonoBehaviour
         cooldown -= Time.deltaTime;
     }
 
+    //Fires the selected projectile
     public bool Fire()
     {
         if (ammo == 0) {return false;}

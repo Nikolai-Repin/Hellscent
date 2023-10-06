@@ -6,7 +6,7 @@ public class BulletMelee : Bullet
 {
     [SerializeField] private bool reflect;
 
-    void OnTriggerEnter2D(Collider2D other) {
+    protected void OnTriggerEnter2D(Collider2D other) {
         base.OnTriggerEnter2D(other);
         if (other.gameObject.tag == "Bullet" && other.GetComponent<Bullet>().getReflectable()) {
             other.gameObject.GetComponent<Bullet>().SetProjectileVelocity(transform.rotation, other.gameObject.GetComponent<Bullet>().getProjectileSpeed());
