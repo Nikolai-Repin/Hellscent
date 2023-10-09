@@ -24,12 +24,13 @@ public class EnemyWeapon : Weapon
     //Used to have weapon face towards player
     void Update()
     {
-        transform.position = parent.transform.position;
+        transform.position = offset*parent.transform.position;
         Vector3 Look = transform.InverseTransformPoint(target.transform.position);
         float Angle = Mathf.Atan2(Look.y, Look.x) * Mathf.Rad2Deg;
         transform.Rotate(0,0, Angle);
         Fire();
         cooldown -= Time.deltaTime;
+        Debug.Log(cooldown);
     }
 }
 
