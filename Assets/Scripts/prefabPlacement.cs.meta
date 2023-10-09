@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5b8c8f48cc8b6a742ae81d7a3af3a5db
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - basicRoom: {fileID: 2792181421481565406, guid: dc5f3b6f07564134ab402889de9274d5, type: 3}
+  - bigLRoom: {fileID: 3114142269086657357, guid: 56b033766dcc8154b81127bcd3572c7a, type: 3}
+  - hallwayStraight: {fileID: 7564696797152967632, guid: 9ccd97415ada88442bf31f3ad28c86fd, type: 3}
+  - hallwayTIntersection: {fileID: 1236552340074397669, guid: 3acf188abb2a76c46a46b45ce84e0bd2, type: 3}
+  - spawnRoom: {fileID: 8767254853541074108, guid: 4612257200b9ea040a39437ac0662e87, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
