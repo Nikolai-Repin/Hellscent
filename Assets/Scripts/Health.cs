@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-   public float healthAmount = 100;
+   public float healthAmount = 100f;
    public Image healthbar;
    
    void Update()
    {
       if (healthAmount <= 0) {
-         Debug.Break();
+         //Debug.Break();
       } 
    }
 
