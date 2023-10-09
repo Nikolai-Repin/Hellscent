@@ -16,14 +16,15 @@ public class EnemyWeapon : Weapon
     void Start()
     {
         parent = transform.parent.gameObject;      
-
+        offset = 2F;
+         
     }
 
     // Update is called once per frame
     //Used to have weapon face towards player
     void Update()
     {
-        transform.position = parent.transform.position * offset;
+        transform.position = parent.transform.position;
         Vector3 Look = transform.InverseTransformPoint(target.transform.position);
         float Angle = Mathf.Atan2(Look.y, Look.x) * Mathf.Rad2Deg;
         transform.Rotate(0,0, Angle);
