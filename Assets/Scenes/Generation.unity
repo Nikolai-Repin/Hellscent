@@ -225,6 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 912806342}
   - component: {fileID: 912806341}
+  - component: {fileID: 912806343}
   m_Layer: 0
   m_Name: The Grid from Tron
   m_TagString: Untagged
@@ -259,6 +260,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &912806343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912806340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8c8f48cc8b6a742ae81d7a3af3a5db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rooms:
+  - {fileID: 2792181421481565406, guid: dc5f3b6f07564134ab402889de9274d5, type: 3}
+  - {fileID: 3114142269086657357, guid: 56b033766dcc8154b81127bcd3572c7a, type: 3}
+  hallways:
+  - {fileID: 7564696797152967632, guid: 9ccd97415ada88442bf31f3ad28c86fd, type: 3}
+  - {fileID: 1236552340074397669, guid: 3acf188abb2a76c46a46b45ce84e0bd2, type: 3}
+  spawnRoom: {fileID: 8767254853541074108, guid: 4612257200b9ea040a39437ac0662e87, type: 3}
+  roomSpacing: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

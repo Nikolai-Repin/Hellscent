@@ -901,17 +901,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1284152360 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4102891628024463206, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-  m_PrefabInstance: {fileID: 1372748130}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a50f9f1a44a96814ba583364c39cc1a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1372748130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -931,7 +920,11 @@ PrefabInstance:
     - target: {fileID: -3558676805350794031, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: weapon
       value: 
-      objectReference: {fileID: 1284152360}
+      objectReference: {fileID: 0}
+    - target: {fileID: -3558676805350794031, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 7182153838417077510, guid: ccdfa20d8de36454eb545d70a278809e, type: 3}
     - target: {fileID: 2376104330443926614, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.846

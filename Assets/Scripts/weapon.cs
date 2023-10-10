@@ -13,14 +13,14 @@ public class Weapon : MonoBehaviour
     private float cooldown;
     private GameObject parent;
     private SpriteRenderer sr;
-    private Controller controller;
+    private PlayerController controller;
 
     // Start is called before the first frame update
     void Start()
     {
         parent = transform.parent.gameObject;
         sr = GetComponent<SpriteRenderer>();
-        controller = parent.GetComponent<Controller>();
+        controller = parent.GetComponent<PlayerController>();
         controller.NewWeapon(GetComponent<Weapon>());
     }
 

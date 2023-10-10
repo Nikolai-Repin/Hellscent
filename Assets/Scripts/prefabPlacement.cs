@@ -31,7 +31,7 @@ public class prefabPlacement : MonoBehaviour
 
 		Transform created_join_point = created.Find("Join Point " + direction).Find("Join Point");
 
-		Vector2 shift = new Vector2();
+		Vector2 shift;
 		if (direction == "North" || direction == "South") {
 			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y + ((direction == "North" ? -roomSpacing : roomSpacing)) - created_join_point.position.y);
 		} else {
