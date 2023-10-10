@@ -8,22 +8,25 @@ public class Controller : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float dash;
     [SerializeField, Range(0,1)] private float damper;
+
     [SerializeField] public Weapon equippedWeapon;
-    [SerializeField] private static float damage;
+    public List<Weapon> heldWeapons;
+    private int weaponIndex;
+    private bool hasWeapon = false;
+
     private Vector2 direction;
     private Vector2 saved_direction;
 
-    private int weaponIndex;
-    private bool hasWeapon = false;
-    public List<Weapon> heldWeapons;
+    [SerializeField] private static float damage;
 
-    void Start () {
+
+
+    void Start() {
         rb = GetComponent<Rigidbody2D>();
+        //heldWeapons = new List<Weapon>();
         weaponIndex = 0;
         Debug.Log(heldWeapons.Count + "Player Side");
         damage = 20f;
-        heldWeapons = new List<Weapon>();
-        weaponIndex = 0;
     }
 
     void Update()
@@ -49,6 +52,8 @@ public class Controller : MonoBehaviour
             Debug.Log("Pickup Attempt");
         }
 
+        rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
+
         if (hasWeapon) {
             if (Input.GetKeyDown(KeyCode.R)) {
                 ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
@@ -62,16 +67,25 @@ public class Controller : MonoBehaviour
                 }
             }
         }
-        rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
-
-
 
         if (Input.GetKeyDown(KeyCode.J)) {
             Debug.Log(GetDamage());
         }
 
-
         rb.velocity += direction * speed * Time.deltaTime; 
+    }
+
+    public void ChangeWeapon(int i) {
+        if (equippedWeapon != null) {equippedWeapon.transform.gameObject.GetComponent<SpriteRenderer>().enabled = false;}
+        weaponIndex = i;
+        equippedWeapon = heldWeapons[weaponIndex];
+        equippedWeapon.transform.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+    }
+
+    public void NewWeapon(Weapon w) {
+        hasWeapon = true;
+        heldWeapons.Add(w);
+        ChangeWeapon(heldWeapons.Count-1);
     }
 
     public static float GetDamage() {
@@ -82,18 +96,4 @@ public class Controller : MonoBehaviour
     public static void AddDamage(float BonusDamage) {
         damage += BonusDamage;
     }
-
-    public void ChangeWeapon(int i) {
-        if (equippedWeapon != null) {equippedWeapon.transform.gameObject.GetComponent<SpriteRenderer>().enabled = false;}
-        weaponIndex = i;
-        equippedWeapon = heldWeapons[weaponIndex];
-        equippedWeapon.transform.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-    }
-
-        public void NewWeapon(Weapon w) {
-        hasWeapon = true;
-        heldWeapons.Add(w);
-        ChangeWeapon(heldWeapons.Count-1);
-    }
-
 }

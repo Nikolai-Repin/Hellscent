@@ -37,6 +37,7 @@ public class Bullet : MonoBehaviour {
 
     void Update() {
         lifeTime += Time.deltaTime; //Update bullet lifetime
+
         //This being called every frame could be laggy, it's likely that there's a better way to do this
         //Kill bullet if it's too old
         if (lifeTime >= maxLife) {
@@ -44,26 +45,24 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D other) {
+    protected void OnTriggerEnter2D(Collider2D other) 
+    {
+        
+        //I need to set up teams or something of the like for this, I want bullets to be able to belong to enemies
         if (other.gameObject.tag == "Enemy") {
-            Health health = other.gameObject.GetComponent<Health>();
+            Health health =  other.gameObject.GetComponent<Health>();
             health.TakeDamage(damage);
             pierce--;
         }
 
         if (other.gameObject.tag == "Wall") { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
             pierce--;
-
         }
-
         if (pierce <= 0) {
             Destroy(gameObject);
         }
-
-        if (other.GetComponent<Bullet>() == null) { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
-            Destroy(gameObject);
-        }
     }
+
     public float getProjectileSpeed() {
         return projectileSpeed;
     }
