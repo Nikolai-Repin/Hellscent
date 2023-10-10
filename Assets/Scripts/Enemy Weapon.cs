@@ -8,23 +8,23 @@ public class EnemyWeapon : Weapon
 
 {
     // cooldownTime is set to fire once per second
-    private GameObject parent;
-    private SpriteRenderer sr;
-    private Controller controller;
-    public GameObject target;
+    protected GameObject target;
     // Start is called before the first frame update
     void Start()
     {
         parent = transform.parent.gameObject;      
-        offset = 2F;
-         
+        
+
     }
 
     // Update is called once per frame
     //Used to have weapon face towards player
     void Update()
     {
-        transform.position = offset*parent.transform.position;
+        Vector3 temp = new Vector3();
+        temp = parent.transform.position;
+        temp.x += -.5F;
+        transform.position = temp;
         Vector3 Look = transform.InverseTransformPoint(target.transform.position);
         float Angle = Mathf.Atan2(Look.y, Look.x) * Mathf.Rad2Deg;
         transform.Rotate(0,0, Angle);

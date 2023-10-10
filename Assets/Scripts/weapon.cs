@@ -11,9 +11,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float kickback = 0F;
 
     protected float cooldown;
-    private GameObject parent;
-    private SpriteRenderer sr;
-    private Controller controller;
+    protected GameObject parent;
+    protected SpriteRenderer sr;
+    protected Controller controller;
 
     // Start is called before the first frame update
     void Start()
