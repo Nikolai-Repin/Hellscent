@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2965779057163575472}
   - component: {fileID: 6218505295094987517}
   m_Layer: 0
-  m_Name: Spawn Room Join Point
+  m_Name: Join Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

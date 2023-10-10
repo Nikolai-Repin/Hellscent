@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6264619692310176906}
   - component: {fileID: 6810205421234035794}
   m_Layer: 0
-  m_Name: Basic room Join Point East
+  m_Name: Join Point East
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 837376265118695975}
   - component: {fileID: 8293676505580943681}
   m_Layer: 0
-  m_Name: Basic room Join Point West
+  m_Name: Join Point West
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 2825623050685144392}
   - component: {fileID: 6793204816843182075}
   m_Layer: 0
-  m_Name: Basic room Join Point North
+  m_Name: Join Point North
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1442,7 +1442,6 @@ GameObject:
   - component: {fileID: 6774147241733711375}
   - component: {fileID: 2831846863616604652}
   - component: {fileID: 3907883972395894162}
-  - component: {fileID: 2600953487412399419}
   m_Layer: 0
   m_Name: Basic room
   m_TagString: Untagged
@@ -4591,20 +4590,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &2600953487412399419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2792181421481565406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f3c31149c028774b9a45e8baf008e4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entryPointsRotaions: 
-  entryPointsOccupation: 
 --- !u!1 &4105488038929958923
 GameObject:
   m_ObjectHideFlags: 0
@@ -4722,7 +4707,7 @@ GameObject:
   - component: {fileID: 7008061205284148128}
   - component: {fileID: 6078282727190365164}
   m_Layer: 0
-  m_Name: Basic room Join Point South
+  m_Name: Join Point South
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
