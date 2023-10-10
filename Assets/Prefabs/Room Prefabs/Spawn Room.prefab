@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2965779057163575472}
   - component: {fileID: 6218505295094987517}
   m_Layer: 0
-  m_Name: Join Point
+  m_Name: Join Point North
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -932,6 +932,7 @@ GameObject:
   - component: {fileID: 4007450817161134931}
   - component: {fileID: 1039707857741593292}
   - component: {fileID: 7459282343117754877}
+  - component: {fileID: 1539791444324161922}
   m_Layer: 0
   m_Name: Spawn Room
   m_TagString: Untagged
@@ -2761,3 +2762,18 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &1539791444324161922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8767254853541074108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd01d8a59b6946b68b72c1e87ee6d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorDirection:
+  - North
+  doorOccupation: 00

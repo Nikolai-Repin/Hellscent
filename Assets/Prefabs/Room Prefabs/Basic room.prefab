@@ -1442,6 +1442,7 @@ GameObject:
   - component: {fileID: 6774147241733711375}
   - component: {fileID: 2831846863616604652}
   - component: {fileID: 3907883972395894162}
+  - component: {fileID: 7447212170180541544}
   m_Layer: 0
   m_Name: Basic room
   m_TagString: Untagged
@@ -4590,6 +4591,24 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &7447212170180541544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792181421481565406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd01d8a59b6946b68b72c1e87ee6d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorDirection:
+  - North
+  - West
+  - South
+  - East
+  doorOccupation: 00000000
 --- !u!1 &4105488038929958923
 GameObject:
   m_ObjectHideFlags: 0
