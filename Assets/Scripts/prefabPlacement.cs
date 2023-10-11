@@ -23,20 +23,23 @@ public class prefabPlacement : MonoBehaviour
 	List<string> directionNumber = new List<string>(){"North", "West", "South", "East"};
 
 	void Start () {
-		createRoom(spawnRoom);
+		GameObject startRoom = createRoom(spawnRoom, null, true);
 
-		createRoom(rooms[0]);
-
-		alignRooms(dungeon[0].transform, dungeon[1].transform);
+		createRoom(spawnRoom, startRoom);
 	}
 
-	private void createRoom(GameObject room, GameObject alignTo=null)
+	private GameObject createRoom(GameObject room, GameObject toAlign, bool start=false)
     {
 		RoomInfo data = room.GetComponent<RoomInfo>();
-		float randomDir = data.doorDirection.Count == 4 ? 0 : Random.Range(0, 4);
+		float randomDir = start ? Random.Range(0, 4) : 0;
 		GameObject createdRoom = Instantiate(room, new Vector2(0, 0), Quaternion.Euler(0, 0, randomDir * 90));
 		createdRoom.transform.SetParent(transform, false);
 		dungeon.Add(createdRoom);
+		if (!start)
+        {
+			alignRooms(toAlign.transform, createdRoom.transform);
+		}
+		return createdRoom;
 	}
 
 	private void alignRooms(Transform origin, Transform created) {
@@ -48,25 +51,29 @@ public class prefabPlacement : MonoBehaviour
 		string true_dir = directionNumber[directionNumber.IndexOf(direction_origin) + (int) (origin.rotation.eulerAngles.z / 90)];
 		string direction_created;
 		RoomInfo created_data = created.GetComponent<RoomInfo>();
+		string true_created_dir = "";
 		if (created_data.doorDirection.Count == 4) {
 			direction_created = reverseDirection[true_dir];
+			true_created_dir = direction_created;
 		} else {
+			created.transform.rotation = Quaternion.Euler(0, 0, 0);
 			string selected_door = created_data.doorDirection[Random.Range(0, created_data.doorDirection.Count)];
 			int selected_door_dir = directionNumber.IndexOf(selected_door);
 			int dir_diff = directionNumber.IndexOf(reverseDirection[true_dir]) - selected_door_dir;
-			created.transform.Rotate(0.0f, 0.0f, dir_diff * 90, Space.Self);
+			created.transform.Rotate(0.0f, 0.0f, dir_diff * 90, Space.World);
 			direction_created = selected_door;
-        }
-
+			true_created_dir = directionNumber[directionNumber.IndexOf(selected_door) + (int)(created.rotation.eulerAngles.z / 90)];
+			created_data.doorOccupation[created_data.doorDirection.IndexOf(selected_door)] = true;
+		}
 		Transform created_join_point = created.Find("Join Point " + direction_created).Find("Join Point");
 
 		Vector2 shift;
-		if (direction_created == "North" || direction_created == "South") {
-			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y + ((direction_created == "North" ? -roomSpacing : roomSpacing)) - created_join_point.position.y);
+		if (true_created_dir == "North" || true_created_dir == "South") {
+			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y + ((true_created_dir == "North" ? -roomSpacing : roomSpacing)) - created_join_point.position.y);
 		} else {
-			shift = new Vector2(origin_join_point.position.x + (direction_created == "West" ? roomSpacing : -roomSpacing) - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
+			shift = new Vector2(origin_join_point.position.x + (true_created_dir == "West" ? roomSpacing : -roomSpacing) - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
 		}
-		created.Translate(shift);
+		created.Translate(shift, Space.World);
 	}
 
 	private int findAvailableDoor(RoomInfo data)
