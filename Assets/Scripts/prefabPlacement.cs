@@ -8,6 +8,7 @@ public class PrefabPlacement : MonoBehaviour
     [SerializeField] private GameObject[] rooms;
 	[SerializeField] private GameObject[] hallways;
 	[SerializeField] private GameObject spawnRoom;
+	[SerializeField] private float roomSpacing; // Doesn't actually fully work so fix it future me
 
 	private readonly List<GameObject> dungeon = new();
 
@@ -56,12 +57,12 @@ public class PrefabPlacement : MonoBehaviour
 		if (!start)
         {
 			// Aligns created room to previous room
-			AlignRooms(toAlign.transform, createdRoom.transform);
+			AlignRooms(toAlign.transform, createdRoom.transform, roomSpacing);
 		}
 		return createdRoom;
 	}
 
-	private void AlignRooms(Transform origin, Transform created) {
+	private void AlignRooms(Transform origin, Transform created, float spacing) {
 		// Gets all necessary information about the origin room
 		RoomInfo origin_data = origin.GetComponent<RoomInfo>();
 		string direction_origin = origin_data.doorDirection[FindAvailableDoor(origin_data)];
@@ -69,7 +70,7 @@ public class PrefabPlacement : MonoBehaviour
 		origin_data.doorOccupation[origin_data.doorDirection.IndexOf(direction_origin)] = true;
 
 		// Finds a door on created room that will connect with origin
-		string true_dir = directionNumber[directionNumber.IndexOf(direction_origin) + (int) (origin.rotation.eulerAngles.z / 90)];
+		string true_dir = directionNumber[(directionNumber.IndexOf(direction_origin) + (int) (origin.rotation.eulerAngles.z / 90)) % 4];
 		string direction_created;
 		RoomInfo created_data = created.GetComponent<RoomInfo>();
 		string true_created_dir;
@@ -86,7 +87,7 @@ public class PrefabPlacement : MonoBehaviour
 			int dir_diff = directionNumber.IndexOf(reverseDirection[true_dir]) - selected_door_dir;
 			created.transform.Rotate(0.0f, 0.0f, dir_diff * 90, Space.World);
 			direction_created = selected_door;
-			true_created_dir = directionNumber[directionNumber.IndexOf(selected_door) + (int)(created.rotation.eulerAngles.z / 90)];
+			true_created_dir = directionNumber[(directionNumber.IndexOf(selected_door) + (int)(created.rotation.eulerAngles.z / 90)) % 4];
 			created_data.doorOccupation[created_data.doorDirection.IndexOf(selected_door)] = true;
 		}
 		Transform created_join_point = created.Find("Join Point " + direction_created).Find("Join Point");
@@ -94,9 +95,9 @@ public class PrefabPlacement : MonoBehaviour
 		// Aligns the created room to the origin room
 		Vector2 shift;
 		if (true_created_dir == "North" || true_created_dir == "South") {
-			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
+			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y + (true_created_dir == "South" ? spacing : -spacing) - created_join_point.position.y);
 		} else {
-			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
+			shift = new Vector2(origin_join_point.position.x + (true_created_dir == "West" ? spacing : -spacing)- created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
 		}
 		created.Translate(shift, Space.World);
 	}
