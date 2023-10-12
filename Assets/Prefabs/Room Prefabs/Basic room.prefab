@@ -658,7 +658,7 @@ GameObject:
   - component: {fileID: 6673144381278366148}
   - component: {fileID: 1234286372134988392}
   m_Layer: 0
-  m_Name: Basic room Collisions
+  m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

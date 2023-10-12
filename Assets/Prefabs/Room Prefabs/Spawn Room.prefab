@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 8283120814717602595}
   - component: {fileID: 5141695065270883262}
   m_Layer: 0
-  m_Name: Spawn Room Collisions
+  m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
