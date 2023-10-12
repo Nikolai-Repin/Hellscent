@@ -21,4 +21,8 @@ public class PickupItem : MonoBehaviour
         transform.gameObject.GetComponent<SpriteRenderer>().sprite = targetItem.GetComponent<SpriteRenderer>().sprite;
         return true;
     }
+
+    public GameObject GetItem() {
+        return targetItem;
+    }
 }

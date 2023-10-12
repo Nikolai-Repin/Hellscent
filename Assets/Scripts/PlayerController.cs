@@ -11,18 +11,23 @@ public class Controller : MonoBehaviour
     private Vector2 direction;
     private Vector2 saved_direction;
 
+    //Weapon Variables
     private int weaponIndex;
-    private double pickupDistance;
     private double rHoldTime;
     private bool hasWeapon = false;
     private GameObject equippedWeapon;
     public List<GameObject> heldWeapons;
+
+    private float pickupDistance;
+    private ContactFilter2D itemContactFilter;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         weaponIndex = 0;
         pickupDistance = 10;
         rHoldTime = Time.time;
+        itemContactFilter = new ContactFilter2D();
+        itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
     }
 
     // Update is called once per frame
@@ -47,7 +52,10 @@ public class Controller : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
-            Debug.Log("Pickup Attempt");
+
+            Collider2D[] results = new Collider2D[1];
+            Physics2D.OverlapCircle(transform.position, pickupDistance, itemContactFilter, results);
+            PickupWeapon(results[0].GetComponent<Collider2D>().gameObject);
         }
 
         rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
@@ -77,7 +85,9 @@ public class Controller : MonoBehaviour
     }
 
     public void ChangeWeapon(int i) {
-        if (equippedWeapon != null) {equippedWeapon.GetComponent<SpriteRenderer>().enabled = false;}
+        if (equippedWeapon != null) {
+            equippedWeapon.GetComponent<SpriteRenderer>().enabled = false;
+        }
         weaponIndex = i;
         equippedWeapon = heldWeapons[weaponIndex];
         equippedWeapon.GetComponent<SpriteRenderer>().enabled = true;
@@ -97,17 +107,28 @@ public class Controller : MonoBehaviour
         GameObject DroppedItem = Resources.Load<GameObject>("Prefabs/DroppedItem"); //This line is bad, lmk if there's a better way to do this, p l e a s e
         GameObject droppedWeapon = Instantiate(DroppedItem, transform.position, new Quaternion());
         droppedWeapon.GetComponent<PickupItem>().SetItem(heldWeapons[i]);
+        droppedWeapon.layer = LayerMask.NameToLayer("Items");
 
         //Removing the weapon
         Destroy(heldWeapons[i]);
         heldWeapons.RemoveAt(i);
     }
 
-    public void NewWeapon(GameObject w) {
+    public void NewWeapon(GameObject weapon) {
         hasWeapon = true;
-        heldWeapons.Add(w);
+        weapon.transform.SetParent(transform);
+        heldWeapons.Add(weapon);
         ChangeWeapon(heldWeapons.Count-1);
     }
 
+    public void PickupWeapon(GameObject target) {
+
+        //Add the weapon to the arsonal
+        GameObject newWeapon = Instantiate(target.GetComponent<PickupItem>().GetItem(), transform.position, new Quaternion());
+        NewWeapon(newWeapon);
+
+        //Destroy the weapon on the ground
+        //Destroy(target);
+    }
 
 }
