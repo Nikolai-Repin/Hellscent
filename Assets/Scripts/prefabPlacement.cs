@@ -23,7 +23,7 @@ public class prefabPlacement : MonoBehaviour
 	List<string> directionNumber = new List<string>(){"North", "West", "South", "East"};
 
 	void Start () {
-		GameObject startRoom = createRoom(spawnRoom, null, true);
+		GameObject startRoom = createRoom(spawnRoom, null, false);
 		createDungeon(startRoom, 4, 5);
 	}
 
@@ -57,7 +57,7 @@ public class prefabPlacement : MonoBehaviour
 		return createdRoom;
 	}
 
-	private void alignRooms(Transform origin, Transform created, float spacing=0) {
+	private void alignRooms(Transform origin, Transform created, float spacing) {
 		RoomInfo origin_data = origin.GetComponent<RoomInfo>();
 		string direction_origin = origin_data.doorDirection[findAvailableDoor(origin_data)];
 		Transform origin_join_point = origin.Find("Join Point " + direction_origin).Find("Join Point");
