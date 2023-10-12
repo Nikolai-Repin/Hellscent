@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class TextSlider : MonoBehaviour
 {
     public Slider slider;
-    public TextMeshProUGUI numberText;
+    public TextMeshProUGUI sliderText;
 
     void Start() {
 
     }
 
     void Update() {
-        numberText.text = slider.value.ToSting();
+        sliderText.text = slider.value.ToString();
     }
 }
