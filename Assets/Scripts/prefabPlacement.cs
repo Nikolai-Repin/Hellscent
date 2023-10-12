@@ -33,16 +33,17 @@ public class PrefabPlacement : MonoBehaviour
 		// Loops between all available doors of the current room
 		for (int i = 0; i < GetNumAvailable(startRoom.GetComponent<RoomInfo>()); i++)
         {
+			GameObject hallway = CreateRoom(hallways[0], startRoom);
 			if (mainBranchLen > 0)
             {
 				// Determines if the room being created is a main branch(a branch that leads to the end)
-				CreateDungeon(CreateRoom(hallways[0], startRoom), mainBranchLen - 1, branchCap - 1);
+				CreateDungeon(CreateRoom(rooms[0], hallway), mainBranchLen - 1, branchCap - 1);
 				mainBranchLen = 0;
             }
 			else if (branchCap > 0 && Random.Range(0, 3) == 0)
             {
 				// Determines if any more branches should be added and rolls a dice to see if the room will be created
-				CreateDungeon(CreateRoom(hallways[0], startRoom), 0, branchCap - 1);
+				CreateDungeon(CreateRoom(rooms[0], hallway), 0, branchCap - 1);
 			}
         }
     }
