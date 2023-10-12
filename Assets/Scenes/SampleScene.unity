@@ -396,7 +396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7528520584060275958, guid: 3a7d3169ceb12c745a9c4573fc8f3a5d, type: 3}
       propertyPath: offset
-      value: 2
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7528520584060275958, guid: 3a7d3169ceb12c745a9c4573fc8f3a5d, type: 3}
       propertyPath: target
@@ -842,7 +842,7 @@ PrefabInstance:
       addedObject: {fileID: 1998005640}
     - targetCorrespondingSourceObject: {fileID: 1154847076967636346, guid: ca5c592287b90de4a8151b140ddfdb28, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1998005647}
+      addedObject: {fileID: 1998005661}
   m_SourcePrefab: {fileID: 100100000, guid: ca5c592287b90de4a8151b140ddfdb28, type: 3}
 --- !u!1 &833540003
 GameObject:
@@ -1154,18 +1154,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthAmount: 100
   healthbar: {fileID: 574235}
---- !u!114 &1998005647
+--- !u!114 &1998005661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998005632}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c94eadcba715e714ca4fa3b7bb29a405, type: 3}
+  m_Script: {fileID: 11500000, guid: fc514e56157eea743935f9b9880fdac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target2: {fileID: 523742109}
 --- !u!1001 &2058751442
 PrefabInstance:
   m_ObjectHideFlags: 0
