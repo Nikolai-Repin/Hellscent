@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class prefabPlacement : MonoBehaviour
+public class PrefabPlacement : MonoBehaviour
 {
     [SerializeField] private GameObject[] rooms;
 	[SerializeField] private GameObject[] hallways;
 	[SerializeField] private GameObject spawnRoom;
 	[SerializeField] private float roomSpacing;
 
-	private List<GameObject> dungeon = new List<GameObject>();
+	private readonly List<GameObject> dungeon = new();
 
-	Dictionary<string, string> reverseDirection = new Dictionary<string, string>()
+    private readonly Dictionary<string, string> reverseDirection = new()
 	{
 		{"North", "South"},
 		{"West", "East"},
@@ -20,34 +20,34 @@ public class prefabPlacement : MonoBehaviour
 		{"East", "West"}
 	};
 
-	List<string> directionNumber = new List<string>(){"North", "West", "South", "East"};
+    private readonly List<string> directionNumber = new() { "North", "West", "South", "East" };
 
 	void Start () {
 		// Creates the starting room and starts the generation
-		GameObject startRoom = createRoom(spawnRoom, null, false);
-		createDungeon(startRoom, 4, 5);
+		GameObject startRoom = CreateRoom(spawnRoom, null, true);
+		CreateDungeon(startRoom, 4, 5);
 	}
 
-	private void createDungeon(GameObject startRoom, int mainBranchLen, int branchCap)
+	private void CreateDungeon(GameObject startRoom, int mainBranchLen, int branchCap)
     {
 		// Loops between all available doors of the current room
-		for (int i = 0; i < getNumAvailable(startRoom.GetComponent<RoomInfo>()); i++)
+		for (int i = 0; i < GetNumAvailable(startRoom.GetComponent<RoomInfo>()); i++)
         {
 			if (mainBranchLen > 0)
             {
 				// Determines if the room being created is a main branch(a branch that leads to the end)
-				createDungeon(createRoom(rooms[0], startRoom), mainBranchLen - 1, branchCap - 1);
+				CreateDungeon(CreateRoom(rooms[0], startRoom), mainBranchLen - 1, branchCap - 1);
 				mainBranchLen = 0;
             }
 			else if (branchCap > 0 && Random.Range(0, 3) == 0)
             {
 				// Determines if any more branches should be added and rolls a dice to see if the room will be created
-				createDungeon(createRoom(rooms[0], startRoom), 0, branchCap - 1);
+				CreateDungeon(CreateRoom(rooms[0], startRoom), 0, branchCap - 1);
 			}
         }
     }
 
-	private GameObject createRoom(GameObject room, GameObject toAlign, bool start=false)
+	private GameObject CreateRoom(GameObject room, GameObject toAlign, bool start=false)
     {
 		// Initializes a room
 		float randomDir = start ? Random.Range(0, 4) : 0;
@@ -57,15 +57,15 @@ public class prefabPlacement : MonoBehaviour
 		if (!start)
         {
 			// Aligns created room to previous room
-			alignRooms(toAlign.transform, createdRoom.transform, roomSpacing);
+			AlignRooms(toAlign.transform, createdRoom.transform, roomSpacing);
 		}
 		return createdRoom;
 	}
 
-	private void alignRooms(Transform origin, Transform created, float spacing) {
+	private void AlignRooms(Transform origin, Transform created, float spacing) {
 		// Gets all necessary information about the origin room
 		RoomInfo origin_data = origin.GetComponent<RoomInfo>();
-		string direction_origin = origin_data.doorDirection[findAvailableDoor(origin_data)];
+		string direction_origin = origin_data.doorDirection[FindAvailableDoor(origin_data)];
 		Transform origin_join_point = origin.Find("Join Point " + direction_origin).Find("Join Point");
 		origin_data.doorOccupation[origin_data.doorDirection.IndexOf(direction_origin)] = true;
 
@@ -101,10 +101,10 @@ public class prefabPlacement : MonoBehaviour
 		created.Translate(shift, Space.World);
 	}
 
-	private int findAvailableDoor(RoomInfo data)
+	private int FindAvailableDoor(RoomInfo data)
     {
 		// Finds a random available door for a given room
-		List<int> available = new List<int>();
+		List<int> available = new();
 		for (int i = 0; i < data.doorOccupation.Count; i++)
         {
 			if (!data.doorOccupation[i])
@@ -115,7 +115,7 @@ public class prefabPlacement : MonoBehaviour
 		return available.Count == 0 ? -1 : available[Random.Range(0, available.Count)];
     }
 
-	private int getNumAvailable(RoomInfo data)
+	private int GetNumAvailable(RoomInfo data)
     {
 		// Gets the number of all available doors for a given room
 		int count = 0;
