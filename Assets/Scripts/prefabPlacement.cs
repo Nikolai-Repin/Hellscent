@@ -24,9 +24,24 @@ public class prefabPlacement : MonoBehaviour
 
 	void Start () {
 		GameObject startRoom = createRoom(spawnRoom, null, true);
-
-		createRoom(spawnRoom, startRoom);
+		createDungeon(startRoom, 4, 5);
 	}
+
+	private void createDungeon(GameObject startRoom, int mainBranchLen, int branchCap)
+    {
+		for (int i = 0; i < getNumAvailable(startRoom.GetComponent<RoomInfo>()); i++)
+        {
+			if (mainBranchLen > 0)
+            {	
+				createDungeon(createRoom(rooms[0], startRoom), mainBranchLen - 1, branchCap - 1);
+				mainBranchLen = 0;
+            }
+			else if (branchCap > 0 && Random.Range(0, 3) == 0)
+            {
+				createDungeon(createRoom(rooms[0], startRoom), 0, branchCap - 1);
+			}
+        }
+    }
 
 	private GameObject createRoom(GameObject room, GameObject toAlign, bool start=false)
     {
@@ -37,12 +52,12 @@ public class prefabPlacement : MonoBehaviour
 		dungeon.Add(createdRoom);
 		if (!start)
         {
-			alignRooms(toAlign.transform, createdRoom.transform);
+			alignRooms(toAlign.transform, createdRoom.transform, roomSpacing);
 		}
 		return createdRoom;
 	}
 
-	private void alignRooms(Transform origin, Transform created) {
+	private void alignRooms(Transform origin, Transform created, float spacing=0) {
 		RoomInfo origin_data = origin.GetComponent<RoomInfo>();
 		string direction_origin = origin_data.doorDirection[findAvailableDoor(origin_data)];
 		Transform origin_join_point = origin.Find("Join Point " + direction_origin).Find("Join Point");
@@ -51,7 +66,7 @@ public class prefabPlacement : MonoBehaviour
 		string true_dir = directionNumber[directionNumber.IndexOf(direction_origin) + (int) (origin.rotation.eulerAngles.z / 90)];
 		string direction_created;
 		RoomInfo created_data = created.GetComponent<RoomInfo>();
-		string true_created_dir = "";
+		string true_created_dir;
 		if (created_data.doorDirection.Count == 4) {
 			direction_created = reverseDirection[true_dir];
 			true_created_dir = direction_created;
@@ -69,9 +84,9 @@ public class prefabPlacement : MonoBehaviour
 
 		Vector2 shift;
 		if (true_created_dir == "North" || true_created_dir == "South") {
-			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y + ((true_created_dir == "North" ? -roomSpacing : roomSpacing)) - created_join_point.position.y);
+			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y + ((true_created_dir == "North" ? -spacing : roomSpacing)) - created_join_point.position.y);
 		} else {
-			shift = new Vector2(origin_join_point.position.x + (true_created_dir == "West" ? roomSpacing : -roomSpacing) - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
+			shift = new Vector2(origin_join_point.position.x + (true_created_dir == "West" ? roomSpacing : -spacing) - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
 		}
 		created.Translate(shift, Space.World);
 	}
@@ -87,5 +102,18 @@ public class prefabPlacement : MonoBehaviour
             }
         }
 		return available.Count == 0 ? -1 : available[Random.Range(0, available.Count)];
+    }
+
+	private int getNumAvailable(RoomInfo data)
+    {
+		int count = 0;
+		foreach (bool occupied in data.doorOccupation)
+        {
+			if (!occupied)
+            {
+				count++;
+            }
+        }
+		return count;
     }
 }
