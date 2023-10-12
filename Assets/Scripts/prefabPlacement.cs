@@ -8,7 +8,6 @@ public class PrefabPlacement : MonoBehaviour
     [SerializeField] private GameObject[] rooms;
 	[SerializeField] private GameObject[] hallways;
 	[SerializeField] private GameObject spawnRoom;
-	[SerializeField] private float roomSpacing;
 
 	private readonly List<GameObject> dungeon = new();
 
@@ -36,13 +35,13 @@ public class PrefabPlacement : MonoBehaviour
 			if (mainBranchLen > 0)
             {
 				// Determines if the room being created is a main branch(a branch that leads to the end)
-				CreateDungeon(CreateRoom(rooms[0], startRoom), mainBranchLen - 1, branchCap - 1);
+				CreateDungeon(CreateRoom(hallways[0], startRoom), mainBranchLen - 1, branchCap - 1);
 				mainBranchLen = 0;
             }
 			else if (branchCap > 0 && Random.Range(0, 3) == 0)
             {
 				// Determines if any more branches should be added and rolls a dice to see if the room will be created
-				CreateDungeon(CreateRoom(rooms[0], startRoom), 0, branchCap - 1);
+				CreateDungeon(CreateRoom(hallways[0], startRoom), 0, branchCap - 1);
 			}
         }
     }
@@ -57,12 +56,12 @@ public class PrefabPlacement : MonoBehaviour
 		if (!start)
         {
 			// Aligns created room to previous room
-			AlignRooms(toAlign.transform, createdRoom.transform, roomSpacing);
+			AlignRooms(toAlign.transform, createdRoom.transform);
 		}
 		return createdRoom;
 	}
 
-	private void AlignRooms(Transform origin, Transform created, float spacing) {
+	private void AlignRooms(Transform origin, Transform created) {
 		// Gets all necessary information about the origin room
 		RoomInfo origin_data = origin.GetComponent<RoomInfo>();
 		string direction_origin = origin_data.doorDirection[FindAvailableDoor(origin_data)];
@@ -78,6 +77,7 @@ public class PrefabPlacement : MonoBehaviour
 			// If the room has four doors do not rotate
 			direction_created = reverseDirection[true_dir];
 			true_created_dir = direction_created;
+			created_data.doorOccupation[created_data.doorDirection.IndexOf(direction_created)] = true;
 		} else {
 			// Randomly rotates rooms with less than 4 doors
 			created.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -94,9 +94,9 @@ public class PrefabPlacement : MonoBehaviour
 		// Aligns the created room to the origin room
 		Vector2 shift;
 		if (true_created_dir == "North" || true_created_dir == "South") {
-			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y + ((true_created_dir == "North" ? -spacing : roomSpacing)) - created_join_point.position.y);
+			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
 		} else {
-			shift = new Vector2(origin_join_point.position.x + (true_created_dir == "West" ? roomSpacing : -spacing) - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
+			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
 		}
 		created.Translate(shift, Space.World);
 	}

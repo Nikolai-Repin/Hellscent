@@ -2678,7 +2678,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorDirection:
   - West
-  doorOccupation: 00
+  - East
+  doorOccupation: 0000
 --- !u!1 &8394072806639774584
 GameObject:
   m_ObjectHideFlags: 0
