@@ -128,7 +128,7 @@ public class Controller : MonoBehaviour
         NewWeapon(newWeapon);
 
         //Destroy the weapon on the ground
-        //Destroy(target);
+        Destroy(target);
     }
 
 }
