@@ -3,16 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour
-{    
+{
+    private GameObject playerCharacter;
     public float bonusDamage;
+    public int bonusAmmo;
 
-    // Triggers Item effect (only increasing bullet damage for now) when it comes in contact with the player.
+    void Start() {
+        playerCharacter = GameObject.FindWithTag("player");
+    }
+
+    // Triggers various item effects with if conditions when coming in contact with the player.
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("player")) {
             Debug.Log("touched an item!");
             
             if (bonusDamage > 0) {
-                Controller.AddDamage(bonusDamage);
+                playerCharacter.GetComponent<Controller>().AddDamage(bonusDamage);
+            }
+
+            if (bonusAmmo > 0) {
+                playerCharacter.GetComponent<Controller>().equippedWeapon.addAmmo(bonusAmmo);
             }
 
             Destroy(gameObject);

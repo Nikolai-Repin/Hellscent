@@ -17,9 +17,7 @@ public class Controller : MonoBehaviour
     private Vector2 direction;
     private Vector2 saved_direction;
 
-    [SerializeField] private static float damage;
-
-
+    [SerializeField] private float damage;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -88,12 +86,14 @@ public class Controller : MonoBehaviour
         ChangeWeapon(heldWeapons.Count-1);
     }
 
-    public static float GetDamage() {
+    public float GetDamage() {
         return damage;
     }
 
     // Method to increase the damage that the player deals using a weapon.
-    public static void AddDamage(float BonusDamage) {
+    public void AddDamage(float BonusDamage) {
         damage += BonusDamage;
     }
+
+
 }

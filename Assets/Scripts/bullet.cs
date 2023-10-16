@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour {
     }
 
     void Start() {
-        damage = Controller.GetDamage();
+        damage = creator.GetComponent<Weapon>().GetDamage();
     }
 
     void Update() {
@@ -61,6 +61,10 @@ public class Bullet : MonoBehaviour {
         if (pierce <= 0) {
             Destroy(gameObject);
         }
+    }
+
+    public void addAmmo(int bonusAmmo) {
+
     }
 
     public float getProjectileSpeed() {

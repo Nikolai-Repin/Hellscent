@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(itemType, new Vector3(-1.8f, -2.5f, 0), Quaternion.identity);
+        Instantiate(itemType, new Vector3(-1, -2, 0), Quaternion.identity);
         Debug.Log("test");
     }
 

@@ -62,5 +62,12 @@ public class Weapon : MonoBehaviour
 
     public float GetOffset() {return offset;}
 
+    public float GetDamage() {
+        return controller.GetDamage();
+    }
+
+    public void addAmmo(int bonusAmmo) {
+        ammo += bonusAmmo;
+    }
 
 }
