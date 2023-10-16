@@ -30,23 +30,33 @@ public class PrefabPlacement : MonoBehaviour
 
 	private void CreateDungeon(GameObject startRoom, int mainBranchLen, int branchCap)
     {
+		GameObject hallway = CreateRoom(hallways[0], startRoom);
+		CreateRoom(rooms[1], hallway);
 		// Loops between all available doors of the current room
-		for (int i = 0; i < GetNumAvailable(startRoom.GetComponent<RoomInfo>()); i++)
+		/*for (int i = 0; i < GetNumAvailable(startRoom.GetComponent<RoomInfo>()); i++)
         {
 			if (mainBranchLen > 0)
             {
 				// Determines if the room being created is a main branch(a branch that leads to the end)
-				GameObject hallway = CreateRoom(hallways[0], startRoom);
-				CreateDungeon(CreateRoom(rooms[0], hallway), mainBranchLen - 1, branchCap - 1);
+				if (Random.Range(0, 8) != 0) {
+					GameObject hallway = CreateRoom(hallways[0], startRoom);
+					CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], hallway), mainBranchLen - 1, branchCap - 1);
+				} else {
+					CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], startRoom), mainBranchLen - 1, branchCap - 1);
+				}
 				mainBranchLen = 0;
             }
 			else if (branchCap > 0 && Random.Range(0, 3) == 0)
             {
 				// Determines if any more branches should be added and rolls a dice to see if the room will be created
-				GameObject hallway = CreateRoom(hallways[0], startRoom);
-				CreateDungeon(CreateRoom(rooms[0], hallway), 0, branchCap - 1);
+				if (Random.Range(0, 8) != 0) {
+					GameObject hallway = CreateRoom(hallways[0], startRoom);
+					CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], hallway), 0, branchCap - 1);
+				} else {
+					CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], startRoom), 0, branchCap - 1);
+				}
 			}
-        }
+        }*/
     }
 
 	private GameObject CreateRoom(GameObject room, GameObject toAlign, bool start=false)
@@ -82,7 +92,7 @@ public class PrefabPlacement : MonoBehaviour
 			true_created_dir = direction_created;
 			created_data.doorOccupation[created_data.doorDirection.IndexOf(direction_created)] = true;
 		} else {
-			// Randomly rotates rooms with less than 4 doors
+			// Randomly rotates rooms with less than 4 doors	
 			created.transform.rotation = Quaternion.Euler(0, 0, 0);
 			string selected_door = created_data.doorDirection[Random.Range(0, created_data.doorDirection.Count)];
 			int selected_door_dir = directionNumber.IndexOf(selected_door);
