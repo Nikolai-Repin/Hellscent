@@ -52,10 +52,8 @@ public class Controller : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
-
-            Collider2D[] results = new Collider2D[1];
-            Physics2D.OverlapCircle(transform.position, pickupDistance, itemContactFilter, results);
-            PickupWeapon(results[0].GetComponent<Collider2D>().gameObject);
+            Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
+            PickupWeapon(results[0].transform.gameObject); //This line causes error
         }
 
         rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
@@ -106,10 +104,11 @@ public class Controller : MonoBehaviour
         //Creating the weapon as a dropped item
         GameObject DroppedItem = Resources.Load<GameObject>("Prefabs/DroppedItem"); //This line is bad, lmk if there's a better way to do this, p l e a s e
         GameObject droppedWeapon = Instantiate(DroppedItem, transform.position, new Quaternion());
+        droppedWeapon.name = droppedWeapon.name.Replace("(Clone)","").Trim();
         droppedWeapon.GetComponent<PickupItem>().SetItem(heldWeapons[i]);
-        droppedWeapon.layer = LayerMask.NameToLayer("Items");
+        //droppedWeapon.layer = LayerMask.NameToLayer("Items");
 
-        //Removing the weapon
+        //Removing the held weapon
         Destroy(heldWeapons[i]);
         heldWeapons.RemoveAt(i);
     }
@@ -125,10 +124,13 @@ public class Controller : MonoBehaviour
 
         //Add the weapon to the arsonal
         GameObject newWeapon = Instantiate(target.GetComponent<PickupItem>().GetItem(), transform.position, new Quaternion());
+        newWeapon.transform.parent = gameObject.transform;
+        newWeapon.GetComponent<Weapon>().GetControllerAndEquip();
+        newWeapon.transform.localScale = new Vector3(2, 2, 0);
         NewWeapon(newWeapon);
 
         //Destroy the weapon on the ground
-        Destroy(target);
+        target.GetComponent<PickupItem>().CleanUp();
     }
 
 }

@@ -18,15 +18,18 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        parent = transform.parent.gameObject;
         sr = GetComponent<SpriteRenderer>();
-        GetControllerAndEquip();
+        if (transform.parent != null) {
+            parent = transform.parent.gameObject;
+            if (transform.parent.gameObject.GetComponent<Controller>() != null) {GetControllerAndEquip();}
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateAngleAndPosition(Input.mousePosition);
+        
+        if (transform.parent != null && transform.parent.gameObject.GetComponent<Controller>() != null) {UpdateAngleAndPosition(Input.mousePosition);}
 
         cooldown -= Time.deltaTime;
     }
@@ -53,7 +56,7 @@ public class Weapon : MonoBehaviour
     public float GetOffset() {return offset;}
 
     public bool GetControllerAndEquip() {
-        if (parent.GetComponent<Controller>() != null) {
+        if (transform.parent.gameObject.GetComponent<Controller>() != null) {
             controller = parent.GetComponent<Controller>();
             controller.NewWeapon(transform.gameObject);
             return true;
@@ -78,5 +81,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-
+    public void OnTransformParentChanged() {
+        parent = transform.parent.gameObject;
+    }
 }
