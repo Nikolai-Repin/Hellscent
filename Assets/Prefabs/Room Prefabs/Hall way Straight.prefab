@@ -1170,7 +1170,8 @@ GameObject:
   - component: {fileID: 1456360862278154705}
   - component: {fileID: 1136812448662334932}
   - component: {fileID: 7041253570612283099}
-  m_Layer: 0
+  - component: {fileID: 1446512325769732199}
+  m_Layer: 7
   m_Name: Hall way Straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2680,6 +2681,42 @@ MonoBehaviour:
   - West
   - East
   doorOccupation: 0000
+--- !u!19719996 &1446512325769732199
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7564696797152967632}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1 &8394072806639774584
 GameObject:
   m_ObjectHideFlags: 0
