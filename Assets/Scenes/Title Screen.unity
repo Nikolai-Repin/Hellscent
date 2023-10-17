@@ -400,7 +400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 145, y: 66}
+  m_AnchoredPosition: {x: 149, y: 27}
   m_SizeDelta: {x: 313.1992, y: 36.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &210869081
@@ -450,10 +450,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 40
+  m_Value: 51
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 528712691}
+        m_TargetAssemblyTypeName: SoundSettings, Assembly-CSharp
+        m_MethodName: SetVolumeFromSlider
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &210869082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,6 +1038,7 @@ GameObject:
   - component: {fileID: 528712689}
   - component: {fileID: 528712688}
   - component: {fileID: 528712687}
+  - component: {fileID: 528712691}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1117,6 +1130,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &528712691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528712686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b7b31ac638c4c4fad56d7f4b8b76a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundSlider: {fileID: 210869081}
+  masterMixer: {fileID: 24100000, guid: a4497542da844b4408f7b05920607cef, type: 2}
 --- !u!1 &573822314
 GameObject:
   m_ObjectHideFlags: 0
