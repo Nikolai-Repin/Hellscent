@@ -24,7 +24,7 @@ public class Controller : MonoBehaviour
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         weaponIndex = 0;
-        pickupDistance = 10;
+        pickupDistance = 5;
         rHoldTime = Time.time;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
@@ -53,7 +53,9 @@ public class Controller : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E)) {
             Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
-            PickupWeapon(results[0].transform.gameObject); //This line causes error
+            if (results.Length > 0) {
+                PickupWeapon(FindClosest(results, transform.position));
+            }
         }
 
         rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
@@ -63,7 +65,7 @@ public class Controller : MonoBehaviour
                 rHoldTime = Time.time;
             }
             if (Input.GetKeyUp(KeyCode.R)) {
-                if ((Time.time - rHoldTime)<1) {
+                if ((Time.time - rHoldTime)<0.5) {
                     ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
                 } else {
                     DropWeapon(weaponIndex);
@@ -106,7 +108,6 @@ public class Controller : MonoBehaviour
         GameObject droppedWeapon = Instantiate(DroppedItem, transform.position, new Quaternion());
         droppedWeapon.name = droppedWeapon.name.Replace("(Clone)","").Trim();
         droppedWeapon.GetComponent<PickupItem>().SetItem(heldWeapons[i]);
-        //droppedWeapon.layer = LayerMask.NameToLayer("Items");
 
         //Removing the held weapon
         Destroy(heldWeapons[i]);
@@ -116,6 +117,7 @@ public class Controller : MonoBehaviour
     public void NewWeapon(GameObject weapon) {
         hasWeapon = true;
         weapon.transform.SetParent(transform);
+        weapon.GetComponent<Weapon>().GetControllerAndEquip();
         heldWeapons.Add(weapon);
         ChangeWeapon(heldWeapons.Count-1);
     }
@@ -125,12 +127,26 @@ public class Controller : MonoBehaviour
         //Add the weapon to the arsonal
         GameObject newWeapon = Instantiate(target.GetComponent<PickupItem>().GetItem(), transform.position, new Quaternion());
         newWeapon.transform.parent = gameObject.transform;
-        newWeapon.GetComponent<Weapon>().GetControllerAndEquip();
         newWeapon.transform.localScale = new Vector3(2, 2, 0);
-        NewWeapon(newWeapon);
 
         //Destroy the weapon on the ground
         target.GetComponent<PickupItem>().CleanUp();
+    }
+
+    public GameObject FindClosest (Collider2D[] targets, Vector3 origin) {
+        GameObject closest = targets[0].transform.gameObject;
+        float closestLen = (targets[0].transform.position - origin).sqrMagnitude;
+        float curLen = closestLen;
+
+        for (int i = 1; i < targets.Length; i++) {
+            curLen = (targets[i].transform.position - origin).sqrMagnitude;
+            if (curLen < closestLen) {
+                closestLen = curLen;
+                closest = targets[i].transform.gameObject;
+            }
+        }
+
+        return closest;
     }
 
 }

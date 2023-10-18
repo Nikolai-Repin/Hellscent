@@ -21,7 +21,9 @@ public class Weapon : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
-            if (transform.parent.gameObject.GetComponent<Controller>() != null) {GetControllerAndEquip();}
+            if (transform.parent.gameObject.GetComponent<Controller>() != null) {
+                transform.parent.gameObject.GetComponent<Controller>().NewWeapon(transform.gameObject);
+            }
         }
     }
 
@@ -29,7 +31,9 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         
-        if (transform.parent != null && transform.parent.gameObject.GetComponent<Controller>() != null) {UpdateAngleAndPosition(Input.mousePosition);}
+        if (transform.parent != null && transform.parent.gameObject.GetComponent<Controller>() != null) {
+            UpdateAngleAndPosition(Input.mousePosition);
+        }
 
         cooldown -= Time.deltaTime;
     }
@@ -58,7 +62,6 @@ public class Weapon : MonoBehaviour
     public bool GetControllerAndEquip() {
         if (transform.parent.gameObject.GetComponent<Controller>() != null) {
             controller = parent.GetComponent<Controller>();
-            controller.NewWeapon(transform.gameObject);
             return true;
         }
         return false;
