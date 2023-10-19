@@ -1694,7 +1694,7 @@ GameObject:
   - component: {fileID: 448319315273879854}
   - component: {fileID: 6883701656160692761}
   m_Layer: 0
-  m_Name: Joint Point North
+  m_Name: Join Point North
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

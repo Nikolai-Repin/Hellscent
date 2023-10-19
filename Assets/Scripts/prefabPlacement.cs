@@ -52,7 +52,7 @@ public class PrefabPlacement : MonoBehaviour
 				}
 				mainBranchLen = 0;
             }
-			else if (branchCap > 0 && Random.Range(0, 3) != 0)
+			else if (branchCap > 0 && Random.Range(0, 5) != 0)
             {
 				// Determines if any more branches should be added and rolls a dice to see if the room will be created
 				if (Random.Range(0, 8) != 0) {
@@ -118,6 +118,10 @@ public class PrefabPlacement : MonoBehaviour
 			shift = new Vector2(origin_join_point.position.x + (true_created_dir == "West" ? spacing : -spacing)- created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
 		}
 		created.Translate(shift, Space.World);
+		/*if (myCollider.bounds.Intersects(playerObject.movementSoundSphere.bounds))
+		{
+			Debug.Log("Player Detected!!");
+		}*/
 	}
 
 	private int FindAvailableDoor(RoomInfo data)
