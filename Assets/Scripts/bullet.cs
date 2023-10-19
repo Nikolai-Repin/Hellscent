@@ -32,7 +32,6 @@ public class Bullet : MonoBehaviour {
     }
 
     void Start() {
-        damage = creator.GetComponent<Weapon>().GetDamage();
     }
 
     void Update() {
@@ -63,8 +62,11 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    public void addAmmo(int bonusAmmo) {
-
+    // Sets values like damage and bullet size whenever a bullet spawns
+    public void SetStartingValues() {
+        damage = creator.GetComponent<Weapon>().GetDamage();
+        //changes the scale based on damage (change the values of the denominators if you wanna change how much the size scales).
+        transform.localScale += new Vector3(damage/30, damage/30, 0f);
     }
 
     public float getProjectileSpeed() {

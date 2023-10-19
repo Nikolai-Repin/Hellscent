@@ -74,7 +74,9 @@ public class Controller : MonoBehaviour
     }
 
     public void ChangeWeapon(int i) {
-        if (equippedWeapon != null) {equippedWeapon.transform.gameObject.GetComponent<SpriteRenderer>().enabled = false;}
+        if (equippedWeapon != null) {
+            equippedWeapon.transform.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        }
         weaponIndex = i;
         equippedWeapon = heldWeapons[weaponIndex];
         equippedWeapon.transform.gameObject.GetComponent<SpriteRenderer>().enabled = true;
@@ -91,8 +93,12 @@ public class Controller : MonoBehaviour
     }
 
     // Method to increase the damage that the player deals using a weapon.
-    public void AddDamage(float BonusDamage) {
-        damage += BonusDamage;
+    public void AddDamage(float bonusDamage) {
+        damage += bonusDamage;
+    }
+
+    public void AddSpeed(float bonusSpeed) {
+        speed += bonusSpeed;
     }
 
 

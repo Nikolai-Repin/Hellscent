@@ -51,7 +51,7 @@ public class Weapon : MonoBehaviour
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.creator = transform.gameObject;
             bulletScript.LaunchProjectile(transform.rotation);
-            
+            bulletScript.SetStartingValues();
             ammo--;
             cooldown = cooldownTime;
             return true;
