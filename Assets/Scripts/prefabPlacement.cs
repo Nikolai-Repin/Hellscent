@@ -39,11 +39,16 @@ public class PrefabPlacement : MonoBehaviour
 			if (mainBranchLen > 0)
             {
 				// Determines if the room being created is a main branch(a branch that leads to the end)
-				if (Random.Range(0, 8) != 0) {
+				if(mainBranchLen == 1){
 					GameObject hallway = CreateRoom(hallways[0], startRoom);
-					CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], hallway), mainBranchLen - 1, branchCap - 1);
+					CreateDungeon(CreateRoom(bossRoom, hallway), mainBranchLen - 1, branchCap - 1);
 				} else {
-					CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], startRoom), mainBranchLen - 1, branchCap - 1);
+					if (Random.Range(0, 8) != 0) {
+						GameObject hallway = CreateRoom(hallways[0], startRoom);
+						CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], hallway), mainBranchLen - 1, branchCap - 1);
+					} else {
+						CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], startRoom), mainBranchLen - 1, branchCap - 1);
+					}
 				}
 				mainBranchLen = 0;
             }

@@ -1694,7 +1694,7 @@ GameObject:
   - component: {fileID: 448319315273879854}
   - component: {fileID: 6883701656160692761}
   m_Layer: 0
-  m_Name: Joint Point
+  m_Name: Joint Point North
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1889,6 +1889,7 @@ GameObject:
   - component: {fileID: 7893450901995415225}
   - component: {fileID: 7280415596632040622}
   - component: {fileID: 8769202089797880773}
+  - component: {fileID: 5945561106692066512}
   m_Layer: 7
   m_Name: Boss Room
   m_TagString: Untagged
@@ -15750,3 +15751,18 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &5945561106692066512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8238676731242650557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd01d8a59b6946b68b72c1e87ee6d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorDirection:
+  - North
+  doorOccupation: 00
