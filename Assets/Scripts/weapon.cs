@@ -15,10 +15,24 @@ public class Weapon : MonoBehaviour
     private SpriteRenderer sr;
     private Controller controller;
 
+    //Rand Stats
+    [SerializeField] public bool randomize;
+    public float modCooldownTime = 1.0F;
+    public float modDamage = 1.0F;
+    public float modProjectileSpeed = 1.0F;
+
     // Start is called before the first frame update
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+
+        if (randomize) {
+            RandomizeMods(1.0F);
+            randomize = false;
+        }
+
+        cooldownTime *= modCooldownTime;
+
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
             if (transform.parent.gameObject.GetComponent<Controller>() != null) {
@@ -46,7 +60,7 @@ public class Weapon : MonoBehaviour
         if (cooldown <= 0) {
             GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
             Bullet bulletScript = bullet.GetComponent<Bullet>();
-            bulletScript.creator = transform.gameObject;
+            bulletScript.UpdateCreator(transform.gameObject);
             bulletScript.LaunchProjectile(transform.rotation);
             
             ammo--;
@@ -86,5 +100,11 @@ public class Weapon : MonoBehaviour
 
     public void OnTransformParentChanged() {
         parent = transform.parent.gameObject;
+    }
+
+    public void RandomizeMods(float v) {
+        modCooldownTime += Random.Range(-1.0F*v, v)*1.0F; 
+        modDamage += Random.Range(-1.0F*v, v)*1.0F; 
+        modProjectileSpeed += Random.Range(-1.0F*v, v)*1.0F; 
     }
 }
