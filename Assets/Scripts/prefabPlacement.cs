@@ -13,7 +13,7 @@ public class PrefabPlacement : MonoBehaviour
 	[SerializeField] private int mainBranchLength;
 	[SerializeField] private int offshootBranchCap;
 
-	private readonly List<GameObject> dungeon = new();
+	private List<GameObject> dungeon = new();
 
     private readonly Dictionary<string, string> reverseDirection = new()
 	{
@@ -27,7 +27,7 @@ public class PrefabPlacement : MonoBehaviour
 
 	void Start () {
 		// Creates the starting room and starts the generation
-		GameObject startRoom = CreateRoom(spawnRoom, null, true);
+		GameObject startRoom = CreateRoom(spawnRoom, null, false, true);
 		CreateDungeon(startRoom, mainBranchLength, offshootBranchCap);
 	}
 
@@ -39,15 +39,99 @@ public class PrefabPlacement : MonoBehaviour
 			if (mainBranchLen > 0)
             {
 				// Determines if the room being created is a main branch(a branch that leads to the end)
-				if(mainBranchLen == 1){
-					GameObject hallway = CreateRoom(hallways[0], startRoom);
-					CreateDungeon(CreateRoom(bossRoom, hallway), mainBranchLen - 1, branchCap - 1);
+				if (mainBranchLen == 1){
+					GameObject hallway = CreateRoom(hallways[0], startRoom, true);
+					if (hallway == null)
+					{
+						for (int j = dungeon.Count - 1; j >= 0; j--)
+						{
+							GameObject room = dungeon[j];
+							if (GetNumAvailable(room.GetComponent<RoomInfo>()) > 0)
+							{
+								CreateDungeon(room, mainBranchLen, branchCap);
+								break;
+							}
+						}
+						break;
+					}
+					GameObject created = CreateRoom(bossRoom, hallway, true);
+					if (created == null)
+					{
+						dungeon.Remove(hallway);
+						Destroy(hallway);
+						for (int j = dungeon.Count - 1; j >= 0; j--)
+						{
+							GameObject room = dungeon[j];
+							if (GetNumAvailable(room.GetComponent<RoomInfo>()) > 0)
+							{
+								CreateDungeon(room, mainBranchLen, branchCap);
+								break;
+							}
+							if (j == 0)
+							{
+								dungeon = new();
+								GameObject start = CreateRoom(spawnRoom, null, true);
+								CreateDungeon(start, mainBranchLength, offshootBranchCap);
+							}
+						}
+						break;
+					}
+					CreateDungeon(created, mainBranchLen - 1, branchCap - 1);
 				} else {
 					if (Random.Range(0, 8) != 0) {
-						GameObject hallway = CreateRoom(hallways[0], startRoom);
-						CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], hallway), mainBranchLen - 1, branchCap - 1);
+						GameObject hallway = CreateRoom(hallways[0], startRoom, true);
+						if (hallway == null)
+                        {
+							for (int j = dungeon.Count - 1; j >= 0; j--)
+                            {
+								GameObject room = dungeon[j];
+								if (GetNumAvailable(room.GetComponent<RoomInfo>()) > 0)
+                                {
+									CreateDungeon(room, mainBranchLen, branchCap);
+									break;
+                                }
+                            }
+							break;
+                        }
+						GameObject created = CreateRoom(rooms[Random.Range(0, rooms.Length)], hallway, true);
+						if (created == null)
+						{
+							dungeon.Remove(hallway);
+							Destroy(hallway);
+							for (int j = dungeon.Count - 1; j >= 0; j--)
+							{
+								GameObject room = dungeon[j];
+								if (GetNumAvailable(room.GetComponent<RoomInfo>()) > 0)
+								{
+									CreateDungeon(room, mainBranchLen, branchCap);
+									break;
+								}
+								if (j == 0)
+                                {
+									dungeon = new();
+									GameObject start = CreateRoom(spawnRoom, null, true);
+									CreateDungeon(start, mainBranchLength, offshootBranchCap);
+								}
+							}
+							break;
+						}
+						CreateDungeon(created, mainBranchLen - 1, branchCap - 1);
 					} else {
-						CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], startRoom), mainBranchLen - 1, branchCap - 1);
+						GameObject created = CreateRoom(rooms[Random.Range(0, rooms.Length)], startRoom, true);
+						if (created == null)
+						{
+							for (int j = dungeon.Count - 1; j >= 0; j--)
+							{
+								GameObject room = dungeon[j];
+								if (GetNumAvailable(room.GetComponent<RoomInfo>()) > 0)
+								{
+									CreateDungeon(room, mainBranchLen, branchCap);
+									break;
+								}
+							}
+							break;
+						}
+						CreateDungeon(created, mainBranchLen - 1, branchCap - 1);
 					}
 				}
 				mainBranchLen = 0;
@@ -56,31 +140,51 @@ public class PrefabPlacement : MonoBehaviour
             {
 				// Determines if any more branches should be added and rolls a dice to see if the room will be created
 				if (Random.Range(0, 8) != 0) {
-					GameObject hallway = CreateRoom(hallways[0], startRoom);
-					CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], hallway), 0, branchCap - 1);
+					GameObject hallway = CreateRoom(hallways[0], startRoom, false);
+					if (hallway == null)
+                    {
+						break;
+                    }
+					GameObject created = CreateRoom(rooms[Random.Range(0, rooms.Length)], hallway, false);
+					if (created == null)
+					{
+						dungeon.Remove(hallway);
+						Destroy(hallway);
+						break;
+					}
+					CreateDungeon(created, 0, branchCap - 1);
 				} else {
-					CreateDungeon(CreateRoom(rooms[Random.Range(0, rooms.Length)], startRoom), 0, branchCap - 1);
+					GameObject created = CreateRoom(rooms[Random.Range(0, rooms.Length)], startRoom, false);
+					if (created == null)
+					{
+						break;
+					}
+					CreateDungeon(created, 0, branchCap - 1);
 				}
 			}
         }
     }
 
-	private GameObject CreateRoom(GameObject room, GameObject toAlign, bool start=false)
+	private GameObject CreateRoom(GameObject room, GameObject toAlign, bool force, bool start=false)
     {
 		// Initializes a room
 		float randomDir = start ? Random.Range(0, 4) : 0;
 		GameObject createdRoom = Instantiate(room, new Vector2(0, 0), Quaternion.Euler(0, 0, randomDir * 90));
 		createdRoom.transform.SetParent(transform, false);
-		dungeon.Add(createdRoom);
 		if (!start)
         {
 			// Aligns created room to previous room
-			AlignRooms(toAlign.transform, createdRoom.transform, roomSpacing);
+			if (!AlignRooms(toAlign.transform, createdRoom.transform, roomSpacing, force))
+            {
+				return null;
+            }
 		}
+		dungeon.Add(createdRoom);
 		return createdRoom;
 	}
 
-	private void AlignRooms(Transform origin, Transform created, float spacing) {
+	private bool AlignRooms(Transform origin, Transform created, float spacing, bool force)
+	{
 		// Gets all necessary information about the origin room
 		RoomInfo origin_data = origin.GetComponent<RoomInfo>();
 		string direction_origin = origin_data.doorDirection[FindAvailableDoor(origin_data)];
@@ -88,16 +192,19 @@ public class PrefabPlacement : MonoBehaviour
 		origin_data.doorOccupation[origin_data.doorDirection.IndexOf(direction_origin)] = true;
 
 		// Finds a door on created room that will connect with origin
-		string true_dir = directionNumber[(directionNumber.IndexOf(direction_origin) + (int) (origin.rotation.eulerAngles.z / 90)) % 4];
+		string true_dir = directionNumber[(directionNumber.IndexOf(direction_origin) + (int)(origin.rotation.eulerAngles.z / 90)) % 4];
 		string direction_created;
 		RoomInfo created_data = created.GetComponent<RoomInfo>();
 		string true_created_dir;
-		if (created_data.doorDirection.Count == 4) {
+		if (created_data.doorDirection.Count == 4)
+		{
 			// If the room has four doors do not rotate
 			direction_created = reverseDirection[true_dir];
 			true_created_dir = direction_created;
 			created_data.doorOccupation[created_data.doorDirection.IndexOf(direction_created)] = true;
-		} else {
+		}
+		else
+		{
 			// Randomly rotates rooms with less than 4 doors	
 			created.transform.rotation = Quaternion.Euler(0, 0, 0);
 			string selected_door = created_data.doorDirection[FindAvailableDoor(created_data)];
@@ -112,16 +219,33 @@ public class PrefabPlacement : MonoBehaviour
 
 		// Aligns the created room to the origin room
 		Vector2 shift;
-		if (true_created_dir == "North" || true_created_dir == "South") {
+		if (true_created_dir == "North" || true_created_dir == "South")
+		{
 			shift = new Vector2(origin_join_point.position.x - created_join_point.position.x, origin_join_point.position.y + (true_created_dir == "South" ? spacing : -spacing) - created_join_point.position.y);
-		} else {
-			shift = new Vector2(origin_join_point.position.x + (true_created_dir == "West" ? spacing : -spacing)- created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
+		}
+		else
+		{
+			shift = new Vector2(origin_join_point.position.x + (true_created_dir == "West" ? spacing : -spacing) - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
 		}
 		created.Translate(shift, Space.World);
-		/*if (myCollider.bounds.Intersects(playerObject.movementSoundSphere.bounds))
-		{
-			Debug.Log("Player Detected!!");
+		/*foreach (GameObject gb in dungeon) {
+			if (created.GetComponent<CompositeCollider2D>().bounds.Intersects(gb.GetComponent<CompositeCollider2D>().bounds))
+			{
+				Debug.Log(gb.name);
+				if (force && GetNumAvailable(origin_data) > 0)
+                {
+					if (!AlignRooms(origin, created, spacing, force))
+                    {
+						//dungeon.Remove(created.gameObject);
+						//Destroy(created.gameObject);
+						return false;
+					}
+					return true;
+				}
+				return false;
+			}
 		}*/
+		return true;
 	}
 
 	private int FindAvailableDoor(RoomInfo data)
