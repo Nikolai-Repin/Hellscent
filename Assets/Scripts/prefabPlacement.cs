@@ -228,8 +228,8 @@ public class PrefabPlacement : MonoBehaviour
 			shift = new Vector2(origin_join_point.position.x + (true_created_dir == "West" ? spacing : -spacing) - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
 		}
 		created.Translate(shift, Space.World);
-		/*foreach (GameObject gb in dungeon) {
-			if (created.GetComponent<CompositeCollider2D>().bounds.Intersects(gb.GetComponent<CompositeCollider2D>().bounds))
+		foreach (GameObject gb in dungeon) {
+			if (created.gameObject.GetComponent<CompositeCollider2D>().bounds.Intersects(gb.GetComponent<CompositeCollider2D>().bounds))
 			{
 				Debug.Log(gb.name);
 				if (force && GetNumAvailable(origin_data) > 0)
@@ -244,7 +244,7 @@ public class PrefabPlacement : MonoBehaviour
 				}
 				return false;
 			}
-		}*/
+		}
 		return true;
 	}
 
