@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
     protected GameObject parent;
     protected SpriteRenderer sr;
     protected Controller controller;
+    protected Vector2 target;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,10 @@ public class Weapon : MonoBehaviour
             parent = transform.parent.gameObject;
             if (transform.parent.gameObject.GetComponent<Controller>() != null) {
                 transform.parent.gameObject.GetComponent<Controller>().NewWeapon(transform.gameObject);
+                SetTarget(Input.mousePosition);
+            }
+            if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
+                SetTarget(transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer().transform.position);
             }
         }
     }
@@ -30,9 +35,12 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (transform.parent != null && transform.parent.gameObject.GetComponent<Controller>() != null) {
-            UpdateAngleAndPosition(Input.mousePosition);
+        if (transform.parent.gameObject.GetComponent<Controller>() != null) {
+            SetTarget(Input.mousePosition);
+        }
+
+        if (transform.parent != null) {
+            UpdateAngleAndPosition(target);
         }
 
         cooldown -= Time.deltaTime;
@@ -88,5 +96,10 @@ public class Weapon : MonoBehaviour
 
     public void OnTransformParentChanged() {
         parent = transform.parent.gameObject;
+    }
+
+    public void SetTarget(Vector2 target) {
+        this.target = target;
+        Debug.Log(this.target);
     }
 }

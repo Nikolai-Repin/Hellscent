@@ -43,9 +43,9 @@ public class Bullet : MonoBehaviour {
 
     protected void OnTriggerEnter2D(Collider2D other) {
         //I need to set up teams or something of the like for this, I want bullets to be able to belong to enemies
-        if (other.gameObject.tag == "Enemy") {
-            Health health =  other.gameObject.GetComponent<Health>();
-            health.TakeDamage(damage);
+        //if (other.gameObject.tag == "Enemy") {
+        if (other.gameObject.GetComponent<Entity>() != null &&  other.gameObject != creator.transform.parent.gameObject) {
+            other.gameObject.GetComponent<Entity>().TakeDamage(damage);
             pierce--;
         }
         if (other.gameObject.tag == "Wall") { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?

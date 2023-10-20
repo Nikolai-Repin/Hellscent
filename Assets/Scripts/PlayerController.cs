@@ -133,20 +133,8 @@ public class Controller : Entity
         target.GetComponent<PickupItem>().CleanUp();
     }
 
-    public GameObject FindClosest (Collider2D[] targets, Vector3 origin) {
-        GameObject closest = targets[0].transform.gameObject;
-        float closestLen = (targets[0].transform.position - origin).sqrMagnitude;
-        float curLen = closestLen;
-
-        for (int i = 1; i < targets.Length; i++) {
-            curLen = (targets[i].transform.position - origin).sqrMagnitude;
-            if (curLen < closestLen) {
-                closestLen = curLen;
-                closest = targets[i].transform.gameObject;
-            }
-        }
-
-        return closest;
+    public override void Die () {
+        return;
     }
 
 }
