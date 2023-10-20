@@ -32,7 +32,6 @@ public class GenerateDungeon : MonoBehaviour
         GameObject startRoom = CreateRoom(spawnRoom, true);
         GameObject nextRoom = CreateRoom(rooms[0]);
         AlignRooms(startRoom, nextRoom, roomSpacing, false);
-
     }
 
     private GameObject CreateRoom(GameObject room, bool start)
