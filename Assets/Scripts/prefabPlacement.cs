@@ -9,7 +9,7 @@ public class PrefabPlacement : MonoBehaviour
 	[SerializeField] private GameObject[] hallways;
 	[SerializeField] private GameObject spawnRoom;
 	[SerializeField] private GameObject bossRoom;
-	[SerializeField] private float roomSpacing; // Doesn't actually fully work so fix it future me
+	[SerializeField] private float roomSpacing;
 	[SerializeField] private int mainBranchLength;
 	[SerializeField] private int offshootBranchCap;
 
