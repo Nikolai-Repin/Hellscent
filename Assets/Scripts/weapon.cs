@@ -9,6 +9,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] public GameObject projectileType;
     [SerializeField] public float cooldownTime = 0.5F;
     [SerializeField] public float kickback = 0F;
+    [SerializeField] public int bullets = 1;
+    [SerializeField] public float accuracy = 1.0F;
+
 
     private float cooldown;
     private GameObject parent;
@@ -27,7 +30,7 @@ public class Weapon : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         if (randomize) {
-            RandomizeMods(1.0F);
+            RandomizeMods(1.0F, 1.0F);
             randomize = false;
         }
 
@@ -56,18 +59,25 @@ public class Weapon : MonoBehaviour
     public bool Fire()
     {
         if (ammo == 0) {return false;}
-        
-        if (cooldown <= 0) {
-            GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
-            Bullet bulletScript = bullet.GetComponent<Bullet>();
-            bulletScript.UpdateCreator(transform.gameObject);
-            bulletScript.LaunchProjectile(transform.rotation);
-            
-            ammo--;
-            cooldown = cooldownTime;
-            return true;
-        }
 
+        for (int i = 0; i < bullets; i++)
+        {
+            if (cooldown <= 0)
+            {
+                if (ammo == 0) { return false; }
+
+                Vector2 innaccuracyVector;
+
+                GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                bulletScript.UpdateCreator(transform.gameObject);
+                bulletScript.LaunchProjectile(transform.rotation);
+
+                ammo--;
+                cooldown = cooldownTime;
+                return true;
+            }
+        }
         return false;
     }
 
@@ -102,9 +112,9 @@ public class Weapon : MonoBehaviour
         parent = transform.parent.gameObject;
     }
 
-    public void RandomizeMods(float v) {
-        modCooldownTime += Random.Range(-1.0F*v, v)*1.0F; 
-        modDamage += Random.Range(-1.0F*v, v)*1.0F; 
-        modProjectileSpeed += Random.Range(-1.0F*v, v)*1.0F; 
+    public void RandomizeMods(float variance, float quality) {
+        modCooldownTime += (Random.Range(-1.0F* variance, variance) + quality) *1.0F; 
+        modDamage += (Random.Range(-1.0F* variance, variance) + quality) *1.0F; 
+        modProjectileSpeed += (Random.Range(-1.0F*variance, variance) + quality) *1.0F; 
     }
 }
