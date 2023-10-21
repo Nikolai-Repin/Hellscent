@@ -25,13 +25,74 @@ public class GenerateDungeon : MonoBehaviour
     private readonly List<string> directionNumber = new() { "North", "West", "South", "East" };
 
     void Start() {
-        StartCoroutine(CreateDungeon());
-    }   
+		GameObject startRoom = CreateRoom(spawnRoom, true);
+		dungeon.Add(startRoom);
+		StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
+    }
 
-    private IEnumerator CreateDungeon() {
-        GameObject startRoom = CreateRoom(spawnRoom, true);
-        GameObject nextRoom = CreateRoom(rooms[0]);
-        AlignRooms(startRoom, nextRoom, roomSpacing, false);
+	IEnumerator CreateDungeon(GameObject origin, int mainBranch, int branchCap) {
+		int nextMainBranch = mainBranch;
+		int nextBranchCap = branchCap;
+		bool usedHallway = false;
+		GameObject nextOrigin = origin;
+		if (mainBranch > 0)
+        {
+			nextMainBranch--;
+        }
+		else if (branchCap > 0 && Random.Range(0, 5) != 0)
+        {
+			nextMainBranch--;
+        }
+		if (Random.Range(0, 8) != 0)
+        {
+			GameObject nextHallway = CreateRoom(hallways[0], false);
+			AlignRooms(nextOrigin.transform, nextHallway.transform, roomSpacing);
+			yield return null;
+			foreach (GameObject dr in dungeon)
+			{
+				if (nextHallway.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
+				{
+					Destroy(nextHallway);
+					if (GetNumAvailable(nextOrigin.GetComponent<RoomInfo>()) > 0)
+                    {
+						StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
+						yield break;
+                    }
+					else
+                    {
+						yield break;
+                    }
+				}
+			}
+			dungeon.Add(nextHallway);
+			nextOrigin = nextHallway;
+			usedHallway = true;
+		}
+		GameObject nextRoom = CreateRoom(rooms[0], false);
+		AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
+		yield return null;
+		foreach (GameObject dr in dungeon) {
+			if (nextRoom.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
+			{
+				Debug.Log(dr.name);
+				//Destroy(nextRoom);
+				if (usedHallway)
+                {
+					//dungeon.Remove(nextOrigin);
+					//Destroy(nextOrigin);
+                }
+				if (GetNumAvailable(nextOrigin.GetComponent<RoomInfo>()) > 0)
+				{
+					StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
+					yield break;
+				}
+				else
+				{
+					yield break;
+				}
+			}
+		}
+		dungeon.Add(nextRoom);
     }
 
     private GameObject CreateRoom(GameObject room, bool start)
@@ -40,7 +101,6 @@ public class GenerateDungeon : MonoBehaviour
 		float randomDir = start ? Random.Range(0, 4) : 0;
 		GameObject createdRoom = Instantiate(room, new Vector2(0, 0), Quaternion.Euler(0, 0, randomDir * 90));
 		createdRoom.transform.SetParent(transform, false);
-		dungeon.Add(createdRoom);
 		return createdRoom;
 	}
 

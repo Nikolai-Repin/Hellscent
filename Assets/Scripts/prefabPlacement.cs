@@ -175,11 +175,15 @@ public class PrefabPlacement : MonoBehaviour
         {
 			// Aligns created room to previous room
 			if (!AlignRooms(toAlign.transform, createdRoom.transform, roomSpacing, force))
-            {
+			{
 				return null;
-            }
+			}
+			else
+            {
+				dungeon.Add(createdRoom);
+			}
 		}
-		dungeon.Add(createdRoom);
+
 		return createdRoom;
 	}
 
@@ -236,8 +240,8 @@ public class PrefabPlacement : MonoBehaviour
                 {
 					if (!AlignRooms(origin, created, spacing, force))
                     {
-						//dungeon.Remove(created.gameObject);
-						//Destroy(created.gameObject);
+						dungeon.Remove(created.gameObject);
+						Destroy(created.gameObject);
 						return false;
 					}
 					return true;
