@@ -951,7 +951,7 @@ MonoBehaviour:
   holdsWeapon: 1
   weapon: {fileID: 1280602053}
   target: {fileID: 0}
-  visRange: 0
+  visRange: 10
 --- !u!1001 &2058751442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -998,6 +998,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2867581710959412191, guid: 6299f6014464a4598a264364aff126b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652576925792206952, guid: 6299f6014464a4598a264364aff126b1, type: 3}
+      propertyPath: maxFrameTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652576925792206952, guid: 6299f6014464a4598a264364aff126b1, type: 3}
+      propertyPath: logPathResults
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5296438892467012091, guid: 6299f6014464a4598a264364aff126b1, type: 3}
