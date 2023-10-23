@@ -278,9 +278,10 @@ MonoBehaviour:
   - {fileID: 7564696797152967632, guid: 9ccd97415ada88442bf31f3ad28c86fd, type: 3}
   spawnRoom: {fileID: 8767254853541074108, guid: 4612257200b9ea040a39437ac0662e87, type: 3}
   bossRoom: {fileID: 8238676731242650557, guid: e0f548f4eaa766c41ae27a590d270acd, type: 3}
-  roomSpacing: 0.17
+  roomSpacing: 0.1601
   mainBranchLength: 0
   offshootBranchCap: 0
+  waitingFrames: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

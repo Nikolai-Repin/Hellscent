@@ -11,6 +11,9 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField] private float roomSpacing;
 	[SerializeField] private int mainBranchLength;
 	[SerializeField] private int offshootBranchCap;
+	[SerializeField] private int waitingFrames;
+
+	private bool go = true;
 
     private List<GameObject> dungeon = new();
 
@@ -25,10 +28,19 @@ public class GenerateDungeon : MonoBehaviour
     private readonly List<string> directionNumber = new() { "North", "West", "South", "East" };
 
     void Start() {
-		GameObject startRoom = CreateRoom(spawnRoom, true);
-		dungeon.Add(startRoom);
-		StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
+		//GameObject startRoom = CreateRoom(spawnRoom, true);
+		//dungeon.Add(startRoom);
+		//StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
     }
+
+	void Update() {
+		if (go) {
+			go = false;
+			GameObject startRoom = CreateRoom(spawnRoom, true);
+			dungeon.Add(startRoom);
+			StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
+		}
+	}
 
 	IEnumerator CreateDungeon(GameObject origin, int mainBranch, int branchCap) {
 		int nextMainBranch = mainBranch;
@@ -47,7 +59,7 @@ public class GenerateDungeon : MonoBehaviour
         {
 			GameObject nextHallway = CreateRoom(hallways[0], false);
 			AlignRooms(nextOrigin.transform, nextHallway.transform, roomSpacing);
-			yield return null;
+			yield return StartCoroutine(waitFrames(waitingFrames));
 			foreach (GameObject dr in dungeon)
 			{
 				if (nextHallway.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
@@ -55,18 +67,20 @@ public class GenerateDungeon : MonoBehaviour
 					Debug.Log("Hallway " + dr.name); 
 				}
 			}
-			dungeon.Add(nextHallway);
 			nextOrigin = nextHallway;
 			usedHallway = true;
 		}
 		GameObject nextRoom = CreateRoom(rooms[0], false);
 		AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
-		yield return null;
+		yield return StartCoroutine(waitFrames(waitingFrames));
 		foreach (GameObject dr in dungeon) {
 			if (nextRoom.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
 			{
 				Debug.Log("Room " + dr.name);
 			}
+		}
+		if (usedHallway) {
+			dungeon.Add(nextOrigin);
 		}
 		dungeon.Add(nextRoom);
     }
@@ -85,7 +99,7 @@ public class GenerateDungeon : MonoBehaviour
 		// Gets all necessary information about the origin room
 		RoomInfo origin_data = origin.GetComponent<RoomInfo>();
 		string direction_origin = origin_data.doorDirection[FindAvailableDoor(origin_data)];
-		Transform origin_join_point = origin.Find("Join Point " + direction_origin).Find("Join Point");
+		Transform origin_join_point = origin.Find("Join Point " + direction_origin);
 		origin_data.doorOccupation[origin_data.doorDirection.IndexOf(direction_origin)] = true;
 
 		// Finds a door on created room that will connect with origin
@@ -112,7 +126,7 @@ public class GenerateDungeon : MonoBehaviour
 			true_created_dir = directionNumber[(directionNumber.IndexOf(selected_door) + (int)(created.rotation.eulerAngles.z / 90)) % 4];
 			created_data.doorOccupation[created_data.doorDirection.IndexOf(selected_door)] = true;
 		}
-		Transform created_join_point = created.Find("Join Point " + direction_created).Find("Join Point");
+		Transform created_join_point = created.Find("Join Point " + direction_created);
 
 		// Aligns the created room to the origin room
 		Vector2 shift;
@@ -154,4 +168,10 @@ public class GenerateDungeon : MonoBehaviour
         }
 		return count;
     }
+
+	IEnumerator waitFrames(int frames) {
+		for (int i = 0; i < frames; i++) {
+			yield return null;
+		}
+	}
 }
