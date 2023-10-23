@@ -1,26 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; 
 
-public class EnemyWeapon : MonoBehaviour
+public class EnemyWeapon : Weapon
 
 
 
 {
-    [SerializeField] public int offset = 2;
-    [SerializeField] public int ammo = -1;
-    [SerializeField] public GameObject projectileType;
     // cooldownTime is set to fire once per second
-    [SerializeField] public int cooldownTime = 600;
-    public int cooldown;
-    private GameObject parent;
-    private SpriteRenderer sr;
-    private Controller controller;
     public GameObject target;
+    protected SpriteRenderer sprn;
     // Start is called before the first frame update
     void Start()
     {
         parent = transform.parent.gameObject;      
+        
 
     }
 
@@ -28,25 +22,26 @@ public class EnemyWeapon : MonoBehaviour
     //Used to have weapon face towards player
     void Update()
     {
-      transform.position = parent.transform.position * offset;
-      Vector3 Look = transform.InverseTransformPoint(target.transform.position);
-      float Angle = Mathf.Atan2(Look.y, Look.x) * Mathf.Rad2Deg;
-      transform.Rotate(0,0, Angle);
-       if(cooldown <= 5)
-       {
-            Attacking();
-       }
-       cooldown--;
-    }
-
-    //Taken from weapon.cs, might make a child of weapon.cs to just call the attack from there;
-    public void Attacking()
-    {
-        GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.creator = transform.gameObject;
-        bulletScript.LaunchProjectile(transform.rotation);
-        cooldown = cooldownTime;
+        Vector3 temp = new Vector3();
+        temp = parent.transform.position;
+        temp.x += 1.7F; //Puts weapon on edge of player in Sample Scene; 
+        transform.position = temp;
+        /*Vector3 Look = transform.InverseTransformPoint(target.transform.position);
+        var dir = transform.InverseTransformPoint(target.transform.position);
+        float Angle = Mathf.Atan2(Look.y, Look.x) * Mathf.Rad2Deg;
+        transform.Rotate(0,0, Angle);
+         var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+        if (angle < 0)
+        {
+            sprn.flipY = true;
+        } else {
+            sprn.flipY = false;
+        }
+        */
+        Fire();
+         Debug.Log("testing");
+        cooldown -= Time.deltaTime;
+        
     }
 }
 

@@ -10,19 +10,22 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float cooldownTime = 0.5F;
     [SerializeField] public float kickback = 0F;
     [SerializeField] public int bullets = 1;
-    [SerializeField] public float accuracy = 1.0F;
+    [SerializeField] public float accuracy = 10.0F;
 
-
-    private float cooldown;
-    private GameObject parent;
-    private SpriteRenderer sr;
-    private Controller controller;
+    protected float cooldown;
+    protected GameObject parent;
+    protected SpriteRenderer sr;
+    protected Controller controller;
+    protected Vector2 target;
 
     //Rand Stats
+    public float quality = 0.0F;
     [SerializeField] public bool randomize;
     public float modCooldownTime = 1.0F;
     public float modDamage = 1.0F;
     public float modProjectileSpeed = 1.0F;
+    public float modAccuracy = 1.0F;
+    public int modBullets = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +33,7 @@ public class Weapon : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         if (randomize) {
-            RandomizeMods(1.0F, 1.0F);
+            RandomizeMods(0.5F, quality);
             randomize = false;
         }
 
@@ -40,6 +43,10 @@ public class Weapon : MonoBehaviour
             parent = transform.parent.gameObject;
             if (transform.parent.gameObject.GetComponent<Controller>() != null) {
                 transform.parent.gameObject.GetComponent<Controller>().NewWeapon(transform.gameObject);
+                SetTarget(Input.mousePosition);
+            }
+            if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
+                SetTarget(transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer().transform.position);
             }
         }
     }
@@ -47,9 +54,9 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (transform.parent != null && transform.parent.gameObject.GetComponent<Controller>() != null) {
-            UpdateAngleAndPosition(Input.mousePosition);
+        if (transform.parent != null) {
+            UpdateTarget();
+            UpdateAngleAndPosition(target);
         }
 
         cooldown -= Time.deltaTime;
@@ -58,30 +65,32 @@ public class Weapon : MonoBehaviour
     //Fires the selected projectile
     public bool Fire()
     {
-        if (ammo == 0) {return false;}
+        if (ammo == 0 || cooldown > 0) {return false;}
 
-        for (int i = 0; i < bullets; i++)
+        for (int i = 0; i < bullets+modBullets; i++)
         {
-            if (cooldown <= 0)
             {
-                if (ammo == 0) { return false; }
-
-                Vector2 innaccuracyVector;
 
                 GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
                 bulletScript.UpdateCreator(transform.gameObject);
-                bulletScript.LaunchProjectile(transform.rotation);
 
-                ammo--;
-                cooldown = cooldownTime;
-                return true;
+                Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
+                Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
+                bulletScript.LaunchProjectile(fireAngle);
+
+                
             }
         }
-        return false;
+
+        ammo--;
+        cooldown = cooldownTime;
+        return true;
     }
 
     public float GetOffset() {return offset;}
+
+    public float GetCoolDown() {return cooldown;}
 
     public bool GetControllerAndEquip() {
         if (transform.parent.gameObject.GetComponent<Controller>() != null) {
@@ -95,7 +104,7 @@ public class Weapon : MonoBehaviour
 
         //Setting position and angle
         transform.position = parent.transform.position;
-        var dir = targetPosition - Camera.main.WorldToScreenPoint(transform.parent.position);
+        var dir = targetPosition - transform.parent.position;
         var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
         transform.position += dir.normalized * offset;
@@ -112,9 +121,31 @@ public class Weapon : MonoBehaviour
         parent = transform.parent.gameObject;
     }
 
-    public void RandomizeMods(float variance, float quality) {
+    public float RandomizeMods(float variance, float quality) {
         modCooldownTime += (Random.Range(-1.0F* variance, variance) + quality) *1.0F; 
         modDamage += (Random.Range(-1.0F* variance, variance) + quality) *1.0F; 
         modProjectileSpeed += (Random.Range(-1.0F*variance, variance) + quality) *1.0F; 
+        modAccuracy += (Random.Range(-1.0F*variance, variance) + quality) *1.0F; 
+        while (Random.Range(0, variance*10) <= quality && modBullets < 3) {
+            modBullets++;
+        }
+
+        return (modCooldownTime-1)+(modDamage-1)+(modProjectileSpeed-1)+(modAccuracy-1)+modBullets;
+    }
+
+    public void SetTarget(Vector2 target) {
+        this.target = target;
+    }
+
+    public void UpdateTarget() {
+        if (transform.parent != null) {
+            parent = transform.parent.gameObject;
+            if (transform.parent.gameObject.GetComponent<Controller>() != null) {
+                SetTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            }
+            if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
+                SetTarget(transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer().transform.position);
+            }
+        }
     }
 }
