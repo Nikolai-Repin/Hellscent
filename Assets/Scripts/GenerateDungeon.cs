@@ -46,14 +46,21 @@ public class GenerateDungeon : MonoBehaviour
 		int nextMainBranch = mainBranch;
 		int nextBranchCap = branchCap;
 		bool usedHallway = false;
+		bool continueDungeon = false;
 		GameObject nextOrigin = origin;
+		if (mainBranch < 1 && branchCap < 1) 
+		{
+			yield break;
+		}
 		if (mainBranch > 0)
         {
+			continueDungeon = true;
 			nextMainBranch--;
         }
 		else if (branchCap > 0 && Random.Range(0, 5) != 0)
         {
-			nextMainBranch--;
+			continueDungeon = true;
+			nextBranchCap--;
         }
 		if (Random.Range(0, 8) != 0)
         {
@@ -64,25 +71,38 @@ public class GenerateDungeon : MonoBehaviour
 			{
 				if (nextHallway.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
 				{
-					Debug.Log("Hallway " + dr.name); 
+					Destroy(nextHallway);
+					yield break;
 				}
 			}
 			nextOrigin = nextHallway;
 			usedHallway = true;
 		}
-		GameObject nextRoom = CreateRoom(rooms[0], false);
+		GameObject nextRoom = CreateRoom(rooms[Random.Range(0, rooms.Length)], false);
 		AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
 		yield return StartCoroutine(waitFrames(waitingFrames));
 		foreach (GameObject dr in dungeon) {
 			if (nextRoom.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
 			{
-				Debug.Log("Room " + dr.name);
+				if (usedHallway) {
+					Destroy(nextOrigin);
+				}
+				Destroy(nextRoom);
+				yield break;
 			}
 		}
 		if (usedHallway) {
 			dungeon.Add(nextOrigin);
 		}
 		dungeon.Add(nextRoom);
+		if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0) 
+		{
+			StartCoroutine(CreateDungeon(origin, nextMainBranch, branchCap));
+		}
+		else if (continueDungeon) 
+		{
+			StartCoroutine(CreateDungeon(nextRoom, nextMainBranch, nextBranchCap));
+		}
     }
 
     private GameObject CreateRoom(GameObject room, bool start)
