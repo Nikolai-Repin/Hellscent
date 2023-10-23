@@ -52,16 +52,7 @@ public class GenerateDungeon : MonoBehaviour
 			{
 				if (nextHallway.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
 				{
-					Destroy(nextHallway);
-					if (GetNumAvailable(nextOrigin.GetComponent<RoomInfo>()) > 0)
-                    {
-						StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
-						yield break;
-                    }
-					else
-                    {
-						yield break;
-                    }
+					Debug.Log("Hallway " + dr.name); 
 				}
 			}
 			dungeon.Add(nextHallway);
@@ -74,22 +65,7 @@ public class GenerateDungeon : MonoBehaviour
 		foreach (GameObject dr in dungeon) {
 			if (nextRoom.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
 			{
-				Debug.Log(dr.name);
-				//Destroy(nextRoom);
-				if (usedHallway)
-                {
-					//dungeon.Remove(nextOrigin);
-					//Destroy(nextOrigin);
-                }
-				if (GetNumAvailable(nextOrigin.GetComponent<RoomInfo>()) > 0)
-				{
-					StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
-					yield break;
-				}
-				else
-				{
-					yield break;
-				}
+				Debug.Log("Room " + dr.name);
 			}
 		}
 		dungeon.Add(nextRoom);
