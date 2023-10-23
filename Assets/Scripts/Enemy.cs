@@ -25,7 +25,6 @@ public class Enemy : Entity
             weapon.GetComponent<Weapon>().SetTarget(target.transform.position);
         } else {
             target = FindClosestPlayer(visRange);
-            Debug.Log(target.transform.position);
             weapon.GetComponent<Weapon>().SetTarget(target.transform.position);
         }
     }

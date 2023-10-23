@@ -35,11 +35,8 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.parent.gameObject.GetComponent<Controller>() != null) {
-            SetTarget(Input.mousePosition);
-        }
-
         if (transform.parent != null) {
+            UpdateTarget();
             UpdateAngleAndPosition(target);
         }
 
@@ -81,7 +78,7 @@ public class Weapon : MonoBehaviour
 
         //Setting position and angle
         transform.position = parent.transform.position;
-        var dir = targetPosition - Camera.main.WorldToScreenPoint(transform.parent.position);
+        var dir = targetPosition - transform.parent.position;
         var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
         transform.position += dir.normalized * offset;
@@ -101,5 +98,17 @@ public class Weapon : MonoBehaviour
     public void SetTarget(Vector2 target) {
         this.target = target;
         Debug.Log(this.target);
+    }
+
+    public void UpdateTarget() {
+        if (transform.parent != null) {
+            parent = transform.parent.gameObject;
+            if (transform.parent.gameObject.GetComponent<Controller>() != null) {
+                SetTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            }
+            if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
+                SetTarget(transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer().transform.position);
+            }
+        }
     }
 }
