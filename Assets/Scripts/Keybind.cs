@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class Keybind : MonoBehaviour
 {
-    private Dictionary<string, int> keys = new Dictionary<string, Keycode>();
+    
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
         
     }
@@ -18,7 +18,4 @@ public class Keybind : MonoBehaviour
         
     }
 
-    public void ChangeKey() {
-        
-    }
 }
