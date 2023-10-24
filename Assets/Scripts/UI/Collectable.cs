@@ -18,5 +18,5 @@ public class Collectable : MonoBehaviour
 }
 
 public enum CollectableType {
-    NONE, AXE
+    NONE, WEAPON, MATERIAL
 }
