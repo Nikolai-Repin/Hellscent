@@ -8,6 +8,7 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField] private GameObject[] hallways;
 	[SerializeField] private GameObject spawnRoom;
 	[SerializeField] private GameObject bossRoom;
+	[SerializeField] private GameObject endCap;
 	[SerializeField] private float roomSpacing;
 	[SerializeField] private int mainBranchLength;
 	[SerializeField] private int offshootBranchCap;
@@ -39,7 +40,20 @@ public class GenerateDungeon : MonoBehaviour
 			GameObject startRoom = CreateRoom(spawnRoom, true);
 			dungeon.Add(startRoom);
 			StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
+			StartCoroutine(detectEnd());
 		}
+	}
+
+	IEnumerator detectEnd() {
+		bool end = false;
+		while (!end) {
+			int start = dungeon.Count;
+			yield return StartCoroutine(waitFrames(waitingFrames * 2));
+			if (start == dungeon.Count) {
+				end = true;
+			}
+		}
+		//CapDoors();
 	}
 
 	IEnumerator CreateDungeon(GameObject origin, int mainBranch, int branchCap) {
@@ -47,6 +61,7 @@ public class GenerateDungeon : MonoBehaviour
 		int nextBranchCap = branchCap;
 		bool usedHallway = false;
 		bool continueDungeon = false;
+		string door = "";
 		GameObject nextOrigin = origin;
 		if (mainBranch < 1 && branchCap < 1) 
 		{
@@ -65,7 +80,8 @@ public class GenerateDungeon : MonoBehaviour
 		if (Random.Range(0, 8) != 0)
         {
 			GameObject nextHallway = CreateRoom(hallways[0], false);
-			AlignRooms(nextOrigin.transform, nextHallway.transform, roomSpacing);
+			door = AlignRooms(nextOrigin.transform, nextHallway.transform, roomSpacing);
+
 			yield return StartCoroutine(waitFrames(waitingFrames));
 			foreach (GameObject dr in dungeon)
 			{
@@ -79,7 +95,10 @@ public class GenerateDungeon : MonoBehaviour
 			usedHallway = true;
 		}
 		GameObject nextRoom = CreateRoom(rooms[Random.Range(0, rooms.Length)], false);
-		AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
+		string hallDoor = AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
+		if (!usedHallway) {
+			door = hallDoor;
+		}
 		yield return StartCoroutine(waitFrames(waitingFrames));
 		foreach (GameObject dr in dungeon) {
 			if (nextRoom.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
@@ -91,6 +110,8 @@ public class GenerateDungeon : MonoBehaviour
 				yield break;
 			}
 		}
+		RoomInfo originData = origin.GetComponent<RoomInfo>();
+		originData.trueOccupancy[originData.doorDirection.IndexOf(door)] = true;
 		if (usedHallway) {
 			dungeon.Add(nextOrigin);
 		}
@@ -105,6 +126,18 @@ public class GenerateDungeon : MonoBehaviour
 		}
     }
 
+	private void CapDoors() {
+		foreach (GameObject dr in dungeon) {
+			RoomInfo data = dr.GetComponent<RoomInfo>();
+			foreach (bool o in data.trueOccupancy) {
+				if (!o) {
+					GameObject cap = Instantiate(endCap, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
+					AlignRooms(dr.transform, cap.transform, 0);
+				}	
+			}
+		}
+	}
+
     private GameObject CreateRoom(GameObject room, bool start)
     {
 		// Initializes a room
@@ -114,7 +147,7 @@ public class GenerateDungeon : MonoBehaviour
 		return createdRoom;
 	}
 
-	private void AlignRooms(Transform origin, Transform created, float spacing)
+	private string AlignRooms(Transform origin, Transform created, float spacing)
 	{
 		// Gets all necessary information about the origin room
 		RoomInfo origin_data = origin.GetComponent<RoomInfo>();
@@ -159,6 +192,7 @@ public class GenerateDungeon : MonoBehaviour
 			shift = new Vector2(origin_join_point.position.x + (true_created_dir == "West" ? spacing : -spacing) - created_join_point.position.x, origin_join_point.position.y - created_join_point.position.y);
 		}
 		created.Translate(shift, Space.World);
+		return direction_origin;
 	} 
 
     private int FindAvailableDoor(RoomInfo data)
