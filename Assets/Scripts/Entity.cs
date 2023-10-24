@@ -33,6 +33,7 @@ public class Entity : MonoBehaviour
         return (false);
    }
 
+    //Finds the closest game object from a array of collider2D and their distance from Vector3 origin
     public GameObject FindClosest (Collider2D[] targets, Vector3 origin) {
         if (targets.Length > 0) {
             GameObject closest = targets[0].transform.gameObject;
@@ -54,10 +55,12 @@ public class Entity : MonoBehaviour
         return null;
     }
 
+    //Finds the closest game object from a list of collider2D and their distance from Vector3 origin
     public GameObject FindClosest (List<Collider2D> targets, Vector3 origin) {
         return FindClosest(targets.ToArray(), origin);
     }
 
+    //Destroys the entity
     public virtual void Die () {
         Destroy(transform.gameObject);
     }
