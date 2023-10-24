@@ -21,7 +21,7 @@ public class Entity : MonoBehaviour
     }
 
     //Deals damage to entity if vulnerable, returns true if damage was dealt
-    public bool TakeDamage(float damage) {
+    public virtual bool TakeDamage(float damage) {
         if (vulnerable) {
             healthAmount -= damage;
             if (healthAmount <= 0) {

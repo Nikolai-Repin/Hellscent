@@ -12,6 +12,11 @@ public class Controller : Entity
     private Vector2 saved_direction;
 
     //Weapon Variables
+    [SerializeField] private float maxMana;
+    [SerializeField] private float mana;
+    [SerializeField] private float manaRechargeSpeed;
+    [SerializeField] private float manaRechargeDelay;
+    private float lastFireTime;
     private int weaponIndex;
     private double rHoldTime;
     private bool hasWeapon = false;
@@ -26,6 +31,8 @@ public class Controller : Entity
         weaponIndex = 0;
         pickupDistance = 5;
         rHoldTime = Time.time;
+        lastFireTime = Time.time;
+        mana = maxMana;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
     }
@@ -60,23 +67,52 @@ public class Controller : Entity
 
         rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
 
+        //Recharging mana
+        if ((Time.time - lastFireTime)>manaRechargeDelay) {
+            if (mana < maxMana) {
+                mana += manaRechargeSpeed*Time.deltaTime;
+            }
+
+            if (mana > maxMana) {
+                mana = maxMana;
+            }
+        }
+
+        //Weapon handling
         if (hasWeapon) {
+
             if (Input.GetKeyDown(KeyCode.R)) {
                 rHoldTime = Time.time;
             }
+
             if (Input.GetKeyUp(KeyCode.R)) {
+                //Change weapon if r was held for half a second
                 if ((Time.time - rHoldTime)<0.5) {
                     ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
+                //Drop held weapon if r was held for longer
                 } else {
                     DropWeapon(weaponIndex);
                 }
             }
             
             if (Input.GetMouseButton(0)) {
-                if(equippedWeapon.GetComponent<Weapon>().Fire()) {
-                    Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
-                    kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
-                    rb.velocity += kbVector;
+
+                //Firing if player has enough mana to fire the weapon
+                float manaCost = equippedWeapon.GetComponent<Weapon>().GetManaCost();
+                if(mana >= manaCost) {
+                    
+
+                    //Firing, Fire() returns true if it fired successfully
+                    if(equippedWeapon.GetComponent<Weapon>().Fire()) {
+
+                        lastFireTime = Time.time;
+                        mana -= manaCost;
+
+                        //Kickback from successful shot
+                        Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
+                        kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
+                        rb.velocity += kbVector;
+                    }
                 }
             }
         }
@@ -133,8 +169,25 @@ public class Controller : Entity
         target.GetComponent<PickupItem>().CleanUp();
     }
 
+    //Deals damage to entity if vulnerable, returns true if damage was dealt
+    public override bool TakeDamage(float damage) {
+        if (vulnerable) {
+            healthAmount--;
+            if (healthAmount <= 0) {
+                Die();
+            }
+            Debug.Log("Damaged");
+            return true;
+        }
+        return (false);
+   }
+
     public override void Die () {
         return;
+    }
+
+    public float GetManaPercent() {
+        return mana/maxMana;
     }
 
 }
