@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2299466888014863248}
   m_Layer: 0
-  m_Name: Join Point
+  m_Name: Join Point West
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 5656310556243357656}
   - component: {fileID: 6715824231413897609}
   - component: {fileID: 4839737403077216148}
+  - component: {fileID: 5859334346615336547}
   m_Layer: 0
   m_Name: End Wall
   m_TagString: Untagged
@@ -227,6 +228,22 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &5859334346615336547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7239455093769158510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd01d8a59b6946b68b72c1e87ee6d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorDirection:
+  - West
+  doorOccupation: 00
+  trueOccupancy: 
 --- !u!1 &7662808374561010124
 GameObject:
   m_ObjectHideFlags: 0

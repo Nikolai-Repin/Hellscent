@@ -28,12 +28,6 @@ public class GenerateDungeon : MonoBehaviour
 
     private readonly List<string> directionNumber = new() { "North", "West", "South", "East" };
 
-    void Start() {
-		//GameObject startRoom = CreateRoom(spawnRoom, true);
-		//dungeon.Add(startRoom);
-		//StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
-    }
-
 	void Update() {
 		if (go) {
 			go = false;
@@ -53,7 +47,7 @@ public class GenerateDungeon : MonoBehaviour
 				end = true;
 			}
 		}
-		//CapDoors();
+		CapDoors();
 	}
 
 	IEnumerator CreateDungeon(GameObject origin, int mainBranch, int branchCap) {
@@ -62,6 +56,7 @@ public class GenerateDungeon : MonoBehaviour
 		bool usedHallway = false;
 		bool continueDungeon = false;
 		string door = "";
+		bool boss = false;
 		GameObject nextOrigin = origin;
 		if (mainBranch < 1 && branchCap < 1) 
 		{
@@ -69,6 +64,9 @@ public class GenerateDungeon : MonoBehaviour
 		}
 		if (mainBranch > 0)
         {
+			if (mainBranch == 1) {
+				boss = true;
+			}
 			continueDungeon = true;
 			nextMainBranch--;
         }
@@ -77,7 +75,7 @@ public class GenerateDungeon : MonoBehaviour
 			continueDungeon = true;
 			nextBranchCap--;
         }
-		if (Random.Range(0, 8) != 0)
+		if (boss || Random.Range(0, 8) != 0)
         {
 			GameObject nextHallway = CreateRoom(hallways[0], false);
 			door = AlignRooms(nextOrigin.transform, nextHallway.transform, roomSpacing);
@@ -93,8 +91,10 @@ public class GenerateDungeon : MonoBehaviour
 			}
 			nextOrigin = nextHallway;
 			usedHallway = true;
+			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[0] = true;
+			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[1] = true;
 		}
-		GameObject nextRoom = CreateRoom(rooms[Random.Range(0, rooms.Length)], false);
+		GameObject nextRoom = CreateRoom(boss ? bossRoom : rooms[Random.Range(0, rooms.Length)], false);
 		string hallDoor = AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
 		if (!usedHallway) {
 			door = hallDoor;
@@ -129,10 +129,12 @@ public class GenerateDungeon : MonoBehaviour
 	private void CapDoors() {
 		foreach (GameObject dr in dungeon) {
 			RoomInfo data = dr.GetComponent<RoomInfo>();
-			foreach (bool o in data.trueOccupancy) {
+			for (int i = 0; i < data.trueOccupancy.Count; i++) {
+				bool o = data.trueOccupancy[i];
 				if (!o) {
 					GameObject cap = Instantiate(endCap, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
-					AlignRooms(dr.transform, cap.transform, 0);
+					cap.transform.SetParent(transform, false);
+					AlignRooms(dr.transform, cap.transform, 0, data.doorDirection[i]);
 				}	
 			}
 		}
@@ -147,11 +149,11 @@ public class GenerateDungeon : MonoBehaviour
 		return createdRoom;
 	}
 
-	private string AlignRooms(Transform origin, Transform created, float spacing)
+	private string AlignRooms(Transform origin, Transform created, float spacing, string force = null)
 	{
 		// Gets all necessary information about the origin room
 		RoomInfo origin_data = origin.GetComponent<RoomInfo>();
-		string direction_origin = origin_data.doorDirection[FindAvailableDoor(origin_data)];
+		string direction_origin = force == null ? origin_data.doorDirection[FindAvailableDoor(origin_data)] : force;
 		Transform origin_join_point = origin.Find("Join Point " + direction_origin);
 		origin_data.doorOccupation[origin_data.doorDirection.IndexOf(direction_origin)] = true;
 
