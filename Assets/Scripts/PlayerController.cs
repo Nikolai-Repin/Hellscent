@@ -6,8 +6,8 @@ public class Controller : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private float speed;
-    [SerializeField] private float dash;
-    [SerializeField, Range(0,1)] private float damper;
+    [SerializeField] private float dash; // default should be 150
+    [SerializeField, Range(0,1)] private float damper; // default should be 150
     private Vector2 direction;
     private Vector2 saved_direction;
 
@@ -15,7 +15,7 @@ public class Controller : MonoBehaviour
     private int weaponIndex;
     private double rHoldTime;
     private bool hasWeapon = false;
-    private GameObject equippedWeapon;
+    public GameObject equippedWeapon;
     public List<GameObject> heldWeapons;
     [SerializeField] private float damage;
 
@@ -49,7 +49,8 @@ public class Controller : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {
-            rb.velocity += saved_direction * dash * Time.deltaTime;
+             rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
+
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {

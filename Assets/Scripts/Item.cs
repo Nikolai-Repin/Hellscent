@@ -23,7 +23,7 @@ public class Item : MonoBehaviour
             }
 
             if (bonusAmmo > 0) {
-                playerCharacter.GetComponent<Controller>().equippedWeapon.addAmmo(bonusAmmo);
+                playerCharacter.GetComponent<Controller>().equippedWeapon.GetComponent<Weapon>().addAmmo(bonusAmmo);
             }
 
             if (bonusSpeed > 0) {
