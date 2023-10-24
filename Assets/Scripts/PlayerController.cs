@@ -13,9 +13,9 @@ public class Controller : Entity
 
     //Weapon Variables
     [SerializeField] private float maxMana;
-    [SerializeField] private float mana;
-    [SerializeField] private float manaRechargeSpeed;
-    [SerializeField] private float manaRechargeDelay;
+    [SerializeField] private float mana; //Please lmk if there's a way to make this read only in the inspector, -J
+    private float manaRechargeSpeed = 5;
+    private float manaRechargeDelay = 1;
     private float lastFireTime;
     private int weaponIndex;
     private double rHoldTime;
@@ -120,6 +120,7 @@ public class Controller : Entity
         rb.velocity += direction * speed * Time.deltaTime; 
     }
 
+    //Changes the currently held weapon to index i in heldWeapons
     public void ChangeWeapon(int i) {
         if (equippedWeapon != null) {
             equippedWeapon.GetComponent<SpriteRenderer>().enabled = false;
@@ -129,6 +130,7 @@ public class Controller : Entity
         equippedWeapon.GetComponent<SpriteRenderer>().enabled = true;
     }
 
+    //Drops the weapon at index i in heldWeapons
     public void DropWeapon(int i) {
         //Handling what happens to the selected weapon if it's being dropped
         if (equippedWeapon == heldWeapons[i]) {
@@ -150,6 +152,7 @@ public class Controller : Entity
         heldWeapons.RemoveAt(i);
     }
 
+    //Registers a new weapon in the player's list of held weapons
     public void NewWeapon(GameObject weapon) {
         hasWeapon = true;
         weapon.transform.SetParent(transform);
@@ -158,6 +161,7 @@ public class Controller : Entity
         ChangeWeapon(heldWeapons.Count-1);
     }
 
+    //Picks up target dropped item off the ground
     public void PickupWeapon(GameObject target) {
 
         //Add the weapon to the arsonal
@@ -182,10 +186,12 @@ public class Controller : Entity
         return (false);
    }
 
+    //Overrides Die() in Entity so player isn't destroyed on death
     public override void Die () {
         return;
     }
 
+    //Returns percentage of current mana out of maxMana
     public float GetManaPercent() {
         return mana/maxMana;
     }
