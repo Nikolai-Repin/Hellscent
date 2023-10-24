@@ -1,21 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Keybind : MonoBehaviour
-{
+[CreateAssetMenu(fileName = "Keybind", menuName = "Keybind")]
+public class Keybind : ScriptableObject {
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public KeyCode pickup, switchW, fireW;
 
-    // Update is called once per frame
-    private void Update()
-    {
+    public KeyCode CheckKey(string key) {
         
-    }
+        switch (key) {
+            case "Pickup":
+                return pickup;
 
+            case "Switch":
+                return switchW;
+
+            case "Fire":
+                return fireW;
+
+            default:
+                return KeyCode.None;
+        }
+    }
 }
