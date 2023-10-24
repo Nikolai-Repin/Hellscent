@@ -255,7 +255,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.16, y: 0.16, z: 0.16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -281,7 +281,7 @@ MonoBehaviour:
   spawnRoom: {fileID: 8767254853541074108, guid: 4612257200b9ea040a39437ac0662e87, type: 3}
   bossRoom: {fileID: 8238676731242650557, guid: e0f548f4eaa766c41ae27a590d270acd, type: 3}
   endCap: {fileID: 7239455093769158510, guid: c3335738fc9dafa4f9ba64e19914a16c, type: 3}
-  roomSpacing: 0.1601
+  roomSpacing: 1.0001
   mainBranchLength: 5
   offshootBranchCap: 3
   waitingFrames: 10
