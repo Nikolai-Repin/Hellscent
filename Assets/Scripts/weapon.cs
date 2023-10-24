@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float kickback = 0F;
     [SerializeField] public int bullets = 1;
     [SerializeField] public float accuracy = 10.0F;
+    [SerializeField] public float manaCost = 1.0F;
 
     protected float cooldown;
     protected GameObject parent;
@@ -26,6 +27,7 @@ public class Weapon : MonoBehaviour
     public float modProjectileSpeed = 1.0F;
     public float modAccuracy = 1.0F;
     public int modBullets = 0;
+    public float modManaCost = 1.0F;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +35,7 @@ public class Weapon : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         if (randomize) {
-            RandomizeMods(0.5F, quality);
+            modManaCost = RandomizeMods(0.5F, quality);
             randomize = false;
         }
 
@@ -130,7 +132,8 @@ public class Weapon : MonoBehaviour
             modBullets++;
         }
 
-        return (modCooldownTime-1)+(modDamage-1)+(modProjectileSpeed-1)+(modAccuracy-1)+modBullets;
+        //Replace the number at the end with how many modifiers there are - Currently 5
+        return 1.0F+(((modCooldownTime-1)+(modDamage-1)+(modProjectileSpeed-1)+((modAccuracy*-1.0F)-1)+modBullets)/5.0F);
     }
 
     public void SetTarget(Vector2 target) {
@@ -147,5 +150,9 @@ public class Weapon : MonoBehaviour
                 SetTarget(transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer().transform.position);
             }
         }
+    }
+
+    public float GetManaCost() {
+        return manaCost*modManaCost;
     }
 }
