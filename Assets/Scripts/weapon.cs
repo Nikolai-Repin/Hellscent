@@ -34,11 +34,6 @@ public class Weapon : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
 
-        if (randomize) {
-            modManaCost = RandomizeMods(0.5F, quality);
-            randomize = false;
-        }
-
         cooldownTime *= modCooldownTime;
 
         if (transform.parent != null) {
@@ -59,6 +54,12 @@ public class Weapon : MonoBehaviour
         if (transform.parent != null) {
             UpdateTarget();
             UpdateAngleAndPosition(target);
+        }
+
+        //If weapon is marked for randomization, randomize modifiers. Dangerous to call more than once on a weapon
+        if (randomize) {
+            modManaCost = RandomizeMods(0.5F, quality);
+            randomize = false;
         }
 
         cooldown -= Time.deltaTime;
@@ -89,10 +90,6 @@ public class Weapon : MonoBehaviour
         cooldown = cooldownTime;
         return true;
     }
-
-    public float GetOffset() {return offset;}
-
-    public float GetCoolDown() {return cooldown;}
 
     public bool GetControllerAndEquip() {
         if (transform.parent.gameObject.GetComponent<Controller>() != null) {
@@ -152,7 +149,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public float GetManaCost() {
-        return manaCost*modManaCost;
-    }
+    public float GetOffset() {return offset;}
+    public float GetCoolDown() {return cooldown;}
+    public float GetManaCost() {return manaCost*modManaCost;}
 }

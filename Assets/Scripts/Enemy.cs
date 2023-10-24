@@ -29,7 +29,6 @@ public class Enemy : Entity
         }
     }
 
-    //
     protected void OnTriggerEnter2D(Collider2D other) {
         if (dealDamageOnContact) {Debug.Log("Feature not implemented");}
     }
@@ -49,6 +48,7 @@ public class Enemy : Entity
         return null;
     }
 
+    //Returns closest player in visRange
     public GameObject FindClosestPlayer() {
         return FindClosestPlayer(visRange);
     }
