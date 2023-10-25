@@ -177,10 +177,10 @@ public class GenerateDungeon : MonoBehaviour
 		{
 			yield return StartCoroutine(CreateDungeon(nextRoom, nextMainBranch, nextBranchCap));
 		}
-		if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0 && Random.Range(0, 3) == 0) 
+		if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0 && Random.Range(0, 3) != 0) 
 		{
 			yield return StartCoroutine(CreateDungeon(origin, 0, branchCap));
-		}
+		} 
     }
 
 	private void CapDoors() {
