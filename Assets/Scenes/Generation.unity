@@ -283,8 +283,9 @@ MonoBehaviour:
   endCap: {fileID: 7239455093769158510, guid: c3335738fc9dafa4f9ba64e19914a16c, type: 3}
   roomSpacing: 1.0001
   mainBranchLength: 5
-  offshootBranchCap: 3
-  waitingFrames: 10
+  offshootBranchCap: 1
+  waitingFrames: 5
+  success: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
