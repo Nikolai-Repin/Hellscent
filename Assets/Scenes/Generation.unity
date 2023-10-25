@@ -215,80 +215,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &912806340
-GameObject:
+--- !u!1001 &8041695338263362378
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 912806342}
-  - component: {fileID: 912806341}
-  - component: {fileID: 912806343}
-  m_Layer: 0
-  m_Name: The Grid from Tron
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!156049354 &912806341
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 912806340}
-  m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 0}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
---- !u!4 &912806342
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 912806340}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &912806343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 912806340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8dc4277dbb788448eb5307ab52a886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rooms:
-  - {fileID: 398384071107680236, guid: 78f7edb7004194a43aab8932077e6005, type: 3}
-  - {fileID: 3114142269086657357, guid: 56b033766dcc8154b81127bcd3572c7a, type: 3}
-  - {fileID: 398384071107680236, guid: 22581e11fa28c41419e01a63d93465f2, type: 3}
-  hallways:
-  - {fileID: 7564696797152967632, guid: 9ccd97415ada88442bf31f3ad28c86fd, type: 3}
-  spawnRoom: {fileID: 8767254853541074108, guid: 4612257200b9ea040a39437ac0662e87, type: 3}
-  bossRoom: {fileID: 8238676731242650557, guid: e0f548f4eaa766c41ae27a590d270acd, type: 3}
-  endCap: {fileID: 7239455093769158510, guid: c3335738fc9dafa4f9ba64e19914a16c, type: 3}
-  roomSpacing: 1.0001
-  mainBranchLength: 5
-  offshootBranchCap: 1
-  waitingFrames: 5
-  success: 1
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1469216794410421582, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469216794410421582, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469216794410421582, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469216794410421582, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469216794410421582, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469216794410421582, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469216794410421582, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469216794410421582, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469216794410421582, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469216794410421582, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673825623514623661, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+      propertyPath: m_Name
+      value: The Grid from Tron
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 273010958}
-  - {fileID: 912806342}
+  - {fileID: 8041695338263362378}
