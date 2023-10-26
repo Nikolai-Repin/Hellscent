@@ -1,26 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+using TMPro;
 
-[CreateAssetMenu(fileName = "Keybind", menuName = "Keybind")]
-public class Keybind : ScriptableObject {
+public class Keybind : MonoBehaviour {
     
-    public KeyCode pickup, switchW, fireW;
+    [Header("Objects")]
+    [SerializeField] private TextMeshProUGUI buttonLbl;
+    
+    private void Start () {
+        buttonLbl.text = PlayerPrefs.GetString("CustomKey");
+    }
 
-    public KeyCode CheckKey(string key) {
-        
-        switch (key) {
-            case "Pickup":
-                return pickup;
+    private void Update () {
 
-            case "Switch":
-                return switchW;
+        if (buttonLbl.text == "Awaiting Input") {
 
-            case "Fire":
-                return fireW;
+            foreach (KeyCode keycode in Enum.GetValues(typeof(KeyCode))) {
 
-            default:
-                return KeyCode.None;
+                if (Input.GetKey(keycode)) {
+
+                    buttonLbl.text = keycode.ToString();
+                    PlayerPrefs.SetString("CustomKey", keycode.ToString());
+                    PlayerPrefs.Save();                
+                }
+            }
         }
+    }
+
+    public void ChangeKey() {
+        buttonLbl.text = "Awaiting Input";
     }
 }
