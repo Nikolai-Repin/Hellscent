@@ -13,9 +13,10 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField] private int mainBranchLength;
 	[SerializeField] private int offshootBranchCap;
 	[SerializeField] private int waitingFrames;
+	[SerializeField] private int onlyBranchRooms;
 
 	private bool go = true;
-	private bool success = true;
+	public bool success = true;
 
     private List<GameObject> dungeon = new();
 
@@ -43,13 +44,18 @@ public class GenerateDungeon : MonoBehaviour
 		bool end = false;
 		while (!end) {
 			int start = dungeon.Count;
-			yield return StartCoroutine(waitFrames(waitingFrames * 2));
+			yield return StartCoroutine(waitFrames(waitingFrames * 10));
 			if (start == dungeon.Count) {
 				end = true;
 			}
 		}
 		if (success) {
-			CapDoors();
+			foreach (GameObject dr in dungeon) {
+				if (dr.name == bossRoom.name + "(Clone)") {
+					CapDoors();
+					break;
+				}
+			}
 		} else {
 			foreach (GameObject dr in dungeon) {
 				Destroy(dr);
@@ -76,7 +82,7 @@ public class GenerateDungeon : MonoBehaviour
 				int nextIndex = dungeon.IndexOf(origin) - 1;
 				for (int i = nextIndex; i >= 0; i--) {
 					if (GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
-						StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
+						yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
 						yield break;
 					}
 				}
@@ -115,12 +121,12 @@ public class GenerateDungeon : MonoBehaviour
 				{
 					Destroy(nextHallway);
 					if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0) {
-						StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
+						yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
 					} else if (mainBranch > 0) {
 						int nextIndex = dungeon.IndexOf(origin) - 1;
 						for (int i = nextIndex; i >= 0; i--) {
 							if (GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
-								StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
+								yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
 								yield break;
 							}
 						}
@@ -134,7 +140,7 @@ public class GenerateDungeon : MonoBehaviour
 			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[0] = true;
 			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[1] = true;
 		}
-		GameObject nextRoom = CreateRoom(boss ? bossRoom : rooms[Random.Range(0, rooms.Length)], false);
+		GameObject nextRoom = CreateRoom(boss ? bossRoom : rooms[Random.Range(0, rooms.Length - (mainBranch > 0 ? onlyBranchRooms : 0))], false);
 		string hallDoor = AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
 		if (!usedHallway) {
 			door = hallDoor;
@@ -148,12 +154,12 @@ public class GenerateDungeon : MonoBehaviour
 				}
 				Destroy(nextRoom);
 				if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0) {
-						StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
+						yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
 					} else if (mainBranch > 0) {
 						int nextIndex = dungeon.IndexOf(origin) - 1;
 						for (int i = nextIndex; i >= 0; i--) {
 							if (GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
-								StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
+								yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
 								yield break;
 							}
 						}
@@ -168,14 +174,14 @@ public class GenerateDungeon : MonoBehaviour
 			dungeon.Add(nextOrigin);
 		}
 		dungeon.Add(nextRoom);
-		if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0) 
+		if (continueDungeon) 
 		{
-			StartCoroutine(CreateDungeon(origin, nextMainBranch, branchCap));
+			yield return StartCoroutine(CreateDungeon(nextRoom, nextMainBranch, nextBranchCap));
 		}
-		else if (continueDungeon) 
+		if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0 && Random.Range(0, 3) != 0) 
 		{
-			StartCoroutine(CreateDungeon(nextRoom, nextMainBranch, nextBranchCap));
-		}
+			yield return StartCoroutine(CreateDungeon(origin, 0, branchCap));
+		} 
     }
 
 	private void CapDoors() {
