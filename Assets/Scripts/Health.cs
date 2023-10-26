@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
    void Update()
    {
       if (healthAmount <= 0) {
-         //Debug.Break();
+         Destroy(gameObject);
       } 
    }
 
