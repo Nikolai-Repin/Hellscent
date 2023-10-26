@@ -13,6 +13,7 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField] private int mainBranchLength;
 	[SerializeField] private int offshootBranchCap;
 	[SerializeField] private int waitingFrames;
+	[SerializeField] private int onlyBranchRooms;
 
 	private bool go = true;
 	public bool success = true;
@@ -139,7 +140,7 @@ public class GenerateDungeon : MonoBehaviour
 			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[0] = true;
 			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[1] = true;
 		}
-		GameObject nextRoom = CreateRoom(boss ? bossRoom : rooms[Random.Range(0, rooms.Length)], false);
+		GameObject nextRoom = CreateRoom(boss ? bossRoom : rooms[Random.Range(0, rooms.Length - (mainBranch > 0 ? onlyBranchRooms : 0))], false);
 		string hallDoor = AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
 		if (!usedHallway) {
 			door = hallDoor;
