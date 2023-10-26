@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4542381926267665092}
   - component: {fileID: 3322369734690504179}
   m_Layer: 0
-  m_Name: AmmoItem
+  m_Name: MaxManaItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,5 +144,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bonusDamage: 0
-  bonusAmmo: 50
+  bonusMaxMana: 10
   bonusSpeed: 0

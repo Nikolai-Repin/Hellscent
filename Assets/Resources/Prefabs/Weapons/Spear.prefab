@@ -102,3 +102,12 @@ MonoBehaviour:
   projectileType: {fileID: 6942168956635508771, guid: 3e2d3526750fd1a4b8a0a7d88a1d660d, type: 3}
   cooldownTime: 0.3
   kickback: -10
+  bullets: 1
+  accuracy: 0
+  quality: 0
+  randomize: 0
+  modCooldownTime: 1
+  modDamage: 1
+  modProjectileSpeed: 1
+  modAccuracy: 1
+  modBullets: 0

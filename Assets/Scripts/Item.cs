@@ -6,8 +6,9 @@ public class Item : MonoBehaviour
 {
     private GameObject playerCharacter;
     public float bonusDamage;
-    public int bonusAmmo;
+    public int bonusMaxMana;
     public float bonusSpeed;
+    public float bonusManaRechargeSpeed;
 
     void Start() {
         playerCharacter = GameObject.FindWithTag("player");
@@ -22,12 +23,16 @@ public class Item : MonoBehaviour
                 playerCharacter.GetComponent<Controller>().AddDamage(bonusDamage);
             }
 
-            if (bonusAmmo > 0) {
-                playerCharacter.GetComponent<Controller>().equippedWeapon.GetComponent<Weapon>().addAmmo(bonusAmmo);
+            if (bonusMaxMana > 0) {
+                playerCharacter.GetComponent<Controller>().AddMaxMana(bonusMaxMana);
             }
 
             if (bonusSpeed > 0) {
                 playerCharacter.GetComponent<Controller>().AddSpeed(bonusSpeed);
+            }
+
+            if (bonusManaRechargeSpeed > 0) {
+                playerCharacter.GetComponent<Controller>().AddManaRechargeSpeed(bonusManaRechargeSpeed);
             }
 
             Destroy(gameObject);
