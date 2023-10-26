@@ -282,11 +282,7 @@ MonoBehaviour:
   vulnerable: 1
   healthAmount: 10
   dealDamageOnContact: 1
-  holdsWeapon: 0
-  weapon: {fileID: 0}
-  target: {fileID: 0}
   visRange: 5
-  speed: 0
 --- !u!1 &6081340166808081702
 GameObject:
   m_ObjectHideFlags: 0
