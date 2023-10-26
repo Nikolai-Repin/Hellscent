@@ -10,6 +10,7 @@ public class Enemy : Entity
     [SerializeField] protected GameObject weapon;
     [SerializeField] protected GameObject target;
     [SerializeField] protected float visRange;
+    [SerializeField] protected float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -20,17 +21,21 @@ public class Enemy : Entity
     // Update is called once per frame
     void Update()
     {
+        target = FindClosestPlayer(visRange);
         if (target != null) {
-            weapon.GetComponent<Weapon>().Fire();
-            weapon.GetComponent<Weapon>().SetTarget(target.transform.position);
-        } else {
-            target = FindClosestPlayer(visRange);
-            weapon.GetComponent<Weapon>().SetTarget(target.transform.position);
+            if(holdsWeapon) {
+                weapon.GetComponent<Weapon>().Fire();
+                weapon.GetComponent<Weapon>().SetTarget(target.transform.position);
+            }
         }
     }
 
     protected void OnTriggerEnter2D(Collider2D other) {
-        if (dealDamageOnContact) {Debug.Log("Feature not implemented");}
+        if (other.gameObject.tag == "player") {
+            if (dealDamageOnContact) {
+                other.GetComponent<Controller>().TakeDamage(1);
+            }
+        }
     }
 
     //Returns closest player in range
