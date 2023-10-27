@@ -71,17 +71,21 @@ public class Inventory_UI : MonoBehaviour
         draggedIcon = Instantiate(draggedSlot.itemIcon);
         draggedIcon.transform.SetParent(canvas.transform);
         draggedIcon.raycastTarget = false;
-        draggedIcon.rectTransform.sizeDelta = new Vector2(50, 50);
+        draggedIcon.rectTransform.sizeDelta = new Vector2(50f, 50f);
 
         MoveToMousePosition(draggedIcon.gameObject);
+
         Debug.Log("Start Drag : " + draggedSlot.name);
     }
 
     public void SlotDrag() {
+        MoveToMousePosition(draggedIcon.gameObject);
         Debug.Log("Dragging: " + draggedSlot.name);
     }
 
     public void SlotEndDrag() {
+        Destroy(draggedIcon.gameObject);
+        draggedIcon = null;
         Debug.Log("Done Dragging: " + draggedSlot.name);
     }
 
