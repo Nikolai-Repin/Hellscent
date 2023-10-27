@@ -235,6 +235,14 @@ PrefabInstance:
       propertyPath: rooms.Array.data[3]
       value: 
       objectReference: {fileID: 6227156363105034367, guid: ce979fb8476d0457188008daa9649dd1, type: 3}
+    - target: {fileID: 1588208625494465651, guid: d0c14ef6a61ff43cd880db6eca3ec7fb, type: 3}
+      propertyPath: m_CellSize.x
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588208625494465651, guid: d0c14ef6a61ff43cd880db6eca3ec7fb, type: 3}
+      propertyPath: m_CellSize.y
+      value: 0.16
+      objectReference: {fileID: 0}
     - target: {fileID: 2166620911071576543, guid: d0c14ef6a61ff43cd880db6eca3ec7fb, type: 3}
       propertyPath: m_Name
       value: Regular Dungeon

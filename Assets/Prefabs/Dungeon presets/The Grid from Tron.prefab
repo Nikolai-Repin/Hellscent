@@ -41,7 +41,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7673825623514623661}
   m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 0}
+  m_CellSize: {x: 0.16, y: 0.16, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
@@ -70,4 +70,5 @@ MonoBehaviour:
   mainBranchLength: 5
   offshootBranchCap: 1
   waitingFrames: 5
+  onlyBranchRooms: 0
   success: 1
