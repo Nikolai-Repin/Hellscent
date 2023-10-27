@@ -327,13 +327,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e75f2017bde6a7429afc592fa7f387e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 0
+  offset: 6
   walls:
     serializedVersion: 2
     m_Bits: 8
   enemies:
     serializedVersion: 2
     m_Bits: 64
-  ai: 2
+  ai: 1
   endReachedDistanceMelee: 2
   endReachedDistanceRange: 0
+  target: {fileID: 8428924622005797696, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}

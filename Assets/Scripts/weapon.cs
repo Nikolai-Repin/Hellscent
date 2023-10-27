@@ -78,7 +78,7 @@ public class Weapon : MonoBehaviour
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
                 bulletScript.UpdateCreator(transform.gameObject);
 
-                Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
+                Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-accuracy*modAccuracy, accuracy*modAccuracy));
                 Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
                 bulletScript.LaunchProjectile(fireAngle);
 
@@ -121,10 +121,10 @@ public class Weapon : MonoBehaviour
     }
 
     public float RandomizeMods(float variance, float quality) {
-        modCooldownTime += (Random.Range(-1.0F* variance, variance) + quality) *1.0F; 
-        modDamage += (Random.Range(-1.0F* variance, variance) + quality) *1.0F; 
-        modProjectileSpeed += (Random.Range(-1.0F*variance, variance) + quality) *1.0F; 
-        modAccuracy += (Random.Range(-1.0F*variance, variance) + quality) *1.0F; 
+        modCooldownTime += (Random.Range(-variance, variance) + quality) *1.0F; 
+        modDamage += (Random.Range(-variance, variance) + quality) *1.0F; 
+        modProjectileSpeed += (Random.Range(-variance, variance) + quality) *1.0F; 
+        modAccuracy += (Random.Range(-variance, variance) + quality) *1.0F; 
         while (Random.Range(0, variance*10) <= quality && modBullets < 3) {
             modBullets++;
         }

@@ -21,12 +21,14 @@ public class TrackerController : MonoBehaviour
     [SerializeField] private float endReachedDistanceMelee;
     [SerializeField] private float endReachedDistanceRange;
 
-    private Transform target;
+    [SerializeField] private Transform target;
     private AIPath aiPath;
 
     private void Start()
     {
-        target = GameObject.FindWithTag("player").transform;
+
+        transform.parent.GetComponent<Enemy>().tc = this;
+
         aiPath = transform.parent.GetComponent<AIPath>();
         if (ai == AI.Melee)
         {

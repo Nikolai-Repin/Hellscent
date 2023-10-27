@@ -8,6 +8,8 @@ public class Enemy : Entity
     [SerializeField] protected bool dealDamageOnContact;
     [SerializeField] protected float visRange;
 
+    public TrackerController trackerController;
+
     // Update is called once per frame
     void Update()
     {
