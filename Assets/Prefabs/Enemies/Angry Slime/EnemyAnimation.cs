@@ -6,6 +6,7 @@ public class EnemyAnimation : MonoBehaviour
 {
     // Start is called before the first frame update
     public Animator anim;
+    [SerializeField] private Transform player;
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
@@ -14,13 +15,26 @@ public class EnemyAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-             anim.Play("walkUp");
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-             anim.Play("walkDown");
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-             anim.Play("walkLeft");
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-             anim.Play("walkRight");
+    Vector3 direction = player.position - transform.position;
+    Debug.Log(direction);
+    if(Math.Abs(direction.x) > Math.Abs(direction.y)){
+     if(direction.x > 0){
+     anim.Play("walkRight");
+     }
+     else
+     anim.Play("walkLeft");
+    
+
     }
+    else{
+if(direction.y > 0){
+     anim.Play("walkUp");
+     else
+     anim.Play("walkDown");
+    }
+
+
+    }
+
+}
 }
