@@ -176,3 +176,4 @@ MonoBehaviour:
   damper: 0.8
   equippedWeapon: {fileID: 0}
   heldWeapons: []
+  damage: 0

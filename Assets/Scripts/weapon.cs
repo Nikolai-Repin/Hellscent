@@ -5,7 +5,6 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] public float offset = 2F;
-    [SerializeField] public int ammo = -1;
     [SerializeField] public GameObject projectileType;
     [SerializeField] public float cooldownTime = 0.5F;
     [SerializeField] public float kickback = 0F;
@@ -68,25 +67,19 @@ public class Weapon : MonoBehaviour
     //Fires the selected projectile
     public bool Fire()
     {
-        if (ammo == 0 || cooldown > 0) {return false;}
+        if (cooldown > 0) {return false;}
+        
+        for (int i = 0; i < bullets+modBullets; i++) {
+            GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.UpdateCreator(transform.gameObject);
 
-        for (int i = 0; i < bullets+modBullets; i++)
-        {
-            {
-
-                GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
-                Bullet bulletScript = bullet.GetComponent<Bullet>();
-                bulletScript.UpdateCreator(transform.gameObject);
-
-                Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
-                Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
-                bulletScript.LaunchProjectile(fireAngle);
-
-                
-            }
+            Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
+            Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
+            bulletScript.LaunchProjectile(transform.rotation);
+            bulletScript.SetStartingValues();            
         }
 
-        ammo--;
         cooldown = cooldownTime;
         return true;
     }
@@ -152,4 +145,9 @@ public class Weapon : MonoBehaviour
     public float GetOffset() {return offset;}
     public float GetCoolDown() {return cooldown;}
     public float GetManaCost() {return manaCost*modManaCost;}
+    
+    public float GetDamage() {
+        return controller.GetDamage();
+    }
+
 }

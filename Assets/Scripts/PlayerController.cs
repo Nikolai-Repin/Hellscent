@@ -6,22 +6,23 @@ public class Controller : Entity
 {
     private Rigidbody2D rb;
     [SerializeField] private float speed;
-    [SerializeField] private float dash;
-    [SerializeField, Range(0,1)] private float damper;
+    [SerializeField] private float dash; // default should be 150
+    [SerializeField, Range(0,1)] private float damper; // default should be 150
     private Vector2 direction;
     private Vector2 saved_direction;
 
     //Weapon Variables
     [SerializeField] private float maxMana;
     [SerializeField] private float mana; //Please lmk if there's a way to make this read only in the inspector, -J
-    private float manaRechargeSpeed = 5;
+    [SerializeField] private float manaRechargeSpeed = 5;
     private float manaRechargeDelay = 1;
     private float lastFireTime;
     private int weaponIndex;
     private double rHoldTime;
     private bool hasWeapon = false;
-    private GameObject equippedWeapon;
+    public GameObject equippedWeapon;
     public List<GameObject> heldWeapons;
+    [SerializeField] private float damage;
 
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
@@ -29,15 +30,16 @@ public class Controller : Entity
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         weaponIndex = 0;
+        damage = 20f;
         pickupDistance = 5;
         rHoldTime = Time.time;
         lastFireTime = Time.time;
+        maxMana = 20;
         mana = maxMana;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
     }
 
-    // Update is called once per frame
     void Update()
     {
         direction = new Vector2(0.0f, 0.0f);
@@ -49,16 +51,18 @@ public class Controller : Entity
         direction = new Vector2(controlx, controly);
         keypressed = controlx != 0 || controly != 0;
         
-
         direction = direction.normalized;
         if (keypressed) {
             saved_direction = direction;
         }
+
         if (Input.GetKeyDown(KeyCode.Space)) {
-            rb.velocity += saved_direction * dash * Time.deltaTime;
+             rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
+
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
+            Debug.Log("Pickup Attempt");
             Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
             if (results.Length > 0) {
                 PickupWeapon(FindClosest(results, transform.position));
@@ -90,7 +94,9 @@ public class Controller : Entity
                 if ((Time.time - rHoldTime)<0.5) {
                     ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
                 //Drop held weapon if r was held for longer
-                } else {
+                }
+
+                else {
                     DropWeapon(weaponIndex);
                 }
             }
@@ -101,7 +107,6 @@ public class Controller : Entity
                 float manaCost = equippedWeapon.GetComponent<Weapon>().GetManaCost();
                 if(mana >= manaCost) {
                     
-
                     //Firing, Fire() returns true if it fired successfully
                     if(equippedWeapon.GetComponent<Weapon>().Fire()) {
 
@@ -151,7 +156,6 @@ public class Controller : Entity
         Destroy(heldWeapons[i]);
         heldWeapons.RemoveAt(i);
     }
-
     //Registers a new weapon in the player's list of held weapons
     public void NewWeapon(GameObject weapon) {
         hasWeapon = true;
@@ -194,6 +198,29 @@ public class Controller : Entity
     //Returns percentage of current mana out of maxMana
     public float GetManaPercent() {
         return mana/maxMana;
+    }
+
+    public float GetDamage() {
+        return damage;
+    }
+
+    // Changes the damage that the player deals using a weapon.
+    public void AddDamage(float bonusDamage) {
+        damage += bonusDamage;
+    }
+
+    // Changes the player's speed
+    public void AddSpeed(float bonusSpeed) {
+        speed += bonusSpeed;
+    }
+
+    // Changes the Player's max mana
+    public void AddMaxMana(float bonusMaxMana) {
+        maxMana += bonusMaxMana;
+    }
+
+    public void AddManaRechargeSpeed(float bonus) {
+        manaRechargeSpeed += bonus;
     }
 
 }
