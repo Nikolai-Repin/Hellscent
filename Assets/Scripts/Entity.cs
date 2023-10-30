@@ -48,8 +48,6 @@ public class Entity : MonoBehaviour
             }
 
             return closest;
-        } else {
-            Debug.Log("targets is empty");
         }
         return null;
     }

@@ -13,7 +13,10 @@ public class Enemy : Entity
     // Update is called once per frame
     void Update()
     {
-        
+        GameObject closestPlayer = FindClosestPlayer();
+        if (closestPlayer != null) {
+            trackerController.SetTarget(closestPlayer.transform);
+        }
     }
 
     protected void OnTriggerEnter2D(Collider2D other) {

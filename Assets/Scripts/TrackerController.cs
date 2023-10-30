@@ -27,7 +27,7 @@ public class TrackerController : MonoBehaviour
     private void Start()
     {
 
-        transform.parent.GetComponent<Enemy>().tc = this;
+        transform.parent.GetComponent<Enemy>().trackerController = this;
 
         aiPath = transform.parent.GetComponent<AIPath>();
         if (ai == AI.Melee)
@@ -76,5 +76,9 @@ public class TrackerController : MonoBehaviour
                 Debug.DrawLine(target.position, transform.position, Color.green);
             }
         }
+    }
+
+    public void SetTarget(Transform newTarget) {
+        target = newTarget;
     }
 }

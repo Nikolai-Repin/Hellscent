@@ -15,41 +15,42 @@ public class Boss : Enemy
         Bombs = 4 //Fires bombs around the room, after they've been fired, returns to wander
     }
     public float phaseCooldown = 10F;
+    public Phase curPhase;
 
     // Start is called before the first frame update
     void Start()
     {
-        Phase = 0;
+        curPhase = Phase.Sleep;
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (Phase) {
-            case Wander: {
+        switch (curPhase) {
+            case Phase.Wander: {
                 break;
             }
 
-            case LineUp: {
+            case Phase.LineUp: {
                 break;
             }
 
-            case Charge: {
+            case Phase.Charge: {
                 break;
             }
 
-            case Bombs: {
+            case Phase.Bombs: {
                 break;
             }
 
-            case Sleep: {
+            case Phase.Sleep: {
                 break;
             }
         }
     }
 
     public void Awaken() {
-        Phase = 1;
+        curPhase = Phase.Wander;
     }
 
     //Pick Phase
@@ -58,15 +59,20 @@ public class Boss : Enemy
             int nextPhase = (int) Random.Range(0, 1);
             switch (nextPhase) {
                 case 0: {
-                    Phase = Charge;
+                    curPhase = Phase.Charge;
                     break;
                 }
                 
                 case 1: {
-                    Phase = Bombs;
+                    curPhase = Phase.Bombs;
                     break;
                 }
             }
         }
     }
+
+    private Vector2 FindChargeLocation(float targetDist) {
+        Vector2 bestPos = Vector2(target.transform.x + targetDist, target.transform.y);
+        Vector2
+    } 
 }
