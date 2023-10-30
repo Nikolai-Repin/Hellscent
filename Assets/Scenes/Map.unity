@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 71812010}
+  player: {fileID: 587657753}
 --- !u!1001 &152706142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -344,7 +345,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1645523303707252002, guid: 4f593149b7945b64391c845a12c527f9, type: 3}
       propertyPath: maxSpeed
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -1645523303707252002, guid: 4f593149b7945b64391c845a12c527f9, type: 3}
       propertyPath: gravity.x

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class EnemyAnimation : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -17,24 +17,28 @@ public class EnemyAnimation : MonoBehaviour
     {
     Vector3 direction = player.position - transform.position;
     Debug.Log(direction);
-    if(Math.Abs(direction.x) > Math.Abs(direction.y)){
+    if (System.Math.Abs(direction.x) > System.Math.Abs(direction.y)){
+     
      if(direction.x > 0){
      anim.Play("walkRight");
      }
-     else
+     else{
      anim.Play("walkLeft");
+     }
+    }
+     else{
+        if(direction.y > 0){
+     anim.Play("walkUp");
+}   else{
+    anim.Play("walkDown");
+}
+     }
     
 
     }
-    else{
-if(direction.y > 0){
-     anim.Play("walkUp");
-     else
-     anim.Play("walkDown");
-    }
 
 
     }
 
-}
-}
+
+
