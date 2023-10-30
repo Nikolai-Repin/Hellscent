@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - player
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - Water
   - UI
   - Enemies
-  - 
-  - 
+  - Items
+  - Rooms
   - 
   - 
   - 
