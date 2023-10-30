@@ -11,8 +11,7 @@ public class Inventory_UI : MonoBehaviour
 
     public List<Slot_UI> slots = new List<Slot_UI>();
 
-    [SerializeField] private Canvas canvas;
-
+    private Canvas canvas;
     private Slot_UI draggedSlot;
     private Image draggedIcon;
 
@@ -31,14 +30,14 @@ public class Inventory_UI : MonoBehaviour
         // Checks if Inventory is opened or not
         if(!inventoryPanel.activeSelf) {
             inventoryPanel.SetActive(true);
-            Setup();
+            Refresh();
         }
         else {
             inventoryPanel.SetActive(false);
         }
     }
 
-    void Setup() {
+    void Refresh() {
         // Loops through all the slots in the inventory
         if(slots.Count == player.inventory.slots.Count) {
             for(int i = 0; i < slots.Count; i++) {
@@ -68,14 +67,15 @@ public class Inventory_UI : MonoBehaviour
     // Drag and dropping items
     public void SlotBeginDrag(Slot_UI slot) {
         draggedSlot = slot;
-        draggedIcon = Instantiate(draggedSlot.itemIcon);
-        draggedIcon.transform.SetParent(canvas.transform);
+
+        draggedIcon = Instantiate(slot.itemIcon);
         draggedIcon.raycastTarget = false;
         draggedIcon.rectTransform.sizeDelta = new Vector2(50f, 50f);
+        draggedIcon.transform.SetParent(canvas.transform);
 
         MoveToMousePosition(draggedIcon.gameObject);
 
-        Debug.Log("Start Drag : " + draggedSlot.name);
+        Debug.Log("Begin Drag : " + slot.name);
     }
 
     public void SlotDrag() {
