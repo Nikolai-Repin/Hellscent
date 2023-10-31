@@ -43,7 +43,8 @@ public class Keybind : MonoBehaviour {
 
                     button.text = keycode.ToString();
                     PlayerPrefs.SetString(k, keycode.ToString());
-                    PlayerPrefs.Save();                
+                    PlayerPrefs.Save();
+                                    
                 }
             }
         }
