@@ -60,6 +60,9 @@ public class Weapon : MonoBehaviour
         if (randomize) {
             modManaCost = RandomizeMods(0.5F, quality);
             randomize = false;
+        
+        if (transform.parent != null && transform.parent.gameObject.GetComponent<PlayerController>() != null) {
+            UpdateAngleAndPosition(Input.mousePosition);
         }
 
         cooldown -= Time.deltaTime;
@@ -92,8 +95,8 @@ public class Weapon : MonoBehaviour
     }
 
     public bool GetControllerAndEquip() {
-        if (transform.parent.gameObject.GetComponent<Controller>() != null) {
-            controller = parent.GetComponent<Controller>();
+        if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
+            controller = parent.GetComponent<PlayerController>();
             return true;
         }
         return false;

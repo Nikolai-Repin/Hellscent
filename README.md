@@ -1,6 +1,6 @@
-# (PlaceHolder) (TopDownRPG)
-## Welcome to (PlaceHolder). 
-(PlaceHolder) is a TopDown 2D RPG that focuses on using procedural generation to make every playthrough unique.
+# Hellscent (TopDownRPG)
+## Welcome to Hellscent. 
+Hellscent is a TopDown 2D RPG that focuses on using procedural generation to make every playthrough unique.
 ### Beta-Testing
 If you want to beta test this game, follow the steps below:
 1. Clone the repository using [this guide](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
