@@ -21,7 +21,7 @@ public class TrackerController : MonoBehaviour
     [SerializeField] private float endReachedDistanceMelee;
     [SerializeField] private float endReachedDistanceRange;
 
-    [SerializeField] private Transform target;
+    [SerializeField] public Transform target;
     private AIPath aiPath;
 
     private void Start()

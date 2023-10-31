@@ -72,7 +72,10 @@ public class Boss : Enemy
     }
 
     private Vector2 FindChargeLocation(float targetDist) {
-        Vector2 bestPos = Vector2(target.transform.x + targetDist, target.transform.y);
-        Vector2
+        if (trackerController.target != null) {
+            Vector2 bestPos = new Vector2(trackerController.target.transform.position.x + targetDist, trackerController.target.transform.position.y);
+            return bestPos;
+        }
+        return new Vector2(0, 0);
     } 
 }
