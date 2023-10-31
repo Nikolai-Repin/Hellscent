@@ -6,12 +6,10 @@ public class Enemy : Entity
 {
 
     [SerializeField] protected bool dealDamageOnContact;
-    [SerializeField] protected bool holdsWeapon;
-    [SerializeField] protected GameObject weapon;
-    [SerializeField] protected GameObject target;
     [SerializeField] protected float visRange;
     [SerializeField] float damage;
 
+    public TrackerController trackerController;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,19 +19,18 @@ public class Enemy : Entity
     // Update is called once per frame
     void Update()
     {
-        target = FindClosestPlayer(visRange);
-        if (target != null) {
-            weapon.GetComponent<Weapon>().Fire();
-            weapon.GetComponent<Weapon>().SetTarget(target.transform.position);
-        } 
-        //else {
-            
-         //   
-       // }
+        GameObject closestPlayer = FindClosestPlayer();
+        if (closestPlayer != null) {
+            trackerController.SetTarget(closestPlayer.transform);
+        }
     }
 
     protected void OnTriggerEnter2D(Collider2D other) {
-        if (dealDamageOnContact) {Debug.Log("Feature not implemented");}
+        if (other.gameObject.tag == "player") {
+            if (dealDamageOnContact) {
+                other.GetComponent<Controller>().TakeDamage(1);
+            }
+        }
     }
 
     //Returns closest player in range

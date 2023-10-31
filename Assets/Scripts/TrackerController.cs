@@ -21,12 +21,14 @@ public class TrackerController : MonoBehaviour
     [SerializeField] private float endReachedDistanceMelee;
     [SerializeField] private float endReachedDistanceRange;
 
-    private Transform target;
+    [SerializeField] public Transform target;
     private AIPath aiPath;
 
     private void Start()
     {
-        target = GameObject.FindWithTag("player").transform;
+
+        transform.parent.GetComponent<Enemy>().trackerController = this;
+
         aiPath = transform.parent.GetComponent<AIPath>();
         if (ai == AI.Melee)
         {
@@ -74,5 +76,9 @@ public class TrackerController : MonoBehaviour
                 Debug.DrawLine(target.position, transform.position, Color.green);
             }
         }
+    }
+
+    public void SetTarget(Transform newTarget) {
+        target = newTarget;
     }
 }

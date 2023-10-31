@@ -73,11 +73,11 @@ public class Weapon : MonoBehaviour
             GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.UpdateCreator(transform.gameObject);
+            bulletScript.SetStartingValues();
 
-            Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
+            Vector3 inaccuracy = new Vector3(0, 0, Random.Range(accuracy*modAccuracy, accuracy*modAccuracy));
             Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
-            bulletScript.LaunchProjectile(transform.rotation);
-            bulletScript.SetStartingValues();            
+            bulletScript.LaunchProjectile(fireAngle);                
         }
 
         cooldown = cooldownTime;
@@ -114,10 +114,11 @@ public class Weapon : MonoBehaviour
     }
 
     public float RandomizeMods(float variance, float quality) {
-        modCooldownTime += (Random.Range(-1.0F* variance, variance) + quality) *1.0F; 
-        modDamage += (Random.Range(-1.0F* variance, variance) + quality) *1.0F; 
-        modProjectileSpeed += (Random.Range(-1.0F*variance, variance) + quality) *1.0F; 
-        modAccuracy += (Random.Range(-1.0F*variance, variance) + quality) *1.0F; 
+        modCooldownTime += (Random.Range(-variance, variance) + quality) *1.0F; 
+        modDamage += (Random.Range(-variance, variance) + quality) *1.0F; 
+        modProjectileSpeed += (Random.Range(-variance, variance) + quality) *1.0F; 
+        modAccuracy += (Random.Range(-variance, variance) + quality) *1.0F; 
+
         while (Random.Range(0, variance*10) <= quality && modBullets < 3) {
             modBullets++;
         }
@@ -136,8 +137,8 @@ public class Weapon : MonoBehaviour
             if (transform.parent.gameObject.GetComponent<Controller>() != null) {
                 SetTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
-            if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
 
+            if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
                 GameObject closestPlayer = transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer();
                 if (closestPlayer != null) {
                     SetTarget(closestPlayer.transform.position);

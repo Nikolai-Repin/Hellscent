@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour {
     {
         
         //I need to set up teams or something of the like for this, I want bullets to be able to belong to enemies
-        if (other.gameObject.GetComponent<Entity>() != null &&  other.gameObject != creator.transform.parent.gameObject) {
+        if (other.gameObject.GetComponent<Entity>() != null &&  ((other.gameObject.GetComponent<Enemy>() != null) != (creator.transform.parent.gameObject.GetComponent<Enemy>() != null))) {
             other.gameObject.GetComponent<Entity>().TakeDamage(damage);
             pierce--;
         }

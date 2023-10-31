@@ -27,7 +27,6 @@ public class Entity : MonoBehaviour
             if (healthAmount <= 0) {
                 Die();
             }
-            Debug.Log("Damaged");
             return true;
         }
         return (false);
