@@ -11,9 +11,9 @@ public class Inventory_UI : MonoBehaviour
 
     public List<Slot_UI> slots = new List<Slot_UI>();
 
-    private Canvas canvas;
     private Slot_UI draggedSlot;
     private Image draggedIcon;
+    private Canvas canvas;
 
     private void Awake() {
         canvas = FindObjectOfType<Canvas>();
@@ -53,21 +53,21 @@ public class Inventory_UI : MonoBehaviour
         }
     }
 
-    /* public void Remove(int slotID) {
-        Item itemToDrop = GameManager.instance.itemManager.GetItemByName(
-            player.inventory.slots[slotID].itemName);
+    // Remove item from inventory
+    public void Remove(int slotID) {
+        Collectable itemToDrop = GameManager.instance.itemManager.GetItemByType(
+            player.inventory.slots[slotID].type);
 
         if(itemToDrop != null) {
             player.DropItem(itemToDrop);
             player.inventory.Remove(slotID);
             Refresh();
         }
-    } */
+    }
 
     // Drag and dropping items
     public void SlotBeginDrag(Slot_UI slot) {
-        draggedSlot = slot;
-
+        draggedSlot = slot; 
         draggedIcon = Instantiate(slot.itemIcon);
         draggedIcon.raycastTarget = false;
         draggedIcon.rectTransform.sizeDelta = new Vector2(50f, 50f);
@@ -95,12 +95,12 @@ public class Inventory_UI : MonoBehaviour
 
     private void MoveToMousePosition(GameObject toMove) {
         if(canvas != null) {
-        Vector2 position;
+            Vector2 position;
 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform,
-            Input.mousePosition, null, out position);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform,
+                Input.mousePosition, null, out position);
 
-        toMove.transform.position = canvas.transform.TransformPoint(position);
+            toMove.transform.position = canvas.transform.TransformPoint(position);
         }
     }
 }
