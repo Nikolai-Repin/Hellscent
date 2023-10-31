@@ -46,7 +46,7 @@ public class TrackerController : MonoBehaviour
         {
             transform.position = target.transform.position;
         }
-        else if (ai == AI.Range) 
+        else if (ai == AI.Range && target != null) 
         {
             transform.position = target.transform.position;
             var dir = transform.parent.transform.position - transform.position;
