@@ -19,6 +19,7 @@ public class EnemyShooter : Enemy
     // Update is called once per frame
     void Update()
     {
+        base.Update();
         target = FindClosestPlayer(visRange);
         if (target != null) {
             if (ammo > 0 && Time.time > reloadLastTime) {

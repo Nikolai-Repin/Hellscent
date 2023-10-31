@@ -11,7 +11,7 @@ public class Enemy : Entity
     public TrackerController trackerController;
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         GameObject closestPlayer = FindClosestPlayer();
         if (closestPlayer != null) {
@@ -37,6 +37,7 @@ public class Enemy : Entity
             }
         }
         if (results.Length > 0) {
+            Debug.Log(FindClosest(players, transform.position));
             return FindClosest(players, transform.position);
         }
         return null;
