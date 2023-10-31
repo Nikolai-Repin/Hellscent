@@ -15,7 +15,7 @@ public class EnemyWeapon : MonoBehaviour
     public int cooldown;
     private GameObject parent;
     private SpriteRenderer sr;
-    private Controller controller;
+    private PlayerController controller;
     public GameObject target;
     // Start is called before the first frame update
     void Start()

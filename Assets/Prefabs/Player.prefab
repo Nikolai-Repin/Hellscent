@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 335203246734275676}
   - component: {fileID: 808921467763219813}
   - component: {fileID: 7502559576790646689}
-  - component: {fileID: -3558676805350794031}
+  - component: {fileID: 5637199147852186135}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-3558676805350794031
+--- !u!114 &5637199147852186135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,8 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54679dfc6a5914191988b707e32fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 5
   dash: 0
-  damper: 0.8
-  equippedWeapon: {fileID: 0}
+  damper: 0.006
+  equippedWeapon: {fileID: 7182153838417077510, guid: ccdfa20d8de36454eb545d70a278809e, type: 3}
   heldWeapons: []
