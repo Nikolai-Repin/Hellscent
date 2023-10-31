@@ -10,23 +10,26 @@ public class Enemy : Entity
     [SerializeField] protected GameObject weapon;
     [SerializeField] protected GameObject target;
     [SerializeField] protected float visRange;
+    [SerializeField] float damage;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        damage = 20;
     }
 
     // Update is called once per frame
     void Update()
     {
+        target = FindClosestPlayer(visRange);
         if (target != null) {
             weapon.GetComponent<Weapon>().Fire();
             weapon.GetComponent<Weapon>().SetTarget(target.transform.position);
-        } else {
-            target = FindClosestPlayer(visRange);
-            weapon.GetComponent<Weapon>().SetTarget(target.transform.position);
-        }
+        } 
+        //else {
+            
+         //   
+       // }
     }
 
     protected void OnTriggerEnter2D(Collider2D other) {
@@ -52,4 +55,9 @@ public class Enemy : Entity
     public GameObject FindClosestPlayer() {
         return FindClosestPlayer(visRange);
     }
+
+    public float GetDamage() {
+        return damage;
+    }
+
 }

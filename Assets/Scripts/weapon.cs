@@ -137,7 +137,11 @@ public class Weapon : MonoBehaviour
                 SetTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
             if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
-                SetTarget(transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer().transform.position);
+
+                GameObject closestPlayer = transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer();
+                if (closestPlayer != null) {
+                    SetTarget(closestPlayer.transform.position);
+                }
             }
         }
     }
@@ -147,7 +151,10 @@ public class Weapon : MonoBehaviour
     public float GetManaCost() {return manaCost*modManaCost;}
     
     public float GetDamage() {
-        return controller.GetDamage();
+        if (parent.tag == "Enemy") {
+            return parent.GetComponent<Enemy>().GetDamage();
+        }
+        return parent.GetComponent<Controller>().GetDamage();
     }
 
 }
