@@ -9,6 +9,7 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField] private GameObject spawnRoom;
 	[SerializeField] private GameObject bossRoom;
 	[SerializeField] private GameObject endCap;
+	[SerializeField] private GameObject closedDoor;
 	[SerializeField] private float roomSpacing;
 	[SerializeField] private int mainBranchLength;
 	[SerializeField] private int offshootBranchCap;
@@ -286,6 +287,27 @@ public class GenerateDungeon : MonoBehaviour
 	IEnumerator waitFrames(int frames) {
 		for (int i = 0; i < frames; i++) {
 			yield return null;
+		}
+	}
+
+	public void LockRoom(GameObject room) {
+		RoomInfo data = room.GetComponent<RoomInfo>();
+		for (int i = 0; i < data.trueOccupancy.Count; i++) {
+			bool o = data.trueOccupancy[i];
+			if (!o) {
+				GameObject cap = Instantiate(closedDoor, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
+				cap.transform.SetParent(transform, false);
+				AlignRooms(room.transform, cap.transform, 0, data.doorDirection[i]);
+			}
+		}
+	}
+
+	public void UnlockRooms() {
+		foreach (GameObject part in dungeon) {
+			if (part.name == closedDoor.name + "(Clone)") {
+				dungeon.Remove(part);
+				Destroy(part);
+			}
 		}
 	}
 }

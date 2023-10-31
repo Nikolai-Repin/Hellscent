@@ -248,6 +248,9 @@ MonoBehaviour:
   - West
   doorOccupation: 00
   trueOccupancy: 
+  locked: 0
+  spawners: []
+  entities: []
 --- !u!1 &7662808374561010124
 GameObject:
   m_ObjectHideFlags: 0

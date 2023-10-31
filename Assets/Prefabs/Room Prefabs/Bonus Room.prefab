@@ -3150,6 +3150,9 @@ MonoBehaviour:
   - North
   doorOccupation: 00
   trueOccupancy: 
+  locked: 0
+  spawners: []
+  entities: []
 --- !u!19719996 &3248416161270277016
 TilemapCollider2D:
   m_ObjectHideFlags: 0

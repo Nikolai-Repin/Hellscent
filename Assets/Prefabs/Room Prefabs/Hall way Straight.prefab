@@ -2853,6 +2853,9 @@ MonoBehaviour:
   - West
   doorOccupation: 0000
   trueOccupancy: 
+  locked: 0
+  spawners: []
+  entities: []
 --- !u!19719996 &1446512325769732199
 TilemapCollider2D:
   m_ObjectHideFlags: 0
