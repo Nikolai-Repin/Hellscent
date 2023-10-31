@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
     private float cooldown;
     private GameObject parent;
     private SpriteRenderer sr;
-    private Controller controller;
+    private PlayerController controller;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +21,8 @@ public class Weapon : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
-            if (transform.parent.gameObject.GetComponent<Controller>() != null) {
-                transform.parent.gameObject.GetComponent<Controller>().NewWeapon(transform.gameObject);
+            if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
+                transform.parent.gameObject.GetComponent<PlayerController>().NewWeapon(transform.gameObject);
             }
         }
     }
@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         
-        if (transform.parent != null && transform.parent.gameObject.GetComponent<Controller>() != null) {
+        if (transform.parent != null && transform.parent.gameObject.GetComponent<PlayerController>() != null) {
             UpdateAngleAndPosition(Input.mousePosition);
         }
 
@@ -60,8 +60,8 @@ public class Weapon : MonoBehaviour
     public float GetOffset() {return offset;}
 
     public bool GetControllerAndEquip() {
-        if (transform.parent.gameObject.GetComponent<Controller>() != null) {
-            controller = parent.GetComponent<Controller>();
+        if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
+            controller = parent.GetComponent<PlayerController>();
             return true;
         }
         return false;
