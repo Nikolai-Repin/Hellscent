@@ -147,7 +147,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 8130049668612832152, guid: 4f593149b7945b64391c845a12c527f9, type: 3}
   m_PrefabInstance: {fileID: 510672018}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &71812013
+--- !u!114 &71812018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -427,9 +427,7 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: 436b69414b04047fca3929c70df57c4f, type: 3}
-    m_RemovedComponents:
-    - {fileID: 2086717246165074628, guid: 4f593149b7945b64391c845a12c527f9, type: 3}
-    - {fileID: -7358406975381877545, guid: 4f593149b7945b64391c845a12c527f9, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -438,7 +436,7 @@ PrefabInstance:
       addedObject: {fileID: 71812006}
     - targetCorrespondingSourceObject: {fileID: 5037072847363122877, guid: 4f593149b7945b64391c845a12c527f9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 71812013}
+      addedObject: {fileID: 71812018}
   m_SourcePrefab: {fileID: 100100000, guid: 4f593149b7945b64391c845a12c527f9, type: 3}
 --- !u!4 &587657753 stripped
 Transform:

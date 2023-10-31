@@ -64,4 +64,7 @@ public class Entity : MonoBehaviour
     public float getHealth(){
         return healthAmount;
     }
+    public void subHealth(float n){
+        healthAmount -= n;
+    }
 }

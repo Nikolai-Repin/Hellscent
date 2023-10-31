@@ -16,7 +16,6 @@ public class EnemyAnimation : MonoBehaviour
     void Update()
     {
     Vector3 direction = player.position - transform.position;
-    Debug.Log(direction);
     if (System.Math.Abs(direction.x) > System.Math.Abs(direction.y)){
      
      if(direction.x > 0){
