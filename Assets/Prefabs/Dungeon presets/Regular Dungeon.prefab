@@ -61,6 +61,7 @@ MonoBehaviour:
   - {fileID: 398384071107680236, guid: 78f7edb7004194a43aab8932077e6005, type: 3}
   - {fileID: 3114142269086657357, guid: 56b033766dcc8154b81127bcd3572c7a, type: 3}
   - {fileID: 398384071107680236, guid: 22581e11fa28c41419e01a63d93465f2, type: 3}
+  - {fileID: 6227156363105034367, guid: ce979fb8476d0457188008daa9649dd1, type: 3}
   hallways:
   - {fileID: 7564696797152967632, guid: 9ccd97415ada88442bf31f3ad28c86fd, type: 3}
   spawnRoom: {fileID: 8767254853541074108, guid: 4612257200b9ea040a39437ac0662e87, type: 3}
@@ -70,5 +71,7 @@ MonoBehaviour:
   mainBranchLength: 7
   offshootBranchCap: 3
   waitingFrames: 5
-  onlyBranchRooms: 0
-  success: 1
+  onlyBranchRooms: 1
+  tryRoomChance: 50
+  roomChance: 66
+  hallwayChance: 87
