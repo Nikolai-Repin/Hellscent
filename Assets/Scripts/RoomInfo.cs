@@ -7,22 +7,23 @@ public class RoomInfo : MonoBehaviour
     [SerializeField] public List<string> doorDirection;
     [SerializeField] public List<bool> doorOccupation;
     public List<bool> trueOccupancy;
-    [SerializeField] private bool locked = true;
+    public bool locked = true;
+    public bool completed = false;
     [SerializeField] private List<Spawner> spawners;
     public List<GameObject> entities = new();
+    private GenerateDungeon dungeon;
 
     void Start()
     {
         trueOccupancy = new(doorOccupation);
+        dungeon = transform.parent.gameObject.GetComponent<GenerateDungeon>();
     }
 
-    void Update() {
-
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "player") {
-            Debug.Log("Player enters");
+    public void Lock() {
+        //dungeon.LockRoom(transform.gameObject);
+        foreach (Spawner s in spawners) {
+            s.SpawnEnemies();
         }
+        completed = true;
     }
 }

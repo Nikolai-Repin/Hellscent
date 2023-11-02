@@ -297,6 +297,7 @@ public class GenerateDungeon : MonoBehaviour
 			if (!o) {
 				GameObject cap = Instantiate(closedDoor, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
 				cap.transform.SetParent(transform, false);
+				dungeon.Add(cap);
 				AlignRooms(room.transform, cap.transform, 0, data.doorDirection[i]);
 			}
 		}
