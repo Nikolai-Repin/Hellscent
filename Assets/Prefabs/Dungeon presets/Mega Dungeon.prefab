@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7673825623514623661
+--- !u!1 &4397049406439293554
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1469216794410421582}
-  - component: {fileID: 8467133392958881966}
-  - component: {fileID: 4640099341569176059}
+  - component: {fileID: 7522057004636872457}
+  - component: {fileID: 7756396975828067680}
+  - component: {fileID: 2631480863361814697}
   m_Layer: 0
-  m_Name: The Grid from Tron
+  m_Name: Mega Dungeon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1469216794410421582
+--- !u!4 &7522057004636872457
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7673825623514623661}
+  m_GameObject: {fileID: 4397049406439293554}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,25 +33,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!156049354 &8467133392958881966
+--- !u!156049354 &7756396975828067680
 Grid:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7673825623514623661}
+  m_GameObject: {fileID: 4397049406439293554}
   m_Enabled: 1
   m_CellSize: {x: 1, y: 1, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &4640099341569176059
+--- !u!114 &2631480863361814697
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7673825623514623661}
+  m_GameObject: {fileID: 4397049406439293554}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb8dc4277dbb788448eb5307ab52a886, type: 3}
@@ -68,10 +68,10 @@ MonoBehaviour:
   bossRoom: {fileID: 8238676731242650557, guid: e0f548f4eaa766c41ae27a590d270acd, type: 3}
   endCap: {fileID: 7239455093769158510, guid: c3335738fc9dafa4f9ba64e19914a16c, type: 3}
   roomSpacing: 1.0001
-  mainBranchLength: 5
-  offshootBranchCap: 1
+  mainBranchLength: 25
+  offshootBranchCap: 20
   waitingFrames: 5
   onlyBranchRooms: 1
-  tryRoomChance: 50
-  roomChance: 66
+  tryRoomChance: 100
+  roomChance: 100
   hallwayChance: 87
