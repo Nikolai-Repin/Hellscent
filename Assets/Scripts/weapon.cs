@@ -18,30 +18,27 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        parent = transform.parent.gameObject;
         sr = GetComponent<SpriteRenderer>();
-        controller = parent.GetComponent<PlayerController>();
-        controller.NewWeapon(GetComponent<Weapon>());
+        if (transform.parent != null) {
+            parent = transform.parent.gameObject;
+            if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
+                transform.parent.gameObject.GetComponent<PlayerController>().NewWeapon(transform.gameObject);
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = parent.transform.position;
-        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.parent.position);
-        var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
-        transform.position += dir.normalized * offset;
-        if (angle < 0)
-        {
-            sr.flipY = true;
-        } else {
-            sr.flipY = false;
+        
+        if (transform.parent != null && transform.parent.gameObject.GetComponent<PlayerController>() != null) {
+            UpdateAngleAndPosition(Input.mousePosition);
         }
 
         cooldown -= Time.deltaTime;
     }
 
+    //Fires the selected projectile
     public bool Fire()
     {
         if (ammo == 0) {return false;}
@@ -62,5 +59,32 @@ public class Weapon : MonoBehaviour
 
     public float GetOffset() {return offset;}
 
+    public bool GetControllerAndEquip() {
+        if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
+            controller = parent.GetComponent<PlayerController>();
+            return true;
+        }
+        return false;
+    }
 
+    public void UpdateAngleAndPosition(Vector3 targetPosition) {
+
+        //Setting position and angle
+        transform.position = parent.transform.position;
+        var dir = targetPosition - Camera.main.WorldToScreenPoint(transform.parent.position);
+        var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
+        transform.position += dir.normalized * offset;
+
+        //Flip gun so it won't be upside down when aiming left
+        if (angle < 0) {
+            sr.flipY = true;
+        } else {
+            sr.flipY = false;
+        }
+    }
+
+    public void OnTransformParentChanged() {
+        parent = transform.parent.gameObject;
+    }
 }
