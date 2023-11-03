@@ -379,6 +379,10 @@ PrefabInstance:
       propertyPath: pickNextWaypointDist
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1271084484400385619, guid: 4f593149b7945b64391c845a12c527f9, type: 3}
+      propertyPath: autoRepath.mode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2546447388860754969, guid: 4f593149b7945b64391c845a12c527f9, type: 3}
       propertyPath: anim
       value: 
