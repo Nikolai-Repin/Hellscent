@@ -5,7 +5,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
 
-    [SerializeField] protected bool vulnerable;
+    [SerializeField] protected bool invulnerable;
     [SerializeField] protected float healthAmount;
 
     // Start is called before the first frame update
@@ -20,9 +20,9 @@ public class Entity : MonoBehaviour
         
     }
 
-    //Deals damage to entity if vulnerable, returns true if damage was dealt
+    //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
-        if (vulnerable) {
+        if (!invulnerable) {
             healthAmount -= damage;
             if (healthAmount <= 0) {
                 Die();

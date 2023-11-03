@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 94881075102552680}
   - component: {fileID: 6673309329497130108}
   - component: {fileID: 6335419255056588729}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1361,7 +1361,7 @@ GameObject:
   - component: {fileID: 3451231081613137376}
   - component: {fileID: 2722053297930058796}
   - component: {fileID: 2448653684737486427}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Big L Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

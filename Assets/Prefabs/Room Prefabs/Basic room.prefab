@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 957136910335481896}
   - component: {fileID: 1855683047935461422}
   - component: {fileID: 6099746345748037184}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Basic room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4144,7 +4144,7 @@ GameObject:
   - component: {fileID: 8406677376633781174}
   - component: {fileID: 7751624617055596038}
   - component: {fileID: 2749896293329284522}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}

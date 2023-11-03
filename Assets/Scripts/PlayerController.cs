@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : Entity
+public class PlayerController : Entity
 {
     private Rigidbody2D rb;
     [SerializeField] private float speed;
@@ -175,7 +175,7 @@ public class Controller : Entity
 
     //Deals damage to entity if vulnerable, returns true if damage was dealt
     public override bool TakeDamage(float damage) {
-        if (vulnerable) {
+        if (!invulnerable) {
             healthAmount--;
             if (healthAmount <= 0) {
                 Die();

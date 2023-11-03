@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
     protected float cooldown;
     protected GameObject parent;
     protected SpriteRenderer sr;
-    protected Controller controller;
+    protected PlayerController controller;
     protected Vector2 target;
 
     //Rand Stats
@@ -38,8 +38,8 @@ public class Weapon : MonoBehaviour
 
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
-            if (transform.parent.gameObject.GetComponent<Controller>() != null) {
-                transform.parent.gameObject.GetComponent<Controller>().NewWeapon(transform.gameObject);
+            if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
+                transform.parent.gameObject.GetComponent<PlayerController>().NewWeapon(transform.gameObject);
                 SetTarget(Input.mousePosition);
             }
             if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
@@ -51,6 +51,7 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("T: "+target);
         if (transform.parent != null) {
             UpdateTarget();
             UpdateAngleAndPosition(target);
@@ -60,10 +61,8 @@ public class Weapon : MonoBehaviour
         if (randomize) {
             modManaCost = RandomizeMods(0.5F, quality);
             randomize = false;
-        
-        if (transform.parent != null && transform.parent.gameObject.GetComponent<PlayerController>() != null) {
-            UpdateAngleAndPosition(Input.mousePosition);
         }
+
 
         cooldown -= Time.deltaTime;
     }
@@ -143,7 +142,7 @@ public class Weapon : MonoBehaviour
     public void UpdateTarget() {
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
-            if (transform.parent.gameObject.GetComponent<Controller>() != null) {
+            if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
                 SetTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
             if (transform.parent.gameObject.GetComponent<Enemy>() != null) {

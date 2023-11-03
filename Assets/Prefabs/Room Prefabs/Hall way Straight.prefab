@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1472571587642465388}
   - component: {fileID: 7882232680689999068}
   - component: {fileID: 7594807169586971675}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -802,7 +802,7 @@ GameObject:
   - component: {fileID: 1446512325769732199}
   - component: {fileID: 1943380345417478133}
   - component: {fileID: 547915252852086004}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Hall way Straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

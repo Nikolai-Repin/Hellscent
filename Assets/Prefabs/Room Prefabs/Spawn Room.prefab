@@ -43,7 +43,8 @@ GameObject:
   - component: {fileID: 8371136526570564547}
   - component: {fileID: 8283120814717602595}
   - component: {fileID: 5141695065270883262}
-  m_Layer: 0
+  - component: {fileID: 6561727923604557147}
+  m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -726,6 +727,33 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!50 &6561727923604557147
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4948116957316310187}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8767254853541074108
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +769,7 @@ GameObject:
   - component: {fileID: 8469849610980649420}
   - component: {fileID: 6575681764723448176}
   - component: {fileID: 9050839397219789447}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Spawn Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

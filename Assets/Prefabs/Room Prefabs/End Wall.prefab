@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6715824231413897609}
   - component: {fileID: 4839737403077216148}
   - component: {fileID: 5859334346615336547}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: End Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 6274626102397333133}
   - component: {fileID: 6928767529105217866}
   - component: {fileID: 2289206456904482047}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}

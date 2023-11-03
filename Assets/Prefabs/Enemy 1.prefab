@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 3066895954126283705}
   - component: {fileID: 4377919599086744743}
   - component: {fileID: 5367976108461218121}
-  - component: {fileID: 4944509949421356450}
-  - component: {fileID: 3343982385646953942}
-  - component: {fileID: 63943222842401198}
-  - component: {fileID: 778426549253778071}
+  - component: {fileID: 8926693223023636098}
+  - component: {fileID: 8529422724288124930}
+  - component: {fileID: 1162765178507187644}
+  - component: {fileID: 6590746447821759044}
   m_Layer: 6
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -184,7 +184,7 @@ PolygonCollider2D:
       - {x: 0.29296875, y: 0.40234375}
       - {x: 0.15234375, y: 0.47265625}
   m_UseDelaunayMesh: 0
---- !u!114 &4944509949421356450
+--- !u!114 &8926693223023636098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1154847076967636346}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Script: {fileID: 11500000, guid: e396f9d29a70d494eb5a003423798229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
@@ -212,7 +212,7 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &3343982385646953942
+--- !u!114 &8529422724288124930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,14 +221,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1154847076967636346}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
+  m_Script: {fileID: 11500000, guid: afbe9a1c91d9ed74081d4ac67784e185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 7
+  maxSpeed: 1
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -236,8 +236,8 @@ MonoBehaviour:
   centerOffsetCompatibility: NaN
   repathRateCompatibility: NaN
   canSearchCompability: 0
-  orientation: 1
-  enableRotation: 0
+  orientation: 0
+  enableRotation: 1
   autoRepath:
     mode: 2
     interval: 0.5
@@ -245,16 +245,16 @@ MonoBehaviour:
     maximumInterval: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
-  maxAcceleration: 10
+  maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 0.6
-  pickNextWaypointDist: 1
-  endReachedDistance: 0
+  pickNextWaypointDist: 2
+  endReachedDistance: 0.2
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
---- !u!114 &63943222842401198
+--- !u!114 &1162765178507187644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -263,12 +263,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1154847076967636346}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
+  m_Script: {fileID: 11500000, guid: a1ce8439bad44664ea695b413a9fdeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 5328770163138366843}
---- !u!114 &778426549253778071
+--- !u!114 &6590746447821759044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -281,12 +281,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vulnerable: 1
-  healthAmount: 20
+  healthAmount: 10
   dealDamageOnContact: 0
   visRange: 20
   trackerController: {fileID: 0}
   weapon: {fileID: 1077688642757218197}
-  clipSize: 25
+  clipSize: 20
   reloadTime: 1
 --- !u!1 &6081340166808081702
 GameObject:

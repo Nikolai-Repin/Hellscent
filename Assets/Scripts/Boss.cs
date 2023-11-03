@@ -10,9 +10,10 @@ public class Boss : Enemy
     {
         Sleep = 0, //Before player enters boss area, does nothing
         Wander = 1, //Wanders, while in this phase, will pick a new phase at random
-        LineUp = 2, //Lines up with the player on the x or y axis, facing towards player, whatever's closest, then goes in to charge
-        Charge = 3, //Stays still for a period of time, then charges forward at the player, after hitting wall, returns to Wander
-        Bombs = 4 //Fires bombs around the room, after they've been fired, returns to wander
+        Sink = 2, //Sinks into the floor, becoming invincible
+        Chase = 3, //Quickly chases to the player, switches to Emerge once on top of the player
+        Emerge = 4, //Bursts up, spawning sharks, goes to wander
+        Bombs = 5 //Fires bombs around the room, after they've been fired, returns to wander
     }
     public float phaseCooldown = 10F;
     public Phase curPhase;
@@ -24,18 +25,22 @@ public class Boss : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         switch (curPhase) {
             case Phase.Wander: {
                 break;
             }
 
-            case Phase.LineUp: {
+            case Phase.Sink: {
                 break;
             }
 
-            case Phase.Charge: {
+            case Phase.Chase: {
+                break;
+            }
+
+            case Phase.Emerge: {
                 break;
             }
 
@@ -59,7 +64,7 @@ public class Boss : Enemy
             int nextPhase = (int) Random.Range(0, 1);
             switch (nextPhase) {
                 case 0: {
-                    curPhase = Phase.Charge;
+                    curPhase = Phase.Sink;
                     break;
                 }
                 
@@ -77,5 +82,15 @@ public class Boss : Enemy
             return bestPos;
         }
         return new Vector2(0, 0);
-    } 
+    }
+
+    private void Sink() {
+         dealDamageOnContact = false;
+         invulnerable = true;
+    }
+
+    private void Rise() {
+        dealDamageOnContact = true;
+         invulnerable = false;
+    }
 }

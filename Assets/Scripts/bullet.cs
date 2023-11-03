@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour {
     [SerializeField] private float projectileSpeed; //How fast bullet move
     [SerializeField] private int pierce; //How many entities it should inte
     [SerializeField] private bool reflectable; //Should it be flectable by melee weapons
+    private LayerMask walls;
 
     public GameObject creator; //Who created this bullet
     private Weapon wc;
@@ -48,7 +49,7 @@ public class Bullet : MonoBehaviour {
             other.gameObject.GetComponent<Entity>().TakeDamage(damage);
             pierce--;
         }
-        if (other.gameObject.tag == "Wall") { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
+        if (other.gameObject.layer == LayerMask.GetMask("Walls")) { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
             pierce--;
 
         }

@@ -81,4 +81,6 @@ public class TrackerController : MonoBehaviour
     public void SetTarget(Transform newTarget) {
         target = newTarget;
     }
+
+    public LayerMask GetWalls() {return walls;}
 }
