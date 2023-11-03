@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Inventory_UI : MonoBehaviour
+public class Inventory_UI : MonoBehaviour   
 {
     public GameObject inventoryPanel;
 
@@ -65,7 +66,7 @@ public class Inventory_UI : MonoBehaviour
         }
     }
 
-    // Drag and dropping items
+    // Drag and dropping items (Does not work)
     public void SlotBeginDrag(Slot_UI slot) {
         draggedSlot = slot; 
         draggedIcon = Instantiate(slot.itemIcon);
@@ -86,6 +87,7 @@ public class Inventory_UI : MonoBehaviour
     public void SlotEndDrag() {
         Destroy(draggedIcon.gameObject);
         draggedIcon = null;
+
         Debug.Log("Done Dragging: " + draggedSlot.name);
     }
 

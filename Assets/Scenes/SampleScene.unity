@@ -1492,6 +1492,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test Stone Item (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1873123448988247675, guid: b5756abdc8969ed439f5f01182c82135, type: 3}
+      propertyPath: rb2d
+      value: 
+      objectReference: {fileID: 630746090}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1643,6 +1647,11 @@ MonoBehaviour:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7284406455717162103, guid: 29e1da4b1a60bf34d9f8b2f411c67b77, type: 3}
   m_PrefabInstance: {fileID: 1837033105}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &389682748 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 8621681747534549582, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
+  m_PrefabInstance: {fileID: 2104437456002997908}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &432696839
 GameObject:
@@ -2360,6 +2369,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &630746090 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: -1309961850721114743, guid: b5756abdc8969ed439f5f01182c82135, type: 3}
+  m_PrefabInstance: {fileID: 334923329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &652674584
 GameObject:
   m_ObjectHideFlags: 0
@@ -3132,8 +3146,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000042915344, y: -0.17426}
-  m_SizeDelta: {x: 500, y: 250}
+  m_AnchoredPosition: {x: -0.429, y: -2.321}
+  m_SizeDelta: {x: 500.859, y: 254.293}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &832950668
 MonoBehaviour:
@@ -3298,6 +3312,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1192388123}
     m_Modifications:
+    - target: {fileID: 2372858399045359308, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
+      propertyPath: rb2d
+      value: 
+      objectReference: {fileID: 1618853990}
     - target: {fileID: 8466736879047894288, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.59
@@ -4175,6 +4193,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 846924561563970260, guid: b5756abdc8969ed439f5f01182c82135, type: 3}
   m_PrefabInstance: {fileID: 1082266728}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &1024043605 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: -1309961850721114743, guid: b5756abdc8969ed439f5f01182c82135, type: 3}
+  m_PrefabInstance: {fileID: 1082266728}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1030116221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4738,6 +4761,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test Stone Item
       objectReference: {fileID: 0}
+    - target: {fileID: 1873123448988247675, guid: b5756abdc8969ed439f5f01182c82135, type: 3}
+      propertyPath: rb2d
+      value: 
+      objectReference: {fileID: 1024043605}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7680,6 +7707,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8466736879047894288, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
   m_PrefabInstance: {fileID: 896147486}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &1618853990 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 8621681747534549582, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
+  m_PrefabInstance: {fileID: 896147486}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1637376591 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1954141476843718929, guid: 29e1da4b1a60bf34d9f8b2f411c67b77, type: 3}
@@ -10302,6 +10334,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1192388123}
     m_Modifications:
+    - target: {fileID: 2372858399045359308, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
+      propertyPath: rb2d
+      value: 
+      objectReference: {fileID: 389682748}
     - target: {fileID: 8466736879047894288, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.3928151

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class Slot_UI : MonoBehaviour
@@ -9,7 +10,7 @@ public class Slot_UI : MonoBehaviour
     public Image itemIcon;
     public TextMeshProUGUI quantityText;
 
-    [SerializeField] private GameObject highlight;
+    public GameObject highlight;
 
     public void SetItem(Inventory.Slot slot) {
         if(slot != null) {
