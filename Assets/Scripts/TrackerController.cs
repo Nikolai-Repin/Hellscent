@@ -14,6 +14,7 @@ public class TrackerController : MonoBehaviour
     {
         Melee = 1,
         Range = 2,
+        Boss = 3
     }
     [SerializeField] AI ai = AI.Melee;
 
@@ -22,7 +23,7 @@ public class TrackerController : MonoBehaviour
     [SerializeField] private float endReachedDistanceRange;
 
     [SerializeField] public Transform target;
-    private AIPath aiPath;
+    public AIPath aiPath;
 
     private void Start()
     {
@@ -35,6 +36,10 @@ public class TrackerController : MonoBehaviour
             aiPath.endReachedDistance = endReachedDistanceMelee;
         }
         else if (ai == AI.Range)
+        {
+            aiPath.endReachedDistance = endReachedDistanceRange;
+        }
+        else if (ai == AI.Boss)
         {
             aiPath.endReachedDistance = endReachedDistanceRange;
         }

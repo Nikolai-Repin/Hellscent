@@ -15,6 +15,7 @@ public class Boss : Enemy
         Emerge = 4, //Bursts up, spawning sharks, goes to wander
         Bombs = 5 //Fires bombs around the room, after they've been fired, returns to wander
     }
+    public float lastPhaseChange;
     public float phaseCooldown = 10F;
     public Phase curPhase;
 
@@ -29,18 +30,29 @@ public class Boss : Enemy
     {
         switch (curPhase) {
             case Phase.Wander: {
+                if (Time.time < lastPhaseChange+phaseCooldown) {
+                    PickPhase();
+                    Debug.Log(curPhase);
+                }
                 break;
             }
 
             case Phase.Sink: {
+                Sink();
                 break;
             }
 
             case Phase.Chase: {
+                float curLen = 0;
+                curLen = (trackerController.target.transform.position - transform.position).sqrMagnitude;
+                if (curLen <= 1) {
+                    curPhase = Phase.Emerge;
+                }
                 break;
             }
 
             case Phase.Emerge: {
+                Rise();
                 break;
             }
 
@@ -49,12 +61,21 @@ public class Boss : Enemy
             }
 
             case Phase.Sleep: {
+                GameObject closestPlayer = FindClosestPlayer();
+                if (closestPlayer != null) {
+                    trackerController.SetTarget(closestPlayer.transform);
+                    Awaken();
+                }
                 break;
             }
         }
     }
 
     public void Awaken() {
+        dealDamageOnContact = true;
+        invulnerable = false;
+        lastPhaseChange = Time.time;
+        trackerController.aiPath.maxSpeed = 5;
         curPhase = Phase.Wander;
     }
 
@@ -85,12 +106,14 @@ public class Boss : Enemy
     }
 
     private void Sink() {
-         dealDamageOnContact = false;
-         invulnerable = true;
+        dealDamageOnContact = false;
+        invulnerable = true;
+        trackerController.aiPath.maxSpeed = 15;
     }
 
     private void Rise() {
         dealDamageOnContact = true;
-         invulnerable = false;
+        invulnerable = false;
+        trackerController.aiPath.maxSpeed = 5;
     }
 }

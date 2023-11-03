@@ -248,7 +248,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 0
-  maxSpeed: 1
+  maxSpeed: 0
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -256,7 +256,7 @@ MonoBehaviour:
   centerOffsetCompatibility: NaN
   repathRateCompatibility: NaN
   canSearchCompability: 0
-  orientation: 0
+  orientation: 1
   enableRotation: 0
   autoRepath:
     mode: 2
@@ -343,6 +343,7 @@ MonoBehaviour:
   endReachedDistanceMelee: 2
   endReachedDistanceRange: 0
   target: {fileID: 0}
+  aiPath: {fileID: 0}
 --- !u!1001 &4735865946649285237
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -37,7 +37,7 @@ public class Enemy : Entity
             }
         }
         if (results.Length > 0) {
-            Debug.Log(FindClosest(players, transform.position));
+            FindClosest(players, transform.position);
             return FindClosest(players, transform.position);
         }
         return null;

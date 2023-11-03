@@ -51,7 +51,6 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("T: "+target);
         if (transform.parent != null) {
             UpdateTarget();
             UpdateAngleAndPosition(target);
