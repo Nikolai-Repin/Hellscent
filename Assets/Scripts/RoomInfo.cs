@@ -12,6 +12,7 @@ public class RoomInfo : MonoBehaviour
     [SerializeField] private List<Spawner> spawners;
     public List<GameObject> entities = new();
     private GenerateDungeon dungeon;
+    public bool fighting = false;
 
     void Start()
     {
@@ -19,11 +20,18 @@ public class RoomInfo : MonoBehaviour
         dungeon = transform.parent.gameObject.GetComponent<GenerateDungeon>();
     }
 
+    void Update () {
+        if (completed == false && fighting && entities.Count == 0) {
+            completed = true;
+            dungeon.UnlockRooms();
+        }
+    }
+
     public void Lock() {
-        //dungeon.LockRoom(transform.gameObject);
         foreach (Spawner s in spawners) {
             s.SpawnEnemies();
         }
-        completed = true;
+        dungeon.LockRoom(transform.gameObject);
+        fighting = true;
     }
 }

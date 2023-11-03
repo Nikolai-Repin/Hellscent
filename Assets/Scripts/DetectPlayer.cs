@@ -12,7 +12,7 @@ public class DetectPlayer : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (room.completed == false && room.locked == true && other.tag == "player") {
+        if (!room.fighting && !room.completed && room.locked == true && other.tag == "player") {
             other.transform.position = transform.GetChild(0).position;
             room.Lock();
         }

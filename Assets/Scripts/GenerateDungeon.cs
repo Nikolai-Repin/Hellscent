@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GenerateDungeon : MonoBehaviour
@@ -20,6 +21,7 @@ public class GenerateDungeon : MonoBehaviour
 	public bool success = true;
 
     private List<GameObject> dungeon = new();
+	private List<GameObject> closedDoors = new();
 
     private readonly Dictionary<string, string> reverseDirection = new()
 	{
@@ -294,21 +296,21 @@ public class GenerateDungeon : MonoBehaviour
 		RoomInfo data = room.GetComponent<RoomInfo>();
 		for (int i = 0; i < data.trueOccupancy.Count; i++) {
 			bool o = data.trueOccupancy[i];
-			if (!o) {
+			if (o) {
 				GameObject cap = Instantiate(closedDoor, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
 				cap.transform.SetParent(transform, false);
-				dungeon.Add(cap);
+				closedDoors.Add(cap);
 				AlignRooms(room.transform, cap.transform, 0, data.doorDirection[i]);
 			}
 		}
 	}
 
 	public void UnlockRooms() {
-		foreach (GameObject part in dungeon) {
+		foreach (GameObject part in closedDoors) {
 			if (part.name == closedDoor.name + "(Clone)") {
-				dungeon.Remove(part);
 				Destroy(part);
 			}
 		}
+		closedDoors.Clear();
 	}
 }
