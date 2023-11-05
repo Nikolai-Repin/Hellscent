@@ -11,13 +11,19 @@ public class Bullet : MonoBehaviour {
     [SerializeField] private bool reflectable; //Should it be flectable by melee weapons
     private LayerMask walls;
 
-    public GameObject creator; //Who created this bullet
-    private Weapon wc;
+    public string team;
+    protected GameObject creator;
+    protected Weapon wc;
     private float lifeTime = 0f; //How long the bullet has existed for
 
     //Defines how the bullet should move when the bullet is first fired
     public virtual void LaunchProjectile(Quaternion rotation) {
         SetProjectileVelocity(rotation, projectileSpeed*wc.modProjectileSpeed);
+    }
+
+    //Defines how the bullet should move when the bullet is first fired using custom speed
+    public virtual void LaunchProjectile(Quaternion rotation, float speed) {
+        SetProjectileVelocity(rotation, speed);
     }
 
     //Sets bullet velocity based on rotation, using bullet speed
@@ -45,16 +51,16 @@ public class Bullet : MonoBehaviour {
 
     protected void OnTriggerEnter2D(Collider2D other) {
         //I need to set up teams or something of the like for this, I want bullets to be able to belong to enemies
-        if (other.gameObject.GetComponent<Entity>() != null &&  ((other.gameObject.GetComponent<Enemy>() != null) != (creator.transform.parent.gameObject.GetComponent<Enemy>() != null))) {
+        if (other.gameObject.GetComponent<Entity>() != null &&  other.gameObject.tag != team) {
             other.gameObject.GetComponent<Entity>().TakeDamage(damage);
             pierce--;
         }
         if (other.gameObject.layer == LayerMask.GetMask("Walls")) { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
-            pierce--;
+            pierce = 0;
 
         }
         if (pierce <= 0) {
-            Destroy(gameObject);
+            Destroy(transform.gameObject);
         }
     }
 

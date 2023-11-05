@@ -26,6 +26,8 @@ public class PlayerController : Entity
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
 
+    private float invulnTime;
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         weaponIndex = 0;
@@ -33,6 +35,7 @@ public class PlayerController : Entity
         rHoldTime = Time.time;
         lastFireTime = Time.time;
         mana = maxMana;
+        invulnTime = Time.time - 1;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
     }
@@ -175,11 +178,12 @@ public class PlayerController : Entity
 
     //Deals damage to entity if vulnerable, returns true if damage was dealt
     public override bool TakeDamage(float damage) {
-        if (!invulnerable) {
+        if (!invulnerable && Time.time >= invulnTime) {
             healthAmount--;
             if (healthAmount <= 0) {
                 Die();
             }
+            invulnTime = Time.time + 1F;
             Debug.Log("Damaged");
             return true;
         }

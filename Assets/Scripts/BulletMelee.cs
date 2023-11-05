@@ -15,7 +15,7 @@ public class BulletMelee : Bullet
 
     public override void LaunchProjectile(Quaternion rotation) {
         transform.rotation = rotation;
-        float v = (creator.GetComponent<Weapon>().GetOffset());
+        float v = (wc.GetOffset());
         transform.position += transform.right * v;
         GetComponent<Rigidbody2D>().velocity = creator.transform.parent.GetComponent<Rigidbody2D>().velocity;
     }

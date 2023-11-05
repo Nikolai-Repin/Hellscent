@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
-    [SerializeField] GameObject center;
-    [SerializeField] float arenaWidth;
+    private Vector2 arenaCenter;
+    [SerializeField] Vector2 arenaSize;
+    [SerializeField] int numBombs;
+    private GameObject bombPrefab;
+    private GameObject minionPrefab;
+    private Animator animator;
+    private int firedBombs;
+    private float lastAttackTime;
     public enum Phase
     {
         Sleep = 0, //Before player enters boss area, does nothing
@@ -17,12 +23,20 @@ public class Boss : Enemy
     }
     public float lastPhaseChange;
     public float phaseCooldown = 10F;
+    private float phaseCooldownRandom;
     public Phase curPhase;
 
     // Start is called before the first frame update
     void Start()
     {
+        phaseCooldownRandom = phaseCooldown;
         curPhase = Phase.Sleep;
+        arenaCenter = transform.position;
+        bombPrefab = Resources.Load<GameObject>("Prefabs/PirateBomb");
+        minionPrefab = Resources.Load<GameObject>("Prefabs/PirateMinion");
+
+        animator = GetComponent<Animator>();
+        animator.SetInteger("Phase", 0);
     }
 
     // Update is called once per frame
@@ -30,33 +44,52 @@ public class Boss : Enemy
     {
         switch (curPhase) {
             case Phase.Wander: {
-                if (Time.time < lastPhaseChange+phaseCooldown) {
+                //Debug.Log(Time.time - (lastPhaseChange + phaseCooldownRandom));
+                if (Time.time > lastPhaseChange+phaseCooldownRandom) {
                     PickPhase();
-                    Debug.Log(curPhase);
+                    //Debug.Log(curPhase);
                 }
                 break;
             }
 
             case Phase.Sink: {
                 Sink();
+                lastAttackTime = Time.time + 5;
+                curPhase = Phase.Chase;
                 break;
             }
 
             case Phase.Chase: {
-                float curLen = 0;
+                float curLen;
                 curLen = (trackerController.target.transform.position - transform.position).sqrMagnitude;
-                if (curLen <= 1) {
+                Debug.Log(curLen);
+                if (curLen <= 82 || Time.time > lastAttackTime) {
                     curPhase = Phase.Emerge;
+                    lastAttackTime = Time.time + 0.5F;
+                    trackerController.aiPath.maxSpeed = 2;
                 }
                 break;
             }
 
             case Phase.Emerge: {
-                Rise();
+                if (Time.time >= lastAttackTime) {
+                    Debug.Log("rising");
+                    Rise();
+                    ReturnToWander();
+                }
                 break;
             }
 
             case Phase.Bombs: {
+                if (Time.time > lastAttackTime) {
+                    lastAttackTime = lastAttackTime + 0.2F;
+                    GameObject bullet = Instantiate(bombPrefab, new Vector3(Random.Range((arenaCenter.x-arenaSize.x)+3, (arenaCenter.x+arenaSize.x)-3), Random.Range((arenaCenter.y-arenaSize.y)+3, (arenaCenter.y+arenaSize.y)-3), 0), new Quaternion());
+                    firedBombs++;
+                }
+
+                if (firedBombs >= numBombs) {
+                    ReturnToWander();
+                }
                 break;
             }
 
@@ -71,49 +104,66 @@ public class Boss : Enemy
         }
     }
 
+    private void FixedUpdate() {}
+
     public void Awaken() {
         dealDamageOnContact = true;
         invulnerable = false;
-        lastPhaseChange = Time.time;
-        trackerController.aiPath.maxSpeed = 5;
-        curPhase = Phase.Wander;
+        trackerController.SetAI(TrackerController.AI.Range);
+        ReturnToWander();
     }
 
     //Pick Phase
     public void PickPhase() {
-        if(phaseCooldown <= 0) {
-            int nextPhase = (int) Random.Range(0, 1);
-            switch (nextPhase) {
-                case 0: {
-                    curPhase = Phase.Sink;
-                    break;
-                }
+        int nextPhase = (int) Random.Range(0, 2);
+        Debug.Log(nextPhase);
+        switch (nextPhase) {
+            case 0: {
+                curPhase = Phase.Sink;
+                break;
+            }
                 
-                case 1: {
-                    curPhase = Phase.Bombs;
-                    break;
-                }
+            case 1: {
+                curPhase = Phase.Bombs;
+                firedBombs = 0;
+                lastAttackTime = Time.time + 1;
+                trackerController.aiPath.maxSpeed = 0;
+                animator.SetInteger("Phase", 5);
+                break;
             }
         }
     }
 
-    private Vector2 FindChargeLocation(float targetDist) {
-        if (trackerController.target != null) {
-            Vector2 bestPos = new Vector2(trackerController.target.transform.position.x + targetDist, trackerController.target.transform.position.y);
-            return bestPos;
-        }
-        return new Vector2(0, 0);
+    public void ReturnToWander() {
+        phaseCooldownRandom = Random.Range(phaseCooldown, phaseCooldown * 1.2F);
+        curPhase = Phase.Wander;
+        trackerController.aiPath.maxSpeed = 5;
+        trackerController.aiPath.maxSpeed = 5;
+        lastPhaseChange = Time.time;
+        animator.SetInteger("Phase", 1);
+        return;
     }
 
     private void Sink() {
         dealDamageOnContact = false;
         invulnerable = true;
-        trackerController.aiPath.maxSpeed = 15;
+        trackerController.aiPath.maxSpeed = 50;
+        trackerController.aiPath.maxAcceleration = 45;
+        trackerController.SetAI(TrackerController.AI.Melee);
+        animator.SetInteger("Phase", 3);
+        Debug.Log(trackerController.aiPath.endReachedDistance);
     }
 
     private void Rise() {
         dealDamageOnContact = true;
         invulnerable = false;
         trackerController.aiPath.maxSpeed = 5;
+        trackerController.SetAI(TrackerController.AI.Range);
+        int numMinions = 3;
+        float rotationAmount = 6.283F/numMinions;
+        for (int i = 0; i < numMinions; i++) {
+            Instantiate(minionPrefab, transform.position + new Vector3(3*Mathf.Cos(rotationAmount*i), 3*Mathf.Sin(rotationAmount*i), 0), new Quaternion());
+        }
+        animator.SetInteger("Phase", 1);
     }
 }

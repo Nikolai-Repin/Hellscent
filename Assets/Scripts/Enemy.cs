@@ -19,7 +19,7 @@ public class Enemy : Entity
         }
     }
 
-    protected void OnTriggerEnter2D(Collider2D other) {
+    protected void OnTriggerStay2D(Collider2D other) {
         if (other.gameObject.tag == "player") {
             if (dealDamageOnContact) {
                 other.GetComponent<PlayerController>().TakeDamage(1);

@@ -78,6 +78,7 @@ public class Weapon : MonoBehaviour
                 GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
                 bulletScript.UpdateCreator(transform.gameObject);
+                bulletScript.team = parent.tag;
 
                 Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-accuracy*modAccuracy, accuracy*modAccuracy));
                 Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
