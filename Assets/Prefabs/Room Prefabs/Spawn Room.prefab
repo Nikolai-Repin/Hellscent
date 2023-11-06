@@ -43,14 +43,9 @@ GameObject:
   - component: {fileID: 8371136526570564547}
   - component: {fileID: 8283120814717602595}
   - component: {fileID: 5141695065270883262}
-<<<<<<< HEAD
-  - component: {fileID: 6561727923604557147}
-  m_Layer: 3
-=======
   - component: {fileID: 2265194340948660927}
   - component: {fileID: 5147830981591257447}
   m_Layer: 0
->>>>>>> c9b48f72a15fdbd5b72c7e642488dec4dd4e40b8
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -733,11 +728,7 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
-<<<<<<< HEAD
---- !u!50 &6561727923604557147
-=======
 --- !u!50 &2265194340948660927
->>>>>>> c9b48f72a15fdbd5b72c7e642488dec4dd4e40b8
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -764,8 +755,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< HEAD
-=======
 --- !u!66 &5147830981591257447
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -847,7 +836,6 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 4948116957316310187}
->>>>>>> c9b48f72a15fdbd5b72c7e642488dec4dd4e40b8
 --- !u!1 &8767254853541074108
 GameObject:
   m_ObjectHideFlags: 0
