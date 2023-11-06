@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private int enemyCount;
     [SerializeField] private bool point = false;
     
-    public void SpawnEnemies() {
+    public IEnumerator SpawnEnemies() {
         for (int i = 0; i < enemyCount; i++) {
             GameObject enemy;
             if (point) {
@@ -21,6 +21,7 @@ public class Spawner : MonoBehaviour
                 enemy.transform.Translate(position);
             }
             transform.parent.gameObject.GetComponent<RoomInfo>().entities.Add(enemy);
+            yield return new WaitForSeconds(0.05f);
         }
     }
 

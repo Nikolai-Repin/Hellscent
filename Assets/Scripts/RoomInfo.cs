@@ -27,9 +27,9 @@ public class RoomInfo : MonoBehaviour
         }
     }
 
-    public void Lock() {
+    public IEnumerator Lock() {
         foreach (Spawner s in spawners) {
-            s.SpawnEnemies();
+            yield return StartCoroutine(s.SpawnEnemies());
         }
         dungeon.LockRoom(transform.gameObject);
         fighting = true;
