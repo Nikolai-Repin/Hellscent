@@ -8,6 +8,7 @@ public class Boss : Enemy
     private Vector2 arenaCenter;
     [SerializeField] Vector2 arenaSize;
     [SerializeField] int numBombs;
+    [SerializeField] public GameObject projectileType;
     private GameObject bombPrefab;
     private GameObject minionPrefab;
     private Animator animator;
@@ -182,6 +183,16 @@ public class Boss : Enemy
         float rotationAmount = 6.283F/numMinions;
         for (int i = 0; i < numMinions; i++) {
             Instantiate(minionPrefab, transform.position + new Vector3(3*Mathf.Cos(rotationAmount*i), 3*Mathf.Sin(rotationAmount*i), 0), new Quaternion());
+        }
+
+        int projectiles = 8; //How many projectiles in each ring
+        rotationAmount = 360/projectiles;
+        for (int i = 0; i < projectiles; i++) {
+            GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.team = "Enemy";
+            Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)));
+            bulletScript.LaunchProjectile(fireAngle, 10);
         }
         animator.SetInteger("Phase", 1);
     }

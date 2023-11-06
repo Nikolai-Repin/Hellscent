@@ -345,6 +345,7 @@ MonoBehaviour:
   trackerController: {fileID: 0}
   arenaSize: {x: 15, y: 15}
   numBombs: 10
+  projectileType: {fileID: 6942168956635508771, guid: 2ffa203c2970a08409e070e3f820d93d, type: 3}
   lastPhaseChange: 0
   phaseCooldown: 10
   curPhase: 0
