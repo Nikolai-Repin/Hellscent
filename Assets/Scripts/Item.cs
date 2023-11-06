@@ -3,30 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(menuName = "Scriptable object/Item")]
-public class Item : ScriptableObject
+[RequireComponent(typeof(Rigidbody2D))]
+public class Item : MonoBehaviour
 {
+    public ItemData data;
+    [HideInInspector] public Rigidbody2D rb2d;
 
-    [Header("Only gameplay")]
-    public TileBase title;
-    public ItemType type;
-    public ActionType actiontype;
-    public Vector2Int range = new Vector2Int(5, 4);
-
-    [Header("Only UI")]
-    public bool stackable = true;
-
-    [Header("Both")]
-    public Sprite image;
-
-}
-
-public enum ItemType {
-    Spell,
-    Tool
-}
-
-public enum ActionType {
-    Attack,
-    Mine
+    private void Awake() {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
 }

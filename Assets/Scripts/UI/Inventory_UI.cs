@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Inventory_UI : MonoBehaviour   
+public class Inventory_UI : MonoBehaviour
 {
     public GameObject inventoryPanel;
 
@@ -14,6 +14,8 @@ public class Inventory_UI : MonoBehaviour
 
     private Slot_UI draggedSlot;
     private Image draggedIcon;
+
+    [SerializeField]
     private Canvas canvas;
 
     private void Awake() {
@@ -43,7 +45,7 @@ public class Inventory_UI : MonoBehaviour
         if(slots.Count == player.inventory.slots.Count) {
             for(int i = 0; i < slots.Count; i++) {
                 // Checks to see if there is an item in the slot
-                if(player.inventory.slots[i].type != CollectableType.NONE) {
+                if(player.inventory.slots[i].itemName != "") {
                     slots[i].SetItem(player.inventory.slots[i]);
                 }
 
@@ -55,15 +57,17 @@ public class Inventory_UI : MonoBehaviour
     }
 
     // Remove item from inventory
-    public void Remove(int slotID) {
-        Collectable itemToDrop = GameManager.instance.itemManager.GetItemByType(
-            player.inventory.slots[slotID].type);
+    public void Remove() {
+        Item itemToDrop = GameManager.instance.itemManager.GetItemByName(
+            player.inventory.slots[draggedSlot.slotID].itemName);
 
         if(itemToDrop != null) {
             player.DropItem(itemToDrop);
-            player.inventory.Remove(slotID);
+            player.inventory.Remove(draggedSlot.slotID, player.inventory.slots[draggedSlot.slotID].count);
             Refresh();
         }
+
+        draggedSlot = null;
     }
 
     // Drag and dropping items (Does not work)
