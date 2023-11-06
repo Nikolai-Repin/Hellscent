@@ -70,7 +70,7 @@ public class Boss : Enemy
                 curLen = (trackerController.target.transform.position - transform.position).sqrMagnitude;
                 if (curLen <= 82 || Time.time > lastAttackTime) {
                     curPhase = Phase.Emerge;
-                    lastAttackTime = Time.time + 0.5F;
+                    lastAttackTime = Time.time + 0.75F;
                     trackerController.aiPath.maxSpeed = 2;
                 }
                 break;
