@@ -10,15 +10,15 @@ public class Keybind : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI buttonItem;
     
     private void Start () {
-        buttonAttack.text = PlayerPrefs.GetString("CustomKey1");
-        buttonPickUp.text = PlayerPrefs.GetString("CustomKey2");
-        buttonItem.text = PlayerPrefs.GetString("CustomKey3");
+        buttonAttack.text = PlayerPrefs.GetString("Attack");
+        buttonPickUp.text = PlayerPrefs.GetString("Grab");
+        buttonItem.text = PlayerPrefs.GetString("Item");
     }
 
     private void Update () {
-        ChangeKey(buttonAttack, "CustomKey1");
-        ChangeKey(buttonPickUp, "CustomKey2");
-        ChangeKey(buttonItem, "CustomKey3");
+        ChangeKey(buttonAttack, "Attack");
+        ChangeKey(buttonPickUp, "Swap");
+        ChangeKey(buttonItem, "Grab");
         
     }
 
@@ -42,7 +42,7 @@ public class Keybind : MonoBehaviour {
                 if (Input.GetKey(keycode)) {
 
                     button.text = keycode.ToString();
-                    PlayerPrefs.SetString(k, keycode.ToString());
+                    PlayerPrefs.SetInt(k, (int) (keycode));
                     PlayerPrefs.Save();
                                     
                 }

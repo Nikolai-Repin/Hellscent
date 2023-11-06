@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
 
         direction = new Vector2(controlx, controly);
         keypressed = controlx != 0 || controly != 0;
-        
 
         direction = direction.normalized;
         if (keypressed) {
@@ -51,7 +50,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity += saved_direction * dash * Time.deltaTime;
         }
 
-        if (Input.GetKeyDown((PlayerPrefs.GetString("CustomKey2")).ToLower())) {
+        if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetString("Grab"))) {
             Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
             if (results.Length > 0) {
                 PickupWeapon(FindClosest(results, transform.position));
@@ -61,10 +60,10 @@ public class PlayerController : MonoBehaviour
         rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
 
         if (hasWeapon) {
-            if (Input.GetKeyDown((PlayerPrefs.GetString("CustomKey3")).ToLower())) {
+            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetString("Swap"))) {
                 rHoldTime = Time.time;
             }
-            if (Input.GetKeyUp((PlayerPrefs.GetString("CustomKey3")).ToLower())) {
+            if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetString("Swap"))) {
                 if ((Time.time - rHoldTime)<0.5) {
                     ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
                 } else {
@@ -72,7 +71,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
             
-            if (Input.GetKeyDown((PlayerPrefs.GetString("CustomKey1")))) {
+            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetString("Attack"))) {
                 if(equippedWeapon.GetComponent<Weapon>().Fire()) {
                     Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
                     kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
