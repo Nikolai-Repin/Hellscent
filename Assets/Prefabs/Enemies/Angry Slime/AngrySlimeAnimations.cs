@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Pathfinding;
 public class EnemyAnimation : Entity
 {
     // Start is called before the first frame update
@@ -18,10 +19,6 @@ public class EnemyAnimation : Entity
     {
         bool notdead = true;
     Vector3 direction = player.position - transform.position;
-    while (notdead){
-        if(Input.GetKeyDown("space")){
-            subHealth(10);
-        }
     if (System.Math.Abs(direction.x) > System.Math.Abs(direction.y)){
      
      if(direction.x > 0){
@@ -38,14 +35,21 @@ public class EnemyAnimation : Entity
     anim.Play("walkDown");
 }
      }
-     if(getHealth() <= 0){
-        notdead = false;
-        DeathAnim();
-    }
 if(Input.GetKeyDown("space")){
             subHealth(10);
+
         }
-    }
+        if(getHealth() <= 0){
+           var ai = GetComponent<AIPath>();
+           ai.canMove = false;
+
+
+        enabled = false;
+            DeathAnim();
+            Destroy(gameObject, .5);
+            
+        }
+    
 
     }
 
@@ -53,15 +57,16 @@ if(Input.GetKeyDown("space")){
     public bool DeathAnim(){
         anim.Play("slimeDeath");
         Debug.Log("finished animation");
+
         return true;
     }
-    public void isDead(){
-        if (getHealth() <= 0){
-            Destroy(gameObject.GetComponent<AIPath>());
-        }
+  //  public void isDead(){
+      //  if (getHealth() <= 0){
+           // Destroy(GetComponent(AIPath));
+    //    }
     }    
 
-    }
+    
 
 
 

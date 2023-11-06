@@ -145,8 +145,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f17cb27a23e97a4eaff2b5f55383a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vulnerable: 0
+  healthAmount: 1
   anim: {fileID: 71812010}
   player: {fileID: 587657753}
+  aiScript: {fileID: 0}
 --- !u!114 &71812026
 MonoBehaviour:
   m_ObjectHideFlags: 0
