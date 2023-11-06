@@ -14,7 +14,6 @@ public class TrackerController : MonoBehaviour
     {
         Melee = 1,
         Range = 2,
-        Boss = 3
     }
     [SerializeField] AI ai = AI.Melee;
 
