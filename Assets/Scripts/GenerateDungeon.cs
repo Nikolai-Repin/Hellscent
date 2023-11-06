@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Pathfinding;
 
@@ -10,6 +11,7 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField] private GameObject spawnRoom;
 	[SerializeField] private GameObject bossRoom;
 	[SerializeField] private GameObject endCap;
+	[SerializeField] private GameObject closedDoor;
 	[SerializeField] private float roomSpacing;
 	[SerializeField] private int mainBranchLength;
 	[SerializeField] private int offshootBranchCap;
@@ -23,6 +25,7 @@ public class GenerateDungeon : MonoBehaviour
 	private bool success = true;
 
     private List<GameObject> dungeon = new();
+	private List<GameObject> closedDoors = new();
 
     private readonly Dictionary<string, string> reverseDirection = new()
 	{
@@ -291,5 +294,27 @@ public class GenerateDungeon : MonoBehaviour
 		for (int i = 0; i < frames; i++) {
 			yield return null;
 		}
+	}
+
+	public void LockRoom(GameObject room) {
+		RoomInfo data = room.GetComponent<RoomInfo>();
+		for (int i = 0; i < data.trueOccupancy.Count; i++) {
+			bool o = data.trueOccupancy[i];
+			if (o) {
+				GameObject cap = Instantiate(closedDoor, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
+				cap.transform.SetParent(transform, false);
+				closedDoors.Add(cap);
+				AlignRooms(room.transform, cap.transform, 0, data.doorDirection[i]);
+			}
+		}
+	}
+
+	public void UnlockRooms() {
+		foreach (GameObject part in closedDoors) {
+			if (part.name == closedDoor.name + "(Clone)") {
+				Destroy(part);
+			}
+		}
+		closedDoors.Clear();
 	}
 }
