@@ -19,14 +19,6 @@ public class Enemy : Entity
         }
     }
 
-    protected void OnTriggerStay2D(Collider2D other) {
-        if (other.gameObject.tag == "player") {
-            if (dealDamageOnContact) {
-                other.GetComponent<PlayerController>().TakeDamage(1);
-            }
-        }
-    }
-
     //Returns closest player in range
     public GameObject FindClosestPlayer(float range) {
         Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, range);
@@ -46,5 +38,13 @@ public class Enemy : Entity
     //Returns closest player in visRange
     public GameObject FindClosestPlayer() {
         return FindClosestPlayer(visRange);
+    }
+
+    public virtual void DealContactDamage(Collider2D other) {
+        if (other.gameObject.tag == "player") {
+            if (dealDamageOnContact) {
+                other.GetComponent<PlayerController>().TakeDamage(1);
+            }
+        }
     }
 }

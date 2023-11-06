@@ -6,6 +6,7 @@ public class Entity : MonoBehaviour
 {
 
     [SerializeField] protected bool invulnerable;
+    [SerializeField] protected bool intangible;
     [SerializeField] protected float healthAmount;
 
     // Start is called before the first frame update
@@ -22,14 +23,17 @@ public class Entity : MonoBehaviour
 
     //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
+        if (intangible) {
+            return false;
+        }
+
         if (!invulnerable) {
             healthAmount -= damage;
             if (healthAmount <= 0) {
                 Die();
             }
-            return true;
         }
-        return (false);
+        return true;
    }
 
     //Finds the closest game object from a array of collider2D and their distance from Vector3 origin
@@ -61,4 +65,5 @@ public class Entity : MonoBehaviour
     public virtual void Die () {
         Destroy(transform.gameObject);
     }
+    
 }

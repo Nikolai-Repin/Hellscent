@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Boss : Enemy
 {
@@ -10,16 +11,19 @@ public class Boss : Enemy
     private GameObject bombPrefab;
     private GameObject minionPrefab;
     private Animator animator;
+    private CinemachineVirtualCameraBase vCamera;
     private int firedBombs;
     private float lastAttackTime;
     public enum Phase
     {
+        Death = -1,
         Sleep = 0, //Before player enters boss area, does nothing
-        Wander = 1, //Wanders, while in this phase, will pick a new phase at random
-        Sink = 2, //Sinks into the floor, becoming invincible
-        Chase = 3, //Quickly chases to the player, switches to Emerge once on top of the player
-        Emerge = 4, //Bursts up, spawning sharks, goes to wander
-        Bombs = 5 //Fires bombs around the room, after they've been fired, returns to wander
+        Awakening = 1,
+        Wander = 2, //Wanders, while in this phase, will pick a new phase at random
+        Sink = 3, //Sinks into the floor, becoming invincible
+        Chase = 4, //Quickly chases to the player, switches to Emerge once on top of the player
+        Emerge = 5, //Bursts up, spawning sharks, goes to wander
+        Bombs = 6 //Fires bombs around the room, after they've been fired, returns to wander
     }
     public float lastPhaseChange;
     public float phaseCooldown = 10F;
@@ -34,6 +38,9 @@ public class Boss : Enemy
         arenaCenter = transform.position;
         bombPrefab = Resources.Load<GameObject>("Prefabs/PirateBomb");
         minionPrefab = Resources.Load<GameObject>("Prefabs/PirateMinion");
+        vCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCameraBase>();
+        dealDamageOnContact = false;
+        invulnerable = true;
 
         animator = GetComponent<Animator>();
         animator.SetInteger("Phase", 0);
@@ -44,10 +51,8 @@ public class Boss : Enemy
     {
         switch (curPhase) {
             case Phase.Wander: {
-                //Debug.Log(Time.time - (lastPhaseChange + phaseCooldownRandom));
                 if (Time.time > lastPhaseChange+phaseCooldownRandom) {
                     PickPhase();
-                    //Debug.Log(curPhase);
                 }
                 break;
             }
@@ -62,7 +67,6 @@ public class Boss : Enemy
             case Phase.Chase: {
                 float curLen;
                 curLen = (trackerController.target.transform.position - transform.position).sqrMagnitude;
-                Debug.Log(curLen);
                 if (curLen <= 82 || Time.time > lastAttackTime) {
                     curPhase = Phase.Emerge;
                     lastAttackTime = Time.time + 0.5F;
@@ -73,7 +77,6 @@ public class Boss : Enemy
 
             case Phase.Emerge: {
                 if (Time.time >= lastAttackTime) {
-                    Debug.Log("rising");
                     Rise();
                     ReturnToWander();
                 }
@@ -96,20 +99,37 @@ public class Boss : Enemy
             case Phase.Sleep: {
                 GameObject closestPlayer = FindClosestPlayer();
                 if (closestPlayer != null) {
+                    arenaCenter = transform.position;
                     trackerController.SetTarget(closestPlayer.transform);
+                    lastAttackTime = Time.time + 2;
+                    vCamera.Follow = transform;
+                    curPhase = Phase.Awakening;
+                }
+                break;
+            }
+
+            case Phase.Awakening: {
+                if (Time.time > lastAttackTime) {
                     Awaken();
+                }
+                break;
+            }
+
+            case Phase.Death: {
+                if (Time.time > lastAttackTime) {
+                    vCamera.Follow = trackerController.target.transform;
+                    Destroy(transform.gameObject);
                 }
                 break;
             }
         }
     }
 
-    private void FixedUpdate() {}
-
     public void Awaken() {
         dealDamageOnContact = true;
         invulnerable = false;
         trackerController.SetAI(TrackerController.AI.Range);
+        vCamera.Follow = trackerController.target.transform;
         ReturnToWander();
     }
 
@@ -146,17 +166,16 @@ public class Boss : Enemy
 
     private void Sink() {
         dealDamageOnContact = false;
-        invulnerable = true;
+        intangible = true;
         trackerController.aiPath.maxSpeed = 50;
         trackerController.aiPath.maxAcceleration = 45;
         trackerController.SetAI(TrackerController.AI.Melee);
         animator.SetInteger("Phase", 3);
-        Debug.Log(trackerController.aiPath.endReachedDistance);
     }
 
     private void Rise() {
         dealDamageOnContact = true;
-        invulnerable = false;
+        intangible = false;
         trackerController.aiPath.maxSpeed = 5;
         trackerController.SetAI(TrackerController.AI.Range);
         int numMinions = 3;
@@ -165,5 +184,15 @@ public class Boss : Enemy
             Instantiate(minionPrefab, transform.position + new Vector3(3*Mathf.Cos(rotationAmount*i), 3*Mathf.Sin(rotationAmount*i), 0), new Quaternion());
         }
         animator.SetInteger("Phase", 1);
+    }
+
+    public override void Die() {
+        dealDamageOnContact = false;
+        intangible = true;
+        trackerController.aiPath.maxSpeed = 0;
+        curPhase = Phase.Death;
+        lastAttackTime = Time.time + 1F;
+        vCamera.Follow = transform;
+        animator.SetInteger("Phase", -1);
     }
 }
