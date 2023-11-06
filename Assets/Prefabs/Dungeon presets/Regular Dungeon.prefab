@@ -74,3 +74,6 @@ MonoBehaviour:
   waitingFrames: 5
   onlyBranchRooms: 1
   success: 1
+  tryRoomChance: 50
+  roomChance: 66
+  hallwayChance: 87
