@@ -7,7 +7,7 @@ public class EnemyShooter : Enemy
     [SerializeField] protected GameObject weapon;
     [SerializeField] protected int clipSize;
     [SerializeField] protected float reloadTime;
-    private int ammo;
+    [SerializeField] private int ammo;
     private float reloadLastTime;
     protected GameObject target;
 

@@ -32,7 +32,7 @@ public class PlayerController : Entity
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         weaponIndex = 0;
-        damage = 20f;
+        damage = 0f;
         pickupDistance = 5;
         rHoldTime = Time.time;
         lastFireTime = Time.time;
@@ -203,7 +203,7 @@ public class PlayerController : Entity
         return mana/maxMana;
     }
 
-    public float GetDamage() {
+    public override float GetDamage() {
         return damage;
     }
 

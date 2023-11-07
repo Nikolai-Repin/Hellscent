@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour {
     [SerializeField] private float projectileSpeed; //How fast bullet move
     [SerializeField] private int pierce; //How many entities it should interact with
     [SerializeField] private bool reflectable; //Should it be flectable by melee weapons
+    [SerializeField] private bool setDamage;
     private LayerMask walls;
 
     public string team;
@@ -79,7 +80,11 @@ public class Bullet : MonoBehaviour {
 
     // Sets values like damage and bullet size whenever a bullet spawns
     public void SetStartingValues() {
-        damage = creator.GetComponent<Weapon>().GetDamage();
+        if (setDamage) {
+            damage = creator.GetComponent<Weapon>().GetDamage();
+        } else {
+            damage += creator.GetComponent<Weapon>().GetDamage();
+        }
         //changes the scale based on damage (change the values of the denominators if you wanna change how much the size scales).
         transform.localScale += new Vector3(damage/30, damage/30, 0f);
     }

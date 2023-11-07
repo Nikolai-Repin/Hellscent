@@ -37,8 +37,8 @@ public class Boss : Enemy
         phaseCooldownRandom = phaseCooldown;
         curPhase = Phase.Sleep;
         arenaCenter = transform.position;
-        bombPrefab = Resources.Load<GameObject>("Prefabs/PirateBomb");
-        minionPrefab = Resources.Load<GameObject>("Prefabs/PirateMinion");
+        bombPrefab = Resources.Load<GameObject>("Prefabs/Entities/PirateBomb/PirateBomb");
+        minionPrefab = Resources.Load<GameObject>("Prefabs/Enemies/PirateMinion/PirateMinion");
         vCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCameraBase>();
         dealDamageOnContact = false;
         invulnerable = true;

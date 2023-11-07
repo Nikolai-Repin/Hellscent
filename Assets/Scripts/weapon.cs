@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     protected float cooldown;
     protected GameObject parent;
     protected SpriteRenderer sr;
-    protected PlayerController controller;
+    protected Entity controller;
     protected Vector2 target;
 
     //Rand Stats
@@ -37,6 +37,7 @@ public class Weapon : MonoBehaviour
 
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
+            
             if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
                 transform.parent.gameObject.GetComponent<PlayerController>().NewWeapon(transform.gameObject);
                 SetTarget(Input.mousePosition);
@@ -44,6 +45,7 @@ public class Weapon : MonoBehaviour
             if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
                 SetTarget(transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer().transform.position);
             }
+            controller = parent.GetComponent<Entity>();
         }
     }
 
@@ -92,7 +94,7 @@ public class Weapon : MonoBehaviour
 
     public bool GetControllerAndEquip() {
         if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
-            controller = parent.GetComponent<PlayerController>();
+            controller = parent.GetComponent<Entity>();
             return true;
         }
         return false;

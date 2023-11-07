@@ -65,5 +65,9 @@ public class Entity : MonoBehaviour
     public virtual void Die () {
         Destroy(transform.gameObject);
     }
+
+    public virtual float GetDamage() {
+        return 0;
+    }
     
 }

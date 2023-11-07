@@ -36,14 +36,14 @@ public class BossBomb : Entity
                     float rotationOffset = 0;
 
                     //Outer for loop controls how many rings of projectiles
-                    for (int k = 1; k <= 4; k++) {
+                    for (int k = 1; k <= 2; k++) {
                         //Inner for loop controls how many projectiles in each ring
                         for (int i = 0; i < projectiles; i++) {
                             GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
                             Bullet bulletScript = bullet.GetComponent<Bullet>();
                             bulletScript.team = "Enemy";
                             Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+rotationOffset));
-                            bulletScript.LaunchProjectile(fireAngle, 20/k);
+                            bulletScript.LaunchProjectile(fireAngle, 10/k);
                         }
                         rotationOffset += rotationAmount/2;
                     }
