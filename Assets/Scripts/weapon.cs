@@ -12,12 +12,12 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float accuracy = 10.0F;
     [SerializeField] public float manaCost = 1.0F;
     [SerializeField] private float weight;
-
-
+    
+    
     protected float cooldown;
     protected GameObject parent;
     protected SpriteRenderer sr;
-    protected Controller controller;
+    protected PlayerController controller;
     protected Vector2 target;
 
     //Rand Stats
@@ -29,6 +29,7 @@ public class Weapon : MonoBehaviour
     public float modAccuracy = 1.0F;
     public int modBullets = 0;
     public float modManaCost = 1.0F;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +40,8 @@ public class Weapon : MonoBehaviour
 
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
-            if (transform.parent.gameObject.GetComponent<Controller>() != null) {
-                transform.parent.gameObject.GetComponent<Controller>().NewWeapon(transform.gameObject);
+            if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
+                transform.parent.gameObject.GetComponent<PlayerController>().NewWeapon(transform.gameObject);
                 SetTarget(Input.mousePosition);
             }
             if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
@@ -87,8 +88,8 @@ public class Weapon : MonoBehaviour
     }
 
     public bool GetControllerAndEquip() {
-        if (transform.parent.gameObject.GetComponent<Controller>() != null) {
-            controller = parent.GetComponent<Controller>();
+        if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
+            controller = parent.GetComponent<PlayerController>();
             return true;
         }
         return false;
@@ -136,7 +137,7 @@ public class Weapon : MonoBehaviour
     public void UpdateTarget() {
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
-            if (transform.parent.gameObject.GetComponent<Controller>() != null) {
+            if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
                 SetTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
 
@@ -157,7 +158,7 @@ public class Weapon : MonoBehaviour
         if (parent.tag == "Enemy") {
             return parent.GetComponent<Enemy>().GetDamage();
         }
-        return parent.GetComponent<Controller>().GetDamage();
+        return parent.GetComponent<PlayerController>().GetDamage();
     }
 
 }

@@ -28,7 +28,7 @@ public class Enemy : Entity
     protected void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "player") {
             if (dealDamageOnContact) {
-                other.GetComponent<Controller>().TakeDamage(1);
+                other.GetComponent<PlayerController>().TakeDamage(1);
             }
         }
     }
@@ -38,7 +38,7 @@ public class Enemy : Entity
         Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, range);
         List<Collider2D> players = new List<Collider2D>();
         for (int i = 0; i < results.Length; i++) {
-            if (results[i].transform.GetComponent<Controller>() != null) {
+            if (results[i].transform.GetComponent<PlayerController>() != null) {
                 players.Add(results[i]);
             }
         }

@@ -28,13 +28,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<Image> heartContainerInsides = new List<Image>();
 
     [SerializeField] private GameObject player;
-    [SerializeField] private Controller controller;
+    [SerializeField] private PlayerController controller;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
-        controller = player.GetComponent<Controller>();
+        controller = player.GetComponent<PlayerController>();
         updateHealth();
     }
 

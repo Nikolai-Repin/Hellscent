@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : Entity
+public class PlayerController : Entity
 {
     private Rigidbody2D rb;
     [SerializeField] private float speed;
@@ -61,7 +61,6 @@ public class Controller : Entity
 
         if (Input.GetKeyDown(KeyCode.Space)) {
              rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
-
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {

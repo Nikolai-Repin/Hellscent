@@ -5,7 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     private GameObject playerCharacter;
-    private Controller controller;
+    private PlayerController controller;
     private UIManager uiManager;
 
 
@@ -14,11 +14,11 @@ public class Item : MonoBehaviour
     [SerializeField] private float bonusSpeed;
     [SerializeField] private float bonusManaRechargeSpeed;
     [SerializeField] private float bonusMaxHP;
-    [SerializeField] private float weight;  
+    [SerializeField] private float weight;
 
     void Start() {
         playerCharacter = GameObject.FindWithTag("player");
-        controller = playerCharacter.GetComponent<Controller>();
+        controller = playerCharacter.GetComponent<PlayerController>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
     }
 

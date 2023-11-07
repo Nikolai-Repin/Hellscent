@@ -8,11 +8,13 @@ public class Entity : MonoBehaviour
     [SerializeField] protected bool vulnerable;
     [SerializeField] protected float maxHealthAmount;
     [SerializeField] protected float healthAmount;
+    
+    private UIManager uiManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -25,6 +27,8 @@ public class Entity : MonoBehaviour
     public virtual bool TakeDamage(float damage) {
         if (vulnerable) {
             healthAmount -= damage;
+            uiManager.updateHealth();
+            Debug.Log("hh");
             if (healthAmount <= 0) {
                 Die();
             }
