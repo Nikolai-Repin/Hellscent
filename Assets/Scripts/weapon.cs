@@ -43,7 +43,7 @@ public class Weapon : MonoBehaviour
                 SetTarget(Input.mousePosition);
             }
             if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
-                SetTarget(transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer().transform.position);
+                //SetTarget(transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer().transform.position);
             }
             controller = parent.GetComponent<Entity>();
         }
