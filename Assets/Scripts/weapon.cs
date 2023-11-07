@@ -11,6 +11,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] public int bullets = 1;
     [SerializeField] public float accuracy = 10.0F;
     [SerializeField] public float manaCost = 1.0F;
+    [SerializeField] private float weight;
+
 
     protected float cooldown;
     protected GameObject parent;
