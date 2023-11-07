@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class Slime : Enemy
 {
@@ -17,8 +18,9 @@ public class Slime : Enemy
         ChargeReady = 2,
         ChargeDash = 3,
         ChargeEnd = 4,
+        Splitting = 5,
     }
-    private Phase curPhase;
+    public Phase curPhase;
     private Animator animator;
 
     // Start is called before the first frame update
@@ -33,8 +35,10 @@ public class Slime : Enemy
         animator = GetComponent<Animator>();
         randAttackDelay = Random.Range(0, 0.5F);
         lastAttackTime = Time.time;
-        curPhase = Phase.Sleep;
-
+        if (curPhase == null) {
+            curPhase = Phase.Sleep;
+        }
+        
         //Why wont the game call these???
         splitOffHealth = healthAmount/4;
         Debug.Log(healthAmount);
@@ -98,22 +102,35 @@ public class Slime : Enemy
             case (Phase.Death): {
                 if (Time.time > lastAttackTime) {
                     GameObject splitOff;
-                    Vector3 splitOffOffset = new Vector3(size, 0, 0);
+                    Vector2 splitOffOffset = new Vector2(size*10, 0);
 
                     splitOff = Instantiate(clone, transform.position, new Quaternion());
-                    splitOff.GetComponent<Slime>().healthAmount = splitOffHealth;
-                    splitOff.GetComponent<Slime>().size--;
-                    splitOff.GetComponent<Slime>().trackerController.aiPath.maxSpeed = 5;
-                    splitOff.GetComponent<Slime>().invulnTime = Time.time + 0.5F;
-                    splitOff.transform.position -= splitOffOffset;
+                    var splitOffSlime = splitOff.GetComponent<Slime>();
+                    splitOffSlime.healthAmount = splitOffHealth;
+                    splitOffSlime.size--;
+                    splitOffSlime.trackerController.aiPath.maxSpeed = 5;
+                    splitOffSlime.invulnTime = Time.time + 0.5F;
+                    splitOff.GetComponent<AIPath>().enabled = false;
+                    splitOff.GetComponent<Rigidbody2D>().velocity += splitOffOffset*-1;
 
                     splitOff = Instantiate(clone, transform.position, new Quaternion());
-                    splitOff.GetComponent<Slime>().healthAmount = splitOffHealth;
-                    splitOff.GetComponent<Slime>().size--;
-                    splitOff.GetComponent<Slime>().trackerController.aiPath.maxSpeed = 5;
-                    splitOff.GetComponent<Slime>().invulnTime = Time.time + 0.5F;
-                    splitOff.transform.position += splitOffOffset;
+                    splitOffSlime = splitOff.GetComponent<Slime>();
+                    splitOffSlime.healthAmount = splitOffHealth;
+                    splitOffSlime.size--;
+                    splitOffSlime.trackerController.aiPath.maxSpeed = 5;
+                    splitOffSlime.invulnTime = Time.time + 0.5F;
+                    splitOffSlime.curPhase = Phase.Splitting;
+                    splitOff.GetComponent<AIPath>().enabled = false;
+                    splitOff.GetComponent<Rigidbody2D>().velocity += splitOffOffset;
                     Destroy(transform.gameObject);
+                }
+                break;
+            }
+
+            case (Phase.Splitting): {
+                if (Time.time > lastAttackTime) {
+                    GetComponent<AIPath>().enabled = true;
+                    curPhase = Phase.Wander;
                 }
                 break;
             }
