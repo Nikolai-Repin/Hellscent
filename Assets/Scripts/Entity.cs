@@ -6,6 +6,7 @@ public class Entity : MonoBehaviour
 {
 
     [SerializeField] protected bool vulnerable;
+    [SerializeField] protected float maxHealthAmount;
     [SerializeField] protected float healthAmount;
 
     // Start is called before the first frame update
@@ -60,5 +61,17 @@ public class Entity : MonoBehaviour
     //Destroys the entity
     public virtual void Die () {
         Destroy(transform.gameObject);
+    }
+
+    public void AddMaxHP(float bonusMaxHP) {
+        maxHealthAmount += bonusMaxHP;
+    }
+
+    public float GetMaxHealthAmount() {
+        return maxHealthAmount;
+    }
+
+    public float GetHealthAmount() {
+        return healthAmount;
     }
 }

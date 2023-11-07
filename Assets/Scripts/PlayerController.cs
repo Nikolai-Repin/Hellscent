@@ -27,8 +27,11 @@ public class Controller : Entity
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
 
+    private UIManager uiManager;
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
         weaponIndex = 0;
         damage = 20f;
         pickupDistance = 5;
@@ -180,7 +183,7 @@ public class Controller : Entity
     //Deals damage to entity if vulnerable, returns true if damage was dealt
     public override bool TakeDamage(float damage) {
         if (vulnerable) {
-            healthAmount--;
+            healthAmount -= damage;
             if (healthAmount <= 0) {
                 Die();
             }
