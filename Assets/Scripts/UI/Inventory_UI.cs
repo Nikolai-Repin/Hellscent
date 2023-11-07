@@ -14,9 +14,8 @@ public class Inventory_UI : MonoBehaviour
 
     private Slot_UI draggedSlot;
     private Image draggedIcon;
-
-    [SerializeField]
     private Canvas canvas;
+    private bool dragSingle;
 
     private void Awake() {
         canvas = FindObjectOfType<Canvas>();
@@ -26,6 +25,14 @@ public class Inventory_UI : MonoBehaviour
         // Press TAB to open Inventory
         if(Input.GetKeyDown(KeyCode.Tab)) {
             ToggleInventory();
+        }
+
+        // Hold LeftShift to drop 1 single item
+        if(Input.GetKey(KeyCode.LeftShift)) {
+            dragSingle = true;
+        }
+        else {
+            dragSingle = false;
         }
     }
 
@@ -62,8 +69,15 @@ public class Inventory_UI : MonoBehaviour
             player.inventory.slots[draggedSlot.slotID].itemName);
 
         if(itemToDrop != null) {
-            player.DropItem(itemToDrop);
-            player.inventory.Remove(draggedSlot.slotID, player.inventory.slots[draggedSlot.slotID].count);
+            if(dragSingle) {
+                player.DropItem(itemToDrop);
+                player.inventory.Remove(draggedSlot.slotID);
+            }
+
+            else {
+                player.DropItem(itemToDrop, player.inventory.slots[draggedSlot.slotID].count);
+                player.inventory.Remove(draggedSlot.slotID, player.inventory.slots[draggedSlot.slotID].count);
+            }
             Refresh();
         }
 
@@ -72,7 +86,8 @@ public class Inventory_UI : MonoBehaviour
 
     // Drag and dropping items (Does not work)
     public void SlotBeginDrag(Slot_UI slot) {
-        draggedSlot = slot; 
+        draggedSlot = slot;
+
         draggedIcon = Instantiate(slot.itemIcon);
         draggedIcon.raycastTarget = false;
         draggedIcon.rectTransform.sizeDelta = new Vector2(50f, 50f);

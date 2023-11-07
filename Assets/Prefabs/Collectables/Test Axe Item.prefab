@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2372858399045359308}
   - component: {fileID: 1439137330403257745}
   - component: {fileID: 8621681747534549582}
+  - component: {fileID: 3146726680561592923}
   m_Layer: 0
   m_Name: Test Axe Item
   m_TagString: Untagged
@@ -99,9 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6227a03517164144483bfc0b6d10be9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  icon: {fileID: 21300000, guid: 719c2201c2f5f6c4aafffaeb5abdf5f9, type: 3}
-  rb2d: {fileID: 0}
 --- !u!61 &1439137330403257745
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -174,3 +172,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3146726680561592923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9193315736720810564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afa0733aae27fc478195d4660596b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: ee48aebc8d8f2964fb90868424d3bbca, type: 2}
+  rb2d: {fileID: 0}

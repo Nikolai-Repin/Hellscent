@@ -638,7 +638,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc7e9d83bd2e24439675c77fd5a289a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - {fileID: 3146726680561592923, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
+  - {fileID: 3465672066862675836, guid: b5756abdc8969ed439f5f01182c82135, type: 3}
 --- !u!1001 &162666757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1212,7 +1214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &219501301
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5545,7 +5547,7 @@ PrefabInstance:
       objectReference: {fileID: 318620684}
     - target: {fileID: 3100128633742212759, guid: 29e1da4b1a60bf34d9f8b2f411c67b77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3100128633742212759, guid: 29e1da4b1a60bf34d9f8b2f411c67b77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -7446,7 +7448,6 @@ MonoBehaviour:
   - {fileID: 970377333}
   - {fileID: 1129539772}
   - {fileID: 974436229}
-  canvas: {fileID: 0}
 --- !u!114 &1558465591 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1954141476843718929, guid: 29e1da4b1a60bf34d9f8b2f411c67b77, type: 3}
@@ -10373,7 +10374,7 @@ PrefabInstance:
       objectReference: {fileID: 135806284}
     - target: {fileID: 3100128633742212759, guid: 29e1da4b1a60bf34d9f8b2f411c67b77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3100128633742212759, guid: 29e1da4b1a60bf34d9f8b2f411c67b77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

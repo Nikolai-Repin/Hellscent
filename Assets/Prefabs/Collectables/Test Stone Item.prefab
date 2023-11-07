@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1873123448988247675}
   - component: {fileID: 2956597972415591225}
   - component: {fileID: -1309961850721114743}
+  - component: {fileID: 3465672066862675836}
   m_Layer: 0
   m_Name: Test Stone Item
   m_TagString: Untagged
@@ -99,9 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6227a03517164144483bfc0b6d10be9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
-  icon: {fileID: 21300000, guid: 108ca3e7dda90d945b0914bf9259ec94, type: 3}
-  rb2d: {fileID: 0}
 --- !u!61 &2956597972415591225
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -174,3 +172,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3465672066862675836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446218500392795296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afa0733aae27fc478195d4660596b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 725c187ed5cc59f4c997c4ec774e9bc7, type: 2}
+  rb2d: {fileID: 0}
