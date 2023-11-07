@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f17cb27a23e97a4eaff2b5f55383a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vulnerable: 0
+  healthAmount: 0
   anim: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &7740483742753584622
@@ -168,7 +170,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 0.25
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -179,7 +181,7 @@ MonoBehaviour:
   orientation: 1
   enableRotation: 0
   autoRepath:
-    mode: 0
+    mode: 2
     interval: NaN
     sensitivity: 10
     maximumInterval: 2
