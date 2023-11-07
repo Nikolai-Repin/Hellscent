@@ -10,15 +10,31 @@ public class Keybind : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI buttonItem;
     
     private void Start () {
-        buttonAttack.text = PlayerPrefs.GetString("Attack");
-        buttonPickUp.text = PlayerPrefs.GetString("Grab");
-        buttonItem.text = PlayerPrefs.GetString("Item");
+        if (PlayerPrefs.GetInt("Attack") == 0) {
+
+            PlayerPrefs.SetInt("Attack", (int) KeyCode.Mouse0);
+            buttonAttack.text = "Mouse0";
+        } else {
+
+            buttonAttack.text = PlayerPrefs.GetString("aText");
+        } if (PlayerPrefs.GetInt("Grab") == 0) {
+            PlayerPrefs.SetInt("Grab", (int) KeyCode.E);
+            buttonPickUp.text = "E";
+        } else {
+            buttonPickUp.text = PlayerPrefs.GetString("gText");
+
+        } if (PlayerPrefs.GetInt("Swap") == 0) {
+            PlayerPrefs.SetInt("Swap", (int) KeyCode.R);
+            buttonItem.text = "R";
+        } else {
+            buttonItem.text = PlayerPrefs.GetString("sText");
+        }
     }
 
     private void Update () {
-        ChangeKey(buttonAttack, "Attack");
-        ChangeKey(buttonPickUp, "Swap");
-        ChangeKey(buttonItem, "Grab");
+        ChangeKey(buttonAttack, "Attack", "aText");
+        ChangeKey(buttonItem, "Grab", "gText");
+        ChangeKey(buttonPickUp, "Swap", "sText");
         
     }
 
@@ -34,7 +50,7 @@ public class Keybind : MonoBehaviour {
         buttonItem.text = "Awaiting Input";
     }
 
-    public void ChangeKey(TextMeshProUGUI button, String k) {
+    public void ChangeKey(TextMeshProUGUI button, String k, String t) {
         if (button.text == "Awaiting Input") {
 
             foreach (KeyCode keycode in Enum.GetValues(typeof(KeyCode))) {
@@ -42,7 +58,8 @@ public class Keybind : MonoBehaviour {
                 if (Input.GetKey(keycode)) {
 
                     button.text = keycode.ToString();
-                    PlayerPrefs.SetInt(k, (int) (keycode));
+                    PlayerPrefs.SetInt(k, (int) keycode);
+                    PlayerPrefs.SetString(t, keycode.ToString());
                     PlayerPrefs.Save();
                                     
                 }

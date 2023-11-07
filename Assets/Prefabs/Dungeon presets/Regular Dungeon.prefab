@@ -67,11 +67,13 @@ MonoBehaviour:
   spawnRoom: {fileID: 8767254853541074108, guid: 4612257200b9ea040a39437ac0662e87, type: 3}
   bossRoom: {fileID: 8238676731242650557, guid: e0f548f4eaa766c41ae27a590d270acd, type: 3}
   endCap: {fileID: 7239455093769158510, guid: c3335738fc9dafa4f9ba64e19914a16c, type: 3}
+  closedDoor: {fileID: 6862288333110420476, guid: f37c4eadd351efa4eb6ccb109a3d33e8, type: 3}
   roomSpacing: 1.0001
   mainBranchLength: 7
   offshootBranchCap: 3
   waitingFrames: 5
   onlyBranchRooms: 1
+  success: 1
   tryRoomChance: 50
   roomChance: 66
   hallwayChance: 87

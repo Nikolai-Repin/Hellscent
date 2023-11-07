@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity += saved_direction * dash * Time.deltaTime;
         }
 
-        if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetString("Grab"))) {
+        if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Grab"))) {
             Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
             if (results.Length > 0) {
                 PickupWeapon(FindClosest(results, transform.position));
@@ -60,10 +60,10 @@ public class PlayerController : MonoBehaviour
         rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
 
         if (hasWeapon) {
-            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetString("Swap"))) {
+            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                 rHoldTime = Time.time;
             }
-            if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetString("Swap"))) {
+            if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                 if ((Time.time - rHoldTime)<0.5) {
                     ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
                 } else {
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
             
-            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetString("Attack"))) {
+            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Attack"))) {
                 if(equippedWeapon.GetComponent<Weapon>().Fire()) {
                     Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
                     kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
