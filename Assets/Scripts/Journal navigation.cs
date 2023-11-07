@@ -28,5 +28,9 @@ public class Journalnavigation : MonoBehaviour
             isOpen = !isOpen;
             book = Instantiate(pages[page], new Vector2(0, 0), transform.rotation);
         }
+        else if(!journalOpen && isOpen){
+            isOpen = !isOpen;
+            Destroy(book);
+        }
     }
 }
