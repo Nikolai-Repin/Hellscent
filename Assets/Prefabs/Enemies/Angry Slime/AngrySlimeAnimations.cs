@@ -46,7 +46,7 @@ if(Input.GetKeyDown("space")){
 
         enabled = false;
             DeathAnim();
-            Destroy(gameObject, .5);
+            Destroy(gameObject, (float).55);
             
         }
     
