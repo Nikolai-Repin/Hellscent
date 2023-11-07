@@ -7,7 +7,7 @@ public class Entity : MonoBehaviour
 
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
-    [SerializeField] protected float healthAmount;
+    [SerializeField] public float healthAmount;
 
     // Start is called before the first frame update
     void Start()

@@ -7,6 +7,8 @@ public class Enemy : Entity
 
     [SerializeField] protected bool dealDamageOnContact;
     [SerializeField] protected float visRange;
+    [SerializeField] public float iFrames;
+    public float invulnTime;
 
     public TrackerController trackerController;
 
@@ -47,4 +49,19 @@ public class Enemy : Entity
             }
         }
     }
+
+    public override bool TakeDamage(float damage) {
+        if (intangible || Time.time < invulnTime) {
+            return false;
+        }
+
+        if (!invulnerable) {
+            healthAmount -= damage;
+            if (healthAmount <= 0) {
+                invulnTime = Time.time + iFrames;
+                Die();
+            }
+        }
+        return true;
+   }
 }

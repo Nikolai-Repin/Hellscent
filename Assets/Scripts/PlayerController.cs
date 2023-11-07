@@ -65,7 +65,6 @@ public class PlayerController : Entity
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
-            Debug.Log("Pickup Attempt");
             Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
             if (results.Length > 0) {
                 PickupWeapon(FindClosest(results, transform.position));
