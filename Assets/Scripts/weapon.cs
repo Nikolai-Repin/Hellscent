@@ -10,7 +10,12 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float kickback = 0F;
     [SerializeField] public int bullets = 1;
     [SerializeField] public float accuracy = 10.0F;
+    [SerializeField] public bool useMana;
     [SerializeField] public float manaCost = 1.0F;
+    [SerializeField] private float maxMana;
+    [SerializeField] private float mana;
+    private float manaRechargeDelay = 1;
+    private float lastFireTime;
 
     protected float cooldown;
     protected GameObject parent;
@@ -38,12 +43,13 @@ public class Weapon : MonoBehaviour
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
             
-            if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
-                transform.parent.gameObject.GetComponent<PlayerController>().NewWeapon(transform.gameObject);
+            if (parent.GetComponent<PlayerController>() != null) {
+                parent.GetComponent<PlayerController>().NewWeapon(transform.gameObject);
                 SetTarget(Input.mousePosition);
-            }
-            if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
-                //SetTarget(transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer().transform.position);
+                lastFireTime = Time.time;
+                mana = maxMana;
+            } else {
+                useMana = false;
             }
             controller = parent.GetComponent<Entity>();
         }
@@ -63,6 +69,15 @@ public class Weapon : MonoBehaviour
             randomize = false;
         }
 
+        if (useMana && Time.time>lastFireTime) {
+            if (mana < maxMana) {
+                mana += parent.GetComponent<Entity>().GetManaRechargeSpeed()*Time.deltaTime;
+            }
+
+            if (mana > maxMana) {
+                mana = maxMana;
+            }
+        } 
 
         cooldown -= Time.deltaTime;
     }
@@ -70,7 +85,7 @@ public class Weapon : MonoBehaviour
     //Fires the selected projectile
     public bool Fire()
     {
-        if (cooldown > 0) {return false;}
+        if (cooldown > 0 || mana < manaCost) {return false;}
 
         for (int i = 0; i < bullets+modBullets; i++)
         {
@@ -83,11 +98,14 @@ public class Weapon : MonoBehaviour
                 Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
                 Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
                 bulletScript.LaunchProjectile(fireAngle);
+                bullet.GetComponent<Rigidbody2D>().velocity += parent.GetComponent<Rigidbody2D>().velocity;
                 bulletScript.SetStartingValues(); 
                 
             }
         }
 
+        lastFireTime = Time.time + manaRechargeDelay;
+        mana -= manaCost;
         cooldown = cooldownTime;
         return true;
     }
@@ -134,10 +152,6 @@ public class Weapon : MonoBehaviour
         return 1.0F+(((modCooldownTime-1)+(modDamage-1)+(modProjectileSpeed-1)+((modAccuracy*-1.0F)-1)+modBullets)/5.0F);
     }
 
-    public void SetTarget(Vector2 target) {
-        this.target = target;
-    }
-
     public void UpdateTarget() {
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
@@ -153,12 +167,25 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    //Setters
+    public void SetTarget(Vector2 target) {this.target = target;}
+    public void SetMaxMana(float a) {maxMana = a;}
+
+    //Getters
     public float GetOffset() {return offset;}
     public float GetCoolDown() {return cooldown;}
     public float GetManaCost() {return manaCost*modManaCost;}
-    
-    public float GetDamage() {
-        return controller.GetDamage();
+    public float GetDamage() {return controller.GetDamage();}
+    public GameObject GetParent() {return parent;}
+
+    //Returns percentage of current mana out of maxMana
+    public float GetManaPercent() {
+        return mana/maxMana;
     }
 
+    
+
+    public void AddMaxMana(float a) {
+        maxMana += a;
+    }
 }

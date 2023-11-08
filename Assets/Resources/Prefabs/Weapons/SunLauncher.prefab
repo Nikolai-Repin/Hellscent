@@ -98,13 +98,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0.3
-  ammo: -1
   projectileType: {fileID: 6942168956635508771, guid: 45417f9a9eea53a459be0d7aff50990f, type: 3}
   cooldownTime: 2
   kickback: 5
   bullets: 1
   accuracy: 0
+  useMana: 1
   manaCost: 1
+  maxMana: 50
+  mana: 0
   quality: 0
   randomize: 0
   modCooldownTime: 1

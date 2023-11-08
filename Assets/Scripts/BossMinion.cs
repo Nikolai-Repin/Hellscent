@@ -19,7 +19,7 @@ public class BossMinion : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         switch (curPhase) {
             case (Phase.Live): {

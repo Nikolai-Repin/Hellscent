@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour {
     [SerializeField] private int pierce; //How many entities it should interact with
     [SerializeField] private bool reflectable; //Should it be flectable by melee weapons
     [SerializeField] private bool setDamage;
+    [SerializeField] private bool rotate;
     private LayerMask walls;
 
     public string team;
@@ -34,9 +35,10 @@ public class Bullet : MonoBehaviour {
 
     //Sets bullet velocity based on rotation and how fast it should move
     public virtual void SetProjectileVelocity(Quaternion rotation, float strength) {
-        Vector2 newVelocity = new Vector2();
+        Vector3 newVelocity = new Vector3(0,0,0);
         newVelocity.x = strength * Mathf.Cos(rotation.eulerAngles.z * Mathf.Deg2Rad);
         newVelocity.y = strength * Mathf.Sin(rotation.eulerAngles.z * Mathf.Deg2Rad);
+        if (rotate) {transform.rotation = rotation;}
         GetComponent<Rigidbody2D>().velocity = newVelocity;
     }
 

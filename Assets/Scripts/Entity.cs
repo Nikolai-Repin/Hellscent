@@ -9,18 +9,6 @@ public class Entity : MonoBehaviour
     [SerializeField] protected bool intangible;
     [SerializeField] public float healthAmount;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
         if (intangible) {
@@ -66,7 +54,13 @@ public class Entity : MonoBehaviour
         Destroy(transform.gameObject);
     }
 
+    //Returns 0, mainly exists to be overridden in PlayerController so that weapons don't break
     public virtual float GetDamage() {
+        return 0;
+    }
+
+    //Returns 0, mainly exists to be overridden in PlayerController so that weapons don't break
+    public virtual float GetManaRechargeSpeed() {
         return 0;
     }
     

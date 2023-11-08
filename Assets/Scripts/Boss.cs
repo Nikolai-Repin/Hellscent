@@ -42,6 +42,7 @@ public class Boss : Enemy
         vCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCameraBase>();
         dealDamageOnContact = false;
         invulnerable = true;
+        intangible = true;
 
         animator = GetComponent<Animator>();
         animator.SetInteger("Phase", 0);
@@ -129,6 +130,7 @@ public class Boss : Enemy
     public void Awaken() {
         dealDamageOnContact = true;
         invulnerable = false;
+        intangible = false;
         trackerController.SetAI(TrackerController.AI.Range);
         vCamera.Follow = trackerController.target.transform;
         ReturnToWander();

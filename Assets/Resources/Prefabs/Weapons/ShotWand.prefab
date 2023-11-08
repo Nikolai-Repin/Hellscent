@@ -103,7 +103,10 @@ MonoBehaviour:
   kickback: 2
   bullets: 5
   accuracy: 10
+  useMana: 1
   manaCost: 5
+  maxMana: 50
+  mana: 0
   quality: 0
   randomize: 0
   modCooldownTime: 1
