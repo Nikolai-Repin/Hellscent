@@ -99,11 +99,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666317ef1be0e934ba0fce0e099bbd28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invulnerable: 1
+  intangible: 1
+  healthAmount: 0
   maxLife: 0.2
   damage: 50
   projectileSpeed: 5
   pierce: 1000
   reflectable: 0
+  setDamage: 0
+  rotate: 0
   team: 
   reflect: 1
 --- !u!50 &1413869230194000966

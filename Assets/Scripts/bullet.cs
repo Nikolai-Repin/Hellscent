@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class Bullet : Entity {
     
     [SerializeField] private float maxLife; //How long a bullet should exist for, in seconds, I think.
     [SerializeField] private float damage; // How much damage a bullet should do

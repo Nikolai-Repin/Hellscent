@@ -7,6 +7,7 @@ public class BossBomb : Entity
     private float fuse = 3F;
 
     [SerializeField] public GameObject projectileType;
+    public Boss creator;
     private Animator animator;
     private enum Phase {
         Charging = 1,
@@ -44,6 +45,8 @@ public class BossBomb : Entity
                             bulletScript.team = "Enemy";
                             Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+rotationOffset));
                             bulletScript.LaunchProjectile(fireAngle, 10/k);
+
+                            creator.ClaimEntity(bullet);
                         }
                         rotationOffset += rotationAmount/2;
                     }

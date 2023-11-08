@@ -15,6 +15,7 @@ public class Boss : Enemy
     private CinemachineVirtualCameraBase vCamera;
     private int firedBombs;
     private float lastAttackTime;
+    //private List<Entity> ClaimedEntities;
     public enum Phase
     {
         Death = -1,
@@ -85,11 +86,16 @@ public class Boss : Enemy
                 break;
             }
 
+            //Bomb attack, fills arena with bombs that detonate after a short delay, spawning rings of bullets
             case Phase.Bombs: {
                 if (Time.time > lastAttackTime) {
                     lastAttackTime = lastAttackTime + 0.2F;
                     GameObject bullet = Instantiate(bombPrefab, new Vector3(Random.Range((arenaCenter.x-arenaSize.x)+3, (arenaCenter.x+arenaSize.x)-3), Random.Range((arenaCenter.y-arenaSize.y)+3, (arenaCenter.y+arenaSize.y)-3), 0), new Quaternion());
                     firedBombs++;
+                    
+                    //Supposed to mark attack entites as something to destroy when the boss dies, but I need to have it handle entities that have been destroyed
+                    bullet.GetComponent<BossBomb>().creator = this;
+                    //ClaimEntity(bullet);
                 }
 
                 if (firedBombs >= numBombs) {
@@ -98,6 +104,7 @@ public class Boss : Enemy
                 break;
             }
 
+            //Pre fight, before anything happens, checks if the player is in range to begin fight
             case Phase.Sleep: {
                 GameObject closestPlayer = FindClosestPlayer();
                 if (closestPlayer != null) {
@@ -110,6 +117,7 @@ public class Boss : Enemy
                 break;
             }
 
+            //Intro to fight
             case Phase.Awakening: {
                 if (Time.time > lastAttackTime) {
                     Awaken();
@@ -117,6 +125,7 @@ public class Boss : Enemy
                 break;
             }
 
+            //Death animation, cleans up the boss's attacks
             case Phase.Death: {
                 if (Time.time > lastAttackTime) {
                     vCamera.Follow = trackerController.target.transform;
@@ -127,6 +136,7 @@ public class Boss : Enemy
         }
     }
 
+    //Handling what happens once the fight begins
     public void Awaken() {
         dealDamageOnContact = true;
         invulnerable = false;
@@ -136,7 +146,7 @@ public class Boss : Enemy
         ReturnToWander();
     }
 
-    //Pick Phase
+    //Picks the next phase
     public void PickPhase() {
         int nextPhase = (int) Random.Range(0, 2);
         Debug.Log(nextPhase);
@@ -157,10 +167,10 @@ public class Boss : Enemy
         }
     }
 
+    //Returns to wander, ensuring properties are what they're supposed to be that might have been altered during an attack
     public void ReturnToWander() {
         phaseCooldownRandom = Random.Range(phaseCooldown, phaseCooldown * 1.2F);
         curPhase = Phase.Wander;
-        trackerController.aiPath.maxSpeed = 5;
         trackerController.aiPath.maxSpeed = 5;
         lastPhaseChange = Time.time;
         animator.SetInteger("Phase", 1);
@@ -176,6 +186,7 @@ public class Boss : Enemy
         animator.SetInteger("Phase", 3);
     }
 
+    //Emerges from the sunken state, spawning 3 minions and a ring of projectiles
     private void Rise() {
         dealDamageOnContact = true;
         intangible = false;
@@ -183,8 +194,12 @@ public class Boss : Enemy
         trackerController.SetAI(TrackerController.AI.Range);
         int numMinions = 3;
         float rotationAmount = 6.283F/numMinions;
+        GameObject minion;
         for (int i = 0; i < numMinions; i++) {
-            Instantiate(minionPrefab, transform.position + new Vector3(3*Mathf.Cos(rotationAmount*i), 3*Mathf.Sin(rotationAmount*i), 0), new Quaternion());
+            minion = Instantiate(minionPrefab, transform.position + new Vector3(3*Mathf.Cos(rotationAmount*i), 3*Mathf.Sin(rotationAmount*i), 0), new Quaternion());
+
+            //Supposed to mark attack entites as something to destroy when the boss dies, but I need to have it handle entities that have been destroyed
+            //ClaimEntity(minion);
         }
 
         int projectiles = 8; //How many projectiles in each ring
@@ -195,6 +210,9 @@ public class Boss : Enemy
             bulletScript.team = "Enemy";
             Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)));
             bulletScript.LaunchProjectile(fireAngle, 10);
+
+            //Supposed to mark attack entites as something to destroy when the boss dies, but I need to have it handle entities that have been destroyed
+            //ClaimEntity(bulletScript);
         }
         animator.SetInteger("Phase", 1);
     }
@@ -207,5 +225,18 @@ public class Boss : Enemy
         lastAttackTime = Time.time + 1F;
         vCamera.Follow = transform;
         animator.SetInteger("Phase", -1);
+
+        //Supposed to destroy when the boss dies, but I need to have it handle entities that have been destroyed
+        //foreach (Entity i in ClaimedEntities) {
+            //i.Die();
+        //}
+    }
+
+    public void ClaimEntity(Entity e) {
+        //ClaimedEntities.Add(e);
+    }
+
+    public void ClaimEntity(GameObject e) {
+        //ClaimedEntities.Add(e.GetComponent<Entity>());
     }
 }
