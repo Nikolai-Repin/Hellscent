@@ -98,7 +98,7 @@ public class Weapon : MonoBehaviour
                 Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
                 Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
                 bulletScript.LaunchProjectile(fireAngle);
-                bullet.GetComponent<Rigidbody2D>().velocity += parent.GetComponent<Rigidbody2D>().velocity;
+                bullet.GetComponent<Rigidbody2D>().velocity += parent.GetComponent<Rigidbody2D>().velocity.normalized;
                 bulletScript.SetStartingValues(); 
                 
             }
