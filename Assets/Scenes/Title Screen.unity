@@ -627,7 +627,7 @@ GameObject:
   - component: {fileID: 211579946}
   - component: {fileID: 211579945}
   m_Layer: 5
-  m_Name: Pick Up Item
+  m_Name: Grab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -700,7 +700,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1074568588}
         m_TargetAssemblyTypeName: Keybind, Assembly-CSharp
-        m_MethodName: ChangePickUpKey
+        m_MethodName: ChangeGrabKey
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2184,8 +2184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonAttack: {fileID: 56644331}
-  buttonPickUp: {fileID: 1239971805}
-  buttonItem: {fileID: 1706081805}
+  buttonGrab: {fileID: 1239971805}
+  buttonSwap: {fileID: 1706081805}
 --- !u!4 &1074568589
 Transform:
   m_ObjectHideFlags: 0
@@ -3204,7 +3204,7 @@ GameObject:
   - component: {fileID: 1647069905}
   - component: {fileID: 1647069904}
   m_Layer: 5
-  m_Name: Item Change/Drop
+  m_Name: Swap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3277,7 +3277,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1074568588}
         m_TargetAssemblyTypeName: Keybind, Assembly-CSharp
-        m_MethodName: ChangeItemKey
+        m_MethodName: ChangeSwapKey
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
