@@ -8,6 +8,8 @@ public class UIGameManager : MonoBehaviour
 
     public ItemManager itemManager;
 
+    public Player player;
+
     private void Awake() {
         if(instance != null && instance != this) {
             Destroy(this.gameObject);
@@ -20,5 +22,7 @@ public class UIGameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         itemManager = GetComponent<ItemManager>();
+
+        player = FindObjectOfType<Player>();
     }
 }
