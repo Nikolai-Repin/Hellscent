@@ -14,7 +14,7 @@ public class Journalnavigation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log(pages.Length);
     }
 
     // Update is called once per frame
@@ -22,8 +22,24 @@ public class Journalnavigation : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.J)){
             journalOpen = !journalOpen;
-            
+            OpenBook();
         }
+
+        if(Input.GetKeyDown(KeyCode.RightArrow)){
+            if(page < pages.Length - 1 && isOpen){
+                page++;
+                ChangePage();
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.LeftArrow)){
+            if(page > 0 && isOpen){
+                page--;
+                ChangePage();
+            }
+        }
+    }
+
+    private void OpenBook(){
         if(journalOpen && !isOpen){
             isOpen = !isOpen;
             book = Instantiate(pages[page], new Vector2(0, 0), transform.rotation);
@@ -32,5 +48,12 @@ public class Journalnavigation : MonoBehaviour
             isOpen = !isOpen;
             Destroy(book);
         }
+
     }
+
+    private void ChangePage(){
+        Destroy(book);
+        book = Instantiate(pages[page], new Vector2(0, 0), transform.rotation);
+    }
+
 }
