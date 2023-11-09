@@ -131,13 +131,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 808921467763219813, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3246128399018723868, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: dash
-      value: 150
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: speed
@@ -248,6 +252,7 @@ MonoBehaviour:
   - {fileID: 7673825623514623661, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
   - {fileID: 2166620911071576543, guid: d0c14ef6a61ff43cd880db6eca3ec7fb, type: 3}
   repeats: 0200000004000000
+  player: {fileID: 178615751}
 --- !u!4 &178615751 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8428924622005797696, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}

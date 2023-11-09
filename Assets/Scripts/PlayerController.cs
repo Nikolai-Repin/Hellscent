@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
             saved_direction = direction;
         }
         if (Input.GetKeyDown(KeyCode.Space)) {
-            rb.velocity += saved_direction * dash * Time.deltaTime;
+            rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
