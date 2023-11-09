@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GenerateDungeon : MonoBehaviour
@@ -9,16 +10,22 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField] private GameObject spawnRoom;
 	[SerializeField] private GameObject bossRoom;
 	[SerializeField] private GameObject endCap;
+	[SerializeField] private GameObject closedDoor;
 	[SerializeField] private float roomSpacing;
 	[SerializeField] private int mainBranchLength;
 	[SerializeField] private int offshootBranchCap;
 	[SerializeField] private int waitingFrames;
 	[SerializeField] private int onlyBranchRooms;
+	[SerializeField, Range(0, 100)] private int tryRoomChance;
+	[SerializeField, Range(0, 100)] private int roomChance;
+	[SerializeField, Range(0, 100)] private int hallwayChance;
+	public bool dungeonOver = false;
 
 	private bool go = true;
-	public bool success = true;
+	private bool success = true;
 
     private List<GameObject> dungeon = new();
+	private List<GameObject> closedDoors = new();
 
     private readonly Dictionary<string, string> reverseDirection = new()
 	{
@@ -53,20 +60,19 @@ public class GenerateDungeon : MonoBehaviour
 			foreach (GameObject dr in dungeon) {
 				if (dr.name == bossRoom.name + "(Clone)") {
 					CapDoors();
-					break;
+					yield break;
 				}
 			}
-		} else {
-			foreach (GameObject dr in dungeon) {
-				Destroy(dr);
-			}
-			dungeon = new();
-			GameObject startRoom = CreateRoom(spawnRoom, true);
-			success = true;
-			dungeon.Add(startRoom);
-			StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
-			StartCoroutine(detectEnd());
 		}
+		foreach (GameObject dr in dungeon) {
+			Destroy(dr);
+		}
+		dungeon = new();
+		GameObject startRoom = CreateRoom(spawnRoom, true);
+		success = true;
+		dungeon.Add(startRoom);
+		StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
+		StartCoroutine(detectEnd());
 	}
 
 	IEnumerator CreateDungeon(GameObject origin, int mainBranch, int branchCap) {
@@ -103,13 +109,13 @@ public class GenerateDungeon : MonoBehaviour
 			continueDungeon = true;
 			nextMainBranch--;
         }
-		else if (branchCap > 0 && Random.Range(0, 5) != 0)
+		else if (branchCap > 0 && Random.Range(0, 101) <= roomChance)
         {
 			nextMainBranch = 0;
 			continueDungeon = true;
 			nextBranchCap--;
 		}
-		if (boss || Random.Range(0, 8) != 0)
+		if (boss || Random.Range(0, 101) <= hallwayChance)
         {
 			GameObject nextHallway = CreateRoom(hallways[0], false);
 			door = AlignRooms(nextOrigin.transform, nextHallway.transform, roomSpacing);
@@ -178,7 +184,7 @@ public class GenerateDungeon : MonoBehaviour
 		{
 			yield return StartCoroutine(CreateDungeon(nextRoom, nextMainBranch, nextBranchCap));
 		}
-		if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0 && Random.Range(0, 3) != 0) 
+		if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0 && Random.Range(0, 101) <= tryRoomChance) 
 		{
 			yield return StartCoroutine(CreateDungeon(origin, 0, branchCap));
 		} 
@@ -287,5 +293,27 @@ public class GenerateDungeon : MonoBehaviour
 		for (int i = 0; i < frames; i++) {
 			yield return null;
 		}
+	}
+
+	public void LockRoom(GameObject room) {
+		RoomInfo data = room.GetComponent<RoomInfo>();
+		for (int i = 0; i < data.trueOccupancy.Count; i++) {
+			bool o = data.trueOccupancy[i];
+			if (o) {
+				GameObject cap = Instantiate(closedDoor, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
+				cap.transform.SetParent(transform, false);
+				closedDoors.Add(cap);
+				AlignRooms(room.transform, cap.transform, 0, data.doorDirection[i]);
+			}
+		}
+	}
+
+	public void UnlockRooms() {
+		foreach (GameObject part in closedDoors) {
+			if (part.name == closedDoor.name + "(Clone)") {
+				Destroy(part);
+			}
+		}
+		closedDoors.Clear();
 	}
 }

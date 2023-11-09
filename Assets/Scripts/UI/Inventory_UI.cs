@@ -65,7 +65,7 @@ public class Inventory_UI : MonoBehaviour
 
     // Remove item from inventory
     public void Remove() {
-        Item itemToDrop = GameManager.instance.itemManager.GetItemByName(
+        Item itemToDrop = UIGameManager.instance.itemManager.GetItemByName(
             player.inventory.slots[draggedSlot.slotID].itemName);
 
         if(itemToDrop != null) {

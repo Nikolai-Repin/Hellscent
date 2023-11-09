@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class UIGameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static UIGameManager instance;
 
     public ItemManager itemManager;
 
