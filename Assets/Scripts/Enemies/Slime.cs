@@ -39,10 +39,7 @@ public class Slime : Enemy
             curPhase = Phase.Sleep;
         }
         
-        //Why wont the game call these???
         splitOffHealth = healthAmount/4;
-        Debug.Log(healthAmount);
-        Debug.Log(splitOffHealth);
         
         float scale = 0+((size)*0.5F);
         transform.localScale = new Vector3(scale, scale, 1);

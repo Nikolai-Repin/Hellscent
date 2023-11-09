@@ -39,6 +39,7 @@ public class Weapon : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         cooldownTime *= modCooldownTime;
+        cooldown = Time.time;
 
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
@@ -50,6 +51,7 @@ public class Weapon : MonoBehaviour
                 mana = maxMana;
             } else {
                 useMana = false;
+                manaCost = 0;
             }
             controller = parent.GetComponent<Entity>();
         }
@@ -89,24 +91,21 @@ public class Weapon : MonoBehaviour
 
         for (int i = 0; i < bullets+modBullets; i++)
         {
-            {
-
-                GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
-                Bullet bulletScript = bullet.GetComponent<Bullet>();
-                bulletScript.UpdateCreator(transform.gameObject);
-                bulletScript.team = parent.tag;
-                Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
-                Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
-                bulletScript.LaunchProjectile(fireAngle);
-                bullet.GetComponent<Rigidbody2D>().velocity += parent.GetComponent<Rigidbody2D>().velocity.normalized;
-                bulletScript.SetStartingValues(); 
-                
-            }
+            GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.UpdateCreator(transform.gameObject);
+            bulletScript.team = parent.tag;
+            Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
+            Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
+            bulletScript.LaunchProjectile(fireAngle);
+            bullet.GetComponent<Rigidbody2D>().velocity += parent.GetComponent<Rigidbody2D>().velocity.normalized;
+            bulletScript.SetStartingValues();
         }
 
         lastFireTime = Time.time + manaRechargeDelay;
         mana -= manaCost;
         cooldown = cooldownTime;
+
         return true;
     }
 
@@ -182,8 +181,6 @@ public class Weapon : MonoBehaviour
     public float GetManaPercent() {
         return mana/maxMana;
     }
-
-    
 
     public void AddMaxMana(float a) {
         maxMana += a;

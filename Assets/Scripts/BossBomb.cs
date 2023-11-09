@@ -32,24 +32,7 @@ public class BossBomb : Entity
             //Pre-Detonation
             case Phase.Charging: {
                 if (fuse <= 0) {
-                    int projectiles = 8; //How many projectiles in each ring
-                    float rotationAmount = 360/projectiles;
-                    float rotationOffset = 0;
-
-                    //Outer for loop controls how many rings of projectiles
-                    for (int k = 1; k <= 2; k++) {
-                        //Inner for loop controls how many projectiles in each ring
-                        for (int i = 0; i < projectiles; i++) {
-                            GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
-                            Bullet bulletScript = bullet.GetComponent<Bullet>();
-                            bulletScript.team = "Enemy";
-                            Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+rotationOffset));
-                            bulletScript.LaunchProjectile(fireAngle, 10/k);
-
-                            creator.ClaimEntity(bullet);
-                        }
-                        rotationOffset += rotationAmount/2;
-                    }
+                    FireInRings(projectileType, 8, 360/8, 0);
                     curPhase = Phase.Blasting;
                 }
                 break;

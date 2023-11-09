@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
     [SerializeField] public float healthAmount;
+    private RoomInfo room;
 
     //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
@@ -22,7 +23,22 @@ public class Entity : MonoBehaviour
             }
         }
         return true;
-   }
+    }
+
+    protected void FireInRings(GameObject projectile, int projectileCount, float rotationAmount, float rotationOffset) {
+        //Outer for loop controls how many rings of projectiles
+        for (int k = 1; k <= 2; k++) {
+            //Inner for loop controls how many projectiles in each ring
+            for (int i = 0; i < projectileCount; i++) {
+                GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                bulletScript.team = "Enemy";
+                Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+rotationOffset));
+                bulletScript.LaunchProjectile(fireAngle, 10/k);
+            }
+            rotationOffset += rotationAmount/2;
+        }
+    }
 
     //Finds the closest game object from a array of collider2D and their distance from Vector3 origin
     public GameObject FindClosest (Collider2D[] targets, Vector3 origin) {
@@ -51,6 +67,7 @@ public class Entity : MonoBehaviour
 
     //Destroys the entity
     public virtual void Die () {
+        if (room != null) {room.RemoveEntity(this);}
         Destroy(transform.gameObject);
     }
 
@@ -63,5 +80,7 @@ public class Entity : MonoBehaviour
     public virtual float GetManaRechargeSpeed() {
         return 0;
     }
+
+    public void SetRoom(RoomInfo r) {room = r;}
     
 }

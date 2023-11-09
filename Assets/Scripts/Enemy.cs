@@ -50,6 +50,10 @@ public class Enemy : Entity
         }
     }
 
+    public virtual void TriggerEvent(Collider2D other) {
+        return;
+    }
+
     public override bool TakeDamage(float damage) {
         if (intangible || Time.time < invulnTime) {
             return false;
@@ -63,5 +67,5 @@ public class Enemy : Entity
             }
         }
         return true;
-   }
+    }
 }
