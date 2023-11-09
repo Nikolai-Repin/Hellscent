@@ -14,7 +14,7 @@ public class Item : MonoBehaviour
     [SerializeField] private float bonusSpeed;
     [SerializeField] private float bonusManaRechargeSpeed;
     [SerializeField] private float bonusMaxHP;
-    [SerializeField] private float weight;
+    [SerializeField] private int weight;
 
     void Start() {
         playerCharacter = GameObject.FindWithTag("player");
@@ -53,5 +53,7 @@ public class Item : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    public int GetWeight() {
+        return weight;
+    }
 }

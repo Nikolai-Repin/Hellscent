@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9f1a44a96814ba583364c39cc1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weight: 30
   offset: 0.3
   projectileType: {fileID: 6942168956635508771, guid: 920cfc9e5d8cc7b4195d0e9faf474df4, type: 3}
   cooldownTime: 0.5

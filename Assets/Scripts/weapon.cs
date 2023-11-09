@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private float weight;
+    [SerializeField] private int weight;
 
     [SerializeField] public float offset = 2F;
     [SerializeField] public GameObject projectileType;
@@ -171,4 +171,7 @@ public class Weapon : MonoBehaviour
         return parent.GetComponent<PlayerController>().GetDamage();
     }
 
+    public int GetWeight() {
+        return weight;
+    }
 }

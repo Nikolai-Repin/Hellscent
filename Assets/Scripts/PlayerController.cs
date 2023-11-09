@@ -64,7 +64,6 @@ public class PlayerController : Entity
 
         if (Input.GetKeyDown(KeyCode.Space)) {
              rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
-             uiManager.updateHealth();
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
