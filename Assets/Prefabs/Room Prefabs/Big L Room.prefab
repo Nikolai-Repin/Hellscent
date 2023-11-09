@@ -1566,7 +1566,7 @@ GameObject:
   - component: {fileID: 3451231081613137376}
   - component: {fileID: 2722053297930058796}
   - component: {fileID: 2448653684737486427}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Big L Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

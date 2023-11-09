@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Pathfinding;
 
 public class GenerateDungeon : MonoBehaviour
 {
@@ -60,6 +61,7 @@ public class GenerateDungeon : MonoBehaviour
 			foreach (GameObject dr in dungeon) {
 				if (dr.name == bossRoom.name + "(Clone)") {
 					CapDoors();
+					AstarPath.active.Scan();
 					yield break;
 				}
 			}

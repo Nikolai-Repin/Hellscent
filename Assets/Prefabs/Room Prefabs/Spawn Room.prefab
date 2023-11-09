@@ -851,7 +851,7 @@ GameObject:
   - component: {fileID: 8469849610980649420}
   - component: {fileID: 6575681764723448176}
   - component: {fileID: 9050839397219789447}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Spawn Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

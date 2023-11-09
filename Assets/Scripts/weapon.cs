@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] private float weight;
+
     [SerializeField] public float offset = 2F;
     [SerializeField] public GameObject projectileType;
     [SerializeField] public float cooldownTime = 0.5F;
@@ -11,13 +13,12 @@ public class Weapon : MonoBehaviour
     [SerializeField] public int bullets = 1;
     [SerializeField] public float accuracy = 10.0F;
     [SerializeField] public float manaCost = 1.0F;
-    [SerializeField] private float weight;
-    
+
     
     protected float cooldown;
     protected GameObject parent;
     protected SpriteRenderer sr;
-    protected PlayerController controller;
+    protected Entity controller; //change to PLayer controller if needed
     protected Vector2 target;
 
     //Rand Stats
@@ -29,7 +30,6 @@ public class Weapon : MonoBehaviour
     public float modAccuracy = 1.0F;
     public int modBullets = 0;
     public float modManaCost = 1.0F;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +43,13 @@ public class Weapon : MonoBehaviour
             if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
                 transform.parent.gameObject.GetComponent<PlayerController>().NewWeapon(transform.gameObject);
                 SetTarget(Input.mousePosition);
+                //lastFireTime = Time.time;
+                //mana = maxMana;
             }
+
+            //else {
+            //    useMana = false;
+            //}
             if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
                 SetTarget(transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer().transform.position);
             }
@@ -64,6 +70,7 @@ public class Weapon : MonoBehaviour
             randomize = false;
         }
 
+
         cooldown -= Time.deltaTime;
     }
 
@@ -71,16 +78,19 @@ public class Weapon : MonoBehaviour
     public bool Fire()
     {
         if (cooldown > 0) {return false;}
-        
-        for (int i = 0; i < bullets+modBullets; i++) {
+
+        for (int i = 0; i < bullets+modBullets; i++)
+        {
             GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.UpdateCreator(transform.gameObject);
-            bulletScript.SetStartingValues();
+            bulletScript.team = parent.tag;
 
-            Vector3 inaccuracy = new Vector3(0, 0, Random.Range(accuracy*modAccuracy, accuracy*modAccuracy));
+            Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
             Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
-            bulletScript.LaunchProjectile(fireAngle);                
+            bulletScript.LaunchProjectile(fireAngle);
+        
+            bulletScript.SetStartingValues();
         }
 
         cooldown = cooldownTime;
@@ -89,7 +99,7 @@ public class Weapon : MonoBehaviour
 
     public bool GetControllerAndEquip() {
         if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
-            controller = parent.GetComponent<PlayerController>();
+            controller = parent.GetComponent<Entity>();
             return true;
         }
         return false;

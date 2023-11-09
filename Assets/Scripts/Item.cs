@@ -46,6 +46,7 @@ public class Item : MonoBehaviour
 
             if (bonusMaxHP > 0) {
                 controller.AddMaxHP(bonusMaxHP);
+                controller.RestoreHP(bonusMaxHP);
                 uiManager.updateHealth();
             }
 

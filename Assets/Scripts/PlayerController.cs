@@ -27,18 +27,21 @@ public class PlayerController : Entity
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
 
-    private UIManager uiManager;
+    //private UIManager uiManager;
+
+    private float invulnTime;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
         weaponIndex = 0;
-        damage = 20f;
+        damage = 0f;
         pickupDistance = 5;
         rHoldTime = Time.time;
         lastFireTime = Time.time;
         maxMana = 20;
         mana = maxMana;
+        invulnTime = Time.time - 1;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
     }
@@ -61,10 +64,10 @@ public class PlayerController : Entity
 
         if (Input.GetKeyDown(KeyCode.Space)) {
              rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
+             uiManager.updateHealth();
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
-            Debug.Log("Pickup Attempt");
             Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
             if (results.Length > 0) {
                 PickupWeapon(FindClosest(results, transform.position));
@@ -181,11 +184,13 @@ public class PlayerController : Entity
 
     //Deals damage to entity if vulnerable, returns true if damage was dealt
     public override bool TakeDamage(float damage) {
-        if (vulnerable) {
-            healthAmount -= damage;
+        if (!invulnerable && Time.time >= invulnTime) {
+            healthAmount--;
+            uiManager.updateHealth();
             if (healthAmount <= 0) {
                 Die();
             }
+            invulnTime = Time.time + 1F;
             Debug.Log("Damaged");
             return true;
         }
@@ -202,7 +207,7 @@ public class PlayerController : Entity
         return mana/maxMana;
     }
 
-    public float GetDamage() {
+    public override float GetDamage() {
         return damage;
     }
 

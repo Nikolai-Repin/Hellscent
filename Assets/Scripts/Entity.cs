@@ -5,11 +5,13 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
 
-    [SerializeField] protected bool vulnerable;
+    [SerializeField] protected bool invulnerable;
+    [SerializeField] protected bool intangible;
+
     [SerializeField] protected float maxHealthAmount;
     [SerializeField] protected float healthAmount;
-    
-    private UIManager uiManager;
+
+    protected UIManager uiManager;
 
     // Start is called before the first frame update
     void Start()
@@ -23,18 +25,20 @@ public class Entity : MonoBehaviour
         
     }
 
-    //Deals damage to entity if vulnerable, returns true if damage was dealt
+    //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
-        if (vulnerable) {
+        if (intangible) {
+            return false;
+        }
+
+        if (!invulnerable) {
             healthAmount -= damage;
-            uiManager.updateHealth();
-            Debug.Log("hh");
+
             if (healthAmount <= 0) {
                 Die();
             }
-            return true;
         }
-        return (false);
+        return true;
    }
 
     //Finds the closest game object from a array of collider2D and their distance from Vector3 origin
@@ -71,6 +75,10 @@ public class Entity : MonoBehaviour
         maxHealthAmount += bonusMaxHP;
     }
 
+    public void RestoreHP(float bonusHP) {
+        healthAmount += bonusHP;
+    }
+
     public float GetMaxHealthAmount() {
         return maxHealthAmount;
     }
@@ -78,4 +86,9 @@ public class Entity : MonoBehaviour
     public float GetHealthAmount() {
         return healthAmount;
     }
+
+    public virtual float GetDamage() {
+        return 0;
+    }
+    
 }

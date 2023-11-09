@@ -9,14 +9,22 @@ public class Bullet : MonoBehaviour {
     [SerializeField] private float projectileSpeed; //How fast bullet move
     [SerializeField] private int pierce; //How many entities it should interact with
     [SerializeField] private bool reflectable; //Should it be flectable by melee weapons
+    [SerializeField] private bool setDamage;
+    private LayerMask walls;
 
-    public GameObject creator; //Who created this bullet
-    private Weapon wc;
+    public string team;
+    protected GameObject creator;
+    protected Weapon wc;
     private float lifeTime = 0f; //How long the bullet has existed for
 
     //Defines how the bullet should move when the bullet is first fired
     public virtual void LaunchProjectile(Quaternion rotation) {
         SetProjectileVelocity(rotation, projectileSpeed*wc.modProjectileSpeed);
+    }
+
+    //Defines how the bullet should move when the bullet is first fired using custom speed
+    public virtual void LaunchProjectile(Quaternion rotation, float speed) {
+        SetProjectileVelocity(rotation, speed);
     }
 
     //Sets bullet velocity based on rotation, using bullet speed
@@ -49,17 +57,19 @@ public class Bullet : MonoBehaviour {
     {
         
         //I need to set up teams or something of the like for this, I want bullets to be able to belong to enemies
-        if (other.gameObject.GetComponent<Entity>() != null &&  ((other.gameObject.GetComponent<Enemy>() != null) != (creator.transform.parent.gameObject.GetComponent<Enemy>() != null))) {
-            other.gameObject.GetComponent<Entity>().TakeDamage(damage);
-            pierce--;
+        if (other.gameObject.GetComponent<Entity>() != null &&  other.gameObject.tag != team) {
+            if (other.gameObject.GetComponent<Entity>().TakeDamage(damage)) {
+                pierce--;
+            }
         }
 
-        if (other.gameObject.tag == "Wall") { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
-            pierce--;
+        if (other.gameObject.layer == LayerMask.GetMask("Walls")) { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
+            pierce = 0;
+
         }
 
         if (pierce <= 0) {
-            Destroy(gameObject);
+            Destroy(transform.gameObject);
         }
     }
     
@@ -70,7 +80,11 @@ public class Bullet : MonoBehaviour {
 
     // Sets values like damage and bullet size whenever a bullet spawns
     public void SetStartingValues() {
-        damage = creator.GetComponent<Weapon>().GetDamage();
+        if (setDamage) {
+            damage = creator.GetComponent<Weapon>().GetDamage();
+        } else {
+            damage += creator.GetComponent<Weapon>().GetDamage();
+        }
         //changes the scale based on damage (change the values of the denominators if you wanna change how much the size scales).
         transform.localScale += new Vector3(damage/30, damage/30, 0f);
     }

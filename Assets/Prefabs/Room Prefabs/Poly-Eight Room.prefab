@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4855585715806175721}
   - component: {fileID: 1602508587185646648}
   - component: {fileID: 4508459915466774143}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Poly-Eight Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

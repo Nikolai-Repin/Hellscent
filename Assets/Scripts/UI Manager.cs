@@ -74,6 +74,11 @@ public class UIManager : MonoBehaviour
             index -= 0.5f;
         }
 
+        while (index >= 0) {
+            heartContainerInsides[listIndex].fillAmount = 1;
+            index--;
+        }
+
     }
 
 }

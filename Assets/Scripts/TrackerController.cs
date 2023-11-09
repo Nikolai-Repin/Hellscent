@@ -18,11 +18,11 @@ public class TrackerController : MonoBehaviour
     [SerializeField] AI ai = AI.Melee;
 
     [Space, Header("Pathfinder Settings")]
-    [SerializeField] private float endReachedDistanceMelee;
-    [SerializeField] private float endReachedDistanceRange;
+    [SerializeField] public float endReachedDistanceMelee;
+    [SerializeField] public float endReachedDistanceRange;
 
     [SerializeField] public Transform target;
-    private AIPath aiPath;
+    public AIPath aiPath;
 
     private void Start()
     {
@@ -38,6 +38,7 @@ public class TrackerController : MonoBehaviour
         {
             aiPath.endReachedDistance = endReachedDistanceRange;
         }
+        
     }
 
     private void Update()
@@ -46,7 +47,7 @@ public class TrackerController : MonoBehaviour
         {
             transform.position = target.transform.position;
         }
-        else if (ai == AI.Range) 
+        else if (ai == AI.Range && target != null) 
         {
             transform.position = target.transform.position;
             var dir = transform.parent.transform.position - transform.position;
@@ -81,4 +82,18 @@ public class TrackerController : MonoBehaviour
     public void SetTarget(Transform newTarget) {
         target = newTarget;
     }
+
+    public void SetAI(AI newAI) {
+        ai = newAI;
+        if (ai == AI.Melee)
+        {
+            aiPath.endReachedDistance = endReachedDistanceMelee;
+        }
+        else if (ai == AI.Range)
+        {
+            aiPath.endReachedDistance = endReachedDistanceRange;
+        }
+    }
+
+    public LayerMask GetWalls() {return walls;}
 }

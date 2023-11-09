@@ -910,7 +910,7 @@ GameObject:
   - component: {fileID: 3248416161270277016}
   - component: {fileID: 8792943519864484625}
   - component: {fileID: 6885474219059305944}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Bonus Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
