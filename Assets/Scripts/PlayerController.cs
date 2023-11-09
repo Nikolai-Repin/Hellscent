@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool hasWeapon = false;
     private GameObject equippedWeapon;
     public List<GameObject> heldWeapons;
-
+    public Animator anim;
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
 
@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
         rHoldTime = Time.time;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
+        anim = gameObject.GetComponent < Animator > ();
     }
 
     // Update is called once per frame
@@ -59,6 +60,13 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
+
+        if (Input.GetKeyDown(KeyCode.D)){
+            anim.Play("playerWalkRight");
+        }
+        if(Input.GetKeyDown(KeyCode.A)){
+            anim.Play("playerWalkLeft");
+        }
 
         if (hasWeapon) {
             if (Input.GetKeyDown(KeyCode.R)) {
