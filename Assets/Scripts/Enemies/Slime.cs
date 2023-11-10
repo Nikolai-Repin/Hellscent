@@ -29,6 +29,7 @@ public class Slime : Enemy
         if (size <= 0) {
             Destroy(transform.gameObject);
         }
+        Debug.Log("hewwo");
         dealDamageOnContact = true;
         intangible = false;
         trackerController.aiPath.maxSpeed = 5;
@@ -97,9 +98,9 @@ public class Slime : Enemy
             }
 
             case (Phase.Death): {
-                if (Time.time > lastAttackTime) {
+                if (Time.time > lastAttackTime && size > 1) {
                     GameObject splitOff;
-                    Vector2 splitOffOffset = new Vector2(size*10, 0);
+                    Vector2 splitOffOffset = new Vector2(size, 0);
 
                     splitOff = Instantiate(clone, transform.position, new Quaternion());
                     var splitOffSlime = splitOff.GetComponent<Slime>();
@@ -107,9 +108,8 @@ public class Slime : Enemy
                     splitOffSlime.size--;
                     splitOffSlime.trackerController.aiPath.maxSpeed = 5;
                     splitOffSlime.invulnTime = Time.time + 0.5F;
-                    splitOff.GetComponent<AIPath>().enabled = false;
-                    splitOff.GetComponent<Rigidbody2D>().velocity += splitOffOffset*-1;
-
+                    splitOff.GetComponent<AIBase>().velocity2D += splitOffOffset*-1;
+                    
                     splitOff = Instantiate(clone, transform.position, new Quaternion());
                     splitOffSlime = splitOff.GetComponent<Slime>();
                     splitOffSlime.healthAmount = splitOffHealth;
@@ -117,9 +117,9 @@ public class Slime : Enemy
                     splitOffSlime.trackerController.aiPath.maxSpeed = 5;
                     splitOffSlime.invulnTime = Time.time + 0.5F;
                     splitOffSlime.curPhase = Phase.Splitting;
-                    splitOff.GetComponent<AIPath>().enabled = false;
-                    splitOff.GetComponent<Rigidbody2D>().velocity += splitOffOffset;
-                    Destroy(transform.gameObject);
+                    splitOff.GetComponent<AIBase>().velocity2D += splitOffOffset;
+
+                    base.Die();
                 }
                 break;
             }

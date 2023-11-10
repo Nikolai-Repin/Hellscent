@@ -173,6 +173,7 @@ MonoBehaviour:
   canSearchCompability: 0
   orientation: 1
   enableRotation: 0
+  velocity2D: {x: 0, y: 0}
   autoRepath:
     mode: 2
     interval: 0.5
@@ -187,7 +188,7 @@ MonoBehaviour:
   endReachedDistance: 0.2
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
-  whenCloseToDestination: 0
+  whenCloseToDestination: 1
   constrainInsideGraph: 0
 --- !u!114 &7064328595301721011
 MonoBehaviour:
@@ -255,9 +256,13 @@ MonoBehaviour:
   healthAmount: 10
   dealDamageOnContact: 1
   visRange: 20
+  iFrames: 0
+  invulnTime: 0
   trackerController: {fileID: 0}
   size: 2
   clone: {fileID: 2512800558875698722}
+  randAttackDelay: 0
+  curPhase: 0
 --- !u!1 &4166982996486227311
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2958452685862544046}
   - component: {fileID: 8061661682655729589}
-  - component: {fileID: 2524566302555107120}
+  - component: {fileID: 2188673473741204750}
   m_Layer: 0
   m_Name: ContactDamageCollider
   m_TagString: Untagged
@@ -382,7 +387,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &2524566302555107120
+--- !u!114 &2188673473741204750
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -391,6 +396,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7287778400643104608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8b4c3124c193844abae94f97f14b59d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f967d7e50f86c44b8a0a15fc9ac0338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionType: 1
+  PushOtherEntities: 1

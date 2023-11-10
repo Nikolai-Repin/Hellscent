@@ -51,15 +51,15 @@ public class Bullet : Entity {
         //This being called every frame could be laggy, it's likely that there's a better way to do this
         //Kill bullet if it's too old
         if (lifeTime >= maxLife) {
-            Destroy(gameObject);
+            Die();
         }
     }
 
-    protected void OnTriggerEnter2D(Collider2D other) 
+    protected void OnTriggerStay2D(Collider2D other) 
     {
         
         //I need to set up teams or something of the like for this, I want bullets to be able to belong to enemies
-        if (other.gameObject.GetComponent<Entity>() != null &&  other.gameObject.tag != team) {
+        if (other.gameObject.GetComponent<Entity>() != null && other.gameObject.GetComponent<Bullet>() == null &&  other.gameObject.tag != team) {
             if (other.gameObject.GetComponent<Entity>().TakeDamage(damage)) {
                 pierce--;
             }
@@ -71,7 +71,7 @@ public class Bullet : Entity {
         }
 
         if (pierce <= 0) {
-            Destroy(transform.gameObject);
+            Die();
         }
     }
     
@@ -91,6 +91,23 @@ public class Bullet : Entity {
         transform.localScale += new Vector3(damage/30, damage/30, 0f);
     }
 
+    public void SetStartingValues(float scale, float maxLife, float damage, float projectileSpeed, int pierce, bool reflectable, bool setDamage, bool rotate) {
+        this.transform.localScale = Vector3.one*scale;
+        this.maxLife = maxLife;
+        this.damage = (setDamage) ? damage : this.damage + damage;
+        this.projectileSpeed = projectileSpeed;
+        this.pierce = pierce;
+        this.reflectable = reflectable;
+        this.setDamage = setDamage;
+        this.rotate = rotate;
+        this.lifeTime = 0f;
+    }
+
+    public void AddDamage(float damage, bool updateScale) {
+        damage += creator.GetComponent<Weapon>().GetDamage();
+        if (updateScale) {transform.localScale += new Vector3(damage/30, damage/30, 0f);}
+    }
+
     public float getProjectileSpeed() {
         return projectileSpeed;
     }
@@ -99,4 +116,7 @@ public class Bullet : Entity {
         return reflectable;
     }
 
+    public override void Die() {
+        Destroy(gameObject);
+    }
 }

@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class BlastSack : Enemy
 {
+    [SerializeField] private float fuse;
     [SerializeField] public GameObject projectileType;
+    [SerializeField] private int projectileCount;
+    [SerializeField] private float rotationOffset;
+    [SerializeField] private int rings;
     private enum Phase {
         Wander = 1,
         Detonation = 2
@@ -29,16 +33,16 @@ public class BlastSack : Enemy
             }
 
             case (Phase.Detonation): {
-                FireInRings(projectileType, 8, 360/8, 0);
+                FireInRings(projectileType, projectileCount, 360/projectileCount, rotationOffset, rings);
                 Die();
                 break;
             }
         }
     }
 
-    public virtual void TriggerEvent(Collider2D other) {
-        if (other.gameObject.tag == "player") {
-            DetonationTime = Time.time + 0.5F;
+    public override void TriggerEvent(Collider2D other) {
+        if (other.gameObject.tag == "player" &&  curPhase == Phase.Wander) {
+            DetonationTime = Time.time + fuse;
             curPhase = Phase.Detonation;
         }
     }

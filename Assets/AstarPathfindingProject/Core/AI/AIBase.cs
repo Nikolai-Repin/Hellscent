@@ -190,7 +190,7 @@ namespace Pathfinding {
 		/// Current desired velocity of the agent (does not include local avoidance and physics).
 		/// Lies in the movement plane.
 		/// </summary>
-		protected Vector2 velocity2D;
+		public Vector2 velocity2D;
 
 		/// <summary>
 		/// Velocity due to gravity.

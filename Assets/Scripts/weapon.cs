@@ -99,7 +99,7 @@ public class Weapon : MonoBehaviour
             Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
             bulletScript.LaunchProjectile(fireAngle);
             bullet.GetComponent<Rigidbody2D>().velocity += parent.GetComponent<Rigidbody2D>().velocity.normalized;
-            bulletScript.SetStartingValues();
+            bulletScript.AddDamage(GetDamage(), false);
         }
 
         lastFireTime = Time.time + manaRechargeDelay;
@@ -174,7 +174,7 @@ public class Weapon : MonoBehaviour
     public float GetOffset() {return offset;}
     public float GetCoolDown() {return cooldown;}
     public float GetManaCost() {return manaCost*modManaCost;}
-    public float GetDamage() {return controller.GetDamage();}
+    public float GetDamage() {return controller.GetDamage()*modDamage;}
     public GameObject GetParent() {return parent;}
 
     //Returns percentage of current mana out of maxMana

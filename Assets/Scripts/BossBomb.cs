@@ -32,7 +32,7 @@ public class BossBomb : Entity
             //Pre-Detonation
             case Phase.Charging: {
                 if (fuse <= 0) {
-                    FireInRings(projectileType, 8, 360/8, 0);
+                    FireInRings(projectileType, 8, 360/8, 0, 2);
                     curPhase = Phase.Blasting;
                 }
                 break;

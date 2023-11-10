@@ -25,11 +25,15 @@ public class Entity : MonoBehaviour
         return true;
     }
 
-    protected void FireInRings(GameObject projectile, int projectileCount, float rotationAmount, float rotationOffset) {
+    protected void FireInRings(GameObject projectile, int projectileCount, float rotationAmount, float rotationOffset, int rings) {
+        float breakOutTime = Time.time + 3;
         //Outer for loop controls how many rings of projectiles
-        for (int k = 1; k <= 2; k++) {
+        for (int k = 1; k <= rings; k++) {
             //Inner for loop controls how many projectiles in each ring
             for (int i = 0; i < projectileCount; i++) {
+                if(Time.time >= breakOutTime) {
+                    break;
+                }
                 GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
                 bulletScript.team = "Enemy";
@@ -37,6 +41,28 @@ public class Entity : MonoBehaviour
                 bulletScript.LaunchProjectile(fireAngle, 10/k);
             }
             rotationOffset += rotationAmount/2;
+        }
+    }
+
+    protected void CircleShot(GameObject projectile, int projectileCount, float rotationOffset, float projectileSpeed) {
+        float rotationAmount = 360/projectileCount;
+        for (int i = 0; i < projectileCount; i++) {
+            GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.team = gameObject.tag;
+            Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+rotationOffset));
+            bulletScript.LaunchProjectile(fireAngle, projectileSpeed);
+        }
+    }
+
+    protected void ArcShot(GameObject projectile, int projectileCount, float startAngle, float endAngle) {
+        float rotationAmount = startAngle-endAngle/projectileCount;
+        for (int i = 0; i < projectileCount; i++) {
+            GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.team = "Enemy";
+            Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+startAngle));
+            bulletScript.LaunchProjectile(fireAngle);
         }
     }
 

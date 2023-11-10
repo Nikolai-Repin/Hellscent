@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 6335419255056588729}
   - component: {fileID: 4284342281499221466}
   - component: {fileID: 2757635154033404495}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10713,25 +10713,29 @@ PrefabInstance:
       value: Spawner 2
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
+      propertyPath: point
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: radius
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyCount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[0]
       value: 
-      objectReference: {fileID: 2512800558875698722, guid: 4a2412241139af9479c6e835cdf54e82, type: 3}
+      objectReference: {fileID: 6135393954725748111, guid: bc36d40b200fbfd4bbcb38ae205ec6f8, type: 3}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[1]
       value: 
-      objectReference: {fileID: 6135393954725748111, guid: bc36d40b200fbfd4bbcb38ae205ec6f8, type: 3}
+      objectReference: {fileID: 6270626000634876782, guid: 816a8a38e11b5c0409e53d7518ce2a19, type: 3}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[2]
       value: 
