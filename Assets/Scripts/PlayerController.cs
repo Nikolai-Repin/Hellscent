@@ -20,6 +20,7 @@ public class PlayerController : Entity
     public List<GameObject> heldWeapons;
     [SerializeField] private float damage;
 
+    public Animator anim;
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
 
@@ -34,6 +35,7 @@ public class PlayerController : Entity
         invulnTime = Time.time - 1;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
+        anim = gameObject.GetComponent < Animator > ();
     }
 
     void Update()
@@ -46,7 +48,6 @@ public class PlayerController : Entity
 
         direction = new Vector2(controlx, controly);
         keypressed = controlx != 0 || controly != 0;
-        
         direction = direction.normalized;
         if (keypressed) {
             saved_direction = direction;
@@ -57,7 +58,7 @@ public class PlayerController : Entity
 
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Grab"))) {
             Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
             if (results.Length > 0) {
                 PickupWeapon(FindClosest(results, transform.position));
@@ -66,15 +67,18 @@ public class PlayerController : Entity
 
         rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
 
-        //Weapon handling
-        if (hasWeapon) {
+        if (Input.GetKeyDown(KeyCode.D)){
+            anim.Play("playerWalkRight");
+        }
+        if(Input.GetKeyDown(KeyCode.A)){
+            anim.Play("playerWalkLeft");
+        }
 
-            if (Input.GetKeyDown(KeyCode.R)) {
+        if (hasWeapon) {
+            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                 rHoldTime = Time.time;
             }
-
-            if (Input.GetKeyUp(KeyCode.R)) {
-                //Change weapon if r was held for half a second
+            if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                 if ((Time.time - rHoldTime)<0.5) {
                     ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
                 //Drop held weapon if r was held for longer
@@ -85,9 +89,7 @@ public class PlayerController : Entity
                 }
             }
             
-            if (Input.GetMouseButton(0)) {
-
-                //Firing, Fire() returns true if it fired successfully
+            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Attack"))) {
                 if(equippedWeapon.GetComponent<Weapon>().Fire()) {
 
                     //Kickback from successful shot

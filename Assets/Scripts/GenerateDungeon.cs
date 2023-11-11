@@ -20,6 +20,7 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField, Range(0, 100)] private int tryRoomChance;
 	[SerializeField, Range(0, 100)] private int roomChance;
 	[SerializeField, Range(0, 100)] private int hallwayChance;
+	public bool dungeonOver = false;
 
 	private bool go = true;
 	private bool success = true;

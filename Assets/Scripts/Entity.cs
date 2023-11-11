@@ -109,4 +109,11 @@ public class Entity : MonoBehaviour
 
     public void SetRoom(RoomInfo r) {room = r;}
     
+
+    public float GetHealth(){
+        return healthAmount;
+    }
+    public void SubHealth(float n){
+        healthAmount -= n;
+    }
 }

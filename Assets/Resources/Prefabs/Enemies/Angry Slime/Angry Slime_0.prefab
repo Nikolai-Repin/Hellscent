@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 6961810402102194068}
   - component: {fileID: 1570527118944207837}
   - component: {fileID: 8130049668612832152}
-  - component: {fileID: 1709642406206839804}
-  - component: {fileID: -1645523303707252002}
+  - component: {fileID: 2546447388860754969}
+  - component: {fileID: 7740483742753584622}
+  - component: {fileID: 1271084484400385619}
+  - component: {fileID: 860765103088909922}
   m_Layer: 0
   m_Name: Angry Slime_0
   m_TagString: Untagged
@@ -108,7 +110,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1709642406206839804
+--- !u!114 &2546447388860754969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +119,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 5037072847363122877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f17cb27a23e97a4eaff2b5f55383a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vulnerable: 0
+  healthAmount: 0
+  anim: {fileID: 0}
+  player: {fileID: 0}
+--- !u!114 &7740483742753584622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037072847363122877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e396f9d29a70d494eb5a003423798229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
@@ -136,7 +154,7 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &-1645523303707252002
+--- !u!114 &1271084484400385619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,32 +163,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 5037072847363122877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
+  m_Script: {fileID: 11500000, guid: afbe9a1c91d9ed74081d4ac67784e185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 1
-  gravity: {x: NaN, y: NaN, z: NaN}
+  maxSpeed: 0.25
+  gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
   centerOffsetCompatibility: NaN
   repathRateCompatibility: NaN
   canSearchCompability: 0
-  orientation: 0
-  enableRotation: 1
+  orientation: 1
+  enableRotation: 0
   autoRepath:
     mode: 2
-    interval: 0.5
+    interval: NaN
     sensitivity: 10
     maximumInterval: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
-  rotationSpeed: 360
+  rotationSpeed: 32400
   slowdownDistance: 0.6
   pickNextWaypointDist: 2
   endReachedDistance: 0.2
@@ -178,3 +196,17 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
+--- !u!114 &860765103088909922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037072847363122877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ce8439bad44664ea695b413a9fdeb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  target: {fileID: 0}
