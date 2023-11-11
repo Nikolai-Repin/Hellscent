@@ -89,7 +89,7 @@ public class PlayerController : Entity
                 }
             }
             
-            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Attack"))) {
+            if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) {
                 if(equippedWeapon.GetComponent<Weapon>().Fire()) {
 
                     //Kickback from successful shot

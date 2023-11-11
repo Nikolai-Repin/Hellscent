@@ -53,26 +53,27 @@ public class Slime : Enemy
             case Phase.Wander: {
                 if (Time.time >= lastAttackTime && ((trackerController.target.transform.position - transform.position).sqrMagnitude) <= 500) {
                     curPhase = Phase.ChargeReady; 
-                    lastAttackTime = Time.time + 0.5F;
+                    lastAttackTime = Time.time + 0.2F;
                 }
                 break;
             }
 
             case Phase.ChargeReady: {
                 trackerController.aiPath.maxSpeed = 0;
-                if (Time.time >= lastAttackTime) {
-                    lastAttackTime = Time.time + 0.1F;
-                    trackerController.aiPath.maxSpeed = 500;
-                    trackerController.aiPath.maxAcceleration = 500;
-                    curPhase = Phase.ChargeDash;
-                }
-                break;
-            }
-
-            case Phase.ChargeDash: {
+                trackerController.aiPath.maxAcceleration = 0;
                 if (Time.time >= lastAttackTime) {
                     lastAttackTime = Time.time + 0.3F;
+                    trackerController.aiPath.maxSpeed = 50;
                     trackerController.aiPath.maxAcceleration = 5;
+                    
+
+                    float forceMulti = 50f;
+
+                    Vector2 pushVector = ((trackerController.target.transform.position - transform.position).normalized * forceMulti);
+                    Debug.Log(pushVector/forceMulti);
+                    Debug.Log(trackerController.target.transform.position - transform.position);
+                    GetComponent<AIBase>().velocity2D += pushVector;
+
                     curPhase = Phase.ChargeEnd;
                 }
                 break;
@@ -81,6 +82,7 @@ public class Slime : Enemy
             case Phase.ChargeEnd: {
                 if (Time.time >= lastAttackTime) {
                     lastAttackTime = Time.time + 2;
+                    trackerController.aiPath.maxAcceleration = 5;
                     trackerController.aiPath.maxSpeed = 5;
                     curPhase = Phase.Wander;
                 }

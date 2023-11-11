@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 808921467763219813}
   - component: {fileID: 7502559576790646689}
   - component: {fileID: 5637199147852186135}
+  - component: {fileID: -8807529963949983758}
   m_Layer: 0
   m_Name: Player
   m_TagString: player
@@ -177,7 +178,29 @@ MonoBehaviour:
   speed: 200
   dash: 0
   damper: 0.8
-  maxMana: 50
-  mana: 0
+  manaRechargeSpeed: 5
+  equippedWeapon: {fileID: 0}
   heldWeapons: []
   damage: 0
+  anim: {fileID: 0}
+--- !u!95 &-8807529963949983758
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3246128399018723868}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
