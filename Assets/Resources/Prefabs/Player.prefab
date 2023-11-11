@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 808921467763219813}
   - component: {fileID: 7502559576790646689}
   - component: {fileID: 5637199147852186135}
-  - component: {fileID: -8343974595577565226}
   m_Layer: 0
   m_Name: Player
   m_TagString: player
@@ -77,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -975953101, guid: 4b3cb5d4b73629c4398c943514472e37, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -151,7 +150,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.24, y: 10.24}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -177,34 +176,8 @@ MonoBehaviour:
   healthAmount: 0
   speed: 200
   dash: 0
-<<<<<<<< HEAD:Assets/Resources/Prefabs/Player.prefab
   damper: 0.8
   maxMana: 50
   mana: 0
   heldWeapons: []
   damage: 0
-========
-  damper: 0.006
-  heldWeapons: []
---- !u!95 &-8343974595577565226
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3246128399018723868}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
->>>>>>>> main:Assets/Prefabs/Main Player/Player.prefab
