@@ -46,37 +46,35 @@ public class UIManager : MonoBehaviour
 
     // Updates the amount of health you have displayed
     public void updateHealth() {
-        for (int i = heartContainerOutlines.Count; i < controller.GetMaxHealthAmount(); i++) {
-            heartContainerOutlines.Add(heartContainer);
-            heartContainerOutlines[heartContainerOutlines.Count - 1] = Instantiate(heartContainerOutlines[heartContainerOutlines.Count - 1], new Vector3((-850f + (heartContainerOutlines.Count - 1)*150), 450f, 0f), Quaternion.identity);
-            heartContainerOutlines[heartContainerOutlines.Count - 1].name = "Heart Container " + (heartContainerOutlines.Count);
-            heartContainerOutlines[heartContainerOutlines.Count - 1].transform.SetParent(gameObject.transform.GetChild(0), false);
-            heartContainerOutlines[heartContainerOutlines.Count - 1].gameObject.SetActive(true);
+        if (heartContainerOutlines.Count < controller.GetMaxHealthAmount()) {
+            for (int i = heartContainerOutlines.Count; i < controller.GetMaxHealthAmount(); i++) {
+                heartContainerOutlines.Add(heartContainer);
+                heartContainerOutlines[heartContainerOutlines.Count - 1] = Instantiate(heartContainerOutlines[heartContainerOutlines.Count - 1], new Vector3((-850f + (heartContainerOutlines.Count - 1)*150), 450f, 0f), Quaternion.identity);
+                heartContainerOutlines[heartContainerOutlines.Count - 1].name = "Heart Container " + (heartContainerOutlines.Count);
+                heartContainerOutlines[heartContainerOutlines.Count - 1].transform.SetParent(gameObject.transform.GetChild(0), false);
+                heartContainerOutlines[heartContainerOutlines.Count - 1].gameObject.SetActive(true);
 
-            // Getting the child of the heart container outlines (the heart "insides") and putting them in a list.
-            heartContainerInsides.Add(heartContainerOutlines[i].transform.GetChild(0).GetComponent<Image>());
+                // Getting the child of the heart container outlines (the heart "insides") and putting them in a list.
+                heartContainerInsides.Add(heartContainerOutlines[i].transform.GetChild(0).GetComponent<Image>());
 
-            heartContainerInsides[heartContainerOutlines.Count - 1].name = "Heart Container Insides " + (heartContainerOutlines.Count);
+                heartContainerInsides[heartContainerOutlines.Count - 1].name = "Heart Container Insides " + (heartContainerOutlines.Count);
+            }
         }
 
         // janky code that "fills" every heart container to the appropriate amount.
-        float index = heartContainerOutlines.Count - 1;
-        int listIndex = heartContainerOutlines.Count - 1;
-        while (index >= controller.GetHealthAmount()) {
-            if (index % 1 == 0.5) {
-                heartContainerInsides[listIndex].fillAmount = 0.5f;
-            } 
-            
-            else {
-                heartContainerInsides[listIndex].fillAmount = 0;
-                listIndex--;
-            }
-            index -= 0.5f;
+        for (int i = heartContainerOutlines.Count - 1; i >= controller.GetHealthAmount(); i--) {
+            heartContainerInsides[i].fillAmount = 0;
         }
 
-        while (index >= 0) {
-            heartContainerInsides[listIndex].fillAmount = 1;
-            index--;
+        int index;
+        for (index = 0; index <= controller.GetHealthAmount() - 1; index++) {
+            heartContainerInsides[index].fillAmount = 1;
+            //Debug.Log(index);
+        }
+        Debug.Log("jjj: " + index);
+        if (index < controller.GetHealthAmount()) {
+            Debug.Log("test");
+            heartContainerInsides[index].fillAmount = 0.5f;
         }
 
     }
