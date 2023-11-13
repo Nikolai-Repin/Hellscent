@@ -23,7 +23,7 @@ public class FlareSentry : Enemy
         nextFireTime = Time.time;
     }
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Time.time > nextFireTime) {
             if (firedShots < burstLength) {
@@ -45,7 +45,7 @@ public class FlareSentry : Enemy
     public override void Die() {
         dealDamageOnContact = false;
         intangible = true;
-        trackerController.aiPath.maxSpeed = 0;
         CircleShot(projectileType, projectileCount*4, 0, projectileSpeed);
+        base.Die();
     }
 }

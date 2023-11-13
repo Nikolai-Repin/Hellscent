@@ -8,7 +8,12 @@ public class Entity : MonoBehaviour
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
     [SerializeField] public float healthAmount;
+    public static List<Entity> entityList;
     private RoomInfo room;
+
+    void Start() {
+        entityList.Add(this);
+    }
 
     //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
@@ -115,5 +120,13 @@ public class Entity : MonoBehaviour
     }
     public void SubHealth(float n){
         healthAmount -= n;
+    }
+
+    public virtual void Reset() {Die();}
+
+    public static void ResetAll() {
+        foreach (Entity e in entityList) {
+            e.Reset();
+        }
     }
 }

@@ -29,7 +29,6 @@ public class Slime : Enemy
         if (size <= 0) {
             Destroy(transform.gameObject);
         }
-        Debug.Log("hewwo");
         dealDamageOnContact = true;
         intangible = false;
         trackerController.aiPath.maxSpeed = 5;
@@ -101,25 +100,10 @@ public class Slime : Enemy
 
             case (Phase.Death): {
                 if (Time.time > lastAttackTime && size > 1) {
-                    GameObject splitOff;
-                    Vector2 splitOffOffset = new Vector2(size, 0);
 
-                    splitOff = Instantiate(clone, transform.position, new Quaternion());
-                    var splitOffSlime = splitOff.GetComponent<Slime>();
-                    splitOffSlime.healthAmount = splitOffHealth;
-                    splitOffSlime.size--;
-                    splitOffSlime.trackerController.aiPath.maxSpeed = 5;
-                    splitOffSlime.invulnTime = Time.time + 0.5F;
-                    splitOff.GetComponent<AIBase>().velocity2D += splitOffOffset*-1;
-                    
-                    splitOff = Instantiate(clone, transform.position, new Quaternion());
-                    splitOffSlime = splitOff.GetComponent<Slime>();
-                    splitOffSlime.healthAmount = splitOffHealth;
-                    splitOffSlime.size--;
-                    splitOffSlime.trackerController.aiPath.maxSpeed = 5;
-                    splitOffSlime.invulnTime = Time.time + 0.5F;
-                    splitOffSlime.curPhase = Phase.Splitting;
-                    splitOff.GetComponent<AIBase>().velocity2D += splitOffOffset;
+                    Vector2 splitOffOffset = new Vector2(size, 0);
+                    SpawnChild(splitOffOffset*-1);
+                    SpawnChild(splitOffOffset);
 
                     base.Die();
                 }
@@ -151,5 +135,17 @@ public class Slime : Enemy
                 other.GetComponent<PlayerController>().TakeDamage(1);
             }
         }
+    }
+
+    private void SpawnChild(Vector2 splitVelocity) {
+        GameObject splitOff = Instantiate(clone, transform.position, new Quaternion());
+        Slime splitOffSlime = splitOff.GetComponent<Slime>();
+        splitOffSlime.healthAmount = splitOffHealth;
+        splitOffSlime.size--;
+        splitOffSlime.trackerController.aiPath.maxSpeed = 5;
+        splitOffSlime.invulnTime = Time.time + 0.5F;
+        splitOffSlime.curPhase = Phase.Splitting;
+        splitOffSlime.intangible = false;
+        splitOff.GetComponent<AIBase>().velocity2D += splitVelocity;
     }
 }

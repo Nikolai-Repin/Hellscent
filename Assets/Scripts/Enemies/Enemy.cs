@@ -13,7 +13,7 @@ public class Enemy : Entity
     public TrackerController trackerController;
 
     // Update is called once per frame
-    protected void Update()
+    protected virtual void Update()
     {
         GameObject closestPlayer = FindClosestPlayer();
         if (closestPlayer != null) {
