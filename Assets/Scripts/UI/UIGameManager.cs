@@ -7,6 +7,7 @@ public class UIGameManager : MonoBehaviour
     public static UIGameManager instance;
 
     public ItemManager itemManager;
+    public UI_Manager uiManager;
 
     public Player player;
 
@@ -22,6 +23,7 @@ public class UIGameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         itemManager = GetComponent<ItemManager>();
+        uiManager = GetComponent<UI_Manager>();
 
         player = FindObjectOfType<Player>();
     }

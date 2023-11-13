@@ -864,6 +864,7 @@ GameObject:
   - component: {fileID: 155191539}
   - component: {fileID: 155191538}
   - component: {fileID: 155191540}
+  - component: {fileID: 155191541}
   m_Layer: 0
   m_Name: UI Game Manager
   m_TagString: Untagged
@@ -884,6 +885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemManager: {fileID: 0}
+  uiManager: {fileID: 0}
   player: {fileID: 0}
 --- !u!4 &155191539
 Transform:
@@ -915,6 +917,22 @@ MonoBehaviour:
   items:
   - {fileID: 3146726680561592923, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
   - {fileID: 3465672066862675836, guid: b5756abdc8969ed439f5f01182c82135, type: 3}
+--- !u!114 &155191541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155191537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f040903b3382fd4ca7b65c7769acd49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 55406485}
+  inventoryUIs:
+  - {fileID: 1556292366}
+  - {fileID: 1573215075}
 --- !u!1001 &162666757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7096,7 +7114,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1556292366}
         m_TargetAssemblyTypeName: Inventory_UI, Assembly-CSharp
-        m_MethodName: ToggleInventory
+        m_MethodName: ToggleInventoryUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7707,7 +7725,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3f19ec07948a6458c788fb9a5a2a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPanel: {fileID: 55406485}
   inventoryName: Backpack
   slots:
   - {fileID: 1466234064}
@@ -8061,7 +8078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3f19ec07948a6458c788fb9a5a2a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPanel: {fileID: 0}
   inventoryName: Toolbar
   slots:
   - {fileID: 236347568}
