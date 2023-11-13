@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9f1a44a96814ba583364c39cc1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weight: 90
   offset: 0.3
   projectileType: {fileID: 6942168956635508771, guid: deb5f71d6141a4c43a11e4fbb2295da7, type: 3}
   cooldownTime: 0.1
@@ -104,7 +105,6 @@ MonoBehaviour:
   bullets: 1
   accuracy: 3
   manaCost: 1
-  weight: 100
   quality: 0
   randomize: 0
   modCooldownTime: 1
@@ -113,4 +113,3 @@ MonoBehaviour:
   modAccuracy: 1
   modBullets: 0
   modManaCost: 1
-  bullets: 1

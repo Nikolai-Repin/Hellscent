@@ -144,5 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bonusDamage: 0
-  bonusAmmo: 0
+  bonusMaxMana: 0
   bonusSpeed: 20
+  bonusManaRechargeSpeed: 0
+  bonusMaxHP: 0
+  weight: 60

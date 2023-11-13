@@ -148,3 +148,4 @@ MonoBehaviour:
   bonusSpeed: 0
   bonusManaRechargeSpeed: 0
   bonusMaxHP: 1
+  weight: 40
