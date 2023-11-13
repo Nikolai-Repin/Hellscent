@@ -145,4 +145,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPool: []
   itemPool: []
+  droppedItem: {fileID: 3501811076503607432, guid: 45b87eb4f484d9c409b8a977f24a6b9c, type: 3}
   open: {fileID: 21300000, guid: 7fe959e875fa93d4f99ab02570e58db8, type: 3}

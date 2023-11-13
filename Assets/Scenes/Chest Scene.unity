@@ -485,6 +485,10 @@ PrefabInstance:
       value: Weapon Chest
       objectReference: {fileID: 0}
     - target: {fileID: 8149809629766516823, guid: bd3915e624f19d94fab7fc4bd5fb03b1, type: 3}
+      propertyPath: droppedItem
+      value: 
+      objectReference: {fileID: 3501811076503607432, guid: 45b87eb4f484d9c409b8a977f24a6b9c, type: 3}
+    - target: {fileID: 8149809629766516823, guid: bd3915e624f19d94fab7fc4bd5fb03b1, type: 3}
       propertyPath: weaponPool.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -662,6 +666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Chest
       objectReference: {fileID: 0}
+    - target: {fileID: 8700338159462037227, guid: 6a62042ccb91e1c48a78d64dde637904, type: 3}
+      propertyPath: droppedItem
+      value: 
+      objectReference: {fileID: 3501811076503607432, guid: 45b87eb4f484d9c409b8a977f24a6b9c, type: 3}
     - target: {fileID: 8700338159462037227, guid: 6a62042ccb91e1c48a78d64dde637904, type: 3}
       propertyPath: itemPool.Array.size
       value: 5
