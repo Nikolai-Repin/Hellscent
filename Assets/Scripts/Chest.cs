@@ -12,6 +12,7 @@ public class Chest : MonoBehaviour
 
     [SerializeField] private List<GameObject> weaponPool = new();
     [SerializeField] private List<GameObject> itemPool = new();
+    [SerializeField] private GameObject droppedItem;
     [SerializeField] private Sprite open;
 
     private bool opened = false;
@@ -29,7 +30,9 @@ public class Chest : MonoBehaviour
                     count += weaponPool[index].GetComponent<Weapon>().GetWeight();
                     i++;
                 }
+                GameObject dropped = Instantiate(droppedItem, transform.position, new Quaternion());
                 GameObject drop = Instantiate(weaponPool[index], transform.position, new Quaternion());
+                drop.transform.SetParent(dropped.transform);
             }
             count = 0;
             if (itemPool.Count > 0) {

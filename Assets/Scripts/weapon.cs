@@ -66,7 +66,7 @@ public class Weapon : MonoBehaviour
 
         //If weapon is marked for randomization, randomize modifiers. Dangerous to call more than once on a weapon
         if (randomize) {
-            modManaCost = RandomizeMods(0.5F, quality);
+            modManaCost = RandomizeMods(1.0F, quality);
             randomize = false;
         }
 
