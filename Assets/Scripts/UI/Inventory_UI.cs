@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class Inventory_UI : MonoBehaviour
 {
+    public GameObject inventoryPanel;
+
     public string inventoryName;
 
     public List<Slot_UI> slots = new List<Slot_UI>();
@@ -86,8 +88,16 @@ public class Inventory_UI : MonoBehaviour
     }
 
     public void SlotDrop(Slot_UI slot) {
-        UI_Manager.draggedSlot.inventory.MoveSlot(UI_Manager.draggedSlot.slotID, slot.slotID, slot.inventory);
+        if(UI_Manager.dragSingle) {
+            UI_Manager.draggedSlot.inventory.MoveSlot(UI_Manager.draggedSlot.slotID, slot.slotID, slot.inventory);
+        }
+
+        else {
+            UI_Manager.draggedSlot.inventory.MoveSlot(UI_Manager.draggedSlot.slotID, slot.slotID, slot.inventory,
+                UI_Manager.draggedSlot.inventory.slots[UI_Manager.draggedSlot.slotID].count);
+        }
         UIGameManager.instance.uiManager.RefreshAll();
+        
     }
 
     // Item follows mouse cursor while dragging

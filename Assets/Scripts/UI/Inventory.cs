@@ -104,13 +104,15 @@ public class Inventory
     }
 
     // Move items from slot to slot
-    public void MoveSlot(int fromIndex, int toIndex, Inventory toInventory) {
+    public void MoveSlot(int fromIndex, int toIndex, Inventory toInventory, int numToMove = 1) {
         Slot fromSlot = slots[fromIndex];
         Slot toSlot = toInventory.slots[toIndex];
 
         if(toSlot.isEmpty || toSlot.CanAddItem(fromSlot.itemName)) {
-            toSlot.AddItem(fromSlot.itemName, fromSlot.icon, fromSlot.maxAllowed);
-            fromSlot.RemoveItem();
+            for(int i = 0; i < numToMove; i++) {
+                toSlot.AddItem(fromSlot.itemName, fromSlot.icon, fromSlot.maxAllowed);
+                fromSlot.RemoveItem();
+            }
         }
     }
 }
