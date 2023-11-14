@@ -147,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.27480245, y: -0.01616478}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -158,7 +158,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 7.23963, y: 10.278622}
   m_EdgeRadius: 0
 --- !u!114 &5637199147852186135
 MonoBehaviour:
@@ -172,10 +172,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54679dfc6a5914191988b707e32fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  dash: 0
-  damper: 0.006
+  invulnerable: 0
+  intangible: 0
+  maxHealthAmount: 5
+  healthAmount: 2.5
+  speed: 150
+  dash: 150
+  damper: 0.8
+  maxMana: 0
+  mana: 0
+  manaRechargeSpeed: 5
+  equippedWeapon: {fileID: 0}
   heldWeapons: []
+  damage: 0
+  anim: {fileID: 0}
 --- !u!95 &-8343974595577565226
 Animator:
   serializedVersion: 5

@@ -71,9 +71,8 @@ public class UIManager : MonoBehaviour
             heartContainerInsides[index].fillAmount = 1;
             //Debug.Log(index);
         }
-        Debug.Log("jjj: " + index);
+
         if (index < controller.GetHealthAmount()) {
-            Debug.Log("test");
             heartContainerInsides[index].fillAmount = 0.5f;
         }
 

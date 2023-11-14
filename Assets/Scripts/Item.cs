@@ -26,28 +26,33 @@ public class Item : MonoBehaviour
     // Every mention of controller is simply accessing the "controller" script within player, which just changes some values like damage and speed that the player has.
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("player")) {
-            Debug.Log("touched an item!");
             
             if (bonusDamage > 0) {
                 controller.AddDamage(bonusDamage);
+                Debug.Log("Damage increased by " + bonusDamage);
             }
 
             if (bonusMaxMana > 0) {
                 controller.AddMaxMana(bonusMaxMana);
+                Debug.Log("Max Mana increased by " + bonusMaxMana);
             }
 
             if (bonusSpeed > 0) {
                 controller.AddSpeed(bonusSpeed);
+                Debug.Log("Speed increased by " + bonusSpeed);
             }
 
             if (bonusManaRechargeSpeed > 0) {
                 controller.AddManaRechargeSpeed(bonusManaRechargeSpeed);
+                Debug.Log("Mana recovery increased by " + bonusManaRechargeSpeed);
             }
 
             if (bonusMaxHP > 0) {
                 controller.AddMaxHP(bonusMaxHP);
                 controller.RestoreHP(bonusMaxHP);
                 uiManager.updateHealth();
+                Debug.Log("Max Hp increased by " + bonusMaxHP);
+                Debug.Log("Healed " + bonusMaxHP + " HP");
             }
 
             Destroy(gameObject);
