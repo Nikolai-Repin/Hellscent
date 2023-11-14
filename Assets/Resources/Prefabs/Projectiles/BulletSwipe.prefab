@@ -104,7 +104,7 @@ MonoBehaviour:
   healthAmount: 0
   maxLife: 0.2
   damage: 50
-  projectileSpeed: 5
+  projectileSpeed: 0
   pierce: 1000
   reflectable: 0
   setDamage: 0

@@ -116,6 +116,12 @@ public class Bullet : Entity {
         return reflectable;
     }
 
+    public void Reflected(string newTeam) {
+        reflectable = false;
+        team = newTeam;
+        GetComponent<Rigidbody2D>().velocity *= -1;
+    }
+
     public override void Die() {
         Destroy(gameObject);
     }

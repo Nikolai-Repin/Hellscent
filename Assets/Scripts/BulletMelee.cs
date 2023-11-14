@@ -8,8 +8,8 @@ public class BulletMelee : Bullet
 
     protected new void OnTriggerStay2D(Collider2D other) {
         base.OnTriggerStay2D(other);
-        if (other.gameObject.tag == "Bullet" && other.GetComponent<Bullet>().getReflectable()) {
-            other.gameObject.GetComponent<Bullet>().SetProjectileVelocity(transform.rotation, other.gameObject.GetComponent<Bullet>().getProjectileSpeed());
+        if (other.gameObject.tag == "Bullet" && other.GetComponent<Bullet>().getReflectable() && team != other.gameObject.GetComponent<Bullet>().team) {
+            other.gameObject.GetComponent<Bullet>().Reflected(team);
         }
     }
 
