@@ -8,13 +8,15 @@ public class Journalnavigation : MonoBehaviour
     private bool isOpen = false;
 
     [SerializeField] private GameObject[] pages;
+    [SerializeField] private GameObject[] texts;
     GameObject book;
     private int page = 0;
+    private int text = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(pages.Length);
+        Debug.Log("Theres this one thing that got me trippen");
     }
 
     // Update is called once per frame
@@ -25,16 +27,18 @@ public class Journalnavigation : MonoBehaviour
             OpenBook();
         }
 
-        if(Input.GetKeyDown(KeyCode.RightArrow)){
-            if(page < pages.Length - 1 && isOpen){
-                page++;
-                ChangePage();
+        if(isOpen){
+            if(Input.GetKeyDown(KeyCode.RightArrow)){          
+                if(page < pages.Length - 1){
+                    page++;
+                    ChangePage();
+                }
             }
-        }
-        else if(Input.GetKeyDown(KeyCode.LeftArrow)){
-            if(page > 0 && isOpen){
-                page--;
-                ChangePage();
+            else if(Input.GetKeyDown(KeyCode.LeftArrow)){
+                if(page > 0){
+                    page--;
+                    ChangePage();
+                }
             }
         }
     }
@@ -54,6 +58,10 @@ public class Journalnavigation : MonoBehaviour
     private void ChangePage(){
         Destroy(book);
         book = Instantiate(pages[page], new Vector2(0, 0), transform.rotation);
+    }
+
+    private void ChangeText(){
+        
     }
 
 }
