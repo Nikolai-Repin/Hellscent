@@ -42,9 +42,7 @@ public class Chest : MonoBehaviour
                     count += itemPool[index].GetComponent<Item>().GetWeight();
                     i++;
                 }
-                GameObject dropped = Instantiate(droppedItem, transform.position, new Quaternion());
                 GameObject drop = Instantiate(itemPool[index], transform.position, new Quaternion());
-                drop.transform.SetParent(dropped.transform);
             }
             transform.gameObject.GetComponent<SpriteRenderer>().sprite = open;
         }
