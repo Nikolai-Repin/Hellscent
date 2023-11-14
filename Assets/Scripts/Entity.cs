@@ -8,12 +8,8 @@ public class Entity : MonoBehaviour
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
     [SerializeField] public float healthAmount;
-    public static List<Entity> entityList;
+    public static List<Entity> entityList = new List<Entity>();
     private RoomInfo room;
-
-    void Start() {
-        entityList.Add(this);
-    }
 
     //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
@@ -28,6 +24,13 @@ public class Entity : MonoBehaviour
             }
         }
         return true;
+    }
+
+    protected void Register() {
+        Debug.Log("Registering...");
+        Entity newEntity = transform.GetComponent<Entity>();
+        entityList.Add(newEntity);
+        Debug.Log("Registered!");
     }
 
     protected void FireInRings(GameObject projectile, int projectileCount, float rotationAmount, float rotationOffset, int rings) {
@@ -98,6 +101,7 @@ public class Entity : MonoBehaviour
 
     //Destroys the entity
     public virtual void Die () {
+        entityList.Remove(this);
         if (room != null) {room.RemoveEntity(this);}
         Destroy(transform.gameObject);
     }
@@ -125,8 +129,14 @@ public class Entity : MonoBehaviour
     public virtual void Reset() {Die();}
 
     public static void ResetAll() {
-        foreach (Entity e in entityList) {
+        /*foreach (Entity e in entityList) {
+            entityList.Remove(e);
             e.Reset();
+        }*/
+        Debug.Log(entityList);
+        for (int i = entityList.Count-1; i >= 0; i--) {
+            Debug.Log(entityList[i]);
+            entityList[i].Reset();
         }
     }
 }

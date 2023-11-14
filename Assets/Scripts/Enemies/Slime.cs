@@ -24,8 +24,9 @@ public class Slime : Enemy
     private Animator animator;
 
     // Start is called before the first frame update
-    new void Start()
+    void Start()
     {
+        Register();
         if (size <= 0) {
             Destroy(transform.gameObject);
         }

@@ -47,6 +47,8 @@ public class Boss : Enemy
 
         animator = GetComponent<Animator>();
         animator.SetInteger("Phase", 0);
+        
+        Register();
     }
 
     // Update is called once per frame

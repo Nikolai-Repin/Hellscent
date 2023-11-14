@@ -19,6 +19,7 @@ public class BlastSack : Enemy
     void Start() {
         DetonationTime = Time.time + 5;
         curPhase = Phase.Wander;
+        Register();
     }
 
     void Update() {
