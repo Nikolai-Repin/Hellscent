@@ -35,7 +35,8 @@ public class PlayerController : Entity
         invulnTime = Time.time - 1;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
-        anim = gameObject.GetComponent < Animator > ();
+        anim = gameObject.GetComponent <Animator> ();
+        Register();
     }
 
     void Update()
