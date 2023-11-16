@@ -6,6 +6,7 @@ using Cinemachine;
 public class Boss : Enemy
 {
     private Vector2 arenaCenter;
+    [SerializeField] bool spawnPortal;
     [SerializeField] Vector2 arenaSize;
     [SerializeField] int numBombs;
     [SerializeField] public GameObject projectileType;
@@ -15,7 +16,7 @@ public class Boss : Enemy
     private CinemachineVirtualCameraBase vCamera;
     private int firedBombs;
     private float lastAttackTime;
-    //private List<Entity> ClaimedEntities;
+    
     public enum Phase
     {
         Death = -1,
@@ -132,6 +133,9 @@ public class Boss : Enemy
                 if (Time.time > lastAttackTime) {
                     vCamera.Follow = trackerController.target.transform;
                     Destroy(transform.gameObject);
+                    Vector2 portalOffset = new Vector2(0, arenaSize.y*0.6F);
+                    GameObject portal = Resources.Load<GameObject>("Prefabs/Entities/NextAreaPortal/NextAreaPortal"); //This line is bad, lmk if there's a better way to do this, p l e a s e
+                    Instantiate(portal, arenaCenter + portalOffset, new Quaternion());
                 }
                 break;
             }
@@ -227,6 +231,7 @@ public class Boss : Enemy
         lastAttackTime = Time.time + 1F;
         vCamera.Follow = transform;
         animator.SetInteger("Phase", -1);
+    
 
         //Supposed to destroy when the boss dies, but I need to have it handle entities that have been destroyed
         //foreach (Entity i in ClaimedEntities) {
