@@ -14,6 +14,10 @@ public class Slot_UI : MonoBehaviour
     public TextMeshProUGUI quantityText;
     public GameObject highlight;
 
+    public void Start() {
+        SetEmpty();
+    }
+
     public void SetItem(Inventory.Slot slot) {
         if(slot != null) {
             itemIcon.sprite = slot.icon;
