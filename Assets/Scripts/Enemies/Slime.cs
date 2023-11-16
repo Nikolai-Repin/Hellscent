@@ -24,8 +24,9 @@ public class Slime : Enemy
     private Animator animator;
 
     // Start is called before the first frame update
-    new void Start()
+    void Start()
     {
+        Register();
         if (size <= 0) {
             Destroy(transform.gameObject);
         }
@@ -39,10 +40,7 @@ public class Slime : Enemy
             curPhase = Phase.Sleep;
         }
         
-        //Why wont the game call these???
         splitOffHealth = healthAmount/4;
-        Debug.Log(healthAmount);
-        Debug.Log(splitOffHealth);
         
         float scale = 0+((size)*0.5F);
         transform.localScale = new Vector3(scale, scale, 1);
@@ -55,26 +53,27 @@ public class Slime : Enemy
             case Phase.Wander: {
                 if (Time.time >= lastAttackTime && ((trackerController.target.transform.position - transform.position).sqrMagnitude) <= 500) {
                     curPhase = Phase.ChargeReady; 
-                    lastAttackTime = Time.time + 0.5F;
+                    lastAttackTime = Time.time + 0.2F;
                 }
                 break;
             }
 
             case Phase.ChargeReady: {
                 trackerController.aiPath.maxSpeed = 0;
-                if (Time.time >= lastAttackTime) {
-                    lastAttackTime = Time.time + 0.1F;
-                    trackerController.aiPath.maxSpeed = 500;
-                    trackerController.aiPath.maxAcceleration = 500;
-                    curPhase = Phase.ChargeDash;
-                }
-                break;
-            }
-
-            case Phase.ChargeDash: {
+                trackerController.aiPath.maxAcceleration = 0;
                 if (Time.time >= lastAttackTime) {
                     lastAttackTime = Time.time + 0.3F;
+                    trackerController.aiPath.maxSpeed = 50;
                     trackerController.aiPath.maxAcceleration = 5;
+                    
+
+                    float forceMulti = 50f;
+
+                    Vector2 pushVector = ((trackerController.target.transform.position - transform.position).normalized * forceMulti);
+                    Debug.Log(pushVector/forceMulti);
+                    Debug.Log(trackerController.target.transform.position - transform.position);
+                    GetComponent<AIBase>().velocity2D += pushVector;
+
                     curPhase = Phase.ChargeEnd;
                 }
                 break;
@@ -83,6 +82,7 @@ public class Slime : Enemy
             case Phase.ChargeEnd: {
                 if (Time.time >= lastAttackTime) {
                     lastAttackTime = Time.time + 2;
+                    trackerController.aiPath.maxAcceleration = 5;
                     trackerController.aiPath.maxSpeed = 5;
                     curPhase = Phase.Wander;
                 }
@@ -100,29 +100,13 @@ public class Slime : Enemy
             }
 
             case (Phase.Death): {
-                if (Time.time > lastAttackTime) {
-                    GameObject splitOff;
-                    Vector2 splitOffOffset = new Vector2(size*10, 0);
+                if (Time.time > lastAttackTime && size > 1) {
 
-                    splitOff = Instantiate(clone, transform.position, new Quaternion());
-                    var splitOffSlime = splitOff.GetComponent<Slime>();
-                    splitOffSlime.healthAmount = splitOffHealth;
-                    splitOffSlime.size--;
-                    splitOffSlime.trackerController.aiPath.maxSpeed = 5;
-                    splitOffSlime.invulnTime = Time.time + 0.5F;
-                    splitOff.GetComponent<AIPath>().enabled = false;
-                    splitOff.GetComponent<Rigidbody2D>().velocity += splitOffOffset*-1;
+                    Vector2 splitOffOffset = new Vector2(size, 0);
+                    SpawnChild(splitOffOffset*-1);
+                    SpawnChild(splitOffOffset);
 
-                    splitOff = Instantiate(clone, transform.position, new Quaternion());
-                    splitOffSlime = splitOff.GetComponent<Slime>();
-                    splitOffSlime.healthAmount = splitOffHealth;
-                    splitOffSlime.size--;
-                    splitOffSlime.trackerController.aiPath.maxSpeed = 5;
-                    splitOffSlime.invulnTime = Time.time + 0.5F;
-                    splitOffSlime.curPhase = Phase.Splitting;
-                    splitOff.GetComponent<AIPath>().enabled = false;
-                    splitOff.GetComponent<Rigidbody2D>().velocity += splitOffOffset;
-                    Destroy(transform.gameObject);
+                    base.Die();
                 }
                 break;
             }
@@ -152,5 +136,17 @@ public class Slime : Enemy
                 other.GetComponent<PlayerController>().TakeDamage(1);
             }
         }
+    }
+
+    private void SpawnChild(Vector2 splitVelocity) {
+        GameObject splitOff = Instantiate(clone, transform.position, new Quaternion());
+        Slime splitOffSlime = splitOff.GetComponent<Slime>();
+        splitOffSlime.healthAmount = splitOffHealth;
+        splitOffSlime.size--;
+        splitOffSlime.trackerController.aiPath.maxSpeed = 5;
+        splitOffSlime.invulnTime = Time.time + 0.5F;
+        splitOffSlime.curPhase = Phase.Splitting;
+        splitOffSlime.intangible = false;
+        splitOff.GetComponent<AIBase>().velocity2D += splitVelocity;
     }
 }

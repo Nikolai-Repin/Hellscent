@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4640099341569176059}
   m_Layer: 0
   m_Name: The Grid from Tron
-  m_TagString: Untagged
+  m_TagString: Dungeon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,6 +67,7 @@ MonoBehaviour:
   spawnRoom: {fileID: 8767254853541074108, guid: 4612257200b9ea040a39437ac0662e87, type: 3}
   bossRoom: {fileID: 8238676731242650557, guid: e0f548f4eaa766c41ae27a590d270acd, type: 3}
   endCap: {fileID: 7239455093769158510, guid: c3335738fc9dafa4f9ba64e19914a16c, type: 3}
+  closedDoor: {fileID: 0}
   roomSpacing: 1.0001
   mainBranchLength: 5
   offshootBranchCap: 1
@@ -75,3 +76,4 @@ MonoBehaviour:
   tryRoomChance: 50
   roomChance: 66
   hallwayChance: 87
+  dungeonOver: 0

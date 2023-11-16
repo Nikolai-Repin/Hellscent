@@ -34,4 +34,8 @@ public class RoomInfo : MonoBehaviour
         dungeon.LockRoom(transform.gameObject);
         fighting = true;
     }
+
+    public void RemoveEntity(Entity e) {
+        entities.Remove(e.gameObject);
+    }
 }

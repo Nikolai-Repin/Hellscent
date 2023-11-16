@@ -12,21 +12,19 @@ public class PlayerController : Entity
     private Vector2 saved_direction;
 
     //Weapon Variables
-    [SerializeField] private float maxMana;
-    [SerializeField] private float mana; //Please lmk if there's a way to make this read only in the inspector, -J
     [SerializeField] private float manaRechargeSpeed = 5;
-    private float manaRechargeDelay = 1;
-    private float lastFireTime;
     private int weaponIndex;
     private double rHoldTime;
     private bool hasWeapon = false;
     public GameObject equippedWeapon;
     public List<GameObject> heldWeapons;
     [SerializeField] private float damage;
+
+    public Animator anim;
+
+
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
-
-    //public Animator anim;
 
     //private UIManager uiManager;
 
@@ -39,13 +37,11 @@ public class PlayerController : Entity
         damage = 0f;
         pickupDistance = 5;
         rHoldTime = Time.time;
-        lastFireTime = Time.time;
-        maxMana = 20;
-        mana = maxMana;
         invulnTime = Time.time - 1;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
-        //anim = gameObject.GetComponent <Animator>();
+        anim = gameObject.GetComponent <Animator> ();
+        Register();
     }
 
     void Update()
@@ -58,18 +54,18 @@ public class PlayerController : Entity
 
         direction = new Vector2(controlx, controly);
         keypressed = controlx != 0 || controly != 0;
-
         direction = direction.normalized;
+
         if (keypressed) {
             saved_direction = direction;
         }
 
+        // Makes the player dash. Dash scales with speed and dash variables.
         if (Input.GetKeyDown(KeyCode.Space)) {
              rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
         }
 
         if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Grab"))) {
-            Debug.Log("test");
             Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
             if (results.Length > 0) {
                 PickupWeapon(FindClosest(results, transform.position));
@@ -78,34 +74,18 @@ public class PlayerController : Entity
 
         rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
 
-        /*
         if (Input.GetKeyDown(KeyCode.D)){
             anim.Play("playerWalkRight");
         }
         if(Input.GetKeyDown(KeyCode.A)){
             anim.Play("playerWalkLeft");
         }
-        */
 
-        //Recharging mana
-        if ((Time.time - lastFireTime)>manaRechargeDelay) {
-            if (mana < maxMana) {
-                mana += manaRechargeSpeed*Time.deltaTime;
-            }
-
-            if (mana > maxMana) {
-                mana = maxMana;
-            }
-        }
-
-        //Weapon handling
         if (hasWeapon) {
             if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                 rHoldTime = Time.time;
-                Debug.Log("test");
             }
             if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Swap"))) {
-                Debug.Log("test");
                 if ((Time.time - rHoldTime)<0.5) {
                     ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
                     //Drop held weapon if r was held for longer
@@ -117,21 +97,12 @@ public class PlayerController : Entity
             }
             
             if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) {
-                //Firing if player has enough mana to fire the weapon
-                float manaCost = equippedWeapon.GetComponent<Weapon>().GetManaCost();
-                if(mana >= manaCost) {
-                    
-                    //Firing, Fire() returns true if it fired successfully
-                    if(equippedWeapon.GetComponent<Weapon>().Fire()) {
+                if(equippedWeapon.GetComponent<Weapon>().Fire()) {
 
-                        lastFireTime = Time.time;
-                        mana -= manaCost;
-
-                        //Kickback from successful shot
-                        Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
-                        kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
-                        rb.velocity += kbVector;
-                    }
+                    //Kickback from successful shot
+                    Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
+                    kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
+                    rb.velocity += kbVector;
                 }
             }
         }
@@ -213,9 +184,15 @@ public class PlayerController : Entity
 
     //Returns percentage of current mana out of maxMana
     public float GetManaPercent() {
-        return mana/maxMana;
+        return equippedWeapon.GetComponent<Weapon>().GetManaPercent();
     }
 
+    //Returns mana recharge speed
+    public float GetManaRechargeSpeed() {
+        return manaRechargeSpeed;
+    }
+
+    //Returns damage bonus
     public override float GetDamage() {
         return damage;
     }
@@ -232,7 +209,7 @@ public class PlayerController : Entity
 
     // Changes the Player's max mana
     public void AddMaxMana(float bonusMaxMana) {
-        maxMana += bonusMaxMana;
+        equippedWeapon.GetComponent<Weapon>().AddMaxMana(bonusMaxMana);
     }
 
     public void AddManaRechargeSpeed(float bonus) {

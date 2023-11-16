@@ -16,10 +16,11 @@ public class BossMinion : Enemy
     {
         lastAttackTime = Time.time;
         curPhase = Phase.Live;
+        Register();
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         switch (curPhase) {
             case (Phase.Live): {

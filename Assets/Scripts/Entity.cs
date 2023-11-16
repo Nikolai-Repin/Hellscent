@@ -9,9 +9,12 @@ public class Entity : MonoBehaviour
     [SerializeField] protected bool intangible;
 
     [SerializeField] protected float maxHealthAmount;
-    [SerializeField] protected float healthAmount;
+    [SerializeField] public float healthAmount;
 
     protected UIManager uiManager;
+
+    public static List<Entity> entityList = new List<Entity>();
+    private RoomInfo room;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +27,7 @@ public class Entity : MonoBehaviour
     {
         
     }
+
 
     //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
@@ -40,6 +44,54 @@ public class Entity : MonoBehaviour
         }
         return true;
    }
+
+       protected void Register() {
+        Debug.Log("Registering...");
+        Entity newEntity = transform.GetComponent<Entity>();
+        entityList.Add(newEntity);
+        Debug.Log("Registered!");
+    }
+
+    protected void FireInRings(GameObject projectile, int projectileCount, float rotationAmount, float rotationOffset, int rings) {
+        float breakOutTime = Time.time + 3;
+        //Outer for loop controls how many rings of projectiles
+        for (int k = 1; k <= rings; k++) {
+            //Inner for loop controls how many projectiles in each ring
+            for (int i = 0; i < projectileCount; i++) {
+                if(Time.time >= breakOutTime) {
+                    break;
+                }
+                GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                bulletScript.team = "Enemy";
+                Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+rotationOffset));
+                bulletScript.LaunchProjectile(fireAngle, 10/k);
+            }
+            rotationOffset += rotationAmount/2;
+        }
+    }
+
+    protected void CircleShot(GameObject projectile, int projectileCount, float rotationOffset, float projectileSpeed) {
+        float rotationAmount = 360/projectileCount;
+        for (int i = 0; i < projectileCount; i++) {
+            GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.team = gameObject.tag;
+            Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+rotationOffset));
+            bulletScript.LaunchProjectile(fireAngle, projectileSpeed);
+        }
+    }
+
+    protected void ArcShot(GameObject projectile, int projectileCount, float startAngle, float endAngle) {
+        float rotationAmount = startAngle-endAngle/projectileCount;
+        for (int i = 0; i < projectileCount; i++) {
+            GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.team = "Enemy";
+            Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+startAngle));
+            bulletScript.LaunchProjectile(fireAngle);
+        }
+    }
 
     //Finds the closest game object from a array of collider2D and their distance from Vector3 origin
     public GameObject FindClosest (Collider2D[] targets, Vector3 origin) {
@@ -68,9 +120,26 @@ public class Entity : MonoBehaviour
 
     //Destroys the entity
     public virtual void Die () {
+        entityList.Remove(this);
+        if (room != null) {room.RemoveEntity(this);}
         Destroy(transform.gameObject);
     }
 
+    //Returns 0, mainly exists to be overridden in PlayerController so that weapons don't break
+    public virtual float GetDamage() {
+        return 0;
+    }
+
+    //Returns 0, mainly exists to be overridden in PlayerController so that weapons don't break
+
+    public void SetRoom(RoomInfo r) {
+        room = r;
+    }
+
+    public void SubHealth(float n){
+        healthAmount -= n;
+    }
+    
     public void AddMaxHP(float bonusMaxHP) {
         maxHealthAmount += bonusMaxHP;
     }
@@ -87,8 +156,20 @@ public class Entity : MonoBehaviour
         return healthAmount;
     }
 
-    public virtual float GetDamage() {
-        return 0;
+    public virtual void Reset() {
+        Die();
+        }
+
+    public static void ResetAll() {
+        /*foreach (Entity e in entityList) {
+            entityList.Remove(e);
+            e.Reset();
+        }*/
+        Debug.Log(entityList);
+        for (int i = entityList.Count-1; i >= 0; i--) {
+            Debug.Log(entityList[i]);
+            entityList[i].Reset();
+        }
     }
-    
+
 }

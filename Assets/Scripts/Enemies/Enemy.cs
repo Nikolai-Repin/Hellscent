@@ -7,34 +7,19 @@ public class Enemy : Entity
 
     [SerializeField] protected bool dealDamageOnContact;
     [SerializeField] protected float visRange;
-    
     [SerializeField] public float iFrames;
     public float invulnTime;
 
     public TrackerController trackerController;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //damage = 20;
-    }
 
     // Update is called once per frame
-    protected void Update()
+    protected virtual void Update()
     {
         GameObject closestPlayer = FindClosestPlayer();
         if (closestPlayer != null) {
             trackerController.SetTarget(closestPlayer.transform);
         }
     }
-    /*
-    protected void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "player") {
-            if (dealDamageOnContact) {
-                other.GetComponent<PlayerController>().TakeDamage(1);
-            }
-        }
-    }
-    */
 
     //Returns closest player in range
     public GameObject FindClosestPlayer(float range) {
@@ -65,6 +50,10 @@ public class Enemy : Entity
         }
     }
 
+    public virtual void TriggerEvent(Collider2D other) {
+        return;
+    }
+
     public override bool TakeDamage(float damage) {
         if (intangible || Time.time < invulnTime) {
             return false;
@@ -79,5 +68,4 @@ public class Enemy : Entity
         }
         return true;
    }
-
 }

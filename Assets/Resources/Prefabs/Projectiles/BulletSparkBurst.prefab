@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5509259705827631726}
-  - component: {fileID: -8931525276793173634}
+  - component: {fileID: -979645213558869330}
   - component: {fileID: 107568188245360982}
   - component: {fileID: 7779259379107536370}
   - component: {fileID: 1413869230194000966}
   m_Layer: 0
-  m_Name: BulletSolar
+  m_Name: BulletSparkBurst
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,13 +29,13 @@ Transform:
   m_GameObject: {fileID: 6942168956635508771}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_LocalPosition: {x: -1.72, y: -2.12, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-8931525276793173634
+--- !u!114 &-979645213558869330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,15 +44,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 6942168956635508771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0ba1dc8c0b46274ca825bede3f379f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9dcc96e86a6d0ed41a3075388830b328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 30
-  damage: 50
-  projectileSpeed: 0.5
-  pierce: 1000
+  invulnerable: 1
+  intangible: 1
+  healthAmount: 0
+  maxLife: 5
+  damage: 20
+  projectileSpeed: 30
+  pierce: 1
   reflectable: 1
+  setDamage: 0
+  rotate: 0
   team: 
+  projectile: {fileID: 6942168956635508771, guid: 510769cf04792ed45ba62fbb8b216951, type: 3}
+  projectileCount: 8
+  rotationAmount: 45
+  rotationOffset: 0
+  rings: 2
 --- !u!212 &107568188245360982
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -94,12 +104,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: e3a47a53c76dc35449e1e4c1e6f77d3e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e8179ab8511285488514b0c042ff2b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -137,9 +147,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0019454956, y: -0.0016590059}
   serializedVersion: 2
-  m_Radius: 0.11
+  m_Radius: 0.11366114
 --- !u!50 &1413869230194000966
 Rigidbody2D:
   serializedVersion: 4
@@ -163,7 +173,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
