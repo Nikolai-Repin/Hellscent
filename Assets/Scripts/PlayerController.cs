@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool hasWeapon = false;
     private GameObject equippedWeapon;
     public List<GameObject> heldWeapons;
-
+    public Animator anim;
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
 
@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
         rHoldTime = Time.time;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
+        anim = gameObject.GetComponent < Animator > ();
     }
 
     // Update is called once per frame
@@ -41,7 +42,6 @@ public class PlayerController : MonoBehaviour
 
         direction = new Vector2(controlx, controly);
         keypressed = controlx != 0 || controly != 0;
-        
 
         direction = direction.normalized;
         if (keypressed) {
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity += saved_direction * dash * Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Grab"))) {
             Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
             if (results.Length > 0) {
                 PickupWeapon(FindClosest(results, transform.position));
@@ -60,11 +60,18 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
 
+        if (Input.GetKeyDown(KeyCode.D)){
+            anim.Play("playerWalkRight");
+        }
+        if(Input.GetKeyDown(KeyCode.A)){
+            anim.Play("playerWalkLeft");
+        }
+
         if (hasWeapon) {
-            if (Input.GetKeyDown(KeyCode.R)) {
+            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                 rHoldTime = Time.time;
             }
-            if (Input.GetKeyUp(KeyCode.R)) {
+            if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                 if ((Time.time - rHoldTime)<0.5) {
                     ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
                 } else {
@@ -72,7 +79,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
             
-            if (Input.GetMouseButton(0)) {
+            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Attack"))) {
                 if(equippedWeapon.GetComponent<Weapon>().Fire()) {
                     Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
                     kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
