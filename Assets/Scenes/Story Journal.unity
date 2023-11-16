@@ -232,6 +232,13 @@ MonoBehaviour:
   - {fileID: 7938037865569910882, guid: 9ca7575dfa3737f49b5f6a885a2ed3fb, type: 3}
   - {fileID: 7097814460240527012, guid: b31504ba24f64d642b2ff5a96ec27249, type: 3}
   - {fileID: 1734678405109279279, guid: a06b8ec376cb2084c8c7f15350d60276, type: 3}
+  texts:
+  - {fileID: 1565017087267337727, guid: 3333dea49f3c9ae408ee0de2b6d92fb7, type: 3}
+  - {fileID: 6297125231542696965, guid: 2a2dbb738c29efb48ab34e0712b9159f, type: 3}
+  - {fileID: 1565017087267337727, guid: 3333dea49f3c9ae408ee0de2b6d92fb7, type: 3}
+  - {fileID: 6297125231542696965, guid: 2a2dbb738c29efb48ab34e0712b9159f, type: 3}
+  - {fileID: 1565017087267337727, guid: 3333dea49f3c9ae408ee0de2b6d92fb7, type: 3}
+  - {fileID: 6297125231542696965, guid: 2a2dbb738c29efb48ab34e0712b9159f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
