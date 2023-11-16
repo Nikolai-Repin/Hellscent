@@ -120,6 +120,7 @@ public class Bullet : Entity {
         reflectable = false;
         team = newTeam;
         GetComponent<Rigidbody2D>().velocity *= -1;
+        lifeTime = 0;
     }
 
     public override void Die() {
