@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
+    public bool paused = false;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -29,6 +30,8 @@ public class PlayerController : MonoBehaviour
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
         anim = gameObject.GetComponent < Animator > ();
+        paused = false;
+        
     }
 
     // Update is called once per frame
@@ -44,6 +47,20 @@ public class PlayerController : MonoBehaviour
         keypressed = controlx != 0 || controly != 0;
 
         direction = direction.normalized;
+
+        
+        if (!(paused)) {
+            if (Input.GetKeyDown("escape")) {
+                PauseGame();
+                paused = true;
+            }
+        } else {
+            if (Input.GetKeyDown("escape")) {
+                ResumeGame();
+                paused = false;
+            }
+        }
+
         if (keypressed) {
             saved_direction = direction;
         }
@@ -89,6 +106,14 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.velocity += direction * speed * Time.deltaTime; 
+    }
+
+    public void PauseGame() {
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame() {
+        Time.timeScale = 1;
     }
 
     public void ChangeWeapon(int i) {
