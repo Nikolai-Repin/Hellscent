@@ -126,17 +126,22 @@ public class Entity : MonoBehaviour
         healthAmount -= n;
     }
 
-    public virtual void Reset() {Die();}
+    public virtual void Reset() {
+        entityList.Remove(this);
+        if (room != null) {room.RemoveEntity(this);}
+        Destroy(transform.gameObject);
+    }
 
     public static void ResetAll() {
-        /*foreach (Entity e in entityList) {
-            entityList.Remove(e);
-            e.Reset();
-        }*/
         Debug.Log(entityList);
         for (int i = entityList.Count-1; i >= 0; i--) {
             Debug.Log(entityList[i]);
-            entityList[i].Reset();
+            if (entityList[i] != null) {
+                entityList[i].Reset();
+            } else {
+                Debug.Log("Entity is null");
+            }
+            
         }
     }
 }

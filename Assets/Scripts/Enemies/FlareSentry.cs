@@ -46,7 +46,7 @@ public class FlareSentry : Enemy
     public override void Die() {
         dealDamageOnContact = false;
         intangible = true;
-        CircleShot(projectileType, projectileCount*4, 0, projectileSpeed);
+        CircleShot(projectileType, projectileCount*2, 0, projectileSpeed);
         base.Die();
     }
 }
