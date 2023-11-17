@@ -37,7 +37,7 @@ public class Journalnavigation : MonoBehaviour
             
 
             if(Input.GetKeyDown(KeyCode.RightArrow)){ 
-                Debug.Log("page:" + page + "\ntexts " + text + ", " + (text + 1));
+                
                 if(page == 1 && text < texts.Length / 2){
                     ChangeText();
                     text = text + 2;
@@ -53,23 +53,30 @@ public class Journalnavigation : MonoBehaviour
                     }
                 }
 
-                
             }
 
+            if(Input.GetKeyDown(KeyCode.LeftArrow)){ 
+                
+                if(page == 1 && text > 0){
+                    text = text - 2;
+                    ChangeText();
+                }
 
 
+                else if(page > 0){
+                    page--;
+                    ChangePage();
+                    ChangeText();
+                    if(page == 0){
+                        RemoveText();
+                    }
+                }
+            }
 
-
-
-
-
-
-
-
-
-
-
-
+        }
+        else if(!isOpen){
+            Destroy(book);
+            RemoveText();
         }
     }
 
@@ -103,38 +110,3 @@ public class Journalnavigation : MonoBehaviour
     }
 
 }
-
-
-
-
-
-
-
-
-/*
-
-
-
-
-if(Input.GetKeyDown(KeyCode.RightArrow)){    
-                if(page == 1 && text < texts.Length - 1){
-                    ChangeText();
-                    text = text+2;
-                }      
-                else if(page < pages.Length - 1){
-                    page++;
-                    ChangePage();
-                    RemoveText();
-                }
-            }
-            else if(Input.GetKeyDown(KeyCode.LeftArrow)){
-                if(page == 1 && text > 1){
-                    text = text - 2;
-                    ChangeText();
-                }   
-                else if(page > 0){
-                    page--;
-                    ChangePage();
-                    RemoveText();
-                }
-            }*/
