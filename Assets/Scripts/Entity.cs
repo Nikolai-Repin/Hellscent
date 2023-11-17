@@ -27,10 +27,8 @@ public class Entity : MonoBehaviour
     }
 
     protected void Register() {
-        Debug.Log("Registering...");
         Entity newEntity = transform.GetComponent<Entity>();
         entityList.Add(newEntity);
-        Debug.Log("Registered!");
     }
 
     protected void FireInRings(GameObject projectile, int projectileCount, float rotationAmount, float rotationOffset, int rings) {
@@ -133,9 +131,7 @@ public class Entity : MonoBehaviour
     }
 
     public static void ResetAll() {
-        Debug.Log(entityList);
         for (int i = entityList.Count-1; i >= 0; i--) {
-            Debug.Log(entityList[i]);
             if (entityList[i] != null) {
                 entityList[i].Reset();
             } else {
