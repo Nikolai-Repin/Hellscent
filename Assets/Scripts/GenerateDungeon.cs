@@ -6,6 +6,7 @@ using Pathfinding;
 
 public class GenerateDungeon : MonoBehaviour
 {
+	[SerializeField] private GameObject dungeonLimits;
     [SerializeField] private GameObject[] rooms;
 	[SerializeField] private GameObject[] hallways;
 	[SerializeField] private GameObject spawnRoom;
@@ -41,6 +42,11 @@ public class GenerateDungeon : MonoBehaviour
 	void Update() {
 		if (go) {
 			go = false;
+			GameObject limits = Instantiate(dungeonLimits, new Vector2(), new Quaternion());
+			limits.transform.SetParent(transform);
+			foreach (string lim in directionNumber) {
+				dungeon.Add(limits.transform.Find("Limit " + lim).gameObject);
+			}
 			GameObject startRoom = CreateRoom(spawnRoom, true);
 			dungeon.Add(startRoom);
 			StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
@@ -61,6 +67,8 @@ public class GenerateDungeon : MonoBehaviour
 			foreach (GameObject dr in dungeon) {
 				if (dr.name == bossRoom.name + "(Clone)") {
 					CapDoors();
+					yield return null;
+					AstarPath.active.Scan();
 					yield break;
 				}
 			}
@@ -69,6 +77,11 @@ public class GenerateDungeon : MonoBehaviour
 			Destroy(dr);
 		}
 		dungeon = new();
+		GameObject limits = Instantiate(dungeonLimits, new Vector2(), new Quaternion());
+		limits.transform.SetParent(transform);
+		foreach (string lim in directionNumber) {
+			dungeon.Add(limits.transform.Find("Limit " + lim).gameObject);
+		}
 		GameObject startRoom = CreateRoom(spawnRoom, true);
 		success = true;
 		dungeon.Add(startRoom);

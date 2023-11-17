@@ -5358,11 +5358,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyCount
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[0]
@@ -5443,11 +5443,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyCount
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[0]
