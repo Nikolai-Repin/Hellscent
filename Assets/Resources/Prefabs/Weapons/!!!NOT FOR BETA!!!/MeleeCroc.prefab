@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 082e56e6b92a68b44b998dc59063c881, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -97,14 +97,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9f1a44a96814ba583364c39cc1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 0.2
-  ammo: 50
+  offset: 1
   projectileType: {fileID: 6942168956635508771, guid: 3e2d3526750fd1a4b8a0a7d88a1d660d, type: 3}
   cooldownTime: 0.05
   kickback: -5
   bullets: 1
   accuracy: 10
+  useMana: 0
   manaCost: 1
+  maxMana: 0
+  mana: 0
   quality: 0
   randomize: 0
   modCooldownTime: 1

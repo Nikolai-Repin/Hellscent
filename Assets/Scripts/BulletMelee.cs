@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BulletMelee : Bullet
 {
-    [SerializeField] private bool reflect;
 
     protected new void OnTriggerStay2D(Collider2D other) {
         base.OnTriggerStay2D(other);

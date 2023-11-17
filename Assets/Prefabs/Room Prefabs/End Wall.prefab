@@ -252,6 +252,7 @@ MonoBehaviour:
   completed: 0
   spawners: []
   entities: []
+  fighting: 0
 --- !u!1 &7662808374561010124
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +267,7 @@ GameObject:
   - component: {fileID: 2289206456904482047}
   - component: {fileID: 3993497357539578916}
   - component: {fileID: 7078790232954723403}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
