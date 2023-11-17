@@ -216,4 +216,9 @@ public class PlayerController : Entity
         manaRechargeSpeed += bonus;
     }
 
+    public override void Reset() {
+        transform.position = Vector3.zero;
+        rb.velocity = Vector2.zero;
+    }
+
 }

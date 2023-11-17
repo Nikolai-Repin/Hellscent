@@ -16,11 +16,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float manaCost = 1.0F;
     [SerializeField] private float maxMana;
     [SerializeField] private float mana;
-    private float manaRechargeDelay = 1;
-    private float lastFireTime;
+    [SerializeField] private float manaRechargeDelay = 1;
+    [SerializeField] private float lastFireTime;
 
     
-    protected float cooldown;
+    [SerializeField] protected float cooldown;
     protected GameObject parent;
     protected SpriteRenderer sr;
     protected Entity controller; //change to PLayer controller if needed
