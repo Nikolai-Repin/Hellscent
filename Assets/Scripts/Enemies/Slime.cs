@@ -24,6 +24,7 @@ public class Slime : Enemy
     }
     public Phase curPhase;
     private Animator animator;
+    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class Slime : Enemy
         dealDamageOnContact = true;
         trackerController.aiPath.maxSpeed = 5;
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         randAttackDelay = Random.Range(0, 0.5F);
         lastAttackTime = Time.time;
         if (!isChildSlime) {
@@ -60,6 +62,7 @@ public class Slime : Enemy
                     trackerController.aiPath.maxAcceleration = 0;
                     lastAttackTime = Time.time + 0.2F;
                 }
+                UpdateSprite();
                 break;
             }
 
@@ -81,6 +84,7 @@ public class Slime : Enemy
 
                     curPhase = Phase.ChargeEnd;
                 }
+                UpdateSprite();
                 break;
             }
 
@@ -161,5 +165,12 @@ public class Slime : Enemy
         Slime splitOffSlime = splitOff.GetComponent<Slime>();
         SetChildStats(splitOffHealth);
         splitOff.GetComponent<AIBase>().velocity2D += splitVelocity;
+    }
+
+    private void UpdateSprite() {
+        if (trackerController.target.position.x > transform.position.x) {
+            sr.flipX = true;
+        }
+        animator.SetBool("Moving", GetComponent<Rigidbody2D>().velocity == Vector2.zero);
     }
 }
