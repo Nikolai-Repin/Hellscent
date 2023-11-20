@@ -16,10 +16,15 @@ public class Item : MonoBehaviour
     [SerializeField] private float bonusMaxHP;
     [SerializeField] private int weight;
 
+    public ItemData data;
+    [HideInInspector] public Rigidbody2D rb2d;
+
     void Start() {
         playerCharacter = GameObject.FindWithTag("player");
         controller = playerCharacter.GetComponent<PlayerController>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     // Triggers various item effects with if conditions when coming in contact with the player.
@@ -58,6 +63,22 @@ public class Item : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    /* We have an issue with two classes having the same name but different purposes, have Gabe and Dom resolve these
+
+
+[RequireComponent(typeof(Rigidbody2D))]
+public class Item : MonoBehaviour
+{
+    
+
+    private void Awake() {
+        
+    }
+}
+*/
+
+
     public int GetWeight() {
         return weight;
     }

@@ -7,9 +7,11 @@ public class Slime : Enemy
 {
     [SerializeField] public int size;
     [SerializeField] private GameObject clone;
+    [SerializeField] private bool spawnChildren;
     private float lastAttackTime;
     private float splitOffHealth;
-    public float randAttackDelay;
+    private float randAttackDelay;
+    private bool isChildSlime;
     public enum Phase
     {
         Death = -1,
@@ -22,6 +24,7 @@ public class Slime : Enemy
     }
     public Phase curPhase;
     private Animator animator;
+    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +34,12 @@ public class Slime : Enemy
             Destroy(transform.gameObject);
         }
         dealDamageOnContact = true;
-        intangible = false;
         trackerController.aiPath.maxSpeed = 5;
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         randAttackDelay = Random.Range(0, 0.5F);
         lastAttackTime = Time.time;
-        if (curPhase == null) {
+        if (!isChildSlime) {
             curPhase = Phase.Sleep;
         }
         
@@ -51,24 +54,29 @@ public class Slime : Enemy
     {
         switch (curPhase) {
             case Phase.Wander: {
+                //Check if enough time has passed to attack and if close enough
                 if (Time.time >= lastAttackTime && ((trackerController.target.transform.position - transform.position).sqrMagnitude) <= 500) {
+                    //Switch to charge ready and prep for attack
                     curPhase = Phase.ChargeReady; 
+                    trackerController.aiPath.maxSpeed = 0;
+                    trackerController.aiPath.maxAcceleration = 0;
                     lastAttackTime = Time.time + 0.2F;
                 }
+                UpdateSprite();
                 break;
             }
 
             case Phase.ChargeReady: {
-                trackerController.aiPath.maxSpeed = 0;
-                trackerController.aiPath.maxAcceleration = 0;
+                //For some ungodly reason, slimes are invulnerable while charging. For now, it's a feature.
                 if (Time.time >= lastAttackTime) {
+
+                    //A* caps velocity to maxSpeed, this gets around that
                     lastAttackTime = Time.time + 0.3F;
                     trackerController.aiPath.maxSpeed = 50;
                     trackerController.aiPath.maxAcceleration = 5;
                     
-
+                    //Applying force to slime for charge
                     float forceMulti = 50f;
-
                     Vector2 pushVector = ((trackerController.target.transform.position - transform.position).normalized * forceMulti);
                     Debug.Log(pushVector/forceMulti);
                     Debug.Log(trackerController.target.transform.position - transform.position);
@@ -76,12 +84,16 @@ public class Slime : Enemy
 
                     curPhase = Phase.ChargeEnd;
                 }
+                UpdateSprite();
                 break;
             }
 
             case Phase.ChargeEnd: {
+                //Compares time so slime won't be stopped mid charge
                 if (Time.time >= lastAttackTime) {
                     lastAttackTime = Time.time + 2;
+
+                    //Resets the slime back to wander
                     trackerController.aiPath.maxAcceleration = 5;
                     trackerController.aiPath.maxSpeed = 5;
                     curPhase = Phase.Wander;
@@ -100,19 +112,19 @@ public class Slime : Enemy
             }
 
             case (Phase.Death): {
-                if (Time.time > lastAttackTime && size > 1) {
-
+                if (spawnChildren && Time.time > lastAttackTime && size > 1) {
                     Vector2 splitOffOffset = new Vector2(size, 0);
                     SpawnChild(splitOffOffset*-1);
                     SpawnChild(splitOffOffset);
-
-                    base.Die();
                 }
+                base.Die();
                 break;
             }
 
             case (Phase.Splitting): {
-                if (Time.time > lastAttackTime) {
+                intangible = true;
+                if (Time.time > invulnTime) {
+                    intangible = false;
                     GetComponent<AIPath>().enabled = true;
                     curPhase = Phase.Wander;
                 }
@@ -138,15 +150,27 @@ public class Slime : Enemy
         }
     }
 
+    public void SetChildStats(float health) {
+        isChildSlime = true;
+        healthAmount = health;
+        size--;
+        trackerController.aiPath.maxSpeed = 5;
+        invulnTime = Time.time + 0.5F;
+        curPhase = Phase.Splitting;
+        intangible = false;
+    }
+
     private void SpawnChild(Vector2 splitVelocity) {
         GameObject splitOff = Instantiate(clone, transform.position, new Quaternion());
         Slime splitOffSlime = splitOff.GetComponent<Slime>();
-        splitOffSlime.healthAmount = splitOffHealth;
-        splitOffSlime.size--;
-        splitOffSlime.trackerController.aiPath.maxSpeed = 5;
-        splitOffSlime.invulnTime = Time.time + 0.5F;
-        splitOffSlime.curPhase = Phase.Splitting;
-        splitOffSlime.intangible = false;
+        SetChildStats(splitOffHealth);
         splitOff.GetComponent<AIBase>().velocity2D += splitVelocity;
+    }
+
+    private void UpdateSprite() {
+        if (trackerController.target.position.x > transform.position.x) {
+            sr.flipX = true;
+        }
+        animator.SetBool("Moving", GetComponent<Rigidbody2D>().velocity == Vector2.zero);
     }
 }
