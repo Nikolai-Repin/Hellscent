@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4855585715806175721}
   - component: {fileID: 1602508587185646648}
   - component: {fileID: 4508459915466774143}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Poly-Eight Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4295,7 +4295,7 @@ GameObject:
   - component: {fileID: 2749896293329284522}
   - component: {fileID: 2912384678198683536}
   - component: {fileID: 4390247941474494124}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
