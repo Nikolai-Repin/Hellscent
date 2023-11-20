@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] presets;
     [SerializeField] private int[] repeats;
+    [SerializeField] private Transform player;
 
     void Start() {
         StartCoroutine(RunGame());
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
             if (i + 1 > repeats[repeatLevel]) {
                 repeatLevel++;
             }
+            player.position = new();
             GameObject dungeon = Instantiate(presets[repeatLevel], new Vector2(), new Quaternion());
             while (!dungeon.GetComponent<GenerateDungeon>().dungeonOver) {
                 yield return null;
