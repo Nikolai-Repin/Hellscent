@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.Tilemaps;
+
 public class Item : MonoBehaviour
 {
     private GameObject playerCharacter;
@@ -10,8 +12,12 @@ public class Item : MonoBehaviour
     public float bonusSpeed;
     public float bonusManaRechargeSpeed;
 
+    public ItemData data;
+    [HideInInspector] public Rigidbody2D rb2d;
+
     void Start() {
         playerCharacter = GameObject.FindWithTag("player");
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     // Triggers various item effects with if conditions when coming in contact with the player.
@@ -39,4 +45,16 @@ public class Item : MonoBehaviour
         }
     }
 
+/* We have an issue with two classes having the same name but different purposes, have Gabe and Dom resolve these
+
+
+[RequireComponent(typeof(Rigidbody2D))]
+public class Item : MonoBehaviour
+{
+    
+
+    private void Awake() {
+        
+    }
+*/
 }
