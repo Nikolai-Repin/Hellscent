@@ -8,29 +8,34 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] public float offset = 2F;
     [SerializeField] public GameObject projectileType;
-    [SerializeField] public float cooldownTime = 0.5F;
     [SerializeField] public float kickback = 0F;
+
+    [SerializeField] public float cooldownTime = 0.5F;
     [SerializeField] public int bullets = 1;
     [SerializeField] public float accuracy = 10.0F;
+
+    [SerializeField] private float weaponDamage;
+
     [SerializeField] public bool useMana;
     [SerializeField] public float manaCost = 1.0F;
     [SerializeField] private float maxMana;
     [SerializeField] private float mana;
     [SerializeField] private float manaRechargeDelay = 1;
+
     [SerializeField] private float lastFireTime;
 
     
     [SerializeField] protected float cooldown;
     protected GameObject parent;
     protected SpriteRenderer sr;
-    protected Entity controller; //change to PLayer controller if needed
+    protected Entity controller; //change to Player controller if needed
     protected Vector2 target;
 
     //Rand Stats
     public float quality = 0.0F;
     [SerializeField] public bool randomize;
     public float modCooldownTime = 1.0F;
-    public float modDamage = 1.0F;
+    public float modDamage = 0F;
     public float modProjectileSpeed = 1.0F;
     public float modAccuracy = 1.0F;
     public int modBullets = 0;
@@ -105,7 +110,7 @@ public class Weapon : MonoBehaviour
             bulletScript.LaunchProjectile(fireAngle);
             bullet.GetComponent<Rigidbody2D>().velocity += parent.GetComponent<Rigidbody2D>().velocity.normalized;
 
-            bulletScript.AddDamage(GetDamage(), false);
+            bulletScript.SetStartingValues();
         }
 
         lastFireTime = Time.time + manaRechargeDelay;
@@ -179,11 +184,29 @@ public class Weapon : MonoBehaviour
     public void SetMaxMana(float a) {maxMana = a;}
 
     //Getters
-    public float GetOffset() {return offset;}
-    public float GetCoolDown() {return cooldown;}
-    public float GetManaCost() {return manaCost*modManaCost;}
-    public float GetDamage() {return controller.GetDamage()*modDamage;}
-    public GameObject GetParent() {return parent;}
+    public float GetOffset() {
+        return offset;
+    }
+
+    public float GetCoolDown() {
+        return cooldown;
+    }
+
+    public float GetManaCost() {
+        return manaCost*modManaCost;
+    }
+
+    public float GetDamage() {
+        return weaponDamage;
+    }
+
+    public void AddDamage(float bonusDamage) {
+        weaponDamage += bonusDamage;
+    }
+
+    public GameObject GetParent() {
+        return parent;
+    }
 
     //Returns percentage of current mana out of maxMana
     public float GetManaPercent() {

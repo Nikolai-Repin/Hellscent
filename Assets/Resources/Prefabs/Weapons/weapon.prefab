@@ -100,14 +100,18 @@ MonoBehaviour:
   weight: 90
   offset: 0.3
   projectileType: {fileID: 6942168956635508771, guid: deb5f71d6141a4c43a11e4fbb2295da7, type: 3}
-  cooldownTime: 0.1
   kickback: 0.5
+  cooldownTime: 0.1
   bullets: 1
   accuracy: 3
+  weaponDamage: 0
   useMana: 1
   manaCost: 1
   maxMana: 50
   mana: 0
+  manaRechargeDelay: 1
+  lastFireTime: 0
+  cooldown: 0
   quality: 0
   randomize: 0
   modCooldownTime: 1

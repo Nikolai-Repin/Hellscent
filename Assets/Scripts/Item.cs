@@ -28,7 +28,7 @@ public class Item : MonoBehaviour
         if (other.CompareTag("player")) {
             
             if (bonusDamage > 0) {
-                controller.AddDamage(bonusDamage);
+                controller.equippedWeapon.GetComponent<Weapon>().AddDamage(bonusDamage);
                 Debug.Log("Damage increased by " + bonusDamage);
             }
 
