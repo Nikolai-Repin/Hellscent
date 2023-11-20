@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4b3cb5d4b73629c4398c943514472e37
+guid: 92b21c7971a04944f81b0416b2df6613
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 425
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: knightpiskel (1)_0
+      name: knightpiskelv2 (1)_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1024
-        width: 1024
-        height: 1024
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0b5587b3845ee74797b8fdecba472af
-      internalID: -975953101
+      spriteID: a086406196e7d204cbc55514137a9df0
+      internalID: 628369158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_1
+      name: knightpiskelv2 (1)_1
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 1024
-        width: 1024
-        height: 1024
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d388189b11321804092d60ac51d5b4b7
-      internalID: -1898104307
+      spriteID: bac57fbb42c07964aac9d57dd11e6730
+      internalID: 427917564
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_2
+      name: knightpiskelv2 (1)_2
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 1024
-        width: 1024
-        height: 1024
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d061d5b1dd3b9e84ca012c3bff3dfeeb
-      internalID: -1717062953
+      spriteID: 3c297cb9c69c9554fb07dbb0b6894b92
+      internalID: -1074868581
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_3
+      name: knightpiskelv2 (1)_3
       rect:
         serializedVersion: 2
-        x: 3072
-        y: 1024
-        width: 1024
-        height: 1024
+        x: 96
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 241437110e68f9b4e864f3067dd3c098
-      internalID: -365786085
+      spriteID: 93d6d6e6f74cc4b4d98fb94fffdaa798
+      internalID: 473256956
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_4
+      name: knightpiskelv2 (1)_4
       rect:
         serializedVersion: 2
-        x: 4096
-        y: 1024
-        width: 1024
-        height: 1024
+        x: 128
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d2c457af7f3c214eb401e11e7e07bfd
-      internalID: 1052039436
+      spriteID: 3fe921f9b185bcc4f8beee71169e74bb
+      internalID: 1974107478
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_5
+      name: knightpiskelv2 (1)_5
       rect:
         serializedVersion: 2
-        x: 5120
-        y: 1024
-        width: 1024
-        height: 1024
+        x: 160
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bc8fbc0731ae6b49abe6b5ee2daeabf
-      internalID: -1729022932
+      spriteID: d215efe91e9f1ab49b732c17f7f8b557
+      internalID: 957070082
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_6
+      name: knightpiskelv2 (1)_6
       rect:
         serializedVersion: 2
-        x: 6144
-        y: 1024
-        width: 1024
-        height: 1024
+        x: 192
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b6252776eeaef84f96575443b14e791
-      internalID: 1652330633
+      spriteID: 23151d8d026f81149941b50f54bb7ac4
+      internalID: 1388227898
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_7
+      name: knightpiskelv2 (1)_7
       rect:
         serializedVersion: 2
-        x: 7168
-        y: 1024
-        width: 1024
-        height: 1024
+        x: 224
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,20 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6622235c71d4163468394358013f98a8
-      internalID: -1184800489
+      spriteID: 6474aaf23260a144a8a8fd55e282485d
+      internalID: 32312649
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_8
+      name: knightpiskelv2 (1)_8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 1024
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -305,20 +305,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a083787454e5ad44591f80e3593c25fb
-      internalID: -703586781
+      spriteID: aa6ef1e850051d04b9c46b5fc207f727
+      internalID: -1093613620
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_9
+      name: knightpiskelv2 (1)_9
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 32
         y: 0
-        width: 1024
-        height: 1024
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,20 +326,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8630f6399adb8e840adaea6823b20f4d
-      internalID: -2052916133
+      spriteID: 8ba85ce029e069a46a4f749981d41a0d
+      internalID: 2094405260
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_10
+      name: knightpiskelv2 (1)_10
       rect:
         serializedVersion: 2
-        x: 2048
+        x: 64
         y: 0
-        width: 1024
-        height: 1024
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,20 +347,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f23756a9db83fb143a8904a00bbf9e33
-      internalID: -1380230383
+      spriteID: 6cdb30756dab8464f90e324312a7cf75
+      internalID: 13410714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_11
+      name: knightpiskelv2 (1)_11
       rect:
         serializedVersion: 2
-        x: 3072
+        x: 96
         y: 0
-        width: 1024
-        height: 1024
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,20 +368,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33f03d9050bec5648b3029b61c10a827
-      internalID: -973871125
+      spriteID: f1e5cc47075798141811dedca2f4dcd5
+      internalID: -1845270172
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_12
+      name: knightpiskelv2 (1)_12
       rect:
         serializedVersion: 2
-        x: 4096
+        x: 128
         y: 0
-        width: 1024
-        height: 1024
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,20 +389,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b9c17024e54dc14ebc0821ff783c19f
-      internalID: -933284310
+      spriteID: 8a5326b7d240a0a40a94017369fd0940
+      internalID: -852178341
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_13
+      name: knightpiskelv2 (1)_13
       rect:
         serializedVersion: 2
-        x: 5120
+        x: 160
         y: 0
-        width: 1024
-        height: 1024
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -410,20 +410,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 933f38a4145c5554dbbdea584556637e
-      internalID: -901703295
+      spriteID: 2e2bd779db69c0c409e35d965cc5ddfb
+      internalID: -384124470
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_14
+      name: knightpiskelv2 (1)_14
       rect:
         serializedVersion: 2
-        x: 6144
+        x: 192
         y: 0
-        width: 1024
-        height: 1024
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -431,20 +431,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33ac88db10e75084d843c1e099b2e987
-      internalID: -376009874
+      spriteID: 5065bd0851e80034583d8055b25222cd
+      internalID: -1292739098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: knightpiskel (1)_15
+      name: knightpiskelv2 (1)_15
       rect:
         serializedVersion: 2
-        x: 7168
+        x: 224
         y: 0
-        width: 1024
-        height: 1024
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,8 +452,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19263a27794ca4b4d84cc76673e18b5b
-      internalID: 1971099828
+      spriteID: e33c2f123477a6444aa6bd2844cae34e
+      internalID: 641341829
       vertices: []
       indices: 
       edges: []
@@ -469,22 +469,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      knightpiskel (1)_0: -975953101
-      knightpiskel (1)_1: -1898104307
-      knightpiskel (1)_10: -1380230383
-      knightpiskel (1)_11: -973871125
-      knightpiskel (1)_12: -933284310
-      knightpiskel (1)_13: -901703295
-      knightpiskel (1)_14: -376009874
-      knightpiskel (1)_15: 1971099828
-      knightpiskel (1)_2: -1717062953
-      knightpiskel (1)_3: -365786085
-      knightpiskel (1)_4: 1052039436
-      knightpiskel (1)_5: -1729022932
-      knightpiskel (1)_6: 1652330633
-      knightpiskel (1)_7: -1184800489
-      knightpiskel (1)_8: -703586781
-      knightpiskel (1)_9: -2052916133
+      knightpiskelv2 (1)_0: 628369158
+      knightpiskelv2 (1)_1: 427917564
+      knightpiskelv2 (1)_10: 13410714
+      knightpiskelv2 (1)_11: -1845270172
+      knightpiskelv2 (1)_12: -852178341
+      knightpiskelv2 (1)_13: -384124470
+      knightpiskelv2 (1)_14: -1292739098
+      knightpiskelv2 (1)_15: 641341829
+      knightpiskelv2 (1)_2: -1074868581
+      knightpiskelv2 (1)_3: 473256956
+      knightpiskelv2 (1)_4: 1974107478
+      knightpiskelv2 (1)_5: 957070082
+      knightpiskelv2 (1)_6: 1388227898
+      knightpiskelv2 (1)_7: 32312649
+      knightpiskelv2 (1)_8: -1093613620
+      knightpiskelv2 (1)_9: 2094405260
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
