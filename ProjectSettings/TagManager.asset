@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Item
   - Enemy
   - player
   - Bullet
+  - Dungeon
   layers:
   - Default
   - TransparentFX

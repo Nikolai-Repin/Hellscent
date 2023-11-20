@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8dc4277dbb788448eb5307ab52a886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dungeonLimits: {fileID: 6005312918138334889, guid: a9699513924000c49830c6ef3ab2ae3a, type: 3}
   rooms:
   - {fileID: 398384071107680236, guid: 78f7edb7004194a43aab8932077e6005, type: 3}
   - {fileID: 3114142269086657357, guid: 56b033766dcc8154b81127bcd3572c7a, type: 3}
@@ -73,7 +74,7 @@ MonoBehaviour:
   offshootBranchCap: 3
   waitingFrames: 5
   onlyBranchRooms: 1
-  success: 1
   tryRoomChance: 50
   roomChance: 66
   hallwayChance: 87
+  dungeonOver: 0

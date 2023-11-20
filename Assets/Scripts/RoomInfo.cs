@@ -34,4 +34,8 @@ public class RoomInfo : MonoBehaviour
         }
         fighting = true;
     }
+
+    public void RemoveEntity(Entity e) {
+        entities.Remove(e.gameObject);
+    }
 }

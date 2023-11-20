@@ -5,32 +5,72 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
 
-    [SerializeField] protected bool vulnerable;
-    [SerializeField] protected float healthAmount;
+    [SerializeField] protected bool invulnerable;
+    [SerializeField] protected bool intangible;
+    [SerializeField] public float healthAmount;
+    public static List<Entity> entityList = new List<Entity>();
+    private RoomInfo room;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //Deals damage to entity if vulnerable, returns true if damage was dealt
+    //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
-        if (vulnerable) {
+        if (intangible) {
+            return false;
+        }
+
+        if (!invulnerable) {
             healthAmount -= damage;
             if (healthAmount <= 0) {
                 Die();
             }
-            return true;
         }
-        return (false);
-   }
+        return true;
+    }
+
+    protected void Register() {
+        Entity newEntity = transform.GetComponent<Entity>();
+        entityList.Add(newEntity);
+    }
+
+    protected void FireInRings(GameObject projectile, int projectileCount, float rotationAmount, float rotationOffset, int rings) {
+        float breakOutTime = Time.time + 3;
+        //Outer for loop controls how many rings of projectiles
+        for (int k = 1; k <= rings; k++) {
+            //Inner for loop controls how many projectiles in each ring
+            for (int i = 0; i < projectileCount; i++) {
+                if(Time.time >= breakOutTime) {
+                    break;
+                }
+                GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                bulletScript.team = "Enemy";
+                Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+rotationOffset));
+                bulletScript.LaunchProjectile(fireAngle, 10/k);
+            }
+            rotationOffset += rotationAmount/2;
+        }
+    }
+
+    protected void CircleShot(GameObject projectile, int projectileCount, float rotationOffset, float projectileSpeed) {
+        float rotationAmount = 360/projectileCount;
+        for (int i = 0; i < projectileCount; i++) {
+            GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.team = gameObject.tag;
+            Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+rotationOffset));
+            bulletScript.LaunchProjectile(fireAngle, projectileSpeed);
+        }
+    }
+
+    protected void ArcShot(GameObject projectile, int projectileCount, float startAngle, float endAngle) {
+        float rotationAmount = startAngle-endAngle/projectileCount;
+        for (int i = 0; i < projectileCount; i++) {
+            GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.team = "Enemy";
+            Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+startAngle));
+            bulletScript.LaunchProjectile(fireAngle);
+        }
+    }
 
     //Finds the closest game object from a array of collider2D and their distance from Vector3 origin
     public GameObject FindClosest (Collider2D[] targets, Vector3 origin) {
@@ -59,12 +99,45 @@ public class Entity : MonoBehaviour
 
     //Destroys the entity
     public virtual void Die () {
+        entityList.Remove(this);
+        if (room != null) {room.RemoveEntity(this);}
         Destroy(transform.gameObject);
     }
-    public float getHealth(){
+
+    //Returns 0, mainly exists to be overridden in PlayerController so that weapons don't break
+    public virtual float GetDamage() {
+        return 0;
+    }
+
+    //Returns 0, mainly exists to be overridden in PlayerController so that weapons don't break
+    public virtual float GetManaRechargeSpeed() {
+        return 0;
+    }
+
+    public void SetRoom(RoomInfo r) {room = r;}
+    
+
+    public float GetHealth(){
         return healthAmount;
     }
-    public void subHealth(float n){
+    public void SubHealth(float n){
         healthAmount -= n;
+    }
+
+    public virtual void Reset() {
+        entityList.Remove(this);
+        if (room != null) {room.RemoveEntity(this);}
+        Destroy(transform.gameObject);
+    }
+
+    public static void ResetAll() {
+        for (int i = entityList.Count-1; i >= 0; i--) {
+            if (entityList[i] != null) {
+                entityList[i].Reset();
+            } else {
+                Debug.Log("Entity is null");
+            }
+            
+        }
     }
 }

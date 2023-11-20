@@ -18,15 +18,17 @@ public class TrackerController : MonoBehaviour
     [SerializeField] AI ai = AI.Melee;
 
     [Space, Header("Pathfinder Settings")]
-    [SerializeField] private float endReachedDistanceMelee;
-    [SerializeField] private float endReachedDistanceRange;
+    [SerializeField] public float endReachedDistanceMelee;
+    [SerializeField] public float endReachedDistanceRange;
 
-    private Transform target;
-    private AIPath aiPath;
+    [SerializeField] public Transform target;
+    public AIPath aiPath;
 
     private void Start()
     {
-        target = GameObject.FindWithTag("player").transform;
+
+        transform.parent.GetComponent<Enemy>().trackerController = this;
+
         aiPath = transform.parent.GetComponent<AIPath>();
         if (ai == AI.Melee)
         {
@@ -36,6 +38,7 @@ public class TrackerController : MonoBehaviour
         {
             aiPath.endReachedDistance = endReachedDistanceRange;
         }
+        
     }
 
     private void Update()
@@ -44,7 +47,7 @@ public class TrackerController : MonoBehaviour
         {
             transform.position = target.transform.position;
         }
-        else if (ai == AI.Range) 
+        else if (ai == AI.Range && target != null) 
         {
             transform.position = target.transform.position;
             var dir = transform.parent.transform.position - transform.position;
@@ -75,4 +78,22 @@ public class TrackerController : MonoBehaviour
             }
         }
     }
+
+    public void SetTarget(Transform newTarget) {
+        target = newTarget;
+    }
+
+    public void SetAI(AI newAI) {
+        ai = newAI;
+        if (ai == AI.Melee)
+        {
+            aiPath.endReachedDistance = endReachedDistanceMelee;
+        }
+        else if (ai == AI.Range)
+        {
+            aiPath.endReachedDistance = endReachedDistanceRange;
+        }
+    }
+
+    public LayerMask GetWalls() {return walls;}
 }
