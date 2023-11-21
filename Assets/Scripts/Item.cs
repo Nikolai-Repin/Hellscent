@@ -44,17 +44,4 @@ public class Item : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-/* We have an issue with two classes having the same name but different purposes, have Gabe and Dom resolve these
-
-
-[RequireComponent(typeof(Rigidbody2D))]
-public class Item : MonoBehaviour
-{
-    
-
-    private void Awake() {
-        
-    }
-*/
 }
