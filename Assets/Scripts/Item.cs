@@ -20,7 +20,7 @@ public class Item : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb2d;
 
     void Start() {
-        playerCharacter = GameObject.FindWithTag("player");
+        playerCharacter = GameObject.FindWithTag("Player");
         controller = playerCharacter.GetComponent<PlayerController>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
 
@@ -30,7 +30,7 @@ public class Item : MonoBehaviour
     // Triggers various item effects with if conditions when coming in contact with the player.
     // Every mention of controller is simply accessing the "controller" script within player, which just changes some values like damage and speed that the player has.
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("player")) {
+        if (other.CompareTag("Player")) {
             
             if (bonusDamage > 0) {
                 controller.equippedWeapon.GetComponent<Weapon>().AddDamage(bonusDamage);

@@ -52,7 +52,7 @@ MonoBehaviour:
   maxHealthAmount: 0
   healthAmount: 0
   maxLife: 5
-  bulletDamage: 3
+  bulletDamage: 1
   projectileSpeed: 30
   pierce: 1
   reflectable: 1

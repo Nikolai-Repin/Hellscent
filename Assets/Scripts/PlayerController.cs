@@ -40,7 +40,7 @@ public class PlayerController : Entity
         invulnTime = Time.time - 1;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
-        anim = gameObject.GetComponent <Animator> ();
+        anim = gameObject.GetComponent<Animator>();
         Register();
     }
 
@@ -165,7 +165,7 @@ public class PlayerController : Entity
     //Deals damage to entity if vulnerable, returns true if damage was dealt
     public override bool TakeDamage(float damage) {
         if (!invulnerable && Time.time >= invulnTime) {
-            healthAmount--;
+            healthAmount -= damage;
             uiManager.updateHealth();
             if (healthAmount <= 0) {
                 Die();

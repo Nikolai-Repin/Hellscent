@@ -87,8 +87,11 @@ public class Bullet : Entity {
         } else {
             bulletDamage += creator.GetComponent<Weapon>().GetDamage();
         }
-        //changes the scale based on damage (change the values of the denominators if you wanna change how much the size scales).
-        transform.localScale += new Vector3(bulletDamage/10, bulletDamage/10, 0f);
+
+        //if (setScale) {
+            //changes the scale based on damage (change the values of the denominators if you wanna change how much the size scales).
+            transform.localScale += new Vector3(bulletDamage/10, bulletDamage/10, 0f);
+        //}
     }
 
     public void SetStartingValues(float scale, float maxLife, float damage, float projectileSpeed, int pierce, bool reflectable, bool setDamage, bool rotate) {

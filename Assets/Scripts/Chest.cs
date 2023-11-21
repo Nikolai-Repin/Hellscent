@@ -19,7 +19,7 @@ public class Chest : MonoBehaviour
 
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (!opened && other.CompareTag("player")) {
+        if (!opened && other.CompareTag("Player")) {
             opened = true;
             int count = 0;
             int index = 0;
