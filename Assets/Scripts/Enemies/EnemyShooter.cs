@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class EnemyShooter : Enemy
 {
@@ -30,5 +31,12 @@ public class EnemyShooter : Enemy
                 reloadLastTime = Time.time + reloadTime;
             }
         }
+    }
+
+    public override void TriggerEvent(Collider2D other) {
+        float forceMulti = 0.1f;
+
+        Vector2 pushVector = (-1 * (other.transform.position - transform.position).normalized * forceMulti);
+        GetComponent<AIBase>().velocity2D += pushVector;
     }
 }

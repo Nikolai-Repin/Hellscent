@@ -89,6 +89,7 @@ public class Slime : Enemy
             }
 
             case Phase.ChargeEnd: {
+                animator.SetBool("Charging", true);
                 //Compares time so slime won't be stopped mid charge
                 if (Time.time >= lastAttackTime) {
                     lastAttackTime = Time.time + 2;
@@ -97,6 +98,8 @@ public class Slime : Enemy
                     trackerController.aiPath.maxAcceleration = 5;
                     trackerController.aiPath.maxSpeed = 5;
                     curPhase = Phase.Wander;
+
+                    animator.SetBool("Charging", false);
                 }
                 break;
             }
@@ -168,9 +171,7 @@ public class Slime : Enemy
     }
 
     private void UpdateSprite() {
-        if (trackerController.target.position.x > transform.position.x) {
-            sr.flipX = true;
-        }
-        animator.SetBool("Moving", GetComponent<Rigidbody2D>().velocity == Vector2.zero);
+        sr.flipX = (trackerController.target.position.x > transform.position.x);
+        animator.SetBool("Moving", GetComponent<AIBase>().velocity2D != Vector2.zero);
     }
 }

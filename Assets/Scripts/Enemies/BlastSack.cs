@@ -9,6 +9,8 @@ public class BlastSack : Enemy
     [SerializeField] private int projectileCount;
     [SerializeField] private float rotationOffset;
     [SerializeField] private int rings;
+    private bool blasted;
+    private Animator animator;
     private enum Phase {
         Wander = 1,
         Detonation = 2
@@ -17,6 +19,9 @@ public class BlastSack : Enemy
     private float DetonationTime;
 
     void Start() {
+        blasted = false;
+        animator = GetComponent<Animator>();
+        animator.SetBool("Detonating", false);
         DetonationTime = Time.time + 5;
         curPhase = Phase.Wander;
         Register();
@@ -34,8 +39,14 @@ public class BlastSack : Enemy
             }
 
             case (Phase.Detonation): {
-                FireInRings(projectileType, projectileCount, 360/projectileCount, rotationOffset, rings);
-                Die();
+                if (!blasted) {
+                    FireInRings(projectileType, projectileCount, 360/projectileCount, rotationOffset, rings);
+                    blasted = true;
+                    trackerController.aiPath.maxAcceleration = 0;
+                }
+                
+                animator.SetBool("Detonating", true);
+                Die(0.3F);
                 break;
             }
         }

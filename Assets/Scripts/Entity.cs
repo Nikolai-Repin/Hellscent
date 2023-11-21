@@ -98,10 +98,14 @@ public class Entity : MonoBehaviour
     }
 
     //Destroys the entity
-    public virtual void Die () {
+    public virtual void Die (float dieTime) {
         entityList.Remove(this);
         if (room != null) {room.RemoveEntity(this);}
-        Destroy(transform.gameObject);
+        Destroy(transform.gameObject, dieTime);
+    }
+
+    public virtual void Die () {
+        Die(0);
     }
 
     //Returns 0, mainly exists to be overridden in PlayerController so that weapons don't break

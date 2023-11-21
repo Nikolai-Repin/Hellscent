@@ -262,7 +262,7 @@ MonoBehaviour:
   trackerController: {fileID: 0}
   size: 2
   clone: {fileID: 2512800558875698722}
-  randAttackDelay: 0
+  spawnChildren: 0
   curPhase: 0
 --- !u!95 &8644112151534567933
 Animator:
@@ -274,7 +274,7 @@ Animator:
   m_GameObject: {fileID: 2512800558875698722}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0e6e9b8108a05ca4c9d1d9ee70a78185, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
