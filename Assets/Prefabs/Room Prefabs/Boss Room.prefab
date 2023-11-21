@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4095018908476242209}
   - component: {fileID: 6422117854202481308}
   - component: {fileID: 4161658229286064606}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1870,7 +1870,7 @@ GameObject:
   - component: {fileID: 5945561106692066512}
   - component: {fileID: 1390453384946475634}
   - component: {fileID: 7767072571132884877}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Boss Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7594807169586971675}
   - component: {fileID: 6949532417435430921}
   - component: {fileID: 6336305438410996893}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -900,7 +900,7 @@ GameObject:
   - component: {fileID: 1446512325769732199}
   - component: {fileID: 1943380345417478133}
   - component: {fileID: 547915252852086004}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Hall way Straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2955,6 +2955,7 @@ MonoBehaviour:
   completed: 0
   spawners: []
   entities: []
+  fighting: 0
 --- !u!19719996 &1446512325769732199
 TilemapCollider2D:
   m_ObjectHideFlags: 0

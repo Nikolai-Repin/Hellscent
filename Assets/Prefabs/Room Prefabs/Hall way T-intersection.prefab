@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7493498252492624759}
   - component: {fileID: 2703785746903776864}
   - component: {fileID: 8198234652349018079}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Hall way T-intersection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2817,7 +2817,7 @@ GameObject:
   - component: {fileID: 7742943203658489907}
   - component: {fileID: 240229375240269005}
   - component: {fileID: 7775721527212976332}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
