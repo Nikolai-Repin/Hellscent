@@ -16,6 +16,7 @@ MonoBehaviour:
   displayName: Collect the Treasure!
   levelRequirement: 0
   questPrerequisites: []
-  questStepPrefabs: []
-  goldReward: 50
+  questStepPrefabs:
+  - {fileID: 8570582079886284798, guid: 0b6c3ce3e6fe47242bd7315581ceb17e, type: 3}
+  currency: 50
   experienceReward: 100
