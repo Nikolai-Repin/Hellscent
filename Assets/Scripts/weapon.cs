@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         cooldownTime *= modCooldownTime;
-        cooldown = Time.time;
+        cooldown = 0;
 
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
