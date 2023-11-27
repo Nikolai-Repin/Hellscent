@@ -65,9 +65,8 @@ public class Bullet : Entity {
             }
         }
 
-        if (other.gameObject.layer == LayerMask.GetMask("Walls")) { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
+        if (other.gameObject.layer == LayerMask.NameToLayer("Walls")) {
             pierce = 0;
-
         }
 
         if (pierce <= 0) {
