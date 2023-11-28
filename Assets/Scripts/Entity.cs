@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
     [SerializeField] public float healthAmount;
+    [SerializeField] public float knockbackMult;
     public static List<Entity> entityList = new List<Entity>();
     private RoomInfo room;
     private SpriteRenderer sr;

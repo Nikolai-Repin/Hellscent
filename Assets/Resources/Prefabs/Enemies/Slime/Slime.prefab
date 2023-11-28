@@ -255,6 +255,7 @@ MonoBehaviour:
   invulnerable: 0
   intangible: 0
   healthAmount: 10
+  knockbackMult: 1
   dealDamageOnContact: 1
   visRange: 20
   iFrames: 0

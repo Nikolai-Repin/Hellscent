@@ -12,6 +12,7 @@ public class EnemyShooter : Enemy
     protected GameObject target;
 
     void Start() {
+        base.Start();
         reloadLastTime = Time.time;
         ammo = clipSize;
     }

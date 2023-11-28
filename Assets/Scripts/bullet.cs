@@ -64,9 +64,10 @@ public class Bullet : Entity {
         if (other.gameObject.GetComponent<Entity>() != null && other.gameObject.GetComponent<Bullet>() == null &&  other.gameObject.tag != team) {
             if (other.gameObject.GetComponent<Entity>().TakeDamage(damage)) {
                 if(other.GetComponent<AIBase>() != null) {
-                    other.GetComponent<AIBase>().velocity2D += GetComponent<Rigidbody2D>().velocity.normalized * knockback;
+                    other.GetComponent<AIBase>().velocity2D += (GetComponent<Rigidbody2D>().velocity.normalized * knockback)*other.GetComponent<Entity>().knockbackMult;
                 } else {
-                    other.GetComponent<Rigidbody2D>().velocity += GetComponent<Rigidbody2D>().velocity.normalized * knockback;
+                    Debug.Log("test");
+                    other.GetComponent<Rigidbody2D>().velocity += (GetComponent<Rigidbody2D>().velocity.normalized * knockback)*other.GetComponent<Entity>().knockbackMult;
                 }
                 pierce--;
             }

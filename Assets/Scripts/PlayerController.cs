@@ -166,9 +166,9 @@ public class PlayerController : Entity
             }
             invulnTime = Time.time + 1F;
             Debug.Log("Damaged");
-            return true;
+            //return true;
         }
-        return (false);
+        return true;
    }
 
     //Overrides Die() in Entity so player isn't destroyed on death
