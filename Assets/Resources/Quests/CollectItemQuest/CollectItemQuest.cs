@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectItemQuest : Quest.QuestGoal
+public class CollectItemQuest : Quests.QuestGoal
 {
     public string Item;
 
@@ -12,10 +12,13 @@ public class CollectItemQuest : Quest.QuestGoal
 
     public override void Initialize() {
         base.Initialize();
-        EventManager.Instance.AddListener<CollectingItemGameevent>(OnCollecting);
+        EventManager.Instance.AddListener<CollectingItemGameEvent>(OnCollecting);
     }
 
-    private void OnCollecting(BuildingGameEvent eventInfo) {
-        if(eventInfo.ItemName == )
+    private void OnCollecting(CollectingItemGameEvent eventInfo) {
+        if(eventInfo.ItemName == Item)  {
+            CurrentAmount++;
+            Evaluate();
+        }
     }
 }
