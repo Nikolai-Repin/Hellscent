@@ -698,7 +698,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1776809908}
         m_TargetAssemblyTypeName: Keybind, Assembly-CSharp
         m_MethodName: ChangeGrabKey
         m_Mode: 1
@@ -2715,7 +2715,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1776809908}
         m_TargetAssemblyTypeName: Keybind, Assembly-CSharp
         m_MethodName: ChangeAttackKey
         m_Mode: 1
@@ -3228,7 +3228,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1776809908}
         m_TargetAssemblyTypeName: Keybind, Assembly-CSharp
         m_MethodName: ChangeSwapKey
         m_Mode: 1

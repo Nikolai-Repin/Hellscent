@@ -23,5 +23,10 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void Resume() {
+        menu.SetActive(false);
+        PauseGame(false);
+    }
+
     
 }
