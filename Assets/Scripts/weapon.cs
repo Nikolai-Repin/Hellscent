@@ -132,6 +132,10 @@ public class Weapon : MonoBehaviour
         } else {
             sr.flipY = false;
         }
+
+        //Render the weapon on top of the wielder
+        sr.sortingOrder = parent.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        
     }
 
     public void OnTransformParentChanged() {
