@@ -13,6 +13,7 @@ public class RoomInfo : MonoBehaviour
     public List<GameObject> entities = new();
     private GenerateDungeon dungeon;
     public bool fighting = false;
+    public bool oneDoor = false;
 
     void Start()
     {

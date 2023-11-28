@@ -65,10 +65,15 @@ MonoBehaviour:
   - {fileID: 6227156363105034367, guid: ce979fb8476d0457188008daa9649dd1, type: 3}
   hallways:
   - {fileID: 7564696797152967632, guid: 9ccd97415ada88442bf31f3ad28c86fd, type: 3}
+  - {fileID: 8258935776813723259, guid: 5866aef660ef0a14eb4d80c588f51501, type: 3}
   spawnRoom: {fileID: 8767254853541074108, guid: 4612257200b9ea040a39437ac0662e87, type: 3}
   bossRoom: {fileID: 8238676731242650557, guid: e0f548f4eaa766c41ae27a590d270acd, type: 3}
-  endCap: {fileID: 7239455093769158510, guid: c3335738fc9dafa4f9ba64e19914a16c, type: 3}
-  closedDoor: {fileID: 6862288333110420476, guid: f37c4eadd351efa4eb6ccb109a3d33e8, type: 3}
+  endCap:
+  - {fileID: 7239455093769158510, guid: c3335738fc9dafa4f9ba64e19914a16c, type: 3}
+  - {fileID: 218861653134253889, guid: 72c8150c311521c4691bcf5827475123, type: 3}
+  closedDoor:
+  - {fileID: 4939090538623454192, guid: 69948bad601b6564abb00271df454539, type: 3}
+  - {fileID: 6862288333110420476, guid: f37c4eadd351efa4eb6ccb109a3d33e8, type: 3}
   roomSpacing: 1.0001
   mainBranchLength: 7
   offshootBranchCap: 3
