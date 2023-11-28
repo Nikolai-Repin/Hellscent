@@ -53,6 +53,7 @@ MonoBehaviour:
   maxLife: 20
   damage: 1
   projectileSpeed: 20
+  knockback: 10
   pierce: 1
   reflectable: 1
   setDamage: 0

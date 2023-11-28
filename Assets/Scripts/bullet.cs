@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class Bullet : Entity {
     
     [SerializeField] private float maxLife; //How long a bullet should exist for, in seconds, I think.
     [SerializeField] private float damage; // How much damage a bullet should do
     [SerializeField] private float projectileSpeed; //How fast bullet move
+    [SerializeField] private float knockback; //Knockback on enemy when it makes contact
     [SerializeField] private int pierce; //How many entities it should interact with
     [SerializeField] private bool reflectable; //Should it be flectable by melee weapons
     [SerializeField] private bool setDamage;
@@ -61,6 +63,11 @@ public class Bullet : Entity {
         //I need to set up teams or something of the like for this, I want bullets to be able to belong to enemies
         if (other.gameObject.GetComponent<Entity>() != null && other.gameObject.GetComponent<Bullet>() == null &&  other.gameObject.tag != team) {
             if (other.gameObject.GetComponent<Entity>().TakeDamage(damage)) {
+                if(other.GetComponent<AIBase>() != null) {
+                    other.GetComponent<AIBase>().velocity2D += GetComponent<Rigidbody2D>().velocity.normalized * knockback;
+                } else {
+                    other.GetComponent<Rigidbody2D>().velocity += GetComponent<Rigidbody2D>().velocity.normalized * knockback;
+                }
                 pierce--;
             }
         }

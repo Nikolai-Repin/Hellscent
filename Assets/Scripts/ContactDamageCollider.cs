@@ -23,11 +23,9 @@ public class ContactDamageCollider : MonoBehaviour
         if (PushOtherEntities && other.GetComponent<ContactDamageCollider>() != null) {
             //Give force in the negative direction
             float forceMulti = 0.5f;
-            //AH RIGHT GETCOMPONENT MY BELOATHED UUUGH
 
             Vector2 pushVector = (-1 * (other.transform.position - transform.position).normalized * forceMulti);
             owner.GetComponent<AIBase>().velocity2D += pushVector;
-            //This totally doesn't work
         }
         switch (detectionType) {
             case (DetectionType.damage): {
