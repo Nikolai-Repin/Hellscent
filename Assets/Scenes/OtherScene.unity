@@ -2764,7 +2764,8 @@ PrefabInstance:
       propertyPath: rb2d
       value: 
       objectReference: {fileID: 630746090}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3465672066862675836, guid: b5756abdc8969ed439f5f01182c82135, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -5854,7 +5855,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test Axe Item (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3146726680561592923, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -6560,7 +6562,8 @@ PrefabInstance:
       propertyPath: rb2d
       value: 
       objectReference: {fileID: 1024043605}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3465672066862675836, guid: b5756abdc8969ed439f5f01182c82135, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -10591,7 +10594,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test Axe Item
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3146726680561592923, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
