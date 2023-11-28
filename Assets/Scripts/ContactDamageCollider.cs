@@ -15,6 +15,7 @@ public class ContactDamageCollider : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
+        Debug.Log("");
         owner = transform.parent.GetComponent<Enemy>();
         Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
