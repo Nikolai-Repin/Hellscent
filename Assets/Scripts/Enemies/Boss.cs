@@ -50,7 +50,6 @@ public class Boss : Enemy
         animator.SetInteger("Phase", 0);
         
         base.Start();
-        Register();
     }
 
     // Update is called once per frame

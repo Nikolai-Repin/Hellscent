@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7779259379107536370}
   - component: {fileID: 1413869230194000966}
   m_Layer: 0
-  m_Name: BulletSparkBurstSplit
+  m_Name: BulletTome
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.72, y: -2.12, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,9 +50,9 @@ MonoBehaviour:
   invulnerable: 1
   intangible: 1
   healthAmount: 0
-  maxLife: 5
-  damage: 0.1
-  projectileSpeed: 30
+  maxLife: 20
+  damage: 1
+  projectileSpeed: 20
   pierce: 1
   reflectable: 1
   setDamage: 0
