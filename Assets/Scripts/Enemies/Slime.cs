@@ -29,7 +29,7 @@ public class Slime : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        Register();
+        base.Start();
         if (size <= 0) {
             Destroy(transform.gameObject);
         }

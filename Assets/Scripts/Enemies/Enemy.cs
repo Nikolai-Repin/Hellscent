@@ -14,7 +14,8 @@ public class Enemy : Entity
 
     // Update is called once per frame
     protected virtual void Update()
-    {
+    { 
+        base.Update();
         GameObject closestPlayer = FindClosestPlayer();
         if (closestPlayer != null) {
             trackerController.SetTarget(closestPlayer.transform);

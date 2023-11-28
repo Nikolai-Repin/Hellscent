@@ -10,6 +10,16 @@ public class Entity : MonoBehaviour
     [SerializeField] public float healthAmount;
     public static List<Entity> entityList = new List<Entity>();
     private RoomInfo room;
+    private SpriteRenderer sr;
+    
+    protected virtual void Start() {
+        sr = GetComponent<SpriteRenderer>();
+        Register();
+    }
+
+    protected virtual void Update() {
+        SortInRenderLayer();
+    }
 
     //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
@@ -139,5 +149,10 @@ public class Entity : MonoBehaviour
             }
             
         }
+    }
+
+    public void SortInRenderLayer() {
+        Vector3 tmpPos = Camera.main.WorldToViewportPoint(gameObject.transform.position);
+        sr.sortingOrder = Mathf.RoundToInt(1/tmpPos.y*100);
     }
 }

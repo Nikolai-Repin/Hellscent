@@ -36,7 +36,7 @@ public class PlayerController : Entity
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
         anim = gameObject.GetComponent <Animator> ();
-        Register();
+        base.Start();
     }
 
     void Update()
@@ -101,6 +101,8 @@ public class PlayerController : Entity
         }
 
         rb.velocity += direction * speed * Time.deltaTime; 
+
+        base.Update();
     }
 
     //Changes the currently held weapon to index i in heldWeapons

@@ -21,7 +21,7 @@ public class FlareSentry : Enemy
     void Start() {
         firedShots = 0;
         nextFireTime = Time.time;
-        Register();
+        base.Start();
     }
     // Update is called once per frame
     void Update()

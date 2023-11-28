@@ -49,6 +49,7 @@ public class Boss : Enemy
         animator = GetComponent<Animator>();
         animator.SetInteger("Phase", 0);
         
+        base.Start();
         Register();
     }
 
@@ -140,6 +141,8 @@ public class Boss : Enemy
                 break;
             }
         }
+
+        SortInRenderLayer();
     }
 
     //Handling what happens once the fight begins
