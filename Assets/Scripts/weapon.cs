@@ -68,8 +68,11 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.parent != null) {
+        if (parent.GetComponent<PlayerController>() != null) {
             UpdateTarget();
+        }
+
+        if (transform.parent != null) {
             UpdateAngleAndPosition(target);
         }
 
@@ -172,13 +175,6 @@ public class Weapon : MonoBehaviour
             parent = transform.parent.gameObject;
             if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
                 SetTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            }
-
-            if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
-                GameObject closestPlayer = transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer();
-                if (closestPlayer != null) {
-                    SetTarget(closestPlayer.transform.position);
-                }
             }
         }
     }
