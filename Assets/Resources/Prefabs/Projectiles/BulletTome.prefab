@@ -49,9 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 1
   intangible: 1
+  maxHealthAmount: 0
   healthAmount: 0
+  knockbackMult: 0
   maxLife: 20
-  damage: 1
+  bulletDamage: 7
   projectileSpeed: 20
   knockback: 10
   pierce: 1

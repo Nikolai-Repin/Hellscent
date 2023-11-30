@@ -51,7 +51,7 @@ MonoBehaviour:
   enemies:
     serializedVersion: 2
     m_Bits: 64
-  ai: 2
+  ai: 1
   endReachedDistanceMelee: 2
   endReachedDistanceRange: 0
   target: {fileID: 0}
@@ -340,7 +340,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 0
   intangible: 0
-  healthAmount: 2000
+  maxHealthAmount: 0
+  healthAmount: 750
   knockbackMult: 0.05
   dealDamageOnContact: 1
   visRange: 10

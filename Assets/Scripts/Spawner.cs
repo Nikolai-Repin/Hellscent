@@ -16,11 +16,9 @@ public class Spawner : MonoBehaviour
                 enemy = Instantiate(enemyPool[Random.Range(0, enemyPool.Count)], transform.position, Quaternion.Euler(0, 0, 0));
                 enemy.GetComponent<Entity>().SetRoom(transform.parent.GetComponent<RoomInfo>());
             } else {
-                enemy = Instantiate(enemyPool[Random.Range(0, enemyPool.Count)], new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
+                enemy = Instantiate(enemyPool[Random.Range(0, enemyPool.Count)], transform.position, Quaternion.Euler(0, 0, 0));
                 enemy.GetComponent<Entity>().SetRoom(transform.parent.GetComponent<RoomInfo>());
-                float dist = Random.value * radius;
-                Vector2 position = new(transform.position.x + (Mathf.Cos(Random.Range(0, 360) * Mathf.Deg2Rad) * dist), transform.position.y + (Mathf.Sin(Random.Range(0, 360) * Mathf.Deg2Rad) * dist));
-                enemy.transform.Translate(position);
+                enemy.transform.Translate(Random.insideUnitCircle * radius);
             }
             transform.parent.gameObject.GetComponent<RoomInfo>().entities.Add(enemy);
             yield return new WaitForSeconds(0.05f);
