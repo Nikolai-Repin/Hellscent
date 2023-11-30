@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.541798, y: -3.4105506, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,7 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ef9fdfcfee82245b07dc793332c502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPool: []
+  weaponPool:
+  - {fileID: 9215686754380215263, guid: 3bf4c7cd55d3d7d44a2250b957e70186, type: 3}
+  - {fileID: 9215686754380215263, guid: 0ea1e78253ab778429102350bc93aa79, type: 3}
+  - {fileID: 9215686754380215263, guid: 344e129a626c49f449539189aa0d4f91, type: 3}
   itemPool: []
   droppedItem: {fileID: 3501811076503607432, guid: 45b87eb4f484d9c409b8a977f24a6b9c, type: 3}
   open: {fileID: 21300000, guid: 7db7aefa82b9b1643a629963b13d5d03, type: 3}
