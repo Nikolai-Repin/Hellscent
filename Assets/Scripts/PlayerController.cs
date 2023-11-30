@@ -110,6 +110,7 @@ public class PlayerController : Entity
         rb.velocity += direction * speed * Time.deltaTime; 
     }
 
+
     //Changes the currently held weapon to index i in heldWeapons
     public void ChangeWeapon(int i) {
         if (equippedWeapon != null) {
