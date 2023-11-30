@@ -1764,7 +1764,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2032865273}
         m_TargetAssemblyTypeName: Keybind, Assembly-CSharp
         m_MethodName: ChangeAttackKey
         m_Mode: 1
@@ -2427,7 +2427,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2032865273}
         m_TargetAssemblyTypeName: Keybind, Assembly-CSharp
         m_MethodName: ChangeSwapKey
         m_Mode: 1
@@ -3267,7 +3267,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2032865274}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4109,7 +4109,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2032865273}
         m_TargetAssemblyTypeName: Keybind, Assembly-CSharp
         m_MethodName: ChangeGrabKey
         m_Mode: 1
@@ -4477,6 +4477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 28073616}
   options: {fileID: 1722844780}
+  time: 0
 --- !u!4 &2032865272
 Transform:
   m_ObjectHideFlags: 0
