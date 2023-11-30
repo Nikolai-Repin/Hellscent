@@ -304,8 +304,8 @@ MonoBehaviour:
   slotID: 0
   inventory:
     slots: []
-  itemIcon: {fileID: 0}
-  quantityText: {fileID: 0}
+  itemIcon: {fileID: 1954141476843718929}
+  quantityText: {fileID: 4375623670570643877}
   highlight: {fileID: 0}
 --- !u!114 &274075334592029036
 MonoBehaviour:
