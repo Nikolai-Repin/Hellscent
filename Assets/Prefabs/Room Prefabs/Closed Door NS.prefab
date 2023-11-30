@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 8492669776779689075}
   - component: {fileID: 358618992662274090}
   m_Layer: 0
-  m_Name: Closed Door NW
+  m_Name: Closed Door NS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

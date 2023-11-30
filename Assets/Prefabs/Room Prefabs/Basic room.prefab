@@ -3951,6 +3951,7 @@ MonoBehaviour:
   - {fileID: 287331032886768271}
   entities: []
   fighting: 0
+  oneDoor: 0
 --- !u!50 &957136910335481896
 Rigidbody2D:
   serializedVersion: 4
@@ -5072,7 +5073,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:

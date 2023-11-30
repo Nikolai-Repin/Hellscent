@@ -248,7 +248,6 @@ public class GenerateDungeon : MonoBehaviour
 			// If the room has four doors do not rotate
 			direction_created = reverseDirection[direction_origin];
 			true_created_dir = direction_created;
-			Debug.Log(force + " " + direction_created);
 			created_data.doorOccupation[created_data.doorDirection.IndexOf(direction_created)] = true;
 		/*}
 		else

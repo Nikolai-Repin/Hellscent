@@ -62,7 +62,7 @@ public class Bullet : Entity {
         
         //I need to set up teams or something of the like for this, I want bullets to be able to belong to enemies
         if (other.gameObject.GetComponent<Entity>() != null && other.gameObject.GetComponent<Bullet>() == null &&  other.gameObject.tag != team) {
-            if (other.gameObject.GetComponent<Entity>().TakeDamage(bulletDamage)) {
+            if (other.gameObject.GetComponent<Entity>().TakeDamage(bulletDamage )) {
                 if(other.GetComponent<AIBase>() != null) {
                     other.GetComponent<AIBase>().velocity2D += (GetComponent<Rigidbody2D>().velocity.normalized * knockback)*other.GetComponent<Entity>().knockbackMult;
                 } else {

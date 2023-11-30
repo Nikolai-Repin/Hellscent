@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 6558833012882951719}
   - component: {fileID: 1541678382102177311}
   - component: {fileID: 8454940108530453696}
-  - component: {fileID: 4238713961609125688}
+  - component: {fileID: 235330113107841526}
   m_Layer: 6
   m_Name: Sentry
   m_TagString: Enemy
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 5468758004340273845}
---- !u!114 &4238713961609125688
+--- !u!114 &235330113107841526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -417,21 +417,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6135393954725748111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dabad330d42a0b4b874ff3fc7c3b8be, type: 3}
+  m_Script: {fileID: 11500000, guid: 169d6401ec8c88f4b8595f6b944f6152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   invulnerable: 0
   intangible: 0
-  healthAmount: 25
+  maxHealthAmount: 0
+  healthAmount: 0
   knockbackMult: 0
   dealDamageOnContact: 0
-  visRange: 20
+  visRange: 0
   iFrames: 0
   invulnTime: 0
   trackerController: {fileID: 0}
-  weapon: {fileID: 8704929423517784686}
-  clipSize: 10
-  reloadTime: 1
+  weapon: {fileID: 0}
+  clipSize: 0
+  reloadTime: 0
   ammo: 0
 --- !u!1001 &516415830133926321
 PrefabInstance:
@@ -502,11 +503,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 344e129a626c49f449539189aa0d4f91, type: 3}
---- !u!1 &8704929423517784686 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9215686754380215263, guid: 344e129a626c49f449539189aa0d4f91, type: 3}
-  m_PrefabInstance: {fileID: 516415830133926321}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8975524339750887303 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8909767832380388918, guid: 344e129a626c49f449539189aa0d4f91, type: 3}
