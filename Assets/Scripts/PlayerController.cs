@@ -21,13 +21,18 @@ public class PlayerController : Entity
     [SerializeField] private float damage;
 
     public Animator anim;
+
+
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
+
+    //private UIManager uiManager;
 
     private float invulnTime;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
         weaponIndex = 0;
         damage = 0f;
         pickupDistance = 5;
@@ -35,7 +40,8 @@ public class PlayerController : Entity
         invulnTime = Time.time - 1;
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
-        anim = gameObject.GetComponent <Animator> ();
+        anim = gameObject.GetComponent<Animator>();
+        Register();
         base.Start();
     }
 
@@ -50,12 +56,14 @@ public class PlayerController : Entity
         direction = new Vector2(controlx, controly);
         keypressed = controlx != 0 || controly != 0;
         direction = direction.normalized;
+
         if (keypressed) {
             saved_direction = direction;
         }
 
+        // Makes the player dash. Dash scales with speed and dash variables.
         if (Input.GetKeyDown(KeyCode.Space)) {
-            rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
+             rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
         }
 
         if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Grab"))) {
@@ -81,7 +89,7 @@ public class PlayerController : Entity
             if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                 if ((Time.time - rHoldTime)<0.5) {
                     ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
-                //Drop held weapon if r was held for longer
+                    //Drop held weapon if r was held for longer
                 }
 
                 else {
@@ -160,7 +168,8 @@ public class PlayerController : Entity
     //Deals damage to entity if vulnerable, returns true if damage was dealt
     public override bool TakeDamage(float damage) {
         if (!invulnerable && Time.time >= invulnTime) {
-            healthAmount--;
+            healthAmount -= damage;
+            uiManager.updateHealth();
             if (healthAmount <= 0) {
                 Die();
             }
@@ -182,7 +191,7 @@ public class PlayerController : Entity
     }
 
     //Returns mana recharge speed
-    public override float GetManaRechargeSpeed() {
+    public float GetManaRechargeSpeed() {
         return manaRechargeSpeed;
     }
 

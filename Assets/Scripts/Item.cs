@@ -2,50 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.Tilemaps;
-
 public class Item : MonoBehaviour
 {
     private GameObject playerCharacter;
-    public float bonusDamage;
-    public int bonusMaxMana;
-    public float bonusSpeed;
-    public float bonusManaRechargeSpeed;
+    private PlayerController controller;
+    private UIManager uiManager;
+
+
+    [SerializeField] private float bonusDamage;
+    [SerializeField] private int bonusMaxMana;
+    [SerializeField] private float bonusSpeed;
+    [SerializeField] private float bonusManaRechargeSpeed;
+    [SerializeField] private float bonusMaxHP;
+    [SerializeField] private int weight;
 
     public ItemData data;
     [HideInInspector] public Rigidbody2D rb2d;
 
     void Start() {
-        playerCharacter = GameObject.FindWithTag("player");
+        playerCharacter = GameObject.FindWithTag("Player");
+        controller = playerCharacter.GetComponent<PlayerController>();
+        uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+
         rb2d = GetComponent<Rigidbody2D>();
     }
 
     // Triggers various item effects with if conditions when coming in contact with the player.
+    // Every mention of controller is simply accessing the "controller" script within player, which just changes some values like damage and speed that the player has.
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("player")) {
-            Debug.Log("touched an item!");
+        if (other.CompareTag("Player")) {
             
             if (bonusDamage > 0) {
-                playerCharacter.GetComponent<PlayerController>().AddDamage(bonusDamage);
+                controller.equippedWeapon.GetComponent<Weapon>().AddDamage(bonusDamage);
+                Debug.Log("Damage increased by " + bonusDamage);
             }
 
             if (bonusMaxMana > 0) {
-                playerCharacter.GetComponent<PlayerController>().AddMaxMana(bonusMaxMana);
+                controller.AddMaxMana(bonusMaxMana);
+                Debug.Log("Max Mana increased by " + bonusMaxMana);
             }
 
             if (bonusSpeed > 0) {
-                playerCharacter.GetComponent<PlayerController>().AddSpeed(bonusSpeed);
+                controller.AddSpeed(bonusSpeed);
+                Debug.Log("Speed increased by " + bonusSpeed);
             }
 
             if (bonusManaRechargeSpeed > 0) {
-                playerCharacter.GetComponent<PlayerController>().AddManaRechargeSpeed(bonusManaRechargeSpeed);
+                controller.AddManaRechargeSpeed(bonusManaRechargeSpeed);
+                Debug.Log("Mana recovery increased by " + bonusManaRechargeSpeed);
+            }
+
+            if (bonusMaxHP > 0) {
+                controller.AddMaxHP(bonusMaxHP);
+                controller.RestoreHP(bonusMaxHP);
+                uiManager.updateHealth();
+                Debug.Log("Max Hp increased by " + bonusMaxHP);
+                Debug.Log("Healed " + bonusMaxHP + " HP");
             }
 
             Destroy(gameObject);
         }
     }
 
-/* We have an issue with two classes having the same name but different purposes, have Gabe and Dom resolve these
+    /* We have an issue with two classes having the same name but different purposes, have Gabe and Dom resolve these
 
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -56,5 +75,11 @@ public class Item : MonoBehaviour
     private void Awake() {
         
     }
+}
 */
+
+
+    public int GetWeight() {
+        return weight;
+    }
 }

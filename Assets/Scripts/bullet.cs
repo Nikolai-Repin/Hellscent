@@ -6,12 +6,12 @@ using Pathfinding;
 public class Bullet : Entity {
     
     [SerializeField] private float maxLife; //How long a bullet should exist for, in seconds, I think.
-    [SerializeField] private float damage; // How much damage a bullet should do
+    [SerializeField] private float bulletDamage; // How much damage a bullet should do
     [SerializeField] private float projectileSpeed; //How fast bullet move
     [SerializeField] private float knockback; //Knockback on enemy when it makes contact
     [SerializeField] private int pierce; //How many entities it should interact with
     [SerializeField] private bool reflectable; //Should it be flectable by melee weapons
-    [SerializeField] private bool setDamage;
+    [SerializeField] private bool setDamage; 
     [SerializeField] private bool rotate;
     private LayerMask walls;
 
@@ -62,7 +62,7 @@ public class Bullet : Entity {
         
         //I need to set up teams or something of the like for this, I want bullets to be able to belong to enemies
         if (other.gameObject.GetComponent<Entity>() != null && other.gameObject.GetComponent<Bullet>() == null &&  other.gameObject.tag != team) {
-            if (other.gameObject.GetComponent<Entity>().TakeDamage(damage)) {
+            if (other.gameObject.GetComponent<Entity>().TakeDamage(bulletDamage)) {
                 if(other.GetComponent<AIBase>() != null) {
                     other.GetComponent<AIBase>().velocity2D += (GetComponent<Rigidbody2D>().velocity.normalized * knockback)*other.GetComponent<Entity>().knockbackMult;
                 } else {
@@ -90,18 +90,21 @@ public class Bullet : Entity {
     // Sets values like damage and bullet size whenever a bullet spawns
     public void SetStartingValues() {
         if (setDamage) {
-            damage = creator.GetComponent<Weapon>().GetDamage();
+            bulletDamage = creator.GetComponent<Weapon>().GetDamage();
         } else {
-            damage += creator.GetComponent<Weapon>().GetDamage();
+            bulletDamage += creator.GetComponent<Weapon>().GetDamage();
         }
-        //changes the scale based on damage (change the values of the denominators if you wanna change how much the size scales).
-        transform.localScale += new Vector3(damage/30, damage/30, 0f);
+
+        //if (setScale) {
+            //changes the scale based on damage (change the values of the denominators if you wanna change how much the size scales).
+            transform.localScale += new Vector3(bulletDamage/10, bulletDamage/10, 0f);
+        //}
     }
 
     public void SetStartingValues(float scale, float maxLife, float damage, float projectileSpeed, int pierce, bool reflectable, bool setDamage, bool rotate) {
         this.transform.localScale = Vector3.one*scale;
         this.maxLife = maxLife;
-        this.damage = (setDamage) ? damage : this.damage + damage;
+        bulletDamage = (setDamage) ? bulletDamage : bulletDamage + damage;
         this.projectileSpeed = projectileSpeed;
         this.pierce = pierce;
         this.reflectable = reflectable;
@@ -111,7 +114,7 @@ public class Bullet : Entity {
     }
 
     public void AddDamage(float damage, bool updateScale) {
-        damage += creator.GetComponent<Weapon>().GetDamage();
+        bulletDamage += creator.GetComponent<Weapon>().GetDamage();
         if (updateScale) {transform.localScale += new Vector3(damage/30, damage/30, 0f);}
     }
 
