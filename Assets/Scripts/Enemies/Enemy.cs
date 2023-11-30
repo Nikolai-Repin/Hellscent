@@ -67,5 +67,5 @@ public class Enemy : Entity
             }
         }
         return true;
-    }
+   }
 }

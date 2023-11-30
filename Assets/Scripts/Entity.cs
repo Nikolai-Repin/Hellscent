@@ -7,9 +7,27 @@ public class Entity : MonoBehaviour
 
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
+
+    [SerializeField] protected float maxHealthAmount;
     [SerializeField] public float healthAmount;
+
+    protected UIManager uiManager;
+
     public static List<Entity> entityList = new List<Entity>();
     private RoomInfo room;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
 
     //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
@@ -19,14 +37,16 @@ public class Entity : MonoBehaviour
 
         if (!invulnerable) {
             healthAmount -= damage;
+
             if (healthAmount <= 0) {
                 Die();
             }
         }
         return true;
-    }
+   }
 
-    protected void Register() {
+       protected void Register() {
+        Debug.Log("Registering...");
         Entity newEntity = transform.GetComponent<Entity>();
         entityList.Add(newEntity);
     }
@@ -110,16 +130,11 @@ public class Entity : MonoBehaviour
     }
 
     //Returns 0, mainly exists to be overridden in PlayerController so that weapons don't break
-    public virtual float GetManaRechargeSpeed() {
-        return 0;
+
+    public void SetRoom(RoomInfo r) {
+        room = r;
     }
 
-    public void SetRoom(RoomInfo r) {room = r;}
-    
-
-    public float GetHealth(){
-        return healthAmount;
-    }
     public void SubHealth(float n){
         healthAmount -= n;
     }
@@ -140,4 +155,21 @@ public class Entity : MonoBehaviour
             
         }
     }
+
+    public void AddMaxHP(float bonusMaxHP) {
+        maxHealthAmount += bonusMaxHP;
+    }
+
+    public void RestoreHP(float bonusHP) {
+        healthAmount += bonusHP;
+    }
+
+    public float GetMaxHealthAmount() {
+        return maxHealthAmount;
+    }
+
+    public float GetHealthAmount() {
+        return healthAmount;
+    }
+
 }
