@@ -4,30 +4,38 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] private int weight;
+
     [SerializeField] public float offset = 2F;
     [SerializeField] public GameObject projectileType;
-    [SerializeField] public float cooldownTime = 0.5F;
     [SerializeField] public float kickback = 0F;
+
+    [SerializeField] public float cooldownTime = 0.5F;
     [SerializeField] public int bullets = 1;
     [SerializeField] public float accuracy = 10.0F;
+
+    [SerializeField] private float weaponDamage;
+
     [SerializeField] public bool useMana;
     [SerializeField] public float manaCost = 1.0F;
     [SerializeField] private float maxMana;
     [SerializeField] private float mana;
-    private float manaRechargeDelay = 1;
-    private float lastFireTime;
+    [SerializeField] private float manaRechargeDelay = 1;
 
-    protected float cooldown;
+    [SerializeField] private float lastFireTime;
+
+    
+    [SerializeField] protected float cooldown;
     protected GameObject parent;
     protected SpriteRenderer sr;
-    protected Entity controller;
+    protected Entity controller; //change to Player controller if needed
     protected Vector2 target;
 
     //Rand Stats
     public float quality = 0.0F;
     [SerializeField] public bool randomize;
     public float modCooldownTime = 1.0F;
-    public float modDamage = 1.0F;
+    public float modDamage = 0F;
     public float modProjectileSpeed = 1.0F;
     public float modAccuracy = 1.0F;
     public int modBullets = 0;
@@ -67,13 +75,13 @@ public class Weapon : MonoBehaviour
 
         //If weapon is marked for randomization, randomize modifiers. Dangerous to call more than once on a weapon
         if (randomize) {
-            modManaCost = RandomizeMods(0.5F, quality);
+            modManaCost = RandomizeMods(1.0F, quality);
             randomize = false;
         }
 
         if (useMana && Time.time>lastFireTime) {
             if (mana < maxMana) {
-                mana += parent.GetComponent<Entity>().GetManaRechargeSpeed()*Time.deltaTime;
+                mana += parent.GetComponent<PlayerController>().GetManaRechargeSpeed()*Time.deltaTime;
             }
 
             if (mana > maxMana) {
@@ -95,11 +103,14 @@ public class Weapon : MonoBehaviour
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.UpdateCreator(transform.gameObject);
             bulletScript.team = parent.tag;
+
             Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
             Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
+
             bulletScript.LaunchProjectile(fireAngle);
             bullet.GetComponent<Rigidbody2D>().velocity += parent.GetComponent<Rigidbody2D>().velocity.normalized;
-            bulletScript.AddDamage(GetDamage(), false);
+
+            bulletScript.SetStartingValues();
         }
 
         lastFireTime = Time.time + manaRechargeDelay;
@@ -143,6 +154,7 @@ public class Weapon : MonoBehaviour
         modDamage += (Random.Range(-variance, variance) + quality) *1.0F; 
         modProjectileSpeed += (Random.Range(-variance, variance) + quality) *1.0F; 
         modAccuracy += (Random.Range(-variance, variance) + quality) *1.0F; 
+
         while (Random.Range(0, variance*10) <= quality && modBullets < 3) {
             modBullets++;
         }
@@ -157,6 +169,7 @@ public class Weapon : MonoBehaviour
             if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
                 SetTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
+
             if (transform.parent.gameObject.GetComponent<Enemy>() != null) {
                 GameObject closestPlayer = transform.parent.gameObject.GetComponent<Enemy>().FindClosestPlayer();
                 if (closestPlayer != null) {
@@ -171,18 +184,41 @@ public class Weapon : MonoBehaviour
     public void SetMaxMana(float a) {maxMana = a;}
 
     //Getters
-    public float GetOffset() {return offset;}
-    public float GetCoolDown() {return cooldown;}
-    public float GetManaCost() {return manaCost*modManaCost;}
-    public float GetDamage() {return controller.GetDamage()*modDamage;}
-    public GameObject GetParent() {return parent;}
+    public float GetOffset() {
+        return offset;
+    }
+
+    public float GetCoolDown() {
+        return cooldown;
+    }
+
+    public float GetManaCost() {
+        return manaCost*modManaCost;
+    }
+
+    public float GetDamage() {
+        return weaponDamage;
+    }
+
+    public void AddDamage(float bonusDamage) {
+        weaponDamage += bonusDamage;
+    }
+
+    public GameObject GetParent() {
+        return parent;
+    }
 
     //Returns percentage of current mana out of maxMana
     public float GetManaPercent() {
         return mana/maxMana;
     }
 
-    public void AddMaxMana(float a) {
+        public void AddMaxMana(float a) {
         maxMana += a;
     }
+
+        public int GetWeight() {
+        return weight;
+    }
+
 }
