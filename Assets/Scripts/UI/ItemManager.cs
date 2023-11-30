@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    public Item[] items;
+    public UI_Items[] items;
 
-    private Dictionary<string, Item> nameToItemDict = 
-    new Dictionary<string, Item>();
+    private Dictionary<string, UI_Items> nameToItemDict = 
+    new Dictionary<string, UI_Items>();
 
     private void Awake() {
-        foreach(Item item in items) {
+        foreach(UI_Items item in items) {
             AddItem(item);
         }
     }
 
-    private void AddItem(Item item) {
+    private void AddItem(UI_Items item) {
         if(!nameToItemDict.ContainsKey(item.data.itemName)) {
             nameToItemDict.Add(item.data.itemName, item);
         }
     }
 
-    public Item GetItemByName(string key) {
+    public UI_Items GetItemByName(string key) {
         if(nameToItemDict.ContainsKey(key)) {
             return nameToItemDict[key];
         }
@@ -29,3 +29,4 @@ public class ItemManager : MonoBehaviour
         return null;
     }
 }
+

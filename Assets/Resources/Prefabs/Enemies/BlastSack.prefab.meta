@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Prefabs/Enemies/Angry Slime/slimeDeath.anim.meta
+guid: 43b51b1f87528314e91c2bf0d3678a27
+NativeFormatImporter:
+========
 guid: 99fc6b8d8e1563e4bbfa53279ff4d36e
 PrefabImporter:
+>>>>>>>> 68bcb5b4ed2f1731f2886ed261535ec4ce701621:Assets/Resources/Prefabs/Enemies/BlastSack.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
