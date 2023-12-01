@@ -175,4 +175,8 @@ public class Entity : MonoBehaviour
         return healthAmount;
     }
 
+    public virtual void LastEntityEvent() {
+        return;
+    }
+
 }
