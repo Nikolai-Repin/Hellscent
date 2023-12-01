@@ -49,12 +49,15 @@ public class GenerateDungeon : MonoBehaviour
 			}
 			GameObject startRoom = CreateRoom(spawnRoom);
 			dungeon.Add(startRoom);
-			StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
-			StartCoroutine(detectEnd());
+
+			//Disabling control for player so they cannot leave the dungeon while it's generating
 			GameObject[] players = GameObject.FindGameObjectsWithTag("player");
 			foreach (GameObject p in players) {
-				p.GetComponent<PlayerController>().SetControl(true);
+				p.GetComponent<PlayerController>().SetControl(false);
 			}
+
+			StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
+			StartCoroutine(detectEnd());
 		}
 	}
 
@@ -73,12 +76,13 @@ public class GenerateDungeon : MonoBehaviour
 					CapDoors();
 					yield return null;
 					AstarPath.active.Scan();
+					GameObject[] players = GameObject.FindGameObjectsWithTag("player");
+					foreach (GameObject p in players) {
+						Debug.Log("b");
+						p.GetComponent<PlayerController>().SetControl(true);
+					}
 					yield break;
 				}
-			}
-			GameObject[] players = GameObject.FindGameObjectsWithTag("player");
-			foreach (GameObject p in players) {
-				p.GetComponent<PlayerController>().SetControl(true);
 			}
 		}
 		foreach (GameObject dr in dungeon) {
