@@ -66,7 +66,6 @@ public class Bullet : Entity {
                 if(other.GetComponent<AIBase>() != null) {
                     other.GetComponent<AIBase>().velocity2D += (GetComponent<Rigidbody2D>().velocity.normalized * knockback)*other.GetComponent<Entity>().knockbackMult;
                 } else {
-                    Debug.Log("test");
                     other.GetComponent<Rigidbody2D>().velocity += (GetComponent<Rigidbody2D>().velocity.normalized * knockback)*other.GetComponent<Entity>().knockbackMult;
                 }
                 pierce--;

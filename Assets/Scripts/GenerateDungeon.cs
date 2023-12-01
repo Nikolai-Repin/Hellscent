@@ -51,6 +51,10 @@ public class GenerateDungeon : MonoBehaviour
 			dungeon.Add(startRoom);
 			StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
 			StartCoroutine(detectEnd());
+			GameObject[] players = GameObject.FindGameObjectsWithTag("player");
+			foreach (GameObject p in players) {
+				p.GetComponent<PlayerController>().SetControl(true);
+			}
 		}
 	}
 
@@ -71,6 +75,10 @@ public class GenerateDungeon : MonoBehaviour
 					AstarPath.active.Scan();
 					yield break;
 				}
+			}
+			GameObject[] players = GameObject.FindGameObjectsWithTag("player");
+			foreach (GameObject p in players) {
+				p.GetComponent<PlayerController>().SetControl(true);
 			}
 		}
 		foreach (GameObject dr in dungeon) {
