@@ -16,7 +16,7 @@ public class Entity : MonoBehaviour
     [SerializeField] public float knockbackMult;
     public static List<Entity> entityList = new List<Entity>();
     private RoomInfo room;
-    private SpriteRenderer sr;
+    protected SpriteRenderer sr;
     
     protected virtual void Start() {
         sr = GetComponent<SpriteRenderer>();
@@ -45,7 +45,6 @@ public class Entity : MonoBehaviour
    }
 
        protected void Register() {
-        Debug.Log("Registering...");
         Entity newEntity = transform.GetComponent<Entity>();
         entityList.Add(newEntity);
     }

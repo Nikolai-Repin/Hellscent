@@ -40,6 +40,7 @@ public class EnemyShooter : Enemy
                     }
                 }                
             } else if (ammo == 0) {
+                target = FindClosestPlayer(visRange);
                 GetComponent<AIBase>().canMove = true;
                 curPhase = Phase.Aiming;
                 ammo = clipSize;

@@ -68,7 +68,7 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (parent.GetComponent<PlayerController>() != null) {
+        if (parent.GetComponent<PlayerController>() != null && parent.GetComponent<PlayerController>().alive) {
             UpdateTarget();
         }
 

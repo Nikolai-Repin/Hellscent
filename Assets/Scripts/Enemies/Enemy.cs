@@ -27,7 +27,7 @@ public class Enemy : Entity
         Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, range);
         List<Collider2D> players = new List<Collider2D>();
         for (int i = 0; i < results.Length; i++) {
-            if (results[i].transform.GetComponent<PlayerController>() != null) {
+            if (results[i].transform.GetComponent<PlayerController>() != null && results[i].transform.GetComponent<PlayerController>().alive) {
                 players.Add(results[i]);
             }
         }
