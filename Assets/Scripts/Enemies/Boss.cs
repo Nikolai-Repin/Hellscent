@@ -49,7 +49,7 @@ public class Boss : Enemy
         animator = GetComponent<Animator>();
         animator.SetInteger("Phase", 0);
         
-        Register();
+        base.Start();
     }
 
     // Update is called once per frame
@@ -140,6 +140,8 @@ public class Boss : Enemy
                 break;
             }
         }
+
+        SortInRenderLayer();
     }
 
     //Handling what happens once the fight begins

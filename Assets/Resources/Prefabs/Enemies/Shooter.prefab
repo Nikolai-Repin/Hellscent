@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 524291347114557407}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.009267606, w: 0.9999571}
-  m_LocalPosition: {x: 11.513183, y: -23.044638, z: 0.029216683}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 665226713
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -247,7 +247,7 @@ MonoBehaviour:
     maximumInterval: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
-  maxAcceleration: -2.5
+  maxAcceleration: 5
   rotationSpeed: 360
   slowdownDistance: 0.6
   pickNextWaypointDist: 2
@@ -279,21 +279,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 524291347114557407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dabad330d42a0b4b874ff3fc7c3b8be, type: 3}
+  m_Script: {fileID: 11500000, guid: 169d6401ec8c88f4b8595f6b944f6152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   invulnerable: 0
   intangible: 0
-  healthAmount: 15
+  maxHealthAmount: 0
+  healthAmount: 5
+  knockbackMult: 1
   dealDamageOnContact: 0
   visRange: 20
   iFrames: 0
   invulnTime: 0
   trackerController: {fileID: 0}
   weapon: {fileID: 470356897603892556}
-  clipSize: 5
-  reloadTime: 1
+  clipSize: 10
+  reloadTime: 2
   ammo: 0
+  moveWhileShooting: 0
 --- !u!1 &3410064842637425917
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +324,7 @@ Transform:
   m_GameObject: {fileID: 3410064842637425917}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.009267606, w: 0.9999571}
-  m_LocalPosition: {x: 19.870707, y: 9.197926, z: -0.029216683}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -444,6 +447,10 @@ PrefabInstance:
       propertyPath: accuracy
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7182153838417077510, guid: 344e129a626c49f449539189aa0d4f91, type: 3}
+      propertyPath: projectileType
+      value: 
+      objectReference: {fileID: 6942168956635508771, guid: 448261f2e7c78d844baa448c111135c8, type: 3}
     - target: {fileID: 7182153838417077510, guid: 344e129a626c49f449539189aa0d4f91, type: 3}
       propertyPath: modProjectileSpeed
       value: 0.5

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : Entity
 {
+    private bool canControl;
     private Rigidbody2D rb;
     [SerializeField] private float speed;
     [SerializeField] private float dash; // default should be 150
@@ -31,17 +32,22 @@ public class PlayerController : Entity
     private float invulnTime;
 
     void Start() {
+        canControl = true;
         rb = GetComponent<Rigidbody2D>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+
         weaponIndex = 0;
         damage = 0f;
         pickupDistance = 5;
         rHoldTime = Time.time;
         invulnTime = Time.time - 1;
+
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
         anim = gameObject.GetComponent<Animator>();
+
         Register();
+        base.Start();
     }
 
     void Update()
@@ -49,65 +55,72 @@ public class PlayerController : Entity
         direction = new Vector2(0.0f, 0.0f);
         bool keypressed = false;
 
-        float controlx = Input.GetAxisRaw("Horizontal");
-        float controly = Input.GetAxisRaw("Vertical");
+        if (canControl) {
 
-        direction = new Vector2(controlx, controly);
-        keypressed = controlx != 0 || controly != 0;
-        direction = direction.normalized;
+            float controlx = Input.GetAxisRaw("Horizontal");
+            float controly = Input.GetAxisRaw("Vertical");
 
-        if (keypressed) {
-            saved_direction = direction;
-        }
+            direction = new Vector2(controlx, controly);
+            keypressed = controlx != 0 || controly != 0;
+            direction = direction.normalized;
 
-        // Makes the player dash. Dash scales with speed and dash variables.
-        if (Input.GetKeyDown(KeyCode.Space)) {
-             rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
-        }
-
-        if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Grab"))) {
-            Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
-            if (results.Length > 0) {
-                PickupWeapon(FindClosest(results, transform.position));
+            if (keypressed) {
+                saved_direction = direction;
             }
-        }
 
-        rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
-
-        if (Input.GetKeyDown(KeyCode.D)){
-            anim.Play("playerWalkRight");
-        }
-        if(Input.GetKeyDown(KeyCode.A)){
-            anim.Play("playerWalkLeft");
-        }
-
-        if (hasWeapon) {
-            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) {
-                rHoldTime = Time.time;
+            // Makes the player dash. Dash scales with speed and dash variables.
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
             }
-            if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Swap"))) {
-                if ((Time.time - rHoldTime)<0.5) {
-                    ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
-                    //Drop held weapon if r was held for longer
-                }
 
-                else {
-                    DropWeapon(weaponIndex);
+            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Grab"))) {
+                Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
+                if (results.Length > 0) {
+                    PickupWeapon(FindClosest(results, transform.position));
                 }
             }
+
             
-            if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) {
-                if(equippedWeapon.GetComponent<Weapon>().Fire()) {
 
-                    //Kickback from successful shot
-                    Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
-                    kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
-                    rb.velocity += kbVector;
+            if (Input.GetKeyDown(KeyCode.D)){
+                anim.Play("playerWalkRight");
+            }
+            if(Input.GetKeyDown(KeyCode.A)){
+                anim.Play("playerWalkLeft");
+            }
+
+            if (hasWeapon) {
+                if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) {
+                    rHoldTime = Time.time;
+                }
+                if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Swap"))) {
+                    if ((Time.time - rHoldTime)<0.5) {
+                        ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
+                        //Drop held weapon if r was held for longer
+                    }
+
+                    else {
+                        DropWeapon(weaponIndex);
+                    }
+                }
+                
+                if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) {
+                    if(equippedWeapon.GetComponent<Weapon>().Fire()) {
+
+                        //Kickback from successful shot
+                        Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
+                        kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
+                        rb.velocity += kbVector;
+                    }
                 }
             }
         }
 
+        //if (!alive) {rb.velocity *= 0.5 * Time.deltaTime;}
+        rb.velocity *= Mathf.Pow(1f - damper, Time.deltaTime * 10f);
         rb.velocity += direction * speed * Time.deltaTime; 
+
+        base.Update();
     }
 
 
@@ -173,13 +186,15 @@ public class PlayerController : Entity
             }
             invulnTime = Time.time + 1F;
             Debug.Log("Damaged");
-            return true;
+            //return true;
         }
-        return (false);
+        return true;
    }
 
     //Overrides Die() in Entity so player isn't destroyed on death
     public override void Die () {
+        canControl = false;
+        uiManager.gameObject.SetActive(false);
         return;
     }
 
@@ -220,6 +235,14 @@ public class PlayerController : Entity
     public override void Reset() {
         transform.position = Vector3.zero;
         rb.velocity = Vector2.zero;
+    }
+
+    public void SetControl(bool c) {
+        canControl = c;
+    }
+
+    public bool alive {
+        get {return healthAmount>0;}
     }
 
 }
