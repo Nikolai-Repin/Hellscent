@@ -97,16 +97,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9f1a44a96814ba583364c39cc1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weight: 0
   offset: 0
   projectileType: {fileID: 6942168956635508771, guid: 2ffa203c2970a08409e070e3f820d93d, type: 3}
-  cooldownTime: 2
   kickback: 5
+  cooldownTime: 2
   bullets: 5
   accuracy: 180
+  weaponDamage: 0
   useMana: 0
   manaCost: 1
   maxMana: 0
   mana: 0
+  manaRechargeDelay: 1
+  lastFireTime: 0
+  cooldown: 0
   quality: 0
   randomize: 0
   modCooldownTime: 1
@@ -193,8 +198,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
-  m_Color: {r: 1, g: 0.6560016, b: 0.16509432, a: 1}
+  m_Sprite: {fileID: 2076785268, guid: 5bb583e92c1df3349831766f67385cd2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -267,7 +272,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.8828125}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -310,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 0
   intangible: 0
+  maxHealthAmount: 0
   healthAmount: 20
   dealDamageOnContact: 1
   visRange: 20
