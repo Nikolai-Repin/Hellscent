@@ -143,6 +143,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ef9fdfcfee82245b07dc793332c502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invulnerable: 0
+  intangible: 1
+  maxHealthAmount: 0
+  healthAmount: 0
+  knockbackMult: 0
   weaponPool: []
   itemPool:
   - {fileID: 1945771043983452121, guid: 9d611537894d591499a39211dc5b48e1, type: 3}

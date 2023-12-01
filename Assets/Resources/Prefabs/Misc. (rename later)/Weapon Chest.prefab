@@ -98,6 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ef9fdfcfee82245b07dc793332c502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invulnerable: 0
+  intangible: 1
+  maxHealthAmount: 0
+  healthAmount: 0
+  knockbackMult: 0
   weaponPool:
   - {fileID: 9215686754380215263, guid: 3bf4c7cd55d3d7d44a2250b957e70186, type: 3}
   - {fileID: 9215686754380215263, guid: 0ea1e78253ab778429102350bc93aa79, type: 3}

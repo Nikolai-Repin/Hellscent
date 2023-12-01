@@ -73,6 +73,7 @@ public class GenerateDungeon : MonoBehaviour
 				}
 			}
 		}
+
 		foreach (GameObject dr in dungeon) {
 			Destroy(dr);
 		}

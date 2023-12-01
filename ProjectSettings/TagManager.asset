@@ -43,6 +43,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Minimap
+    uniqueID: 3084323847
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
