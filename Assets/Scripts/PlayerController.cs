@@ -20,9 +20,9 @@ public class PlayerController : Entity
     public GameObject equippedWeapon;
     public List<GameObject> heldWeapons;
     [SerializeField] private float damage;
-
+    
     public Animator anim;
-
+    public GameObject deathScreen;
 
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
@@ -195,6 +195,7 @@ public class PlayerController : Entity
     public override void Die () {
         canControl = false;
         uiManager.gameObject.SetActive(false);
+        deathScreen.SetActive(true);
         return;
     }
 
