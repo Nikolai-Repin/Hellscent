@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestWindow : MonoBehaviour
-{
+{ 
     // Fields for all the elements
     [SerializeField] private Text titleText;
     [SerializeField] private Text descriptionText;
     [SerializeField] private GameObject goalPrefab;
-    [SerializeField] private Transform goalContent;
+    [SerializeField] private Transform goalsContent;
     [SerializeField] private Text xpText;
     [SerializeField] private Text coinsText;
 
@@ -26,7 +27,7 @@ public class QuestWindow : MonoBehaviour
             if (goal.Completed) {
                 countObj.SetActive(false);
                 skipObj.SetActive(false);
-                goalObj.transform.find("Done").gameObject.SetActive(true);
+                goalObj.transform.Find("Done").gameObject.SetActive(true);
             }
 
             else {
