@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : Entity
 {
@@ -23,6 +24,7 @@ public class PlayerController : Entity
     
     public Animator anim;
     public GameObject deathScreen;
+    public int gameScene;
 
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
@@ -197,6 +199,10 @@ public class PlayerController : Entity
         uiManager.gameObject.SetActive(false);
         deathScreen.SetActive(true);
         return;
+    }
+
+    public void Restart () {
+        SceneManager.LoadScene(gameScene);
     }
 
     //Returns percentage of current mana out of maxMana
