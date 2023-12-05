@@ -14,6 +14,7 @@ public class Item : MonoBehaviour
     [SerializeField] private float bonusSpeed;
     [SerializeField] private float bonusManaRechargeSpeed;
     [SerializeField] private float bonusMaxHP;
+    [SerializeField] private float regenHearts;
     [SerializeField] private int weight;
 
     public ItemData data;
@@ -58,6 +59,12 @@ public class Item : MonoBehaviour
                 uiManager.updateHealth();
                 Debug.Log("Max Hp increased by " + bonusMaxHP);
                 Debug.Log("Healed " + bonusMaxHP + " HP");
+            }
+
+            if (regenHearts > 0) {
+                controller.RestoreHP(regenHearts);
+                uiManager.updateHealth();
+                Debug.Log("Healed " + regenHearts + " HP");
             }
 
             Destroy(gameObject);

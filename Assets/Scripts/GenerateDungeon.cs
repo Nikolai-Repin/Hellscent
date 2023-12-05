@@ -177,7 +177,7 @@ public class GenerateDungeon : MonoBehaviour
 			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[0] = true;
 			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[1] = true;
 		}
-		GameObject nextRoom = CreateRoom(boss ? bossRoom : rooms[Random.Range(0, rooms.Length - (mainBranch > 0 ? onlyBranchRooms : 0))]);
+		GameObject nextRoom = CreateRoom(branchCap == 1 && mainBranch == 0 ? rooms[rooms.Length - 1] : (boss ? bossRoom : rooms[Random.Range(0, rooms.Length - (mainBranch > 0 ? onlyBranchRooms : 0))]));
 		string hallDoor = AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
 		if (!usedHallway) {
 			door = hallDoor;
