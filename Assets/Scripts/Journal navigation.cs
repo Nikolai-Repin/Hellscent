@@ -39,8 +39,11 @@ public class Journalnavigation : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.RightArrow)){ 
                 
                 if(page == 1 && text < texts.Length / 2){
-                    ChangeText();
                     text = text + 2;
+                    ChangeText();
+                    ChangePage();
+                    
+                    
                 }
 
 
@@ -52,7 +55,7 @@ public class Journalnavigation : MonoBehaviour
                         RemoveText();
                     }
                 }
-
+                Debug.Log("page: " + page + ", text: " + text);
             }
 
             if(Input.GetKeyDown(KeyCode.LeftArrow)){ 
@@ -71,12 +74,15 @@ public class Journalnavigation : MonoBehaviour
                         RemoveText();
                     }
                 }
+                Debug.Log("page: " + page + ", text: " + text);
             }
 
         }
         else if(!isOpen){
             Destroy(book);
             RemoveText();
+            text = 0;
+            page = 0;
         }
     }
 
