@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Switched to a simpler system, no longer using this code
 public class QuestWindow : MonoBehaviour
 { 
     // Fields for all the elements

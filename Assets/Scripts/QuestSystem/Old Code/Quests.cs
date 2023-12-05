@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Switched to a simpler system, no longer using this code
 public class Quests : ScriptableObject
 {
     [System.Serializable]
