@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
 
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
+
+    [SerializeField] public Sprite healthBar = null;
 
     [SerializeField] protected float maxHealthAmount;
     [SerializeField] public float healthAmount;
@@ -17,15 +20,20 @@ public class Entity : MonoBehaviour
     private RoomInfo room;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+
+        if (gameObject.GetComponent<Entity>().healthBar != null) {
+            uiManager.UpdateEnemyHealth(gameObject.GetComponent<Entity>());
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -37,7 +45,8 @@ public class Entity : MonoBehaviour
 
         if (!invulnerable) {
             healthAmount -= damage;
-
+            uiManager.UpdateEnemyHealth(gameObject.GetComponent<Entity>());
+            Debug.Log("aaasdasdsadsa");
             if (healthAmount <= 0) {
                 Die();
             }

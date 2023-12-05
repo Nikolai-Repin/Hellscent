@@ -19,7 +19,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Camera camera;
+    //[SerializeField] private Camera camera;
     
     [SerializeField] private Image ManaBar;
 
@@ -76,6 +76,10 @@ public class UIManager : MonoBehaviour
             heartContainerInsides[index].fillAmount = 0.5f;
         }
 
+    }
+
+    public void UpdateEnemyHealth(Entity enemy) {
+        Debug.Log("Enemy Health Updated");
     }
 
 }

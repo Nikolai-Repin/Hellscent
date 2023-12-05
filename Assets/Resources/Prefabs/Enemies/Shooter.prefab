@@ -228,7 +228,7 @@ MonoBehaviour:
   version: 5
   radius: 0.5
   height: 2
-  canMove: 1
+  canMove: 0
   maxSpeed: 10
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
@@ -284,6 +284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 0
   intangible: 0
+  healthBar: {fileID: 21300000, guid: 0334ec2c5d1870e458a920885c8535f9, type: 3}
+  maxHealthAmount: 15
   healthAmount: 15
   dealDamageOnContact: 0
   visRange: 20

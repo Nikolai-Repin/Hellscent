@@ -14,6 +14,7 @@ public class EnemyShooter : Enemy
     void Start() {
         reloadLastTime = Time.time;
         ammo = clipSize;
+        base.Start();
     }
 
     // Update is called once per frame
