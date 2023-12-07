@@ -198,11 +198,13 @@ public class PlayerController : Entity
         canControl = false;
         uiManager.gameObject.SetActive(false);
         deathScreen.SetActive(true);
+        Time.timeScale = 0;
         return;
     }
 
     public void Restart () {
         SceneManager.LoadScene(gameScene);
+        Time.timeScale = 1;
     }
 
     //Returns percentage of current mana out of maxMana
