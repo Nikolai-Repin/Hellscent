@@ -588,7 +588,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 528712691}
+      - m_Target: {fileID: 1776809909}
         m_TargetAssemblyTypeName: SoundSettings, Assembly-CSharp
         m_MethodName: SetVolumeFromSlider
         m_Mode: 1
@@ -698,7 +698,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1074568588}
+      - m_Target: {fileID: 1776809908}
         m_TargetAssemblyTypeName: Keybind, Assembly-CSharp
         m_MethodName: ChangeGrabKey
         m_Mode: 1
@@ -1309,9 +1309,8 @@ GameObject:
   - component: {fileID: 528712689}
   - component: {fileID: 528712688}
   - component: {fileID: 528712687}
-  - component: {fileID: 528712691}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Menu Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1401,20 +1400,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &528712691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 528712686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b7b31ac638c4c4fad56d7f4b8b76a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundSlider: {fileID: 210869081}
-  masterMixer: {fileID: 24100000, guid: a4497542da844b4408f7b05920607cef, type: 2}
 --- !u!1 &573822314
 GameObject:
   m_ObjectHideFlags: 0
@@ -2154,53 +2139,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978139392}
   m_CullTransparentMesh: 1
---- !u!1 &1074568587
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1074568589}
-  - component: {fileID: 1074568588}
-  m_Layer: 0
-  m_Name: Keybinds
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1074568588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1074568587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac2c7a64c4ef649469463d076b7c1f6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonAttack: {fileID: 56644331}
-  buttonGrab: {fileID: 1239971805}
-  buttonSwap: {fileID: 1706081805}
---- !u!4 &1074568589
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1074568587}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 408.23248, y: 277.07147, z: 2.8871999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1100706962
 GameObject:
   m_ObjectHideFlags: 0
@@ -2762,7 +2700,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1074568588}
+      - m_Target: {fileID: 1776809908}
         m_TargetAssemblyTypeName: Keybind, Assembly-CSharp
         m_MethodName: ChangeAttackKey
         m_Mode: 1
@@ -3003,7 +2941,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Title
+  m_text: HellScent
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f862247728227f34393a3167096000c5, type: 2}
   m_sharedMaterial: {fileID: -4213889260866660745, guid: f862247728227f34393a3167096000c5, type: 2}
@@ -3275,7 +3213,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1074568588}
+      - m_Target: {fileID: 1776809908}
         m_TargetAssemblyTypeName: Keybind, Assembly-CSharp
         m_MethodName: ChangeSwapKey
         m_Mode: 1
@@ -3603,6 +3541,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1776809907}
   - component: {fileID: 1776809906}
+  - component: {fileID: 1776809908}
+  - component: {fileID: 1776809909}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -3638,6 +3578,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1776809908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776809905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2c7a64c4ef649469463d076b7c1f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonAttack: {fileID: 56644331}
+  buttonGrab: {fileID: 1239971805}
+  buttonSwap: {fileID: 1706081805}
+--- !u!114 &1776809909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776809905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b7b31ac638c4c4fad56d7f4b8b76a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundSlider: {fileID: 210869081}
+  masterMixer: {fileID: 24100000, guid: a4497542da844b4408f7b05920607cef, type: 2}
 --- !u!1 &1893100859
 GameObject:
   m_ObjectHideFlags: 0
@@ -3854,4 +3823,3 @@ SceneRoots:
   - {fileID: 528712690}
   - {fileID: 451619030}
   - {fileID: 1776809907}
-  - {fileID: 1074568589}

@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 107568188245360982}
   - component: {fileID: 7779259379107536370}
   - component: {fileID: 1413869230194000966}
+  - component: {fileID: -5622783350484087780}
   m_Layer: 0
-  m_Name: BulletBomb
+  m_Name: BulletBomb 1
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +58,7 @@ MonoBehaviour:
   pierce: 1000
   reflectable: 1
   setDamage: 0
-  rotate: 0
+  rotate: 1
   team: 
 --- !u!212 &107568188245360982
 SpriteRenderer:
@@ -100,7 +101,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: e3a47a53c76dc35449e1e4c1e6f77d3e, type: 3}
+  m_Sprite: {fileID: -2125591511, guid: 698cf62a324b1964795512be9bd83c3a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -173,3 +174,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!95 &-5622783350484087780
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6942168956635508771}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 07a5ee0bb47a2b643be275a610e147a7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
