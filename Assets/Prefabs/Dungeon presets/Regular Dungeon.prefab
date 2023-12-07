@@ -78,7 +78,7 @@ MonoBehaviour:
   mainBranchLength: 7
   offshootBranchCap: 3
   waitingFrames: 5
-  onlyBranchRooms: 0
+  onlyBranchRooms: 1
   tryRoomChance: 50
   roomChance: 66
   hallwayChance: 87

@@ -51,9 +51,11 @@ MonoBehaviour:
   intangible: 1
   maxHealthAmount: 0
   healthAmount: 0
+  knockbackMult: 0
   maxLife: 5
-  bulletDamage: 5
+  bulletDamage: 3
   projectileSpeed: 30
+  knockback: 0
   pierce: 1
   reflectable: 1
   setDamage: 0

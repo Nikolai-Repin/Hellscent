@@ -70,7 +70,7 @@ public class PlayerController : Entity
 
             // Makes the player dash. Dash scales with speed and dash variables.
             if (Input.GetKeyDown(KeyCode.Space)) {
-                rb.velocity += saved_direction * ((dash*150*0.7f) + (speed*150*0.3f)) * Time.deltaTime;
+                rb.velocity += saved_direction * ((dash*speed));//* Time.deltaTime;
             }
 
             if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Grab"))) {

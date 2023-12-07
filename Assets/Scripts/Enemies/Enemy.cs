@@ -56,17 +56,9 @@ public class Enemy : Entity
     }
 
     public override bool TakeDamage(float damage) {
-        if (intangible || Time.time < invulnTime) {
+        if (Time.time < invulnTime) {
             return false;
         }
-
-        if (!invulnerable) {
-            healthAmount -= damage;
-            if (healthAmount <= 0) {
-                invulnTime = Time.time + iFrames;
-                Die();
-            }
-        }
-        return true;
+        return base.TakeDamage(damage);
    }
 }
