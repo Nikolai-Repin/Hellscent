@@ -19,7 +19,7 @@ TagManager:
   - Enemies
   - Items
   - Rooms
-  - 
+  - Minimap
   - 
   - 
   - 
@@ -43,6 +43,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Minimap
+    uniqueID: 3084323847
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Entities
+    uniqueID: 665226713
+    locked: 0
+  - name: Projectiles
+    uniqueID: 3671666889
     locked: 0

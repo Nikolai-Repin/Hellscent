@@ -78,8 +78,11 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpdateEnemyHealth(Entity enemy) {
+    public void UpdateEntityHealthBar(Entity entity) {
         Debug.Log("Enemy Health Updated");
+        entity.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = (entity.GetHealthAmount()/entity.GetMaxHealthAmount());
+        //entity.healthBar.fillAmount = (entity.GetHealthAmount()/entity.GetMaxHealthAmount());
+        
     }
 
 }

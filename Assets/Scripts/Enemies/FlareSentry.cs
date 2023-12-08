@@ -20,8 +20,8 @@ public class FlareSentry : Enemy
 
     void Start() {
         firedShots = 0;
-        nextFireTime = Time.time;
-        Register();
+        nextFireTime = Time.time + burstDelay + projectileDelay;
+        base.Start();
     }
     // Update is called once per frame
     void Update()
@@ -48,5 +48,13 @@ public class FlareSentry : Enemy
         intangible = true;
         CircleShot(projectileType, projectileCount*2, 0, projectileSpeed);
         base.Die();
+    }
+
+    public override void LastEntityEvent() {
+        if (rotationSpeed == 0) {
+            rotationSpeed = 10;
+            projectileDelay = 1F;
+        }
+        return;
     }
 }

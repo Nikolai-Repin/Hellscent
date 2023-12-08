@@ -9,31 +9,26 @@ public class Entity : MonoBehaviour
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
 
-    [SerializeField] public Sprite healthBar = null;
-
     [SerializeField] protected float maxHealthAmount;
     [SerializeField] public float healthAmount;
 
     protected UIManager uiManager;
 
+    [SerializeField] public float knockbackMult;
     public static List<Entity> entityList = new List<Entity>();
     private RoomInfo room;
-
-    // Start is called before the first frame update
-    protected void Start()
-    {
+    protected SpriteRenderer sr;
+    
+    protected virtual void Start() {
+        sr = GetComponent<SpriteRenderer>();
+        Register();
+        
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
-
-        if (gameObject.GetComponent<Entity>().healthBar != null) {
-            uiManager.UpdateEnemyHealth(gameObject.GetComponent<Entity>());
-        }
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
+    protected virtual void Update() {
+        SortInRenderLayer();
     }
 
 
@@ -45,8 +40,7 @@ public class Entity : MonoBehaviour
 
         if (!invulnerable) {
             healthAmount -= damage;
-            uiManager.UpdateEnemyHealth(gameObject.GetComponent<Entity>());
-            Debug.Log("aaasdasdsadsa");
+            uiManager.UpdateEntityHealthBar(gameObject.GetComponent<Entity>());
             if (healthAmount <= 0) {
                 Die();
             }
@@ -55,7 +49,6 @@ public class Entity : MonoBehaviour
    }
 
        protected void Register() {
-        Debug.Log("Registering...");
         Entity newEntity = transform.GetComponent<Entity>();
         entityList.Add(newEntity);
     }
@@ -165,6 +158,11 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public void SortInRenderLayer() {
+        Vector3 tmpPos = Camera.main.WorldToViewportPoint(gameObject.transform.position);
+        sr.sortingOrder = Mathf.RoundToInt(1/tmpPos.y*100);
+    }
+
     public void AddMaxHP(float bonusMaxHP) {
         maxHealthAmount += bonusMaxHP;
     }
@@ -179,6 +177,10 @@ public class Entity : MonoBehaviour
 
     public float GetHealthAmount() {
         return healthAmount;
+    }
+
+    public virtual void LastEntityEvent() {
+        return;
     }
 
 }

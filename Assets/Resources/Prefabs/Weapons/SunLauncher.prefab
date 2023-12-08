@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingLayerID: 665226713
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9e1e625ec35dee8419a8d30db4d08ffa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,14 +100,18 @@ MonoBehaviour:
   weight: 10
   offset: 0.3
   projectileType: {fileID: 6942168956635508771, guid: 45417f9a9eea53a459be0d7aff50990f, type: 3}
-  cooldownTime: 2
   kickback: 5
+  cooldownTime: 2
   bullets: 1
   accuracy: 0
+  weaponDamage: 0
   useMana: 1
-  manaCost: 1
+  manaCost: 50
   maxMana: 50
   mana: 0
+  manaRechargeDelay: 1
+  lastFireTime: 0
+  cooldown: 0
   quality: 0
   randomize: 0
   modCooldownTime: 1

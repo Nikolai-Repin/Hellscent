@@ -14,7 +14,8 @@ public class Enemy : Entity
 
     // Update is called once per frame
     protected virtual void Update()
-    {
+    { 
+        base.Update();
         GameObject closestPlayer = FindClosestPlayer();
         if (closestPlayer != null) {
             trackerController.SetTarget(closestPlayer.transform);
@@ -26,7 +27,7 @@ public class Enemy : Entity
         Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, range);
         List<Collider2D> players = new List<Collider2D>();
         for (int i = 0; i < results.Length; i++) {
-            if (results[i].transform.GetComponent<PlayerController>() != null) {
+            if (results[i].transform.GetComponent<PlayerController>() != null && results[i].transform.GetComponent<PlayerController>().alive) {
                 players.Add(results[i]);
             }
         }
@@ -55,17 +56,9 @@ public class Enemy : Entity
     }
 
     public override bool TakeDamage(float damage) {
-        if (intangible || Time.time < invulnTime) {
+        if (Time.time < invulnTime) {
             return false;
         }
-
-        if (!invulnerable) {
-            healthAmount -= damage;
-            if (healthAmount <= 0) {
-                invulnTime = Time.time + iFrames;
-                Die();
-            }
-        }
-        return true;
+        return base.TakeDamage(damage);
    }
 }

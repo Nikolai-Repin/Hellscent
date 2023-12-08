@@ -13,6 +13,8 @@ public class RoomInfo : MonoBehaviour
     public List<GameObject> entities = new();
     private GenerateDungeon dungeon;
     public bool fighting = false;
+    public bool oneDoor = false;
+    [SerializeField] private bool activateLastEnemyEvent;
 
     void Start()
     {
@@ -24,11 +26,17 @@ public class RoomInfo : MonoBehaviour
         if (completed == false && fighting && entities.Count == 0) {
             completed = true;
             dungeon.UnlockRooms();
+        } else if (activateLastEnemyEvent && entities.Count == 1) {
+            entities[0].GetComponent<Entity>().LastEntityEvent();
+            activateLastEnemyEvent = false;
+            Debug.Log(entities);
         }
     }
 
     public IEnumerator Lock() {
-        dungeon.LockRoom(transform.gameObject);
+        if (locked) {
+            dungeon.LockRoom(transform.gameObject);
+        }
         foreach (Spawner s in spawners) {
             yield return StartCoroutine(s.SpawnEnemies());
         }
