@@ -82,4 +82,5 @@ MonoBehaviour:
   tryRoomChance: 50
   roomChance: 66
   hallwayChance: 87
+  loadScreen: {fileID: 3433675644997919876, guid: f836b8311a6bc694c8bb5f10ace58e59, type: 3}
   dungeonOver: 0

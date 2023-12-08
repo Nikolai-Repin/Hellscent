@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] presets;
     [SerializeField] private int[] repeats;
     [SerializeField] private Transform player;
+    public bool hide = false;
 
     void Start() {
         StartCoroutine(RunGame());
@@ -19,10 +20,15 @@ public class GameManager : MonoBehaviour
                 repeatLevel++;
             }
             player.position = new();
+            hide = true;
             GameObject dungeon = Instantiate(presets[repeatLevel], new Vector2(), new Quaternion());
-            while (!dungeon.GetComponent<GenerateDungeon>().dungeonOver) {
+            while (dungeon.GetComponent<GenerateDungeon>().finished != true) {
                 yield return null;
             }
+            hide = false;
+            while (!dungeon.GetComponent<GenerateDungeon>().dungeonOver) {
+                yield return null;
+            }   
             Destroy(dungeon);
         }
     }

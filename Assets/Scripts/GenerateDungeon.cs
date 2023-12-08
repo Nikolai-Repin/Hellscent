@@ -25,6 +25,7 @@ public class GenerateDungeon : MonoBehaviour
 
 	private bool go = true;
 	private bool success = true;
+	public bool finished = false;
 
     private List<GameObject> dungeon = new();
 	private List<GameObject> closedDoors = new();
@@ -42,6 +43,7 @@ public class GenerateDungeon : MonoBehaviour
 	void Update() {
 		if (go) {
 			go = false;
+			finished = false;
 			GameObject limits = Instantiate(dungeonLimits, new Vector2(), new Quaternion());
 			limits.transform.SetParent(transform);
 			foreach (string lim in directionNumber) {
@@ -81,6 +83,7 @@ public class GenerateDungeon : MonoBehaviour
 						Debug.Log("b");
 						p.GetComponent<PlayerController>().SetControl(true);
 					}
+					finished = true;
 					yield break;
 				}
 			}
@@ -90,6 +93,7 @@ public class GenerateDungeon : MonoBehaviour
 			Destroy(dr);
 		}
 		dungeon = new();
+		finished = false;
 		GameObject limits = Instantiate(dungeonLimits, new Vector2(), new Quaternion());
 		limits.transform.SetParent(transform);
 		foreach (string lim in directionNumber) {
