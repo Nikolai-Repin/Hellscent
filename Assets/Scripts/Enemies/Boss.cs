@@ -10,7 +10,9 @@ public class Boss : Enemy
     [SerializeField] Vector2 arenaSize;
     [SerializeField] int numBombs;
     [SerializeField] public GameObject projectileType;
+    [SerializeField] private float difficultyModifier = 1;
     private GameObject bombPrefab;
+    private GameObject bombBPrefab;
     private GameObject minionPrefab;
     private Animator animator;
     private CinemachineVirtualCameraBase vCamera;
@@ -26,7 +28,8 @@ public class Boss : Enemy
         Sink = 3, //Sinks into the floor, becoming invincible
         Chase = 4, //Quickly chases to the player, switches to Emerge once on top of the player
         Emerge = 5, //Bursts up, spawning sharks, goes to wander
-        Bombs = 6 //Fires bombs around the room, after they've been fired, returns to wander
+        Bombs = 6, //Fires bombs around the room, after they've been fired, returns to wander
+        LineBombs = 7,
     }
     public float lastPhaseChange;
     public float phaseCooldown = 10F;
@@ -40,6 +43,7 @@ public class Boss : Enemy
         curPhase = Phase.Sleep;
         arenaCenter = transform.position;
         bombPrefab = Resources.Load<GameObject>("Prefabs/Entities/PirateBomb/PirateBomb");
+        bombBPrefab = Resources.Load<GameObject>("Prefabs/Entities/PirateBomb/PirateBombLine");
         minionPrefab = Resources.Load<GameObject>("Prefabs/Enemies/PirateMinion/PirateMinion");
         vCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCameraBase>();
         dealDamageOnContact = false;
@@ -73,7 +77,7 @@ public class Boss : Enemy
             case Phase.Chase: {
                 float curLen;
                 curLen = (trackerController.target.transform.position - transform.position).sqrMagnitude;
-                if (curLen <= 82 || Time.time > lastAttackTime) {
+                if (curLen <= 50 || Time.time > lastAttackTime) {
                     curPhase = Phase.Emerge;
                     lastAttackTime = Time.time + 0.75F;
                     trackerController.aiPath.maxSpeed = 2;
@@ -101,7 +105,26 @@ public class Boss : Enemy
                     //ClaimEntity(bullet);
                 }
 
-                if (firedBombs >= numBombs) {
+                if (firedBombs >= numBombs*difficultyModifier) {
+                    ReturnToWander();
+                }
+                break;
+            }
+
+            //Bomb attack, fills arena with bombs that detonate after a short delay, spawning rings of bullets
+            case Phase.LineBombs: {
+                if (Time.time > lastAttackTime) {
+                    lastAttackTime = lastAttackTime + 0.2F;
+                    Quaternion bombAngle = Quaternion.Euler(0, 0, Random.Range(-90, 90));
+                    GameObject bullet = Instantiate(bombBPrefab, new Vector3(Random.Range((arenaCenter.x-arenaSize.x)+3, (arenaCenter.x+arenaSize.x)-3), Random.Range((arenaCenter.y-arenaSize.y)+3, (arenaCenter.y+arenaSize.y)-3), 0), bombAngle);
+                    firedBombs++;
+                    
+                    //Supposed to mark attack entites as something to destroy when the boss dies, but I need to have it handle entities that have been destroyed
+                    bullet.GetComponent<BossBomb>().creator = this;
+                    //ClaimEntity(bullet);
+                }
+
+                if (firedBombs >= numBombs*difficultyModifier) {
                     ReturnToWander();
                 }
                 break;
@@ -149,14 +172,14 @@ public class Boss : Enemy
         dealDamageOnContact = true;
         invulnerable = false;
         intangible = false;
-        trackerController.SetAI(TrackerController.AI.Range);
+        trackerController.SetAI(TrackerController.AI.Melee);
         vCamera.Follow = trackerController.target.transform;
         ReturnToWander();
     }
 
     //Picks the next phase
     public void PickPhase() {
-        int nextPhase = (int) Random.Range(0, 2);
+        int nextPhase = (int) Random.Range(0, 3);
         Debug.Log(nextPhase);
         switch (nextPhase) {
             case 0: {
@@ -166,6 +189,15 @@ public class Boss : Enemy
                 
             case 1: {
                 curPhase = Phase.Bombs;
+                firedBombs = 0;
+                lastAttackTime = Time.time + 1;
+                trackerController.aiPath.maxSpeed = 0;
+                animator.SetInteger("Phase", 5);
+                break;
+            }
+
+            case 2: {
+                curPhase = Phase.LineBombs;
                 firedBombs = 0;
                 lastAttackTime = Time.time + 1;
                 trackerController.aiPath.maxSpeed = 0;
@@ -200,7 +232,7 @@ public class Boss : Enemy
         intangible = false;
         trackerController.aiPath.maxSpeed = 5;
         trackerController.SetAI(TrackerController.AI.Range);
-        int numMinions = 3;
+        int numMinions = (int)(3*difficultyModifier);
         float rotationAmount = 6.283F/numMinions;
         GameObject minion;
         for (int i = 0; i < numMinions; i++) {
@@ -217,7 +249,7 @@ public class Boss : Enemy
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.team = "Enemy";
             Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)));
-            bulletScript.LaunchProjectile(fireAngle, 10);
+            bulletScript.LaunchProjectile(fireAngle, 10*difficultyModifier);
 
             //Supposed to mark attack entites as something to destroy when the boss dies, but I need to have it handle entities that have been destroyed
             //ClaimEntity(bulletScript);

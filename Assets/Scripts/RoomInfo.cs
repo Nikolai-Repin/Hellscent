@@ -23,14 +23,16 @@ public class RoomInfo : MonoBehaviour
     }
 
     void Update () {
-        if (completed == false && fighting && entities.Count == 0) {
-            completed = true;
+        if (completed == false && fighting) {
+            if (entities.Count == 0) {
+                completed = true;
             dungeon.UnlockRooms();
-        } else if (activateLastEnemyEvent && entities.Count == 1) {
-            entities[0].GetComponent<Entity>().LastEntityEvent();
-            activateLastEnemyEvent = false;
-            Debug.Log(entities);
-        }
+            }   else if (activateLastEnemyEvent &&  entities.Count == 1) {
+                entities[0].GetComponent<Entity>().LastEntityEvent();
+                activateLastEnemyEvent = false;
+                Debug.Log(entities);
+            }
+        } 
     }
 
     public IEnumerator Lock() {

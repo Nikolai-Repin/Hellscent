@@ -20,7 +20,7 @@ public class FlareSentry : Enemy
 
     void Start() {
         firedShots = 0;
-        nextFireTime = Time.time + burstDelay + projectileDelay;
+        nextFireTime = Time.time + 1;
         base.Start();
     }
     // Update is called once per frame
@@ -53,7 +53,7 @@ public class FlareSentry : Enemy
     public override void LastEntityEvent() {
         if (rotationSpeed == 0) {
             rotationSpeed = 10;
-            projectileDelay = 1F;
+            projectileDelay = 0.5F;
         }
         return;
     }

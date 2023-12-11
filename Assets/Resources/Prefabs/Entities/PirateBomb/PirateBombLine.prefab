@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1840769733154752905}
   - component: {fileID: 1527140500431858926}
   m_Layer: 0
-  m_Name: PirateBomb
+  m_Name: PirateBombLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,10 +72,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 665226713
+  m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   knockbackMult: 0
   projectileType: {fileID: 6942168956635508771, guid: 2ffa203c2970a08409e070e3f820d93d, type: 3}
   creator: {fileID: 0}
-  bombType: 1
+  bombType: 2
 --- !u!95 &1527140500431858926
 Animator:
   serializedVersion: 5
