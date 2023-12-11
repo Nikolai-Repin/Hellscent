@@ -90,6 +90,19 @@ public class Entity : MonoBehaviour
         }
     }
 
+    protected void SlowingLineShot(GameObject projectile, int projectileCount, float startSpeed, float endSpeed, Quaternion angle) {
+        float speedChange = (startSpeed - endSpeed) / projectileCount;
+        speedChange = ((startSpeed+speedChange) - endSpeed) / projectileCount;
+        for (int i = 0; i < projectileCount; i++) {
+            GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.team = "Enemy";
+            float fireSpeed = startSpeed - speedChange*i;
+            //Debug.Log(fireSpeed);
+            bulletScript.LaunchProjectile(angle, fireSpeed);
+        }
+    }
+
     //Finds the closest game object from a array of collider2D and their distance from Vector3 origin
     public GameObject FindClosest (Collider2D[] targets, Vector3 origin) {
         if (targets.Length > 0) {
