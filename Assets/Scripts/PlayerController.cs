@@ -123,6 +123,7 @@ public class PlayerController : Entity
         base.Update();
     }
 
+
     //Changes the currently held weapon to index i in heldWeapons
     public void ChangeWeapon(int i) {
         if (equippedWeapon != null) {
