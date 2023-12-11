@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 193651356559496781}
   m_Layer: 0
   m_Name: Regular Dungeon
-  m_TagString: Untagged
+  m_TagString: Dungeon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,11 +76,12 @@ MonoBehaviour:
   - {fileID: 6862288333110420476, guid: f37c4eadd351efa4eb6ccb109a3d33e8, type: 3}
   roomSpacing: 1.0001
   mainBranchLength: 7
-  offshootBranchCap: 3
+  offshootBranchCap: 5
   waitingFrames: 5
   onlyBranchRooms: 1
+  weight: 50
   tryRoomChance: 50
   roomChance: 66
   hallwayChance: 87
-  loadScreen: {fileID: 3433675644997919876, guid: f836b8311a6bc694c8bb5f10ace58e59, type: 3}
   dungeonOver: 0
+  finished: 0

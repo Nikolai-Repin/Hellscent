@@ -18,6 +18,7 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField] private int offshootBranchCap;
 	[SerializeField] private int waitingFrames;
 	[SerializeField] private int onlyBranchRooms;
+	[SerializeField] private int weight;
 	[SerializeField, Range(0, 100)] private int tryRoomChance;
 	[SerializeField, Range(0, 100)] private int roomChance;
 	[SerializeField, Range(0, 100)] private int hallwayChance;
@@ -349,5 +350,8 @@ public class GenerateDungeon : MonoBehaviour
 			}
 		}
 		closedDoors.Clear();
+	}
+	public int GetWeight() {
+		return weight;
 	}
 }

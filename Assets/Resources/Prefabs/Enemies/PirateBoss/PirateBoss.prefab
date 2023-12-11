@@ -346,12 +346,14 @@ MonoBehaviour:
   dealDamageOnContact: 1
   visRange: 10
   iFrames: 0
+  weight: 100
   invulnTime: 0
   trackerController: {fileID: 0}
   spawnPortal: 0
   arenaSize: {x: 15, y: 15}
   numBombs: 10
   projectileType: {fileID: 6942168956635508771, guid: 2ffa203c2970a08409e070e3f820d93d, type: 3}
+  difficultyModifier: 1
   lastPhaseChange: 0
   phaseCooldown: 10
   curPhase: 0

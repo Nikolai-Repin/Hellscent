@@ -397,6 +397,7 @@ MonoBehaviour:
   dealDamageOnContact: 0
   visRange: 20
   iFrames: 0
+  weight: 20
   invulnTime: 0
   trackerController: {fileID: 0}
   fuse: 0.5
