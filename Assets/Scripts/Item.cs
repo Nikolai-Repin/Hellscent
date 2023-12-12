@@ -68,6 +68,7 @@ public class Item : MonoBehaviour
                 controller.RestoreHP(regenHearts);
                 uiManager.updateHealth();
                 Debug.Log("Healed " + regenHearts + " HP");
+            }
                 
             if (journal > 0) {
                 pageStorage.texts[journal] = page;
