@@ -81,7 +81,6 @@ public class GenerateDungeon : MonoBehaviour
 					AstarPath.active.Scan();
 					GameObject[] players = GameObject.FindGameObjectsWithTag("player");
 					foreach (GameObject p in players) {
-						Debug.Log("b");
 						p.GetComponent<PlayerController>().SetControl(true);
 					}
 					finished = true;

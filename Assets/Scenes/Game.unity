@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1876858686}
-  defualtOn: 1
+  defaultOn: 1
 --- !u!114 &93531521 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7081838409665154969, guid: 1b11ea2c53f33a44d944662249491036, type: 3}
@@ -438,7 +438,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 264282463}
-  - component: {fileID: 264282464}
   m_Layer: 0
   m_Name: Minimap
   m_TagString: Untagged
@@ -467,20 +466,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &264282464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 264282462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7346e665aa4ad9043809a399fb721390, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 1876858686}
-  defualtOn: 1
 --- !u!1 &315890430 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7254836270727516316, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
@@ -630,7 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1876858686}
-  defualtOn: 1
+  defaultOn: 1
 --- !u!1 &668021274
 GameObject:
   m_ObjectHideFlags: 3
@@ -829,7 +814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1876858686}
-  defualtOn: 1
+  defaultOn: 1
 --- !u!1001 &890889816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1166,7 +1151,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1415762315}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1415762317
 Camera:
   m_ObjectHideFlags: 0
@@ -1335,7 +1320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1876858686}
-  defualtOn: 1
+  defaultOn: 1
 --- !u!1 &1787826335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,7 +1472,6 @@ GameObject:
   - component: {fileID: 1824853729}
   - component: {fileID: 1824853731}
   - component: {fileID: 1824853730}
-  - component: {fileID: 1824853732}
   m_Layer: 0
   m_Name: Minimap Border
   m_TagString: Untagged
@@ -1552,20 +1536,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824853728}
   m_CullTransparentMesh: 1
---- !u!114 &1824853732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824853728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7346e665aa4ad9043809a399fb721390, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 1876858686}
-  defualtOn: 1
 --- !u!114 &1876858686 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
@@ -1619,7 +1589,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17455363067179574}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1751,7 +1721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1876858686}
-  defualtOn: 0
+  defaultOn: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

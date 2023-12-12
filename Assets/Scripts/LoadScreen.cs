@@ -6,9 +6,17 @@ using UnityEngine.UI;
 public class LoadScreen : MonoBehaviour
 {
     [SerializeField] private GameManager manager;
-    [SerializeField] private bool defualtOn;
+    [SerializeField] private bool defaultOn;
+
+    private Image image;
+
+    void Start() {
+        image = transform.gameObject.GetComponent<Image>();
+    }
 
     void Update() {
-        transform.gameObject.GetComponent<Image>().enabled = defualtOn ? !manager.hide : manager.hide;
+        if (image.enabled) {
+            image.enabled = defaultOn ? !manager.hide : manager.hide;
+        }
     }
 }

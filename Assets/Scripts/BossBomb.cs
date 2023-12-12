@@ -40,8 +40,8 @@ public class BossBomb : Entity
                     if (bombType == BombType.Circle) {
                         FireInRings(projectileType, 8, 360/8, 0, 2);
                     } else if (bombType == BombType.Line) {
-                        SlowingLineShot(projectileType, 8, 10, 1, transform.rotation);
-                        SlowingLineShot(projectileType, 8, 10, 1, Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z+180));
+                        SlowingLineShot(projectileType, 6, 15, 3, transform.rotation);
+                        SlowingLineShot(projectileType, 6, 15, 3, Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z+180));
                     }
                     curPhase = Phase.Blasting;
                 }
