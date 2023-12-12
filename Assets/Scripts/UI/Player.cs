@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // Inventory
+    // -------------------------------------------------------------------------------------
     public InventoryManager inventory;
 
     private void Awake() {
@@ -26,4 +27,11 @@ public class Player : MonoBehaviour
             DropItem(item);
         }
     }
+
+    // Quest System / Player Leveling
+    // -----------------------------------------------------------------------------------
+    public int experience = 0;
+    public int gold = 0;
+
+    public Quest quests;
 }
