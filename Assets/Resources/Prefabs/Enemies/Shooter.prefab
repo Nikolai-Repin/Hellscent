@@ -290,6 +290,7 @@ MonoBehaviour:
   dealDamageOnContact: 0
   visRange: 40
   iFrames: 0
+  weight: 20
   invulnTime: 0
   trackerController: {fileID: 0}
   weapon: {fileID: 470356897603892556}
@@ -297,6 +298,7 @@ MonoBehaviour:
   reloadTime: 2
   ammo: 0
   moveWhileShooting: 0
+  shooterType: 0
 --- !u!1 &3410064842637425917
 GameObject:
   m_ObjectHideFlags: 0
