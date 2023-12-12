@@ -15,9 +15,12 @@ public class Item : MonoBehaviour
     [SerializeField] private float bonusManaRechargeSpeed;
     [SerializeField] private float bonusMaxHP;
     [SerializeField] private int weight;
+    [SerializeField] private int journal;
+    [SerializeField] private GameObject page;
 
     public ItemData data;
     [HideInInspector] public Rigidbody2D rb2d;
+    [SerializeField] Journalnavigation pageStorage;
 
     void Start() {
         playerCharacter = GameObject.FindWithTag("Player");
@@ -58,6 +61,10 @@ public class Item : MonoBehaviour
                 uiManager.updateHealth();
                 Debug.Log("Max Hp increased by " + bonusMaxHP);
                 Debug.Log("Healed " + bonusMaxHP + " HP");
+            }
+
+            if (journal > 0) {
+                pageStorage.texts[journal] = page;
             }
 
             Destroy(gameObject);
