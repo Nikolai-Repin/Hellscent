@@ -15,7 +15,6 @@ public class ContactDamageCollider : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        Debug.Log("");
         owner = transform.parent.GetComponent<Enemy>();
         Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
@@ -24,11 +23,9 @@ public class ContactDamageCollider : MonoBehaviour
         if (PushOtherEntities && other.GetComponent<ContactDamageCollider>() != null) {
             //Give force in the negative direction
             float forceMulti = 0.5f;
-            //AH RIGHT GETCOMPONENT MY BELOATHED UUUGH
 
             Vector2 pushVector = (-1 * (other.transform.position - transform.position).normalized * forceMulti);
             owner.GetComponent<AIBase>().velocity2D += pushVector;
-            //This totally doesn't work
         }
         switch (detectionType) {
             case (DetectionType.damage): {

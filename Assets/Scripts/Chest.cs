@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chest : MonoBehaviour
+public class Chest : Entity
 {
 
     [SerializeField] private List<GameObject> weaponPool = new();
@@ -19,7 +19,7 @@ public class Chest : MonoBehaviour
 
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (!opened && other.CompareTag("Player")) {
+        if (!opened && other.CompareTag("player")) {
             opened = true;
             int count = 0;
             int index = 0;

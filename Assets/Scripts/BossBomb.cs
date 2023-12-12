@@ -9,6 +9,11 @@ public class BossBomb : Entity
     [SerializeField] public GameObject projectileType;
     public Boss creator;
     private Animator animator;
+    [SerializeField] private BombType bombType;
+    private enum BombType {
+        Circle = 1,
+        Line = 2,
+    }
     private enum Phase {
         Charging = 1,
         Blasting = 2,
@@ -32,7 +37,12 @@ public class BossBomb : Entity
             //Pre-Detonation
             case Phase.Charging: {
                 if (fuse <= 0) {
-                    FireInRings(projectileType, 8, 360/8, 0, 2);
+                    if (bombType == BombType.Circle) {
+                        FireInRings(projectileType, 8, 360/8, 0, 2);
+                    } else if (bombType == BombType.Line) {
+                        SlowingLineShot(projectileType, 6, 15, 3, transform.rotation);
+                        SlowingLineShot(projectileType, 6, 15, 3, Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z+180));
+                    }
                     curPhase = Phase.Blasting;
                 }
                 break;

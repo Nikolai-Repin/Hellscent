@@ -12,7 +12,7 @@ public class DetectPlayer : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (!room.fighting && !room.completed && room.locked == true && other.tag == "player") {
+        if (!room.fighting && !room.completed && other.tag == "player") {
             StartCoroutine(room.Lock());
         }
     }
