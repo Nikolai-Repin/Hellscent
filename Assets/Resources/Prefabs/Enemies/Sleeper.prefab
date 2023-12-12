@@ -153,9 +153,9 @@ GameObject:
   - component: {fileID: 4267736262288371163}
   - component: {fileID: 3955087765442714262}
   - component: {fileID: 5312439343345860918}
-  - component: {fileID: 208737942569589933}
+  - component: {fileID: 2049416075905024606}
   m_Layer: 6
-  m_Name: BlastSack
+  m_Name: Sleeper
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 15
+  maxSpeed: 2
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -319,7 +319,7 @@ MonoBehaviour:
     maximumInterval: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
-  maxAcceleration: 5
+  maxAcceleration: 2
   rotationSpeed: 360
   slowdownDistance: 0.6
   pickNextWaypointDist: 2
@@ -377,7 +377,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!114 &208737942569589933
+--- !u!114 &2049416075905024606
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -386,21 +386,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8131431801803962105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb83f495f748bc7469e15c1d79252459, type: 3}
+  m_Script: {fileID: 11500000, guid: 47b4f8b5b2b1d0043950d2636df10e27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   invulnerable: 0
   intangible: 0
   maxHealthAmount: 0
-  healthAmount: 25
-  knockbackMult: 0.3
-  dealDamageOnContact: 0
-  visRange: 20
+  healthAmount: 20
+  knockbackMult: 0.2
+  dealDamageOnContact: 1
+  visRange: 30
   iFrames: 0
   invulnTime: 0
-  trackerController: {fileID: 0}
-  fuse: 1.5
-  projectileType: {fileID: 6942168956635508771, guid: 510769cf04792ed45ba62fbb8b216951, type: 3}
-  projectileCount: 8
-  rotationOffset: 0
-  rings: 2
+  trackerController: {fileID: 185374469373927219}
+  awakeSpeed: 20
+  awakeAcceleration: 17
+  awakeningTime: 5

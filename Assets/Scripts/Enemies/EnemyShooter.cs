@@ -10,7 +10,12 @@ public class EnemyShooter : Enemy
     [SerializeField] protected float reloadTime;
     [SerializeField] private int ammo;
     [SerializeField] private bool moveWhileShooting;
-    [SerializeField] private int shooterType;
+    [SerializeField] private ShooterType sType;
+    private enum ShooterType
+    {
+        Shooter = 0,
+        Popper = 1,
+    }
     private static int shooterCount = 0;
     private int shooterIndex;
     private float reloadLastTime;
@@ -24,7 +29,7 @@ public class EnemyShooter : Enemy
 
     void Start() {
         base.Start();
-        if (shooterType == 0) {
+        if (sType == ShooterType.Shooter) {
 
             shooterIndex = shooterCount;
             shooterCount++;
@@ -55,7 +60,7 @@ public class EnemyShooter : Enemy
                 ammo = clipSize;
                 reloadLastTime = Time.time + Random.Range(reloadTime, reloadTime+(reloadTime/3));
 
-                if (shooterType == 0) { 
+                if (sType == ShooterType.Shooter) { 
                     reloadLastTime += (shooterIndex%shooterCount)*0.5F;
                 }
             }
@@ -70,7 +75,13 @@ public class EnemyShooter : Enemy
     }
 
     public override void Die() {
-        shooterCount--;
+        switch (sType) {
+            case ShooterType.Shooter: {
+                shooterCount--;
+                break;
+            }
+        }
+        
         base.Die();
     }
 }

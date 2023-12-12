@@ -26,9 +26,9 @@ public class TrackerController : MonoBehaviour
 
     private void Start()
     {
-
+        
         transform.parent.GetComponent<Enemy>().trackerController = this;
-
+        Debug.Log("test");
         aiPath = transform.parent.GetComponent<AIPath>();
         switch (ai) {
             case AI.Melee: {
