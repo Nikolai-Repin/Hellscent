@@ -97,16 +97,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9f1a44a96814ba583364c39cc1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weight: 0
   offset: 1
   projectileType: {fileID: 6942168956635508771, guid: 2ba935fd33f77754086b73447fc21544, type: 3}
-  cooldownTime: 0.5
   kickback: 2
+  cooldownTime: 0.5
   bullets: 1
   accuracy: 1
+  weaponDamage: 0
   useMana: 1
   manaCost: 1
-  maxMana: 50
+  maxMana: 25
   mana: 0
+  manaRechargeDelay: 1
+  lastFireTime: 0
+  cooldown: 0
   quality: 0
   randomize: 0
   modCooldownTime: 1
