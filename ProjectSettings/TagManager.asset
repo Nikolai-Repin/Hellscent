@@ -9,6 +9,7 @@ TagManager:
   - player
   - Bullet
   - Dungeon
+  - Journal
   layers:
   - Default
   - TransparentFX
