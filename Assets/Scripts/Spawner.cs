@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
                         StartCoroutine(target.GetComponent<TargetSpawn>().Spawn(enemyPool[SelectEnemy()], spawnTime, transform.parent.GetComponent<RoomInfo>(), tar));
                         transform.parent.gameObject.GetComponent<RoomInfo>().entities.Add(tar);
                     } else {
-                        enemy = Instantiate(enemyPool[SelectEnemy()], transform.position, Quaternion.Euler(0, 0, 0));
+                        enemy = Instantiate(enemyPool[Random.Range(0, enemyPool.Count)], transform.position, Quaternion.Euler(0, 0, 0));
                         enemy.GetComponent<Entity>().SetRoom(transform.parent.GetComponent<RoomInfo>()); 
                         transform.parent.gameObject.GetComponent<RoomInfo>().entities.Add(enemy);
                     }
@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
                         StartCoroutine(target.GetComponent<TargetSpawn>().Spawn(enemyPool[SelectEnemy()], spawnTime, transform.parent.GetComponent<RoomInfo>(), tar));
                         transform.parent.gameObject.GetComponent<RoomInfo>().entities.Add(tar);
                     } else {
-                        enemy = Instantiate(enemyPool[SelectEnemy()], transform.position, Quaternion.Euler(0, 0, 0));
+                        enemy = Instantiate(enemyPool[Random.Range(0, enemyPool.Count)], transform.position, Quaternion.Euler(0, 0, 0));
                         enemy.GetComponent<Entity>().SetRoom(transform.parent.GetComponent<RoomInfo>());
                         enemy.transform.Translate(pos);
                         transform.parent.gameObject.GetComponent<RoomInfo>().entities.Add(enemy);
