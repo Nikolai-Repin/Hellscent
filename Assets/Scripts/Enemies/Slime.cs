@@ -24,17 +24,15 @@ public class Slime : Enemy
     }
     public Phase curPhase;
     private Animator animator;
-    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
     {
-        Register();
+        base.Start();
         if (size <= 0) {
             Destroy(transform.gameObject);
         }
         dealDamageOnContact = true;
-        trackerController.aiPath.maxSpeed = 5;
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         randAttackDelay = Random.Range(0, 0.5F);
@@ -78,8 +76,6 @@ public class Slime : Enemy
                     //Applying force to slime for charge
                     float forceMulti = 50f;
                     Vector2 pushVector = ((trackerController.target.transform.position - transform.position).normalized * forceMulti);
-                    Debug.Log(pushVector/forceMulti);
-                    Debug.Log(trackerController.target.transform.position - transform.position);
                     GetComponent<AIBase>().velocity2D += pushVector;
 
                     curPhase = Phase.ChargeEnd;

@@ -51,9 +51,11 @@ MonoBehaviour:
   intangible: 1
   maxHealthAmount: 0
   healthAmount: 0
+  knockbackMult: 0
   maxLife: 30
-  bulletDamage: 0
+  bulletDamage: 1
   projectileSpeed: 0.5
+  knockback: 0
   pierce: 1000
   reflectable: 1
   setDamage: 0
@@ -97,8 +99,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -623300407
+  m_SortingLayer: 2
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: e3a47a53c76dc35449e1e4c1e6f77d3e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

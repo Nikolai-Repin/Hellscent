@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class Bullet : Entity {
     
     [SerializeField] private float maxLife; //How long a bullet should exist for, in seconds, I think.
     [SerializeField] private float bulletDamage; // How much damage a bullet should do
     [SerializeField] private float projectileSpeed; //How fast bullet move
+    [SerializeField] private float knockback; //Knockback on enemy when it makes contact
     [SerializeField] private int pierce; //How many entities it should interact with
     [SerializeField] private bool reflectable; //Should it be flectable by melee weapons
     [SerializeField] private bool setDamage; 
@@ -60,14 +62,18 @@ public class Bullet : Entity {
         
         //I need to set up teams or something of the like for this, I want bullets to be able to belong to enemies
         if (other.gameObject.GetComponent<Entity>() != null && other.gameObject.GetComponent<Bullet>() == null &&  other.gameObject.tag != team) {
-            if (other.gameObject.GetComponent<Entity>().TakeDamage(bulletDamage)) {
+            if (other.gameObject.GetComponent<Entity>().TakeDamage(bulletDamage )) {
+                if(other.GetComponent<AIBase>() != null) {
+                    other.GetComponent<AIBase>().velocity2D += (GetComponent<Rigidbody2D>().velocity.normalized * knockback)*other.GetComponent<Entity>().knockbackMult;
+                } else {
+                    other.GetComponent<Rigidbody2D>().velocity += (GetComponent<Rigidbody2D>().velocity.normalized * knockback)*other.GetComponent<Entity>().knockbackMult;
+                }
                 pierce--;
             }
         }
 
-        if (other.gameObject.layer == LayerMask.GetMask("Walls")) { //Hardcoding because I don't have the time today to set up a way to handle what bullets should interact with, maybe check if they have the same parent?
+        if (other.gameObject.layer == LayerMask.NameToLayer("Walls")) {
             pierce = 0;
-
         }
 
         if (pierce <= 0) {
