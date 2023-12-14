@@ -287,6 +287,7 @@ MonoBehaviour:
   entities: []
   fighting: 0
   oneDoor: 1
+  activateLastEnemyEvent: 0
 --- !u!1 &7662808374561010124
 GameObject:
   m_ObjectHideFlags: 0
