@@ -11,7 +11,7 @@ public class PlayerController : Entity
     [SerializeField, Range(0,1)] private float damper; // default should be 150
     private Vector2 direction;
     private Vector2 saved_direction;
-
+    private Vector3 target;
     //Weapon Variables
     [SerializeField] private float manaRechargeSpeed = 5;
     private int weaponIndex;
@@ -20,10 +20,6 @@ public class PlayerController : Entity
     public GameObject equippedWeapon;
     public List<GameObject> heldWeapons;
     [SerializeField] private float damage;
-
-    public Animator anim;
-
-
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
 
@@ -44,7 +40,8 @@ public class PlayerController : Entity
 
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
-        anim = gameObject.GetComponent<Animator>();
+        
+
 
         Register();
         base.Start();
@@ -52,6 +49,21 @@ public class PlayerController : Entity
 
     void Update()
     {
+        /*Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseDir = mousePosition - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        */
+         target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var mousedir = target - transform.position;
+        var angle = Mathf.Atan2(mousedir.x, mousedir.y) * Mathf.Rad2Deg;
+        
+        Quaternion angleaxis = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
+        Debug.Log(angleaxis);
+        rb.MoveRotation(angleaxis);
+        transform.rotation = Quaternion.LookRotation(rb.velocity);
+
+
         direction = new Vector2(0.0f, 0.0f);
         bool keypressed = false;
 
@@ -80,14 +92,6 @@ public class PlayerController : Entity
                 }
             }
 
-            
-
-            if (Input.GetKeyDown(KeyCode.D)){
-                anim.Play("playerWalkRight");
-            }
-            if(Input.GetKeyDown(KeyCode.A)){
-                anim.Play("playerWalkLeft");
-            }
 
             if (hasWeapon) {
                 if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) {
