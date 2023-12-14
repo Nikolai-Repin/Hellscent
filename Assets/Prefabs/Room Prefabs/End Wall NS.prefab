@@ -176,6 +176,7 @@ MonoBehaviour:
   fighting: 0
   oneDoor: 1
   activateLastEnemyEvent: 0
+  closedCollisions: {fileID: 0}
 --- !u!1 &1554632848214206479
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,9 +188,9 @@ GameObject:
   - component: {fileID: 2704261007671433796}
   - component: {fileID: 756395068013262430}
   - component: {fileID: 1506620131719929828}
-  - component: {fileID: 8258224890560587907}
-  - component: {fileID: 7325036141369283488}
-  - component: {fileID: 4600954328385489885}
+  - component: {fileID: 2684041548680848964}
+  - component: {fileID: 2987472819434068558}
+  - component: {fileID: 6880264202826849835}
   m_Layer: 3
   m_Name: Collisions
   m_TagString: Untagged
@@ -377,7 +378,7 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!19719996 &8258224890560587907
+--- !u!19719996 &2684041548680848964
 TilemapCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -413,7 +414,7 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!50 &7325036141369283488
+--- !u!50 &2987472819434068558
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -440,7 +441,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!66 &4600954328385489885
+--- !u!66 &6880264202826849835
 CompositeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -473,11 +474,11 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 1
+  m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
-  - m_Collider: {fileID: 8258224890560587907}
+  - m_Collider: {fileID: 2684041548680848964}
     m_ColliderPaths:
     - - X: 530000000
         Y: -270000000
