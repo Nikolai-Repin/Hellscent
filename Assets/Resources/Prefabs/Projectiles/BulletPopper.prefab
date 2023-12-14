@@ -155,33 +155,6 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Resources/Prefabs/Enemies/BurstSentry.prefab
-  m_GameObject: {fileID: 5010791337478828397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb8be72ddf0b094caf08a8d41c5b37d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  invulnerable: 0
-  intangible: 0
-  maxHealthAmount: 20
-  healthAmount: 20
-  knockbackMult: 0
-  dealDamageOnContact: 1
-  visRange: 20
-  iFrames: 0
-  invulnTime: 0
-  trackerController: {fileID: 0}
-  projectileType: {fileID: 6942168956635508771, guid: 2ffa203c2970a08409e070e3f820d93d, type: 3}
-  projectileCount: 8
-  projectileDelay: 3
-  projectileSpeed: 10
-  rotationOffset: 0
-  rotationSpeed: 0
-  burstLength: 1
-  burstDelay: 0
-  alternateDirections: 0
-=======
   m_GameObject: {fileID: 6942168956635508771}
   m_BodyType: 0
   m_Simulated: 1
@@ -202,4 +175,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
->>>>>>> d4ff7cb5e517e0e5daa52fddcc327f8a09661272:Assets/Resources/Prefabs/Projectiles/BulletPopper.prefab
