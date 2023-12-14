@@ -26,19 +26,21 @@ public class TrackerController : MonoBehaviour
 
     private void Start()
     {
-
-        transform.parent.GetComponent<Enemy>().trackerController = this;
-
-        aiPath = transform.parent.GetComponent<AIPath>();
-        if (ai == AI.Melee)
-        {
-            aiPath.endReachedDistance = endReachedDistanceMelee;
-        }
-        else if (ai == AI.Range)
-        {
-            aiPath.endReachedDistance = endReachedDistanceRange;
-        }
         
+        transform.parent.GetComponent<Enemy>().trackerController = this;
+        Debug.Log("test");
+        aiPath = transform.parent.GetComponent<AIPath>();
+        switch (ai) {
+            case AI.Melee: {
+                aiPath.endReachedDistance = endReachedDistanceMelee;
+                break;
+            }
+
+            case AI.Range: {
+                aiPath.endReachedDistance = endReachedDistanceRange;
+                break;
+            }
+        }
     }
 
     private void Update()

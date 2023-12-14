@@ -21,7 +21,7 @@ public class Journalnavigation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Theres this one thing that got me trippen");
+        
     }
 
     // Update is called once per frame

@@ -13,21 +13,20 @@ public class Entity : MonoBehaviour
 
     protected UIManager uiManager;
 
+    [SerializeField] public float knockbackMult;
     public static List<Entity> entityList = new List<Entity>();
     private RoomInfo room;
-
-    // Start is called before the first frame update
-    void Start()
-    {
+    protected SpriteRenderer sr;
+    
+    protected virtual void Start() {
+        sr = GetComponent<SpriteRenderer>();
+        Register();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    protected virtual void Update() {
+        SortInRenderLayer();
     }
-
 
     //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
@@ -46,7 +45,6 @@ public class Entity : MonoBehaviour
    }
 
        protected void Register() {
-        Debug.Log("Registering...");
         Entity newEntity = transform.GetComponent<Entity>();
         entityList.Add(newEntity);
     }
@@ -89,6 +87,19 @@ public class Entity : MonoBehaviour
             bulletScript.team = "Enemy";
             Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)+startAngle));
             bulletScript.LaunchProjectile(fireAngle);
+        }
+    }
+
+    protected void SlowingLineShot(GameObject projectile, int projectileCount, float startSpeed, float endSpeed, Quaternion angle) {
+        float speedChange = (startSpeed - endSpeed) / projectileCount;
+        speedChange = ((startSpeed+speedChange) - endSpeed) / projectileCount;
+        for (int i = 0; i < projectileCount; i++) {
+            GameObject bullet = Instantiate(projectile, transform.position, new Quaternion());
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.team = "Enemy";
+            float fireSpeed = startSpeed - speedChange*i;
+            //Debug.Log(fireSpeed);
+            bulletScript.LaunchProjectile(angle, fireSpeed);
         }
     }
 
@@ -156,6 +167,11 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public void SortInRenderLayer() {
+        Vector3 tmpPos = Camera.main.WorldToViewportPoint(gameObject.transform.position);
+        sr.sortingOrder = Mathf.RoundToInt(1/tmpPos.y*100);
+    }
+
     public void AddMaxHP(float bonusMaxHP) {
         maxHealthAmount += bonusMaxHP;
     }
@@ -170,6 +186,10 @@ public class Entity : MonoBehaviour
 
     public float GetHealthAmount() {
         return healthAmount;
+    }
+
+    public virtual void LastEntityEvent() {
+        return;
     }
 
 }
