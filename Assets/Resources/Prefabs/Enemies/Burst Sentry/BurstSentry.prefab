@@ -154,8 +154,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8009601236626935309}
   - {fileID: 655352989004150746}
+  - {fileID: 8009601236626935309}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.062}
 --- !u!212 &1604624000999719546
@@ -273,7 +273,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -322,6 +322,7 @@ MonoBehaviour:
   dealDamageOnContact: 1
   visRange: 20
   iFrames: 0
+  weight: 30
   invulnTime: 0
   trackerController: {fileID: 0}
   projectileType: {fileID: 6942168956635508771, guid: b576974dd58bb0345a6eca8e3824a21e, type: 3}

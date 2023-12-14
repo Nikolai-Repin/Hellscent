@@ -254,11 +254,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 0
   intangible: 0
+  maxHealthAmount: 0
   healthAmount: 10
   knockbackMult: 1
   dealDamageOnContact: 1
   visRange: 20
   iFrames: 0
+  weight: 70
   invulnTime: 0
   trackerController: {fileID: 0}
   size: 2

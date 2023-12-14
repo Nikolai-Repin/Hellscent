@@ -8,6 +8,7 @@ public class Enemy : Entity
     [SerializeField] protected bool dealDamageOnContact;
     [SerializeField] protected float visRange;
     [SerializeField] public float iFrames;
+    [SerializeField] private int weight;
     public float invulnTime;
 
     public TrackerController trackerController;
@@ -56,17 +57,12 @@ public class Enemy : Entity
     }
 
     public override bool TakeDamage(float damage) {
-        if (intangible || Time.time < invulnTime) {
+        if (Time.time < invulnTime) {
             return false;
         }
-
-        if (!invulnerable) {
-            healthAmount -= damage;
-            if (healthAmount <= 0) {
-                invulnTime = Time.time + iFrames;
-                Die();
-            }
-        }
-        return true;
-   }
+        return base.TakeDamage(damage);
+    }
+    public int GetWeight() {
+        return weight;
+    }
 }

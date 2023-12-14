@@ -10,6 +10,14 @@ public class EnemyShooter : Enemy
     [SerializeField] protected float reloadTime;
     [SerializeField] private int ammo;
     [SerializeField] private bool moveWhileShooting;
+    [SerializeField] private ShooterType sType;
+    private enum ShooterType
+    {
+        Shooter = 0,
+        Popper = 1,
+    }
+    private static int shooterCount = 0;
+    private int shooterIndex;
     private float reloadLastTime;
     protected GameObject target;
     public enum Phase
@@ -21,6 +29,12 @@ public class EnemyShooter : Enemy
 
     void Start() {
         base.Start();
+        if (sType == ShooterType.Shooter) {
+
+            shooterIndex = shooterCount;
+            shooterCount++;
+        }
+        
         curPhase = Phase.Aiming;
         reloadLastTime = Time.time;
         ammo = clipSize;
@@ -45,6 +59,10 @@ public class EnemyShooter : Enemy
                 curPhase = Phase.Aiming;
                 ammo = clipSize;
                 reloadLastTime = Time.time + Random.Range(reloadTime, reloadTime+(reloadTime/3));
+
+                if (sType == ShooterType.Shooter) { 
+                    reloadLastTime += (shooterIndex%shooterCount)*0.5F;
+                }
             }
 
             if (curPhase != Phase.Firing || moveWhileShooting) {
@@ -54,5 +72,16 @@ public class EnemyShooter : Enemy
             target = FindClosestPlayer(visRange);
             ammo = 0;
         }
+    }
+
+    public override void Die() {
+        switch (sType) {
+            case ShooterType.Shooter: {
+                shooterCount--;
+                break;
+            }
+        }
+        
+        base.Die();
     }
 }

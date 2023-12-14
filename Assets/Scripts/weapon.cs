@@ -57,9 +57,9 @@ public class Weapon : MonoBehaviour
                 SetTarget(Input.mousePosition);
                 lastFireTime = Time.time;
                 mana = maxMana;
+                useMana = true;
             } else {
                 useMana = false;
-                manaCost = 0;
             }
             controller = parent.GetComponent<Entity>();
         }
@@ -98,7 +98,7 @@ public class Weapon : MonoBehaviour
     //Fires the selected projectile
     public bool Fire()
     {
-        if (cooldown > 0 || mana < manaCost) {return false;}
+        if (cooldown > 0 || (useMana && mana < manaCost)) {return false;}
 
         for (int i = 0; i < bullets+modBullets; i++)
         {
@@ -117,7 +117,7 @@ public class Weapon : MonoBehaviour
         }
 
         lastFireTime = Time.time + manaRechargeDelay;
-        mana -= manaCost;
+        if (useMana) {mana -= manaCost;}
         cooldown = cooldownTime;
 
         return true;
