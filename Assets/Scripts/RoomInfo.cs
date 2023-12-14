@@ -15,6 +15,7 @@ public class RoomInfo : MonoBehaviour
     public bool fighting = false;
     public bool oneDoor = false;
     [SerializeField] private bool activateLastEnemyEvent;
+    [SerializeField] private GameObject closedCollisions;
 
     void Start()
     {
@@ -26,7 +27,8 @@ public class RoomInfo : MonoBehaviour
         if (completed == false && fighting) {
             if (entities.Count == 0) {
                 completed = true;
-            dungeon.UnlockRooms();
+                dungeon.UnlockRooms();
+                closedCollisions.SetActive(false);
             }   else if (activateLastEnemyEvent &&  entities.Count == 1) {
                 entities[0].GetComponent<Entity>().LastEntityEvent();
                 activateLastEnemyEvent = false;
@@ -37,6 +39,7 @@ public class RoomInfo : MonoBehaviour
 
     public IEnumerator Lock() {
         if (locked) {
+            closedCollisions.SetActive(true);
             dungeon.LockRoom(transform.gameObject);
         }
         foreach (Spawner s in spawners) {

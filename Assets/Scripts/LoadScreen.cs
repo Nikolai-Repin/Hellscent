@@ -15,8 +15,6 @@ public class LoadScreen : MonoBehaviour
     }
 
     void Update() {
-        if (image.enabled) {
-            image.enabled = defaultOn ? !manager.hide : manager.hide;
-        }
+        image.enabled = defaultOn ? !manager.hide : manager.hide;
     }
 }
