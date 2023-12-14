@@ -291,6 +291,7 @@ MonoBehaviour:
   dealDamageOnContact: 0
   visRange: 40
   iFrames: 0
+  weight: 20
   invulnTime: 0
   trackerController: {fileID: 0}
   weapon: {fileID: 470356897603892556}
@@ -477,6 +478,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  shooterType: 0
 --- !u!1 &3410064842637425917
 GameObject:
   m_ObjectHideFlags: 0

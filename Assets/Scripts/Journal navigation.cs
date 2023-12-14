@@ -8,7 +8,7 @@ public class Journalnavigation : MonoBehaviour
     private bool isOpen = false;
 
     [SerializeField] private GameObject[] pages;
-    [SerializeField] private GameObject[] texts;
+    [SerializeField] public GameObject[] texts;
 
     GameObject book;
     GameObject textLeft;
@@ -21,7 +21,7 @@ public class Journalnavigation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Theres this one thing that got me trippen");
+        
     }
 
     // Update is called once per frame

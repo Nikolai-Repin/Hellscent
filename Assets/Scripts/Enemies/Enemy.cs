@@ -8,6 +8,7 @@ public class Enemy : Entity
     [SerializeField] protected bool dealDamageOnContact;
     [SerializeField] protected float visRange;
     [SerializeField] public float iFrames;
+    [SerializeField] private int weight;
     public float invulnTime;
 
     public TrackerController trackerController;
@@ -60,5 +61,8 @@ public class Enemy : Entity
             return false;
         }
         return base.TakeDamage(damage);
-   }
+    }
+    public int GetWeight() {
+        return weight;
+    }
 }

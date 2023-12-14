@@ -501,6 +501,7 @@ MonoBehaviour:
   dealDamageOnContact: 1
   visRange: 20
   iFrames: 0
+  weight: 30
   invulnTime: 0
   trackerController: {fileID: 0}
   projectileType: {fileID: 6942168956635508771, guid: b576974dd58bb0345a6eca8e3824a21e, type: 3}

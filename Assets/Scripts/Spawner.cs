@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
                 if (point) {
                     if (useTargets) {
                         GameObject tar = Instantiate(target, transform.position, Quaternion.Euler(0, 0, 0));
-                        StartCoroutine(target.GetComponent<TargetSpawn>().Spawn(enemyPool[Random.Range(0, enemyPool.Count)], spawnTime, transform.parent.GetComponent<RoomInfo>(), tar));
+                        StartCoroutine(target.GetComponent<TargetSpawn>().Spawn(enemyPool[SelectEnemy()], spawnTime, transform.parent.GetComponent<RoomInfo>(), tar));
                         transform.parent.gameObject.GetComponent<RoomInfo>().entities.Add(tar);
                     } else {
                         enemy = Instantiate(enemyPool[Random.Range(0, enemyPool.Count)], transform.position, Quaternion.Euler(0, 0, 0));
@@ -32,7 +32,7 @@ public class Spawner : MonoBehaviour
                     if (useTargets) {
                         GameObject tar = Instantiate(target, transform.position, Quaternion.Euler(0, 0, 0));
                         tar.transform.Translate(pos);
-                        StartCoroutine(target.GetComponent<TargetSpawn>().Spawn(enemyPool[Random.Range(0, enemyPool.Count)], spawnTime, transform.parent.GetComponent<RoomInfo>(), tar));
+                        StartCoroutine(target.GetComponent<TargetSpawn>().Spawn(enemyPool[SelectEnemy()], spawnTime, transform.parent.GetComponent<RoomInfo>(), tar));
                         transform.parent.gameObject.GetComponent<RoomInfo>().entities.Add(tar);
                     } else {
                         enemy = Instantiate(enemyPool[Random.Range(0, enemyPool.Count)], transform.position, Quaternion.Euler(0, 0, 0));
@@ -44,6 +44,18 @@ public class Spawner : MonoBehaviour
                 yield return new WaitForSeconds(0.05f);
             }
         }
+    }
+
+    private int SelectEnemy() {
+        int count = transform.parent.parent.GetComponent<GenerateDungeon>().GetWeight();
+        int index = 0;
+        int i = 0;
+        while (i < 200 && count < 100) {
+            index = Random.Range(0, enemyPool.Count);
+            count += enemyPool[index].GetComponent<Enemy>().GetWeight();
+            i++;
+        }
+        return index;
     }
 
     private void OnDrawGizmosSelected() {

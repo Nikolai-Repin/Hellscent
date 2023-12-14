@@ -79,10 +79,10 @@ public class UIManager : MonoBehaviour
     }
 
     public void UpdateEntityHealthBar(Entity entity) {
-        Debug.Log("Enemy Health Updated");
-        Debug.Log("Image reference: " + entity.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>());
+        
+        // Gets reference to the entity's canvas, which then gets reference to the image of the health bar. 
+        // Uses the health bar's reference to visually update how much health an entity has.
         entity.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = (entity.GetHealthAmount()/entity.GetMaxHealthAmount());
-        //entity.healthBar.fillAmount = (entity.GetHealthAmount()/entity.GetMaxHealthAmount());
         
     }
 

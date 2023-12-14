@@ -175,6 +175,7 @@ MonoBehaviour:
   entities: []
   fighting: 0
   oneDoor: 1
+  activateLastEnemyEvent: 0
 --- !u!1 &1554632848214206479
 GameObject:
   m_ObjectHideFlags: 0

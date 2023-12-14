@@ -18,6 +18,7 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField] private int offshootBranchCap;
 	[SerializeField] private int waitingFrames;
 	[SerializeField] private int onlyBranchRooms;
+	[SerializeField] private int weight;
 	[SerializeField, Range(0, 100)] private int tryRoomChance;
 	[SerializeField, Range(0, 100)] private int roomChance;
 	[SerializeField, Range(0, 100)] private int hallwayChance;
@@ -25,6 +26,7 @@ public class GenerateDungeon : MonoBehaviour
 
 	private bool go = true;
 	private bool success = true;
+	public bool finished = false;
 
     private List<GameObject> dungeon = new();
 	private List<GameObject> closedDoors = new();
@@ -42,6 +44,7 @@ public class GenerateDungeon : MonoBehaviour
 	void Update() {
 		if (go) {
 			go = false;
+			finished = false;
 			GameObject limits = Instantiate(dungeonLimits, new Vector2(), new Quaternion());
 			limits.transform.SetParent(transform);
 			foreach (string lim in directionNumber) {
@@ -78,9 +81,9 @@ public class GenerateDungeon : MonoBehaviour
 					AstarPath.active.Scan();
 					GameObject[] players = GameObject.FindGameObjectsWithTag("player");
 					foreach (GameObject p in players) {
-						Debug.Log("b");
 						p.GetComponent<PlayerController>().SetControl(true);
 					}
+					finished = true;
 					yield break;
 				}
 			}
@@ -90,6 +93,7 @@ public class GenerateDungeon : MonoBehaviour
 			Destroy(dr);
 		}
 		dungeon = new();
+		finished = false;
 		GameObject limits = Instantiate(dungeonLimits, new Vector2(), new Quaternion());
 		limits.transform.SetParent(transform);
 		foreach (string lim in directionNumber) {
@@ -345,5 +349,8 @@ public class GenerateDungeon : MonoBehaviour
 			}
 		}
 		closedDoors.Clear();
+	}
+	public int GetWeight() {
+		return weight;
 	}
 }

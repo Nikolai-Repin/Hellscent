@@ -225,6 +225,7 @@ MonoBehaviour:
   entities: []
   fighting: 0
   oneDoor: 1
+  activateLastEnemyEvent: 0
 --- !u!1 &5845440402115951030
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,20 +560,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 7646026495694809731}
     m_ColliderPaths:
-    - - X: 5000000
-        Y: 5000000
-      - X: -5000000
-        Y: 5000000
-      - X: -5000000
-        Y: -5000000
-      - X: 5000000
-        Y: -5000000
+    - - X: 510000000
+        Y: -250000000
+      - X: 500000000
+        Y: -250000000
+      - X: 500000000
+        Y: -300000000
+      - X: 510000000
+        Y: -300000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 0.4999707, y: -0.5}
-      - {x: 0.4999707, y: 0.5}
-      - {x: -0.5, y: 0.4999707}
-      - {x: -0.4999707, y: -0.5}
+    - - {x: 50.999973, y: -30}
+      - {x: 50.999973, y: -25}
+      - {x: 50, y: -25.000029}
+      - {x: 50.00003, y: -30}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0

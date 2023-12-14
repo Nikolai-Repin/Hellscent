@@ -450,6 +450,7 @@ MonoBehaviour:
   dealDamageOnContact: 1
   visRange: 10
   iFrames: 0
+  weight: 100
   invulnTime: 0
   trackerController: {fileID: 0}
   spawnPortal: 0
