@@ -8,7 +8,7 @@ public class Journalnavigation : MonoBehaviour
     private bool isOpen = false;
 
     [SerializeField] private GameObject[] pages;
-    [SerializeField] private GameObject[] texts;
+    [SerializeField] public GameObject[] texts;
 
     GameObject book;
     GameObject textLeft;
