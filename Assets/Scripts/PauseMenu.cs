@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject options;
     private bool isShowing = false;
     public float time;
+    public int targetScene;
 
     void Update() {
         if (Input.GetKeyDown("escape")) {
@@ -31,6 +33,11 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume() {
         menu.SetActive(false);
+        PauseGame(false);
+    }
+
+    public void Quit() {
+        SceneManager.LoadScene(targetScene);
         PauseGame(false);
     }
 
