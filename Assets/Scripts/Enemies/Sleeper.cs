@@ -11,26 +11,23 @@ public class Sleeper : Enemy
     private float curAcceleration;
     private float accelerationIncrease;
     private float speedIncrease;
-    private bool asleep;
+    private bool asleep = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        curSpeed = trackerController.aiPath.maxSpeed;
-        curAcceleration = trackerController.aiPath.maxAcceleration;
-
-        accelerationIncrease = (awakeAcceleration-curAcceleration)/awakeningTime;
-        speedIncrease = (awakeSpeed-curSpeed)/awakeningTime;
+        base.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
+        base.Update();
         if (!asleep && curSpeed != awakeSpeed && curAcceleration != awakeAcceleration) {
             curAcceleration += accelerationIncrease * Time.deltaTime;
             curSpeed += speedIncrease * Time.deltaTime;
             if (curAcceleration > awakeAcceleration) {curAcceleration = awakeAcceleration;}
-            if (curSpeed > speedIncrease) {curSpeed = speedIncrease;}
+            if (curSpeed > awakeSpeed) {curSpeed = awakeSpeed;}
 
             trackerController.aiPath.maxAcceleration = curAcceleration;
             trackerController.aiPath.maxSpeed = curSpeed;
@@ -38,13 +35,28 @@ public class Sleeper : Enemy
     }
 
     public override bool TakeDamage(float damage) {
-        asleep = false;
+        WakeUp();
         return base.TakeDamage(damage);
     }
 
     public override void TriggerEvent(Collider2D other) {
-        if (!asleep && other.gameObject.tag == "player") {
-            asleep = false;
+        if (asleep && other.gameObject.tag == "player") {
+            WakeUp();
         }
+    }
+
+    private void WakeUp() {
+        asleep = false;
+
+        curSpeed = trackerController.aiPath.maxSpeed;
+        curAcceleration = trackerController.aiPath.maxAcceleration;
+
+        accelerationIncrease = (awakeAcceleration-curAcceleration)/awakeningTime;
+        speedIncrease = (awakeSpeed-curSpeed)/awakeningTime;
+    }
+
+    public override void LastEntityEvent() {
+        Die();
+        return;
     }
 }

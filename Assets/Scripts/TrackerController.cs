@@ -45,7 +45,7 @@ public class TrackerController : MonoBehaviour
 
     private void Update()
     {
-        if (ai == AI.Melee) 
+        if (ai == AI.Melee && target != null) 
         {
             transform.position = target.transform.position;
         }
