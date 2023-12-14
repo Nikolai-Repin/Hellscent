@@ -140,20 +140,12 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3232932209666028585, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3232932209666028585, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_Color.g
       value: 0.64651275
       objectReference: {fileID: 0}
     - target: {fileID: 3232932209666028585, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_Color.r
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3232932209666028585, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3246128399018723868, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_Name
@@ -163,26 +155,6 @@ PrefabInstance:
       propertyPath: dash
       value: 0.32
       objectReference: {fileID: 0}
-    - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: healthAmount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: equippedWeapon
-      value: 
-      objectReference: {fileID: 315890430}
-    - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: maxHealthAmount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: heldWeapons.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: heldWeapons.Array.data[0]
-      value: 
-      objectReference: {fileID: 315890430}
     - target: {fileID: 8428924622005797696, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -482,11 +454,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &315890430 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7254836270727516316, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-  m_PrefabInstance: {fileID: 23606052}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &372694756
 GameObject:
   m_ObjectHideFlags: 0
