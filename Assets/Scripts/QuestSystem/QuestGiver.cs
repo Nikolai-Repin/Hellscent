@@ -7,7 +7,7 @@ using TMPro;
 
 public class QuestGiver : MonoBehaviour
 {
-    /* public Quest quest;
+    public Quest quest;
 
     public Player player;
 
@@ -26,11 +26,12 @@ public class QuestGiver : MonoBehaviour
 
     public void OpenQuestWindow() {
         if(!questWindow.activeSelf) {
-            questWindow.SetActive(true);
+            /* questWindow.SetActive(true);
             titleText.text = quest.title;
             descriptionText.text = quest.description;
             experienceText.text = quest.experienceReward.ToString();
             goldText.text = quest.goldReward.ToString();
+            */
         }
 
         else {
@@ -40,8 +41,7 @@ public class QuestGiver : MonoBehaviour
 
     public void AcceptQuest() {
         questWindow.SetActive(false);
-        quest.isActive = true;
         player.quests = quest;
     }
-    */
+    
 }
