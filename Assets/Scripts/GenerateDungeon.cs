@@ -11,13 +11,14 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField] private GameObject[] hallways;
 	[SerializeField] private GameObject spawnRoom;
 	[SerializeField] private GameObject bossRoom;
-	[SerializeField] private GameObject endCap;
-	[SerializeField] private GameObject closedDoor;
+	[SerializeField] private GameObject[] endCap;
+	[SerializeField] private GameObject[] closedDoor;
 	[SerializeField] private float roomSpacing;
 	[SerializeField] private int mainBranchLength;
 	[SerializeField] private int offshootBranchCap;
 	[SerializeField] private int waitingFrames;
 	[SerializeField] private int onlyBranchRooms;
+	[SerializeField] private int weight;
 	[SerializeField, Range(0, 100)] private int tryRoomChance;
 	[SerializeField, Range(0, 100)] private int roomChance;
 	[SerializeField, Range(0, 100)] private int hallwayChance;
@@ -25,6 +26,7 @@ public class GenerateDungeon : MonoBehaviour
 
 	private bool go = true;
 	private bool success = true;
+	public bool finished = false;
 
     private List<GameObject> dungeon = new();
 	private List<GameObject> closedDoors = new();
@@ -42,13 +44,21 @@ public class GenerateDungeon : MonoBehaviour
 	void Update() {
 		if (go) {
 			go = false;
+			finished = false;
 			GameObject limits = Instantiate(dungeonLimits, new Vector2(), new Quaternion());
 			limits.transform.SetParent(transform);
 			foreach (string lim in directionNumber) {
 				dungeon.Add(limits.transform.Find("Limit " + lim).gameObject);
 			}
-			GameObject startRoom = CreateRoom(spawnRoom, true);
+			GameObject startRoom = CreateRoom(spawnRoom);
 			dungeon.Add(startRoom);
+
+			//Disabling control for player so they cannot leave the dungeon while it's generating
+			GameObject[] players = GameObject.FindGameObjectsWithTag("player");
+			foreach (GameObject p in players) {
+				p.GetComponent<PlayerController>().SetControl(false);
+			}
+
 			StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
 			StartCoroutine(detectEnd());
 		}
@@ -69,20 +79,27 @@ public class GenerateDungeon : MonoBehaviour
 					CapDoors();
 					yield return null;
 					AstarPath.active.Scan();
+					GameObject[] players = GameObject.FindGameObjectsWithTag("player");
+					foreach (GameObject p in players) {
+						p.GetComponent<PlayerController>().SetControl(true);
+					}
+					finished = true;
 					yield break;
 				}
 			}
 		}
+
 		foreach (GameObject dr in dungeon) {
 			Destroy(dr);
 		}
 		dungeon = new();
+		finished = false;
 		GameObject limits = Instantiate(dungeonLimits, new Vector2(), new Quaternion());
 		limits.transform.SetParent(transform);
 		foreach (string lim in directionNumber) {
 			dungeon.Add(limits.transform.Find("Limit " + lim).gameObject);
 		}
-		GameObject startRoom = CreateRoom(spawnRoom, true);
+		GameObject startRoom = CreateRoom(spawnRoom);
 		success = true;
 		dungeon.Add(startRoom);
 		StartCoroutine(CreateDungeon(startRoom, mainBranchLength, offshootBranchCap));
@@ -120,7 +137,9 @@ public class GenerateDungeon : MonoBehaviour
 			if (mainBranch == 1) {
 				boss = true;
 			}
-			continueDungeon = true;
+			else {
+				continueDungeon = true;
+			}
 			nextMainBranch--;
         }
 		else if (branchCap > 0 && Random.Range(0, 101) <= roomChance)
@@ -131,10 +150,12 @@ public class GenerateDungeon : MonoBehaviour
 		}
 		if (boss || Random.Range(0, 101) <= hallwayChance)
         {
-			GameObject nextHallway = CreateRoom(hallways[0], false);
-			door = AlignRooms(nextOrigin.transform, nextHallway.transform, roomSpacing);
+			RoomInfo origin_data = origin.GetComponent<RoomInfo>();
+			string hallDir = origin_data.doorDirection[FindAvailableDoor(origin_data)];
+			GameObject nextHallway = CreateRoom(hallways[hallDir == "North" || hallDir == "South" ? 1 : 0]);
+			door = AlignRooms(nextOrigin.transform, nextHallway.transform, roomSpacing, hallDir/*over here do stuff*/);
 
-			yield return StartCoroutine(waitFrames(waitingFrames));
+			yield return StartCoroutine(waitFrames(waitingFrames));		
 			foreach (GameObject dr in dungeon)
 			{
 				if (nextHallway.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
@@ -145,7 +166,7 @@ public class GenerateDungeon : MonoBehaviour
 					} else if (mainBranch > 0) {
 						int nextIndex = dungeon.IndexOf(origin) - 1;
 						for (int i = nextIndex; i >= 0; i--) {
-							if (GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
+							if (!dungeon[i].GetComponent<RoomInfo>().oneDoor && GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
 								yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
 								yield break;
 							}
@@ -160,7 +181,7 @@ public class GenerateDungeon : MonoBehaviour
 			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[0] = true;
 			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[1] = true;
 		}
-		GameObject nextRoom = CreateRoom(boss ? bossRoom : rooms[Random.Range(0, rooms.Length - (mainBranch > 0 ? onlyBranchRooms : 0))], false);
+		GameObject nextRoom = CreateRoom(branchCap == 1 && mainBranch == 0 ? rooms[rooms.Length - 1] : (boss ? bossRoom : rooms[Random.Range(0, rooms.Length - (mainBranch > 0 ? onlyBranchRooms : 0))]));
 		string hallDoor = AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
 		if (!usedHallway) {
 			door = hallDoor;
@@ -178,7 +199,7 @@ public class GenerateDungeon : MonoBehaviour
 					} else if (mainBranch > 0) {
 						int nextIndex = dungeon.IndexOf(origin) - 1;
 						for (int i = nextIndex; i >= 0; i--) {
-							if (GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
+							if (!dungeon[i].GetComponent<RoomInfo>().oneDoor && GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
 								yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
 								yield break;
 							}
@@ -198,7 +219,7 @@ public class GenerateDungeon : MonoBehaviour
 		{
 			yield return StartCoroutine(CreateDungeon(nextRoom, nextMainBranch, nextBranchCap));
 		}
-		if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0 && Random.Range(0, 101) <= tryRoomChance) 
+		if (!origin.GetComponent<RoomInfo>().oneDoor && GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0 && Random.Range(0, 101) <= tryRoomChance) 
 		{
 			yield return StartCoroutine(CreateDungeon(origin, 0, branchCap));
 		} 
@@ -210,7 +231,7 @@ public class GenerateDungeon : MonoBehaviour
 			for (int i = 0; i < data.trueOccupancy.Count; i++) {
 				bool o = data.trueOccupancy[i];
 				if (!o) {
-					GameObject cap = Instantiate(endCap, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
+					GameObject cap = Instantiate(endCap[data.doorDirection[i] == "North" || data.doorDirection[i] == "South" ? 1 : 0], new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
 					cap.transform.SetParent(transform, false);
 					AlignRooms(dr.transform, cap.transform, 0, data.doorDirection[i]);
 				}	
@@ -218,16 +239,15 @@ public class GenerateDungeon : MonoBehaviour
 		}
 	}
 
-    private GameObject CreateRoom(GameObject room, bool start)
+    private GameObject CreateRoom(GameObject room)
     {
 		// Initializes a room
-		float randomDir = start ? Random.Range(0, 4) : 0;
-		GameObject createdRoom = Instantiate(room, new Vector2(0, 0), Quaternion.Euler(0, 0, randomDir * 90));
+		GameObject createdRoom = Instantiate(room, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
 		createdRoom.transform.SetParent(transform, false);
 		return createdRoom;
 	}
 
-	private string AlignRooms(Transform origin, Transform created, float spacing, string force = null)
+	private string AlignRooms(Transform origin, Transform created, float spacing, string force=null)
 	{
 		// Gets all necessary information about the origin room
 		RoomInfo origin_data = origin.GetComponent<RoomInfo>();
@@ -236,17 +256,17 @@ public class GenerateDungeon : MonoBehaviour
 		origin_data.doorOccupation[origin_data.doorDirection.IndexOf(direction_origin)] = true;
 
 		// Finds a door on created room that will connect with origin
-		string true_dir = directionNumber[(directionNumber.IndexOf(direction_origin) + (int)(origin.rotation.eulerAngles.z / 90)) % 4];
+		//string true_dir = directionNumber[(directionNumber.IndexOf(direction_origin) + (int)(origin.rotation.eulerAngles.z / 90)) % 4];
 		string direction_created;
 		RoomInfo created_data = created.GetComponent<RoomInfo>();
 		string true_created_dir;
-		if (created_data.doorDirection.Count == 4)
-		{
+		/*if (created_data.doorDirection.Count == 4)
+		{*/
 			// If the room has four doors do not rotate
-			direction_created = reverseDirection[true_dir];
+			direction_created = reverseDirection[direction_origin];
 			true_created_dir = direction_created;
 			created_data.doorOccupation[created_data.doorDirection.IndexOf(direction_created)] = true;
-		}
+		/*}
 		else
 		{
 			// Randomly rotates rooms with less than 4 doors	
@@ -258,7 +278,7 @@ public class GenerateDungeon : MonoBehaviour
 			direction_created = selected_door;
 			true_created_dir = directionNumber[(directionNumber.IndexOf(selected_door) + (int)(created.rotation.eulerAngles.z / 90)) % 4];
 			created_data.doorOccupation[created_data.doorDirection.IndexOf(selected_door)] = true;
-		}
+		}*/
 		Transform created_join_point = created.Find("Join Point " + direction_created);
 
 		// Aligns the created room to the origin room
@@ -314,7 +334,7 @@ public class GenerateDungeon : MonoBehaviour
 		for (int i = 0; i < data.trueOccupancy.Count; i++) {
 			bool o = data.trueOccupancy[i];
 			if (o) {
-				GameObject cap = Instantiate(closedDoor, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
+				GameObject cap = Instantiate(closedDoor[data.doorDirection[i] == "North" || data.doorDirection[i] == "South" ? 1 : 0], new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
 				cap.transform.SetParent(transform, false);
 				closedDoors.Add(cap);
 				AlignRooms(room.transform, cap.transform, 0, data.doorDirection[i]);
@@ -324,10 +344,13 @@ public class GenerateDungeon : MonoBehaviour
 
 	public void UnlockRooms() {
 		foreach (GameObject part in closedDoors) {
-			if (part.name == closedDoor.name + "(Clone)") {
+			if (part.name == "Closed Door EW(Clone)" || part.name == "Closed Door NS(Clone)") {
 				Destroy(part);
 			}
 		}
 		closedDoors.Clear();
+	}
+	public int GetWeight() {
+		return weight;
 	}
 }

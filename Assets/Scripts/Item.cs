@@ -15,12 +15,16 @@ public class Item : MonoBehaviour
     [SerializeField] private float bonusSpeed;
     [SerializeField] private float bonusManaRechargeSpeed;
     [SerializeField] private float bonusMaxHP;
+    [SerializeField] private float regenHearts;
     [SerializeField] private int weight;
+    [SerializeField] private int journal;
+    [SerializeField] private GameObject page;
 
     [HideInInspector] public Rigidbody2D rb2d;
+    [SerializeField] Journalnavigation pageStorage;
 
     void Start() {
-        playerCharacter = GameObject.FindWithTag("Player");
+        playerCharacter = GameObject.FindWithTag("player");
         controller = playerCharacter.GetComponent<PlayerController>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
 
@@ -30,7 +34,7 @@ public class Item : MonoBehaviour
     // Triggers various item effects with if conditions when coming in contact with the player.
     // Every mention of controller is simply accessing the "controller" script within player, which just changes some values like damage and speed that the player has.
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("player")) {
             
             if (bonusDamage > 0) {
                 controller.equippedWeapon.GetComponent<Weapon>().AddDamage(bonusDamage);
@@ -58,6 +62,16 @@ public class Item : MonoBehaviour
                 uiManager.updateHealth();
                 Debug.Log("Max Hp increased by " + bonusMaxHP);
                 Debug.Log("Healed " + bonusMaxHP + " HP");
+            }
+
+            if (regenHearts > 0) {
+                controller.RestoreHP(regenHearts);
+                uiManager.updateHealth();
+                Debug.Log("Healed " + regenHearts + " HP");
+            }
+                
+            if (journal > 0) {
+                pageStorage.texts[journal] = page;
             }
 
             Destroy(gameObject);

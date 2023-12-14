@@ -154,8 +154,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8009601236626935309}
   - {fileID: 655352989004150746}
+  - {fileID: 8009601236626935309}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.062}
 --- !u!212 &1604624000999719546
@@ -196,8 +196,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 665226713
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: 2076785268, guid: 5bb583e92c1df3349831766f67385cd2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -236,7 +236,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!60 &9045450324629134525
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -273,7 +273,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -318,9 +318,11 @@ MonoBehaviour:
   intangible: 0
   maxHealthAmount: 0
   healthAmount: 20
+  knockbackMult: 0
   dealDamageOnContact: 1
   visRange: 20
   iFrames: 0
+  weight: 30
   invulnTime: 0
   trackerController: {fileID: 0}
   projectileType: {fileID: 6942168956635508771, guid: b576974dd58bb0345a6eca8e3824a21e, type: 3}
