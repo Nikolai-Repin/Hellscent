@@ -26,8 +26,8 @@ public class QuestGiver : MonoBehaviour
 
     public void OpenQuestWindow() {
         if(!questWindow.activeSelf) {
-            /* questWindow.SetActive(true);
-            titleText.text = quest.title;
+            questWindow.SetActive(true);
+            /* titleText.text = quest.title;
             descriptionText.text = quest.description;
             experienceText.text = quest.experienceReward.ToString();
             goldText.text = quest.goldReward.ToString();

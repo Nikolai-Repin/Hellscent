@@ -503,7 +503,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &172733601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1165,50 +1165,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 846924561563970260, guid: b5756abdc8969ed439f5f01182c82135, type: 3}
   m_PrefabInstance: {fileID: 556481019}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &373316022
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 373316023}
-  - component: {fileID: 373316024}
-  m_Layer: 0
-  m_Name: cm
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &373316023
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373316022}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1275337583}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &373316024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373316022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &395448179 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7284406455717162103, guid: 29e1da4b1a60bf34d9f8b2f411c67b77, type: 3}
@@ -3879,12 +3835,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quest: {fileID: 0}
-  player: {fileID: 0}
-  questWindow: {fileID: 0}
-  titleText: {fileID: 0}
-  descriptionText: {fileID: 0}
-  experienceText: {fileID: 0}
-  goldText: {fileID: 0}
+  player: {fileID: 1698205056}
+  questWindow: {fileID: 172733600}
+  titleText: {fileID: 1179246160}
+  descriptionText: {fileID: 259228822}
+  experienceText: {fileID: 1478449247}
+  goldText: {fileID: 107433784}
 --- !u!4 &944456402
 Transform:
   m_ObjectHideFlags: 0
@@ -6146,8 +6102,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 373316023}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1275337585
@@ -7730,14 +7685,13 @@ MonoBehaviour:
   dialogueText: {fileID: 1553823776}
   dialogue:
   - Hello!
-  - You suck at this game!
-  - You should uninstall!
-  - You are not worthy!
-  - Ok, here's the quest.
+  - Ben is very awesome.
+  - Here's your quest!
   continueButton: {fileID: 1870960435}
   acceptButton: {fileID: 861965381}
   wordSpeed: 0.06
   playerIsClose: 0
+  accepted: 0
 --- !u!114 &1642608649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9003,19 +8957,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7502559576790646689, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_Size.x
-      value: 25.034634
+      value: 15.531953
       objectReference: {fileID: 0}
     - target: {fileID: 7502559576790646689, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_Size.y
-      value: 25.034634
+      value: 15.399965
       objectReference: {fileID: 0}
     - target: {fileID: 7502559576790646689, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_Offset.x
-      value: 0
+      value: -0.13198137
       objectReference: {fileID: 0}
     - target: {fileID: 7502559576790646689, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_Offset.y
-      value: 0
+      value: -0.06598759
       objectReference: {fileID: 0}
     - target: {fileID: 8428924622005797696, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_LocalScale.x

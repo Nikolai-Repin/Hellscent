@@ -15,6 +15,7 @@ public class NPC : MonoBehaviour
     public GameObject acceptButton;
     public float wordSpeed;
     public bool playerIsClose;
+    public bool accepted = false;
 
     void Update()
     {
@@ -25,6 +26,7 @@ public class NPC : MonoBehaviour
             }
 
             else {
+                zeroText();
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
             }
@@ -41,6 +43,7 @@ public class NPC : MonoBehaviour
         if(index == dialogue.Length - 1) {
             acceptButton.SetActive(true);
             continueButton.SetActive(false);
+            accepted = true;
         }
 
         if(dialogueText.text == dialogue[index] && index < dialogue.Length - 1) {
