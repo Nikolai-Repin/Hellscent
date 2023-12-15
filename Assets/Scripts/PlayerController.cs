@@ -54,15 +54,6 @@ public class PlayerController : Entity
         Register();
         base.Start();
     }
-    private void LAmouse(){
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - m_transform.position;
-        float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-        //Quaternion rotation = Quaternion.AngleAxis(-1 * angle - 90, Vector3.forward);
-        //rb.MoveRotation(Quaternion.LookRotation(rb.velocity));
-        // m_transform.rotation = rotation;
-      
-
-            }
 
     void FixedUpdate(){
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
