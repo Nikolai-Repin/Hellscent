@@ -65,8 +65,13 @@ public class PlayerController : Entity
             }
 
     void FixedUpdate(){
-         rb.angularVelocity = 1000;
-        Debug.Log(rb.angularVelocity);
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector2 finaldir = direction - rb.position;
+        float desiredangle = Mathf.Atan2(finaldir.x * -1, finaldir.y) * Mathf.Rad2Deg;
+    
+        rb.angularVelocity = (desiredangle - rb.rotation) / Time.fixedDeltaTime;
+
 
     }
     void Update()
