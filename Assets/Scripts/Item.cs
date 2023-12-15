@@ -14,14 +14,13 @@ public class Item : MonoBehaviour
     [SerializeField] private float bonusSpeed;
     [SerializeField] private float bonusManaRechargeSpeed;
     [SerializeField] private float bonusMaxHP;
-    [SerializeField] private float regenHearts;
     [SerializeField] private int weight;
-    [SerializeField] private int journal;
-    [SerializeField] private GameObject page;
+    [SerializeField] private GameObject[] journalPage;
+    private static int pageIndex = 0;
+    [SerializeField] private Journalnavigation pageManager;
 
     public ItemData data;
     [HideInInspector] public Rigidbody2D rb2d;
-    [SerializeField] Journalnavigation pageStorage;
 
     void Start() {
         playerCharacter = GameObject.FindWithTag("player");
@@ -64,14 +63,9 @@ public class Item : MonoBehaviour
                 Debug.Log("Healed " + bonusMaxHP + " HP");
             }
 
-            if (regenHearts > 0) {
-                controller.RestoreHP(regenHearts);
-                uiManager.updateHealth();
-                Debug.Log("Healed " + regenHearts + " HP");
-            }
-                
-            if (journal > 0) {
-                pageStorage.texts[journal] = page;
+            if (journalPage != null) {
+                pageManager.texts[pageIndex + 2] = journalPage[pageIndex];
+                pageIndex++;
             }
 
             Destroy(gameObject);
