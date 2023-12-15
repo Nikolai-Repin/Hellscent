@@ -167,6 +167,6 @@ public class Slime : Enemy
         if (trackerController.target.position.x > transform.position.x) {
             sr.flipX = true;
         }
-        animator.SetBool("Moving", GetComponent<Rigidbody2D>().velocity == Vector2.zero);
+        //        animator.SetBool("Moving", GetComponent<Rigidbody2D>().velocity == Vector2.zero);
     }
 }
