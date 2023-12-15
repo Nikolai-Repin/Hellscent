@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : Entity
 {
@@ -12,6 +14,10 @@ public class PlayerController : Entity
     private Vector2 direction;
     private Vector2 saved_direction;
     private Vector3 target;
+
+    private Transform m_transform;
+
+    private Vector3 mouseTarget;
     //Weapon Variables
     [SerializeField] private float manaRechargeSpeed = 5;
     private int weaponIndex;
@@ -23,11 +29,13 @@ public class PlayerController : Entity
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
 
+
     //private UIManager uiManager;
 
     private float invulnTime;
 
     void Start() {
+        m_transform = this.transform;
         canControl = true;
         rb = GetComponent<Rigidbody2D>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
@@ -46,23 +54,26 @@ public class PlayerController : Entity
         Register();
         base.Start();
     }
+    private void LAmouse(){
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - m_transform.position;
+        float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        //Quaternion rotation = Quaternion.AngleAxis(-1 * angle - 90, Vector3.forward);
+        //rb.MoveRotation(Quaternion.LookRotation(rb.velocity));
+        // m_transform.rotation = rotation;
+      
 
+            }
+
+    void FixedUpdate(){
+         rb.angularVelocity = 1000;
+        Debug.Log(rb.angularVelocity);
+
+    }
     void Update()
     {
-        /*Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 mouseDir = mousePosition - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        */
-         target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var mousedir = target - transform.position;
-        var angle = Mathf.Atan2(mousedir.x, mousedir.y) * Mathf.Rad2Deg;
+    
         
-        Quaternion angleaxis = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
-        Debug.Log(angleaxis);
-        rb.MoveRotation(angleaxis);
-        transform.rotation = Quaternion.LookRotation(rb.velocity);
-
+   
 
         direction = new Vector2(0.0f, 0.0f);
         bool keypressed = false;
