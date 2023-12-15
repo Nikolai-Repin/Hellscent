@@ -136,19 +136,19 @@ public class Weapon : MonoBehaviour
         //Setting position and angle
         transform.position = parent.transform.position;
        var dir = targetPosition - transform.parent.position;
-        var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
+      //  var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+      //  transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
         
         transform.position += dir.normalized * offset;
 
         //Flip gun so it won't be upside down when aiming left
         
-        if (angle < 0) {
+       /* if (angle < 0) {
             sr.flipY = true;
         } else {
             sr.flipY = false;
         }
-        
+        */
         //Render the weapon on top of the wielder
         sr.sortingOrder = parent.GetComponent<SpriteRenderer>().sortingOrder + 1;
         
