@@ -178,7 +178,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 311.5, y: 172.19}
+  m_AnchoredPosition: {x: 0, y: -70}
   m_SizeDelta: {x: 193.1766, y: 75.6207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2924389310644591655
@@ -262,7 +262,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6144259514478781374}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3080475150311927773
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +288,7 @@ GameObject:
   - component: {fileID: 2605502040041414769}
   - component: {fileID: 8703860349222755202}
   m_Layer: 5
-  m_Name: Finish Screeb
+  m_Name: Finish Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -432,7 +444,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Return
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 07a51cf3feafe014fa46b80f157885ba, type: 2}
   m_sharedMaterial: {fileID: 6198267668345713068, guid: 07a51cf3feafe014fa46b80f157885ba, type: 2}
