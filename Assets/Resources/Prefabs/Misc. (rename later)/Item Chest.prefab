@@ -155,5 +155,6 @@ MonoBehaviour:
   - {fileID: 7477404385308204958, guid: 48ab060fb47e08a45a2c528fee0b2291, type: 3}
   - {fileID: 7809032127312759129, guid: a293cefd8410a1e42bc94ba986b96aa3, type: 3}
   - {fileID: 1582206641080860920, guid: 8acaa7744a2a3ec4092daa16e403b6f6, type: 3}
+  - {fileID: 7251219752739850235, guid: 271a40d0d873a9640802a9e4c58d221d, type: 3}
   droppedItem: {fileID: 3501811076503607432, guid: 45b87eb4f484d9c409b8a977f24a6b9c, type: 3}
   open: {fileID: 21300000, guid: 7fe959e875fa93d4f99ab02570e58db8, type: 3}

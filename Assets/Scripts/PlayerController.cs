@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : Entity
 {
@@ -26,6 +26,11 @@ public class PlayerController : Entity
     public GameObject equippedWeapon;
     public List<GameObject> heldWeapons;
     [SerializeField] private float damage;
+    
+    public Animator anim;
+    public GameObject deathScreen;
+    public int gameScene;
+
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
 
@@ -206,7 +211,14 @@ public class PlayerController : Entity
     public override void Die () {
         canControl = false;
         uiManager.gameObject.SetActive(false);
+        deathScreen.SetActive(true);
+        Time.timeScale = 0;
         return;
+    }
+
+    public void Restart () {
+        SceneManager.LoadScene(gameScene);
+        Time.timeScale = 1;
     }
 
     //Returns percentage of current mana out of maxMana
