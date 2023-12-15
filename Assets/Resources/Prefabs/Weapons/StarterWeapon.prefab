@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 0
-  offset: 1
+  offset: 2
   projectileType: {fileID: 6942168956635508771, guid: 2ba935fd33f77754086b73447fc21544, type: 3}
   kickback: 2
   cooldownTime: 0.5
