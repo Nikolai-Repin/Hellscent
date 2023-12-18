@@ -174,19 +174,19 @@ PrefabInstance:
     - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: equippedWeapon
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9215686754380215263, guid: a7b74da57fd25b943838a9b2fca34aa2, type: 3}
     - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: maxHealthAmount
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: heldWeapons.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: heldWeapons.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9215686754380215263, guid: a7b74da57fd25b943838a9b2fca34aa2, type: 3}
     - target: {fileID: 8428924622005797696, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

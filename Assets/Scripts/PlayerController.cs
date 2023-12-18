@@ -187,6 +187,7 @@ public class PlayerController : Entity
         GameObject newWeapon = Instantiate(target.GetComponent<PickupItem>().GetItem(), transform.position, new Quaternion());
         newWeapon.transform.parent = gameObject.transform;
         newWeapon.transform.localScale = new Vector3(2, 2, 0);
+        newWeapon.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
         //Destroy the weapon on the ground
         target.GetComponent<PickupItem>().CleanUp();
@@ -223,7 +224,7 @@ public class PlayerController : Entity
 
     //Returns percentage of current mana out of maxMana
     public float GetManaPercent() {
-        return equippedWeapon.GetComponent<Weapon>().GetManaPercent();
+        return equippedWeapon != null ? equippedWeapon.GetComponent<Weapon>().GetManaPercent() : 100;
     }
 
     //Returns mana recharge speed
