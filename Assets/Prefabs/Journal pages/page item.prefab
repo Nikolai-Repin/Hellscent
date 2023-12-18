@@ -104,8 +104,13 @@ MonoBehaviour:
   bonusManaRechargeSpeed: 0
   bonusMaxHP: 0
   weight: 0
-  journalPage: {fileID: 594067404375776675, guid: 87634a8a506ecab4e86d754baf63e565, type: 3}
-  pageIndex: 2
+  journalPage:
+  - {fileID: 594067404375776675, guid: 87634a8a506ecab4e86d754baf63e565, type: 3}
+  - {fileID: 764912518274314186, guid: 9ae62bc7f62761941b48dc43c6c46c07, type: 3}
+  - {fileID: 2328958309430281608, guid: da7795938d15f0f4dbe041af89dd9d99, type: 3}
+  - {fileID: 9188946253154499508, guid: 19663d44ed097db4ab6a440d0d38d46e, type: 3}
+  - {fileID: 5191890785502364446, guid: 6416772a9f3c08c4c8d380b5231d0f67, type: 3}
+  - {fileID: 5191890785502364446, guid: 6416772a9f3c08c4c8d380b5231d0f67, type: 3}
   pageManager: {fileID: 0}
   data: {fileID: 0}
   rb2d: {fileID: 0}
