@@ -147,8 +147,9 @@ MonoBehaviour:
   bonusMaxMana: 0
   bonusSpeed: 0
   bonusManaRechargeSpeed: 0
-  bonusMaxHP: 0
-  regenHearts: 1
+  bonusMaxHP: 1
   weight: 50
+  journalPage: []
+  pageManager: {fileID: 0}
   data: {fileID: 0}
   rb2d: {fileID: 0}

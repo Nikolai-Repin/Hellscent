@@ -14,6 +14,7 @@ public class Item : MonoBehaviour
     [SerializeField] private float bonusSpeed;
     [SerializeField] private float bonusManaRechargeSpeed;
     [SerializeField] private float bonusMaxHP;
+    [SerializeField] private float healHP;
     [SerializeField] private int weight;
     [SerializeField] private GameObject[] journalPage;
     private static int pageIndex = 0;
@@ -63,7 +64,13 @@ public class Item : MonoBehaviour
                 Debug.Log("Healed " + bonusMaxHP + " HP");
             }
 
-            if (journalPage != null) {
+            if (healHP > 0) {
+                controller.RestoreHP(healHP);
+                uiManager.updateHealth();
+                Debug.Log("Healed " + healHP + " HP");
+            }
+
+            if (journalPage.Length > 0) {
                 pageManager.texts[pageIndex + 2] = journalPage[pageIndex];
                 pageIndex++;
             }

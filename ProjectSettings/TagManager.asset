@@ -56,6 +56,9 @@ TagManager:
   - name: Projectiles
     uniqueID: 3671666889
     locked: 0
+  - name: Walls
+    uniqueID: 3851371001
+    locked: 0
   - name: Journal
     uniqueID: 413302143
     locked: 0
