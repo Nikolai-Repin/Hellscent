@@ -147,7 +147,8 @@ MonoBehaviour:
   bonusMaxMana: 0
   bonusSpeed: 0
   bonusManaRechargeSpeed: 0
-  bonusMaxHP: 1
+  bonusMaxHP: 2
+  healHP: 0
   weight: 50
   journalPage: []
   pageManager: {fileID: 0}
