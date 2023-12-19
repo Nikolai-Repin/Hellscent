@@ -108,7 +108,7 @@ public class Weapon : MonoBehaviour
             bulletScript.team = parent.tag;
 
             Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
-            Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy + (parent.tag != "player" ? new Vector3() : new Vector3(0, 0, 90)));
+            Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
 
             bulletScript.LaunchProjectile(fireAngle);
             bullet.GetComponent<Rigidbody2D>().velocity += parent.GetComponent<Rigidbody2D>().velocity.normalized;
@@ -137,9 +137,7 @@ public class Weapon : MonoBehaviour
         transform.position = parent.transform.position;
        var dir = targetPosition - transform.parent.position;
         var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-        if (parent.tag != "player") {
-            transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
-        }
+        transform.rotation = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
         
         transform.position += dir.normalized * offset;
 
