@@ -62,3 +62,6 @@ TagManager:
   - name: Journal
     uniqueID: 413302143
     locked: 0
+  - name: HUD
+    uniqueID: 1203851725
+    locked: 0

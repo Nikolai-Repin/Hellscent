@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
@@ -21,12 +22,15 @@ public class Entity : MonoBehaviour
     protected virtual void Start() {
         sr = GetComponent<SpriteRenderer>();
         Register();
+        
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+
     }
 
     protected virtual void Update() {
         SortInRenderLayer();
     }
+
 
     //Deals damage to entity if invulnerable, returns true if damage was dealt
     public virtual bool TakeDamage(float damage) {
@@ -36,7 +40,7 @@ public class Entity : MonoBehaviour
 
         if (!invulnerable) {
             healthAmount -= damage;
-
+            uiManager.UpdateEntityHealthBar(gameObject.GetComponent<Entity>());
             if (healthAmount <= 0) {
                 Die();
             }
