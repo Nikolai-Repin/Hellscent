@@ -150,7 +150,7 @@ public class Weapon : MonoBehaviour
             }
         }
         //Render the weapon on top of the wielder
-        sr.sortingOrder = parent.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        sr.sortingOrder = parent.GetComponent<SpriteRenderer>().sortingOrder + 20;
         
     }
 
