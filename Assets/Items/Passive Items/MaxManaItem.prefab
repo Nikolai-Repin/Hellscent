@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1945771043983452121
+--- !u!1 &7809032127312759129
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4404471730189426087}
-  - component: {fileID: 2040377620340065699}
-  - component: {fileID: 7948933430450900912}
-  - component: {fileID: 7101743176883867621}
+  - component: {fileID: 5429365277358185761}
+  - component: {fileID: 9072997328530910415}
+  - component: {fileID: 4542381926267665092}
+  - component: {fileID: 3322369734690504179}
   m_Layer: 0
-  m_Name: DamageItem
-  m_TagString: Item
+  m_Name: MaxManaItem
+  m_TagString: Item Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4404471730189426087
+--- !u!4 &5429365277358185761
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945771043983452121}
+  m_GameObject: {fileID: 7809032127312759129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.95, y: -5.25, z: 0}
+  m_LocalPosition: {x: -4.5, y: -2.78, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2040377620340065699
+--- !u!212 &9072997328530910415
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945771043983452121}
+  m_GameObject: {fileID: 7809032127312759129}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 665226713
   m_SortingLayer: 1
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: aab61134ea3cdb048bbf3796571258dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 451b5b4a3f42a3a42a1b3d62b2bdb100, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,13 +86,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7948933430450900912
+--- !u!61 &4542381926267665092
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945771043983452121}
+  m_GameObject: {fileID: 7809032127312759129}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -131,24 +131,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.09, y: 0.11}
   m_EdgeRadius: 0
---- !u!114 &7101743176883867621
+--- !u!114 &3322369734690504179
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945771043983452121}
+  m_GameObject: {fileID: 7809032127312759129}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d754b11d7c350046bfa5b23e719b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusDamage: 5
-  bonusMaxMana: 0
+  bonusDamage: 0
+  bonusMaxMana: 10
   bonusSpeed: 0
   bonusManaRechargeSpeed: 0
   bonusMaxHP: 0
   regenHearts: 0
-  weight: 30
+  weight: 10
+  journal: 0
+  page: {fileID: 0}
   data: {fileID: 0}
   rb2d: {fileID: 0}
+  pageStorage: {fileID: 0}

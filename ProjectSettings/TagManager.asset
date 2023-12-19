@@ -4,12 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Item
   - Enemy
   - player
   - Bullet
   - Dungeon
   - Journal
+  - Item Pickup
   layers:
   - Default
   - TransparentFX

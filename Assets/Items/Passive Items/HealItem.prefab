@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7235857482584248722}
   m_Layer: 0
   m_Name: HealItem
-  m_TagString: Untagged
+  m_TagString: Item Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 665226713
   m_SortingLayer: 1
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: fb8ba5c3c17422543a8bb0d4b9244e17, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 35c22779265c681459c33656df36e0fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -150,5 +150,8 @@ MonoBehaviour:
   bonusMaxHP: 0
   regenHearts: 1
   weight: 50
+  journal: 0
+  page: {fileID: 0}
   data: {fileID: 0}
   rb2d: {fileID: 0}
+  pageStorage: {fileID: 0}
