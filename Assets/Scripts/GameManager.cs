@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] presets;
     [SerializeField] private int[] repeats;
     [SerializeField] private Transform player;
+    [SerializeField] private GameObject endScreen;
     public bool hide = false;
 
     void Start() {
@@ -31,5 +32,6 @@ public class GameManager : MonoBehaviour
             }   
             Destroy(dungeon);
         }
+        endScreen.SetActive(true);
     }
 }

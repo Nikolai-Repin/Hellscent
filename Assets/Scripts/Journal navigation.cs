@@ -90,10 +90,18 @@ public class Journalnavigation : MonoBehaviour
         if(journalOpen && !isOpen){
             isOpen = !isOpen;
             book = Instantiate(pages[page], new Vector2(0, 0), transform.rotation);
+            GameObject[] players = GameObject.FindGameObjectsWithTag("player");
+			foreach (GameObject p in players) {
+				p.GetComponent<PlayerController>().SetControl(false);
+			}
         }
         else if(!journalOpen && isOpen){
             isOpen = !isOpen;
             Destroy(book);
+            GameObject[] players = GameObject.FindGameObjectsWithTag("player");
+			foreach (GameObject p in players) {
+				p.GetComponent<PlayerController>().SetControl(true);
+			}
         }
 
     }

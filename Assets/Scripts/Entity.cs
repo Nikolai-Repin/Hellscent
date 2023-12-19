@@ -181,7 +181,7 @@ public class Entity : MonoBehaviour
     }
 
     public void RestoreHP(float bonusHP) {
-        healthAmount += bonusHP;
+        healthAmount = (healthAmount + bonusHP > maxHealthAmount) ? maxHealthAmount : healthAmount + bonusHP;
     }
 
     public float GetMaxHealthAmount() {
