@@ -302,7 +302,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 2
+  maxSpeed: 1
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -320,7 +320,7 @@ MonoBehaviour:
     maximumInterval: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
-  maxAcceleration: 2
+  maxAcceleration: 1
   rotationSpeed: 360
   slowdownDistance: 0.6
   pickNextWaypointDist: 2
@@ -401,7 +401,7 @@ MonoBehaviour:
   weight: 0
   invulnTime: 0
   trackerController: {fileID: 185374469373927219}
-  awakeSpeed: 20
+  awakeSpeed: 30
   awakeAcceleration: 17
   awakeningTime: 5
 --- !u!1001 &1658928955658367585
