@@ -11,6 +11,13 @@ If you want to beta test this game, clink the link below:
 ## Feedback
 
 ### Bugs
+To submit a bug report, please use the form: 
+
+[Bug Report Form](https://forms.office.com/Pages/ResponsePage.aspx?id=OUFKmQZ8HkmAmHkAbVdd4JoWOzloFEBHsLJRs7ltMPlUMVJESlNBQ1JRUkwzVzBaUTdOS1VWTVdVQy4u)
+
+If you feel like the bug report form isn't enough, you may message me on teams:
+1. Link to teams messaging: https://teams.microsoft.com/l/chat/0/0?users=null
+2. Name: s-knotwella
 
 ### Suggestions 
 
