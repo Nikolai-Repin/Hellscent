@@ -33,5 +33,5 @@ public class Player : MonoBehaviour
     public int experience = 0;
     public int gold = 0;
 
-    public Quest[] quests;
+    public List<Quest> quests = new List<Quest>();
 }

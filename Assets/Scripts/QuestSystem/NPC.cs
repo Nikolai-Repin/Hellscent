@@ -51,6 +51,11 @@ public class NPC : MonoBehaviour
         }
     }
 
+    public void AcceptQuest() {
+        zeroText();
+    }
+
+    // Goes to next line of dialogue
     public void NextLine() {
         acceptButton.SetActive(false);
         continueButton.SetActive(false);
@@ -89,6 +94,7 @@ public class NPC : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("player")) {
             playerIsClose = false;
+            accepted = false;
             zeroText();
         }
     }
