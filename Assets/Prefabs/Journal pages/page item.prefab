@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -103,6 +103,7 @@ MonoBehaviour:
   bonusSpeed: 0
   bonusManaRechargeSpeed: 0
   bonusMaxHP: 0
+  healHP: 0
   weight: 0
   journalPage:
   - {fileID: 594067404375776675, guid: 87634a8a506ecab4e86d754baf63e565, type: 3}
@@ -111,7 +112,9 @@ MonoBehaviour:
   - {fileID: 9188946253154499508, guid: 19663d44ed097db4ab6a440d0d38d46e, type: 3}
   - {fileID: 5191890785502364446, guid: 6416772a9f3c08c4c8d380b5231d0f67, type: 3}
   - {fileID: 5191890785502364446, guid: 6416772a9f3c08c4c8d380b5231d0f67, type: 3}
-  pageManager: {fileID: 0}
+  - {fileID: 2805459125077872598, guid: 7ccd3f221ab0e734fac4f6f3b8f15199, type: 3}
+  - {fileID: 6370797725465889094, guid: 0e9cb23324b02624ab58c1416a5f3068, type: 3}
+  pageManager: {fileID: 7432847925295459831, guid: b28271d1c92e8c448a151b40eb59e482, type: 3}
   data: {fileID: 0}
   rb2d: {fileID: 0}
 --- !u!58 &7820691989165375126
