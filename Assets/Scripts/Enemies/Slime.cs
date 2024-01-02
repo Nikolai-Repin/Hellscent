@@ -76,7 +76,7 @@ public class Slime : Enemy
                     //Applying force to slime for charge
                     float forceMulti = 50f;
                     Vector2 pushVector = ((trackerController.target.transform.position - transform.position).normalized * forceMulti);
-                    GetComponent<AIBase>().velocity2D += pushVector;
+                    GetComponent<AIBase>().velocity2D = pushVector;
 
                     curPhase = Phase.ChargeEnd;
                 }

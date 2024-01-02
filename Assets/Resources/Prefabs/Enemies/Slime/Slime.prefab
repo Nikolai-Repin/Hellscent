@@ -340,7 +340,7 @@ MonoBehaviour:
   enemies:
     serializedVersion: 2
     m_Bits: 64
-  ai: 2
+  ai: 1
   endReachedDistanceMelee: 2
   endReachedDistanceRange: 0
   target: {fileID: 0}
