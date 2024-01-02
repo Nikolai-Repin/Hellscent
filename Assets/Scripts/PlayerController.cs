@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : Entity
 {
@@ -11,7 +13,11 @@ public class PlayerController : Entity
     [SerializeField, Range(0,1)] private float damper; // default should be 150
     private Vector2 direction;
     private Vector2 saved_direction;
+    private Vector3 target;
 
+    private Transform m_transform;
+
+    private Vector3 mouseTarget;
     //Weapon Variables
     [SerializeField] private float manaRechargeSpeed = 5;
     private int weaponIndex;
@@ -20,18 +26,21 @@ public class PlayerController : Entity
     public GameObject equippedWeapon;
     public List<GameObject> heldWeapons;
     [SerializeField] private float damage;
-
+    
     public Animator anim;
-
+    public GameObject deathScreen;
+    public int gameScene;
 
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
+
 
     //private UIManager uiManager;
 
     private float invulnTime;
 
     void Start() {
+        m_transform = this.transform;
         canControl = true;
         rb = GetComponent<Rigidbody2D>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
@@ -44,14 +53,29 @@ public class PlayerController : Entity
 
         itemContactFilter = new ContactFilter2D();
         itemContactFilter.SetLayerMask(LayerMask.GetMask("Items"));
-        anim = gameObject.GetComponent<Animator>();
+        
+
 
         Register();
         base.Start();
     }
 
+    void FixedUpdate(){
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector2 finaldir = direction - rb.position;
+        float desiredangle = Mathf.Atan2(finaldir.x * -1, finaldir.y) * Mathf.Rad2Deg;
+    
+        rb.angularVelocity = (desiredangle - rb.rotation) / Time.fixedDeltaTime;
+
+
+    }
     void Update()
     {
+    
+        
+   
+
         direction = new Vector2(0.0f, 0.0f);
         bool keypressed = false;
 
@@ -80,14 +104,6 @@ public class PlayerController : Entity
                 }
             }
 
-            
-
-            if (Input.GetKeyDown(KeyCode.D)){
-                anim.Play("playerWalkRight");
-            }
-            if(Input.GetKeyDown(KeyCode.A)){
-                anim.Play("playerWalkLeft");
-            }
 
             if (hasWeapon) {
                 if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) {
@@ -171,6 +187,7 @@ public class PlayerController : Entity
         GameObject newWeapon = Instantiate(target.GetComponent<PickupItem>().GetItem(), transform.position, new Quaternion());
         newWeapon.transform.parent = gameObject.transform;
         newWeapon.transform.localScale = new Vector3(2, 2, 0);
+        newWeapon.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
         //Destroy the weapon on the ground
         target.GetComponent<PickupItem>().CleanUp();
@@ -195,12 +212,19 @@ public class PlayerController : Entity
     public override void Die () {
         canControl = false;
         uiManager.gameObject.SetActive(false);
+        deathScreen.SetActive(true);
+        Time.timeScale = 0;
         return;
+    }
+
+    public void Restart () {
+        SceneManager.LoadScene(gameScene);
+        Time.timeScale = 1;
     }
 
     //Returns percentage of current mana out of maxMana
     public float GetManaPercent() {
-        return equippedWeapon.GetComponent<Weapon>().GetManaPercent();
+        return equippedWeapon != null ? equippedWeapon.GetComponent<Weapon>().GetManaPercent() : 100;
     }
 
     //Returns mana recharge speed
