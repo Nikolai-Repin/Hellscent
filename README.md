@@ -8,7 +8,10 @@ If you want to beta test this game, clink the link below:
 ### [Link](https://www.youtube.com/) 
 *Note that link has not been set yet, Youtube is a placeholder for now*
 
-## Features 
+## Feedback
 
-## Credits 
+### Bugs
+
+### Suggestions 
+
 
