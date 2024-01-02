@@ -64,6 +64,7 @@ MonoBehaviour:
   - {fileID: 398384071107680236, guid: 22581e11fa28c41419e01a63d93465f2, type: 3}
   - {fileID: 398384071107680236, guid: f4359761e13cee14a848bde7cb3f4408, type: 3}
   - {fileID: 398384071107680236, guid: e50f43d2ef605a847acf0a9fba7610e6, type: 3}
+  - {fileID: 398384071107680236, guid: 5670a5b7cc496484fb77684f210a879b, type: 3}
   - {fileID: 6227156363105034367, guid: ce979fb8476d0457188008daa9649dd1, type: 3}
   hallways:
   - {fileID: 7564696797152967632, guid: 9ccd97415ada88442bf31f3ad28c86fd, type: 3}
@@ -81,8 +82,9 @@ MonoBehaviour:
   offshootBranchCap: 1
   waitingFrames: 5
   onlyBranchRooms: 1
+  weight: 0
   tryRoomChance: 50
   roomChance: 66
   hallwayChance: 87
-  loadScreen: {fileID: 3433675644997919876, guid: f836b8311a6bc694c8bb5f10ace58e59, type: 3}
   dungeonOver: 0
+  finished: 0
