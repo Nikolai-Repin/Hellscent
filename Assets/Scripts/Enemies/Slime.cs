@@ -11,7 +11,6 @@ public class Slime : Enemy
     private float lastAttackTime;
     private float splitOffHealth;
     private float randAttackDelay;
-    private bool isChildSlime;
     public enum Phase
     {
         Death = -1,
@@ -29,20 +28,11 @@ public class Slime : Enemy
     void Start()
     {
         base.Start();
-        if (size <= 0) {
-            Destroy(transform.gameObject);
-        }
         dealDamageOnContact = true;
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         randAttackDelay = Random.Range(0, 0.5F);
         lastAttackTime = Time.time;
-        if (!isChildSlime) {
-            curPhase = Phase.Sleep;
-        }
-        
-        splitOffHealth = healthAmount/4;
-        
         float scale = 0+((size)*0.5F);
         transform.localScale = new Vector3(scale, scale, 1);
     }
@@ -58,7 +48,7 @@ public class Slime : Enemy
                     curPhase = Phase.ChargeReady; 
                     trackerController.aiPath.maxSpeed = 0;
                     trackerController.aiPath.maxAcceleration = 0;
-                    lastAttackTime = Time.time + 0.2F;
+                    lastAttackTime = Time.time + 0.5F;
                 }
                 UpdateSprite();
                 break;
@@ -74,9 +64,9 @@ public class Slime : Enemy
                     trackerController.aiPath.maxAcceleration = 5;
                     
                     //Applying force to slime for charge
-                    float forceMulti = 50f;
+                    float forceMulti = 30f;
                     Vector2 pushVector = ((trackerController.target.transform.position - transform.position).normalized * forceMulti);
-                    GetComponent<AIBase>().velocity2D += pushVector;
+                    GetComponent<AIBase>().velocity2D = pushVector;
 
                     curPhase = Phase.ChargeEnd;
                 }
@@ -108,22 +98,7 @@ public class Slime : Enemy
             }
 
             case (Phase.Death): {
-                if (spawnChildren && Time.time > lastAttackTime && size > 1) {
-                    Vector2 splitOffOffset = new Vector2(size, 0);
-                    SpawnChild(splitOffOffset*-1);
-                    SpawnChild(splitOffOffset);
-                }
                 base.Die();
-                break;
-            }
-
-            case (Phase.Splitting): {
-                intangible = true;
-                if (Time.time > invulnTime) {
-                    intangible = false;
-                    GetComponent<AIPath>().enabled = true;
-                    curPhase = Phase.Wander;
-                }
                 break;
             }
         }
@@ -146,27 +121,8 @@ public class Slime : Enemy
         }
     }
 
-    public void SetChildStats(float health) {
-        isChildSlime = true;
-        healthAmount = health;
-        size--;
-        trackerController.aiPath.maxSpeed = 5;
-        invulnTime = Time.time + 0.5F;
-        curPhase = Phase.Splitting;
-        intangible = false;
-    }
-
-    private void SpawnChild(Vector2 splitVelocity) {
-        GameObject splitOff = Instantiate(clone, transform.position, new Quaternion());
-        Slime splitOffSlime = splitOff.GetComponent<Slime>();
-        SetChildStats(splitOffHealth);
-        splitOff.GetComponent<AIBase>().velocity2D += splitVelocity;
-    }
-
     private void UpdateSprite() {
-        if (trackerController.target.position.x > transform.position.x) {
-            sr.flipX = true;
-        }
-        //        animator.SetBool("Moving", GetComponent<Rigidbody2D>().velocity == Vector2.zero);
+        sr.flipX = trackerController.target.position.x > transform.position.x;
+        animator.SetBool("Moving", GetComponent<Rigidbody2D>().velocity == Vector2.zero);
     }
 }

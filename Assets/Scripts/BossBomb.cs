@@ -25,6 +25,7 @@ public class BossBomb : Entity
     {
         curPhase = Phase.Charging;
         animator = GetComponent<Animator>();
+        animator.SetInteger("BombType", (int)bombType);
         animator.SetFloat("Fuse", fuse);
     }
 

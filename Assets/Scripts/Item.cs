@@ -17,13 +17,13 @@ public class Item : MonoBehaviour
     [SerializeField] private float healHP;
     [SerializeField] private int weight;
     [SerializeField] private GameObject[] journalPage;
-    private static int pageIndex = 0;
     [SerializeField] private Journalnavigation pageManager;
 
     public ItemData data;
     [HideInInspector] public Rigidbody2D rb2d;
 
     void Start() {
+        pageManager = GameObject.Find("Main Camera").GetComponent<Journalnavigation>();
         playerCharacter = GameObject.FindWithTag("player");
         controller = playerCharacter.GetComponent<PlayerController>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
@@ -72,8 +72,9 @@ public class Item : MonoBehaviour
             }
 
             if (journalPage.Length > 0) {
-                pageManager.texts[pageIndex + 2] = journalPage[pageIndex];
-                pageIndex++;
+                pageManager.texts[pageManager.lastPage + 4] = journalPage[pageManager.lastPage];
+                pageManager.lastPage++;
+                Debug.Log("saifo");
             }
 
             Destroy(gameObject);

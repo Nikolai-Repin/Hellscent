@@ -80,11 +80,11 @@ MonoBehaviour:
   roomSpacing: 1.0001
   mainBranchLength: 5
   offshootBranchCap: 1
-  waitingFrames: 5
+  waitingFrames: 1
   onlyBranchRooms: 1
   weight: 0
-  tryRoomChance: 50
-  roomChance: 66
+  tryRoomChance: 60
+  roomChance: 70
   hallwayChance: 87
   dungeonOver: 0
   finished: 0
