@@ -33,8 +33,9 @@ public class Item : MonoBehaviour
 
     // Triggers various item effects with if conditions when coming in contact with the player.
     // Every mention of controller is simply accessing the "controller" script within player, which just changes some values like damage and speed that the player has.
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("player")) {
+    void OnTriggerStay2D(Collider2D other) {
+        //Debug.Log("hello everyone]");
+        if (other.CompareTag("player") && Input.GetKey((KeyCode) PlayerPrefs.GetInt("Grab")) ) {
             
             if (bonusDamage > 0) {
                 controller.equippedWeapon.GetComponent<Weapon>().AddDamage(bonusDamage);
