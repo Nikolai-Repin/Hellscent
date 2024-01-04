@@ -1,4 +1,4 @@
-![image](https://github.com/Nikolai-Repin/Hellscent/assets/31192672/b00c323b-b853-45e9-89c9-cfefa927eece)# Hellscent (TopDown RPG)
+# Hellscent (TopDown RPG)
 ## Welcome to Hellscent. 
 Hellscent is a TopDown 2D RPG that focuses on using procedural generation to make every playthrough unique.
 # Beta-Testing
