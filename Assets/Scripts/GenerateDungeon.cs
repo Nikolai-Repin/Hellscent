@@ -215,7 +215,7 @@ public class GenerateDungeon : MonoBehaviour
 			dungeon.Add(nextOrigin);
 		}
 		dungeon.Add(nextRoom);
-		if (continueDungeon) 
+		if (!nextRoom.GetComponent<RoomInfo>().oneDoor && continueDungeon) 
 		{
 			yield return StartCoroutine(CreateDungeon(nextRoom, nextMainBranch, nextBranchCap));
 		}
