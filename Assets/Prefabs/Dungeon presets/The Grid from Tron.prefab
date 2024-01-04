@@ -83,8 +83,8 @@ MonoBehaviour:
   waitingFrames: 1
   onlyBranchRooms: 1
   weight: 0
-  tryRoomChance: 100
-  roomChance: 100
+  tryRoomChance: 60
+  roomChance: 70
   hallwayChance: 87
   dungeonOver: 0
   finished: 0
