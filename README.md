@@ -6,7 +6,17 @@ If you want to beta test this game, clink the link below:
 
 
 ### [Link](https://hellscent.s3.us-west-2.amazonaws.com/Beta/index.html) 
-*Note that link has not been set yet, Youtube is a placeholder for now*
+
+#### Default keybinds:
+
+Attack: left click
+
+Swap item: R
+
+Pick up item: E
+
+Drop item: R (hold)  
+
 
 # Feedback
 
