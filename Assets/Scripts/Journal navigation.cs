@@ -9,6 +9,7 @@ public class Journalnavigation : MonoBehaviour
 
     [SerializeField] private GameObject[] pages;
     [SerializeField] public GameObject[] texts;
+    public int lastPage;
 
     GameObject book;
     GameObject textLeft;
@@ -34,49 +35,25 @@ public class Journalnavigation : MonoBehaviour
         }
 
         if(isOpen){
-            
-
             if(Input.GetKeyDown(KeyCode.RightArrow)){ 
-                
-                if(page == 1 && text < texts.Length / 2){
-                    text = text + 2;
-                    ChangeText();
-                    ChangePage();
-                    
-                    
+                text++;
+                if (text > texts.Length / 2) {
+                    text = texts.Length / 2;
                 }
-
-
-                else if(page < pages.Length - 1){
-                    page++;
-                    ChangePage();
-                    ChangeText();
-                    if(page == pages.Length - 1){
-                        RemoveText();
-                    }
-                }
+                ChangePage();
+                ChangeText();
                 Debug.Log("page: " + page + ", text: " + text);
             }
 
             if(Input.GetKeyDown(KeyCode.LeftArrow)){ 
-                
-                if(page == 1 && text > 0){
-                    text = text - 2;
-                    ChangeText();
-                }
-
-
-                else if(page > 0){
-                    page--;
-                    ChangePage();
-                    ChangeText();
-                    if(page == 0){
-                        RemoveText();
-                    }
-                }
+                text--;
+                if (text < 0) {
+                    text = 0;
+                } 
+                ChangePage();
+                ChangeText();
                 Debug.Log("page: " + page + ", text: " + text);
             }
-
         }
         else if(!isOpen){
             Destroy(book);
@@ -90,6 +67,8 @@ public class Journalnavigation : MonoBehaviour
         if(journalOpen && !isOpen){
             isOpen = !isOpen;
             book = Instantiate(pages[page], new Vector2(0, 0), transform.rotation);
+            book.transform.SetParent(transform, false);
+            book.transform.Translate(new Vector3(0, 0, 1));
             GameObject[] players = GameObject.FindGameObjectsWithTag("player");
 			foreach (GameObject p in players) {
 				p.GetComponent<PlayerController>().SetControl(false);
@@ -108,14 +87,27 @@ public class Journalnavigation : MonoBehaviour
 
     private void ChangePage(){
         Destroy(book);
+        RemoveText();
+        if (text == 0) {
+            page = 0;
+        } else if (text == texts.Length / 2) {
+            page = 2;
+        } else {
+            page = 1;
+        }
         book = Instantiate(pages[page], new Vector2(0, 0), transform.rotation);
+        book.transform.SetParent(transform, false);
+        book.transform.Translate(new Vector3(0, 0, 1));
     }
 
     private void ChangeText(){
-        Destroy(textLeft);
-        Destroy(textRight);
-        textLeft = Instantiate(texts[text], new Vector2(0, 0), transform.rotation);
-        textRight = Instantiate(texts[text + 1], new Vector2(0, 0), transform.rotation);
+        RemoveText();
+        textLeft = Instantiate(texts[text * 2], new Vector2(0, 0), transform.rotation);
+        textLeft.transform.SetParent(transform, false);
+        textLeft.transform.Translate(new Vector3(0, 0, 1));
+        textRight = Instantiate(texts[text * 2 + 1], new Vector2(0, 0), transform.rotation);
+        textRight.transform.SetParent(transform, false);
+        textRight.transform.Translate(new Vector3(0, 0, 1));
     }
 
     private void RemoveText(){
