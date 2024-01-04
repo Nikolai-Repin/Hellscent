@@ -162,7 +162,7 @@ SpriteRenderer:
   m_SortingLayerID: 665226713
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1809412887, guid: 1eaa3dfa274035f4fb42f21f5b076a2a, type: 3}
+  m_Sprite: {fileID: 1987747134, guid: 74d00a27dc006514b99d77ed1770e86c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -270,6 +270,9 @@ MonoBehaviour:
   heldWeapons:
   - {fileID: 7254836270727516316}
   damage: 0
+  anim: {fileID: 0}
+  deathScreen: {fileID: 0}
+  gameScene: 0
 --- !u!1001 &1966640786771518275
 PrefabInstance:
   m_ObjectHideFlags: 0
