@@ -5,7 +5,7 @@ Hellscent is a TopDown 2D RPG that focuses on using procedural generation to mak
 If you want to beta test this game, clink the link below:
 
 
-### [Link](https://hellscent.s3.us-west-2.amazonaws.com/Beta/Updated+Build/index.html) 
+### [Link](https://hellscent.s3.us-west-2.amazonaws.com/clean+build+3/index.html) 
 
 #### Default keybinds:
 
