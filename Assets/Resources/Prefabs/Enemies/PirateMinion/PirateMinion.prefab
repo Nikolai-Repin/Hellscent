@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8252001175666994682}
   - component: {fileID: 5839077437733579749}
   - component: {fileID: 5330832386841567071}
+  - component: {fileID: 6434411859340342135}
   m_Layer: 6
   m_Name: PirateMinion
   m_TagString: Enemy
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 665226713
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: a9369766aa0d84d4ab76ac40b5af7510, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 01a35df1ae268ce44aaa670e4c1e7717, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -263,6 +264,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!95 &6434411859340342135
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561994129611895650}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 63314ea0d964a10478436fc1b89c39e7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4877133740511066942
 GameObject:
   m_ObjectHideFlags: 0
