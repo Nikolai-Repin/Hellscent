@@ -76,8 +76,8 @@ MonoBehaviour:
   - {fileID: 6862288333110420476, guid: f37c4eadd351efa4eb6ccb109a3d33e8, type: 3}
   roomSpacing: 1.0001
   mainBranchLength: 7
-  offshootBranchCap: 5
-  waitingFrames: 5
+  offshootBranchCap: 3
+  waitingFrames: 1
   onlyBranchRooms: 1
   weight: 50
   tryRoomChance: 50
