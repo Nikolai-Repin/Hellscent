@@ -231,7 +231,7 @@ public class Boss : Enemy
         dealDamageOnContact = true;
         intangible = false;
         trackerController.aiPath.maxSpeed = 5;
-        trackerController.SetAI(TrackerController.AI.Range);
+        trackerController.SetAI(TrackerController.AI.Melee);
         int numMinions = (int)(3*difficultyModifier);
         float rotationAmount = 6.283F/numMinions;
         GameObject minion;
