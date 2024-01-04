@@ -1,4 +1,4 @@
-# Hellscent (TopDown RPG)
+![image](https://github.com/Nikolai-Repin/Hellscent/assets/31192672/b00c323b-b853-45e9-89c9-cfefa927eece)# Hellscent (TopDown RPG)
 ## Welcome to Hellscent. 
 Hellscent is a TopDown 2D RPG that focuses on using procedural generation to make every playthrough unique.
 # Beta-Testing
@@ -9,7 +9,9 @@ If you want to beta test this game, clink the link below:
 
 #### Default keybinds:
 
-Attack: left click
+Attack: Left Click
+
+Dash: Space Bar
 
 Swap item: R
 
@@ -23,7 +25,7 @@ Drop item: R (hold)
 ## General Feedback  
 Use this form to submit general feedback and suggestions:
 
-### [Feedback Form]()
+### [Feedback Form](https://forms.office.com/Pages/ResponsePage.aspx?id=OUFKmQZ8HkmAmHkAbVdd4JoWOzloFEBHsLJRs7ltMPlUQkVMVllQUVhZTVVUVE40NVFPV1VHTUwwUC4u&wdLOR=cDD7515A8-52BC-4C2B-BFE4-1E1DD9FE0E07)
 
 
 
