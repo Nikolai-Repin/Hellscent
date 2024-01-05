@@ -143,15 +143,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d754b11d7c350046bfa5b23e719b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusDamage: 5
+  bonusDamage: 2
   bonusMaxMana: 0
   bonusSpeed: 0
   bonusManaRechargeSpeed: 0
   bonusMaxHP: 0
-  regenHearts: 0
+  healHP: 0
   weight: 30
-  journal: 0
-  page: {fileID: 0}
+  journalPage: []
+  pageManager: {fileID: 0}
   data: {fileID: 0}
   rb2d: {fileID: 0}
-  pageStorage: {fileID: 0}
