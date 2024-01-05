@@ -27,7 +27,7 @@ public class Keybind : MonoBehaviour {
         } else {
 
             buttonGrab.text = PlayerPrefs.GetString("gText");
-        } if (PlayerPrefs.GetInt("swap") == 0) {
+        } if (PlayerPrefs.GetInt("Swap") == 0) {
             
             PlayerPrefs.SetInt("Swap", (int) KeyCode.R);
             buttonSwap.text = defaultS;
@@ -73,11 +73,11 @@ public class Keybind : MonoBehaviour {
                 if (Input.GetKey(keycode)) {
                     if ((int) keycode == PlayerPrefs.GetInt("Attack") || (int) keycode == PlayerPrefs.GetInt("Grab") || (int) keycode == PlayerPrefs.GetInt("Swap")) {
                         if (k.Equals("Attack")) {
-                            button.text = defaultA;
+                            button.text = PlayerPrefs.GetString("aText");
                         } else if (k.Equals("Grab")) {
-                            button.text = defaultG;
+                            button.text = PlayerPrefs.GetString("gText");
                         } else if (k.Equals("Swap")) {
-                            button.text = defaultS;
+                            button.text = PlayerPrefs.GetString("sText");
                         }
                         return;
                     }
