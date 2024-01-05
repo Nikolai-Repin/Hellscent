@@ -19,6 +19,8 @@ Pick up item: E
 
 Drop item: R (hold)  
 
+Open/Close Journal: J
+
 
 # Feedback
 
