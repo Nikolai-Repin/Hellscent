@@ -19,7 +19,7 @@ public class Quest : MonoBehaviour
         Completed = Goals.All(g => g.Completed);
     }
 
-    void GiveReward() {
+    public void GiveReward() {
         if (ItemReward != null) {
             player.inventory.Add("backpack", ItemReward);
         }

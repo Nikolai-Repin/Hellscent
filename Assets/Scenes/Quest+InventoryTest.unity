@@ -3357,6 +3357,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29e1da4b1a60bf34d9f8b2f411c67b77, type: 3}
+--- !u!1 &781490106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 781490107}
+  - component: {fileID: 781490108}
+  m_Layer: 0
+  m_Name: CollectingQuest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &781490107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781490106}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1973006886}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &781490108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781490106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bfc683fa8991d448953f6869945b1c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemReward: {fileID: 2050006064}
 --- !u!224 &818308828 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7284406455717162103, guid: 29e1da4b1a60bf34d9f8b2f411c67b77, type: 3}
@@ -8468,6 +8513,7 @@ MonoBehaviour:
   - Hello!
   - Ben is very awesome.
   - Here's your quest!
+  npcName: Bob
   continueButton: {fileID: 1870960435}
   acceptButton: {fileID: 861965381}
   wordSpeed: 0.06
@@ -8485,6 +8531,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc04ec17ae0c16498495fbcaac11afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Bob
+  quests: {fileID: 781490106}
+  questType: Collection
 --- !u!1001 &1643073077
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9440,6 +9489,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 846924561563970260, guid: b5756abdc8969ed439f5f01182c82135, type: 3}
   m_PrefabInstance: {fileID: 926442644}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1973006885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1973006886}
+  m_Layer: 0
+  m_Name: Quests
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1973006886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973006885}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 485.18985, y: 212.35538, z: -0.1688818}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 781490107}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1978428555
 GameObject:
   m_ObjectHideFlags: 0
@@ -10482,6 +10563,17 @@ MonoBehaviour:
   toolbarSlots:
   - {fileID: 677552858}
   - {fileID: 1502668820}
+--- !u!114 &2050006064 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7607539456252687219, guid: c79ec0bbd4d8e4c4ea81ae880910992c, type: 3}
+  m_PrefabInstance: {fileID: 926611731}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc7d0c4f1cfa0e49af5c3f0e1614cdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2077783378 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7284406455717162103, guid: 29e1da4b1a60bf34d9f8b2f411c67b77, type: 3}
@@ -11048,6 +11140,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 208666325}
     m_Modifications:
+    - target: {fileID: 379059460706135035, guid: c98dd38839b1abd43992abb5a17bcfe7, type: 3}
+      propertyPath: m_text
+      value: Bob
+      objectReference: {fileID: 0}
     - target: {fileID: 610851257872645550, guid: c98dd38839b1abd43992abb5a17bcfe7, type: 3}
       propertyPath: m_text
       value: ACCEPT [F]
@@ -11183,3 +11279,4 @@ SceneRoots:
   - {fileID: 1783601743}
   - {fileID: 208666325}
   - {fileID: 1642608645}
+  - {fileID: 1973006886}

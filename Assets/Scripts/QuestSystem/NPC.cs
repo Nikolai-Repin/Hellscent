@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class NPC : MonoBehaviour
 {
+    public static NPC Instance { get; set; }
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
     public string[] dialogue;
+    public string npcName;
     private int index;
 
     public GameObject continueButton;
@@ -40,6 +43,7 @@ public class NPC : MonoBehaviour
             }
         }
 
+        // Last page of dialogue has accept button
         if(index == dialogue.Length - 1) {
             acceptButton.SetActive(true);
             continueButton.SetActive(false);
@@ -52,6 +56,7 @@ public class NPC : MonoBehaviour
     }
 
     public void AcceptQuest() {
+        QuestGiver.Instance.AssignQuest();
         zeroText();
     }
 
@@ -69,6 +74,15 @@ public class NPC : MonoBehaviour
         else {
             zeroText();
         }
+    }
+
+    public void AddNewDialogue(string[] lines, string npcName) {
+
+        index = 0;
+        dialogue = lines;
+        this.npcName = npcName;
+
+        StartCoroutine(Typing());
     }
 
     public void zeroText() {

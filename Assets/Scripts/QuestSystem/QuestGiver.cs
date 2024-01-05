@@ -1,41 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using TMPro;
 
 public class QuestGiver : MonoBehaviour
 {
-    /* public Quest quest;
+    public static QuestGiver Instance { get; set; }
+    public string name;
+    public bool AssignedQuest { get; set; }
+    public bool Helped { get; set; }
 
-    public Player player;
+    [SerializeField] private GameObject quests;
 
-    public GameObject questWindow;
-    public TextMeshProUGUI titleText;
-    public TextMeshProUGUI descriptionText;
-    public TextMeshProUGUI experienceText;
-    public TextMeshProUGUI goldText;
-
-    private void Update() {
-        // Press J to Open up Quest Window
-        if(Input.GetKeyDown(KeyCode.J)) {
-            OpenQuestWindow();
-        }
+    [SerializeField] 
+    private string questType;
+    private Quest Quest { get; set; }
+    
+    public void AssignQuest() {
+        AssignedQuest = true;
+        Quest = (Quest) quests.AddComponent(System.Type.GetType(questType));
     }
 
-    public void OpenQuestWindow() {
-        if(!questWindow.activeSelf) {
-            questWindow.SetActive(true);
-            titleText.text = quest.QuestName;
-            descriptionText.text = quest.Description;
-            experienceText.text = quest.ExperienceReward.ToString();
-            goldText.text = quest.GoldReward.ToString();
+    void CheckQuest() {
+        if (Quest.Completed) {
+            Quest.GiveReward();
+            Helped = true;
+            AssignedQuest = false;
+            NPC.Instance.AddNewDialogue(new string[] {"Thanks for helping! Here's your reward!"}, name);
         }
 
         else {
-            questWindow.SetActive(false);
+            NPC.Instance.AddNewDialogue(new string[] {"You're still not done! Come back when you have finished your task."}, name);
         }
-    } */
+    }
     
 }
