@@ -71,10 +71,9 @@ public class Item : MonoBehaviour
                 Debug.Log("Healed " + healHP + " HP");
             }
 
-            if (journalPage.Length > 0) {
+            if (journalPage.Length > 0 && pageManager.lastPage < 8) {
                 pageManager.texts[pageManager.lastPage + 4] = journalPage[pageManager.lastPage];
                 pageManager.lastPage++;
-                Debug.Log("saifo");
             }
 
             Destroy(gameObject);
