@@ -13,6 +13,8 @@ public class WormBoss : Enemy
     [SerializeField] private float difficultyModifier = 1;
     [SerializeField] private int maxTurrets;
     [SerializeField] private GameObject turretPrefab;
+    [SerializeField] private int segmentCount;
+    [SerializeField] private GameObject segmentPrefab;
     private Animator animator;
     private CinemachineVirtualCameraBase vCamera;
     private int currentTurrets;
@@ -30,6 +32,8 @@ public class WormBoss : Enemy
     public float phaseCooldown = 10F;
     private float phaseCooldownRandom;
     public Phase curPhase;
+    private List<GameObject> bodySegments;
+    private int firingSeg;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +45,11 @@ public class WormBoss : Enemy
         dealDamageOnContact = false;
         invulnerable = true;
         intangible = true;
+        bodySegments = new();
+        bodySegments.Add(transform.gameObject);
+        for (int i = 1; i <= segmentCount; i++) {
+            GenerateSegment(i);
+        }
 
         animator = GetComponent<Animator>();
         animator.SetInteger("Phase", 0);
@@ -55,6 +64,72 @@ public class WormBoss : Enemy
             case Phase.Wander: {
                 if (Time.time > lastPhaseChange+phaseCooldownRandom) {
                     PickPhase();
+                }
+                break;
+            }
+
+            case Phase.Rings: {
+                if (Time.time > lastAttackTime) {
+                    if (firingSeg > bodySegments.Count) {
+                        ReturnToWander();
+                    }
+                    if (firingSeg == 0) {
+                        CircleShot(projectileType, 16, 180*firingSeg, 10);
+                    } else {
+                        bodySegments[firingSeg].GetComponent<WormSegment>().FireRing(projectileType, 16, 180*firingSeg, 10);
+                    }
+                    firingSeg++;
+                    
+                    lastAttackTime = Time.time + 1;
+                }
+                
+                break;
+            }
+
+            case Phase.Turrets: {
+                if (currentTurrets >= maxTurrets) {
+                    ReturnToWander();
+                }
+                if (Time.time > lastAttackTime) {
+                    GameObject newTur = Instantiate(turretPrefab, RandomPosInArena(), new Quaternion());
+                    currentTurrets++;
+                    lastAttackTime = Time.time + 1;
+                }
+                break;
+            }
+
+            //Pre fight, before anything happens, checks if the player is in range to begin fight
+            case Phase.Sleep: {
+                GameObject closestPlayer = FindClosestPlayer();
+                if (closestPlayer != null) {
+                    arenaCenter = transform.position;
+                    trackerController.SetTarget(closestPlayer.transform);
+                    lastAttackTime = Time.time + 2;
+                    vCamera.Follow = transform;
+                    curPhase = Phase.Awakening;
+                }
+                break;
+            }
+
+            //Intro to fight
+            case Phase.Awakening: {
+                if (Time.time > lastAttackTime) {
+                    Awaken();
+                }
+                break;
+            }
+
+            //Death animation, cleans up the boss's attacks
+            case Phase.Death: {
+                if (Time.time > lastAttackTime) {
+                    vCamera.Follow = trackerController.target.transform;
+                    Destroy(transform.gameObject);
+                    Vector2 portalOffset = new Vector2(0, arenaSize.y*0.6F);
+                    Vector2 pageOffset = new Vector2(0, arenaSize.y*0.4F);
+                    GameObject portal = Resources.Load<GameObject>("Prefabs/Entities/NextAreaPortal/NextAreaPortal"); //This line is bad, lmk if there's a better way to do this, p l e a s e
+                    GameObject page = Resources.Load<GameObject>("Prefabs/Items/page item");
+                    Instantiate(portal, arenaCenter + portalOffset , new Quaternion());
+                    Instantiate(page, arenaCenter + pageOffset , new Quaternion());
                 }
                 break;
             }
@@ -79,6 +154,7 @@ public class WormBoss : Enemy
         Debug.Log(nextPhase);
         switch (nextPhase) {
             case 0: {
+                firingSeg = 0;
                 curPhase = Phase.Rings;
                 break;
             }
@@ -86,7 +162,6 @@ public class WormBoss : Enemy
             case 1: {
                 curPhase = Phase.Turrets;
                 lastAttackTime = Time.time + 1;
-                trackerController.aiPath.maxSpeed = 0.1F;
                 animator.SetInteger("Phase", 1);
                 break;
             }
@@ -111,5 +186,19 @@ public class WormBoss : Enemy
         lastAttackTime = Time.time + 1F;
         vCamera.Follow = transform;
         animator.SetInteger("Phase", -1);
+    }
+
+    public void GenerateSegment(int i) {
+        GameObject newSeg = Instantiate(segmentPrefab, transform.position, new Quaternion());
+        bodySegments.Add(newSeg);
+        
+        newSeg.transform.parent = transform;
+        newSeg.transform.localScale = new Vector3(1, 1, 1);
+        newSeg.GetComponent<WormSegment>().head = this;
+        newSeg.GetComponent<Joint2D>().connectedBody = bodySegments[i-1].GetComponent<Rigidbody2D>();
+    }
+
+    private Vector3 RandomPosInArena() {
+        return new Vector3(Random.Range((arenaCenter.x-arenaSize.x)+3, (arenaCenter.x+arenaSize.x)-3), Random.Range((arenaCenter.y-arenaSize.y)+3, (arenaCenter.y+arenaSize.y)-3), 0);
     }
 }
