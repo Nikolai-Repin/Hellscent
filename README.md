@@ -21,6 +21,8 @@ Drop item: R (hold)
 
 Open/Close Journal: J
 
+Pause Game: Escape
+
 
 # Feedback
 
