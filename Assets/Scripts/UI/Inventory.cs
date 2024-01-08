@@ -39,7 +39,7 @@ public class Inventory
         }
 
         // Adds the items to that slot
-        public void AddItem(UI_Items item) {
+        public void AddItem(Item item) {
             this.itemName = item.data.itemName;
             this.icon = item.data.icon;
             count++;
@@ -74,7 +74,7 @@ public class Inventory
             slots.Add(slot);
         }
     }
-    public void Add(UI_Items item) {
+    public void Add(Item item) {
         foreach(Slot slot in slots) {
             if(slot.itemName == item.data.itemName && slot.CanAddItem(item.data.itemName)) {
                 slot.AddItem(item);

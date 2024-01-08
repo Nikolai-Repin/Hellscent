@@ -22,7 +22,7 @@ public class InventoryManager : MonoBehaviour
         inventoryByName.Add("Toolbar", toolbar);
     }
 
-    public void Add(string inventoryName, UI_Items item) {
+    public void Add(string inventoryName, Item item) {
         if(inventoryByName.ContainsKey(inventoryName)) {
             inventoryByName[inventoryName].Add(item);
         }

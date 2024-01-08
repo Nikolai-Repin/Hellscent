@@ -12,17 +12,17 @@ public class Player : MonoBehaviour
         inventory = GetComponent<InventoryManager>();
     }
 
-    public void DropItem(UI_Items item) {
+    public void DropItem(Item item) {
         Vector2 spawnLocation = transform.position;
 
         Vector2 spawnOffset = Random.insideUnitCircle * 1.25f;
 
-        UI_Items droppedItem = Instantiate(item, spawnLocation + spawnOffset, Quaternion.identity);
+        Item droppedItem = Instantiate(item, spawnLocation + spawnOffset, Quaternion.identity);
 
         droppedItem.rb2d.AddForce(spawnOffset * .2f, ForceMode2D.Impulse);
     }
 
-    public void DropItem(UI_Items item, int numToDrop) {
+    public void DropItem(Item item, int numToDrop) {
         for(int i = 0; i < numToDrop; i++) {
             DropItem(item);
         }
