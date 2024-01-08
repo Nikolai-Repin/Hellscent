@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -1210643449
   m_SortingLayer: -1
   m_SortingOrder: 3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0, g: 0.64651275, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8428924622005797696}
   - component: {fileID: 335203246734275676}
   - component: {fileID: 808921467763219813}
-  - component: {fileID: 7502559576790646689}
+  - component: {fileID: 2521395678236679192}
   - component: {fileID: 5637199147852186135}
   m_Layer: 0
   m_Name: Player
@@ -200,8 +200,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &7502559576790646689
-BoxCollider2D:
+--- !u!58 &2521395678236679192
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -233,18 +233,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.8285714, y: 1.8285714}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.7
 --- !u!114 &5637199147852186135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,13 +256,12 @@ MonoBehaviour:
   dash: 0.32
   damper: 0.8
   manaRechargeSpeed: 5
-  equippedWeapon: {fileID: 7254836270727516316}
-  heldWeapons:
-  - {fileID: 7254836270727516316}
+  equippedWeapon: {fileID: 9215686754380215263, guid: a7b74da57fd25b943838a9b2fca34aa2, type: 3}
+  heldWeapons: []
   damage: 0
   anim: {fileID: 0}
   deathScreen: {fileID: 0}
-  gameScene: 0
+  gameScene: 1
 --- !u!1001 &1966640786771518275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -333,10 +322,5 @@ PrefabInstance:
 --- !u!4 &6984858459694142837 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8909767832380388918, guid: a7b74da57fd25b943838a9b2fca34aa2, type: 3}
-  m_PrefabInstance: {fileID: 1966640786771518275}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7254836270727516316 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9215686754380215263, guid: a7b74da57fd25b943838a9b2fca34aa2, type: 3}
   m_PrefabInstance: {fileID: 1966640786771518275}
   m_PrefabAsset: {fileID: 0}
