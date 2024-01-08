@@ -28,7 +28,7 @@ public class Journalnavigation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.J)){
+        if(Input.GetKeyDown(KeyCode.J) && false){
             journalOpen = !journalOpen;
             OpenBook();
             Debug.Log("book is opened");

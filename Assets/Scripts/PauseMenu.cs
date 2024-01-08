@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour
     public int targetScene;
 
     void Update() {
-        if (Input.GetKeyDown("escape")) {
+        if (Input.GetKeyDown("tab")) {
             isShowing = !isShowing;
             menu.SetActive(isShowing);
             PauseGame(isShowing);

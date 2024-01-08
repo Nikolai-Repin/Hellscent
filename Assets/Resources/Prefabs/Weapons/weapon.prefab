@@ -106,8 +106,8 @@ MonoBehaviour:
   accuracy: 3
   weaponDamage: 0
   useMana: 1
-  manaCost: 5
-  maxMana: 50
+  manaCost: 1
+  maxMana: 20
   mana: 0
   manaRechargeDelay: 1
   lastFireTime: 0

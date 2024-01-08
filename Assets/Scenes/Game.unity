@@ -131,33 +131,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3180616111496763035, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3180616111496763035, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 3232932209666028585, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-    - target: {fileID: 3232932209666028585, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: m_Color.g
-      value: 0.64651275
-      objectReference: {fileID: 0}
-    - target: {fileID: 3232932209666028585, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3246128399018723868, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: dash
-      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: gameScene
@@ -168,25 +148,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 581805528}
     - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: healthAmount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: equippedWeapon
       value: 
       objectReference: {fileID: 9215686754380215263, guid: a7b74da57fd25b943838a9b2fca34aa2, type: 3}
     - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: maxHealthAmount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: heldWeapons.Array.size
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5637199147852186135, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
-      propertyPath: heldWeapons.Array.data[0]
-      value: 
-      objectReference: {fileID: 9215686754380215263, guid: a7b74da57fd25b943838a9b2fca34aa2, type: 3}
     - target: {fileID: 8428924622005797696, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

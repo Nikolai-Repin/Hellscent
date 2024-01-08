@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d754b11d7c350046bfa5b23e719b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusDamage: 5
+  bonusDamage: 2
   bonusMaxMana: 0
   bonusSpeed: 0
   bonusManaRechargeSpeed: 0
