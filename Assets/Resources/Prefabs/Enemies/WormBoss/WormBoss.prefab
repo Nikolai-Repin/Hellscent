@@ -292,8 +292,9 @@ MonoBehaviour:
   difficultyModifier: 1
   maxTurrets: 4
   turretPrefab: {fileID: 5010791337478828397, guid: a133b632a41341d459893e6cc95fcfe3, type: 3}
-  segmentCount: 5
+  segmentCount: 8
   segmentPrefab: {fileID: 3738482848794884670, guid: 378967b83e8a6e24b838f3e208c31bf2, type: 3}
+  lineCount: 10
   lastPhaseChange: 0
   phaseCooldown: 10
   curPhase: 0

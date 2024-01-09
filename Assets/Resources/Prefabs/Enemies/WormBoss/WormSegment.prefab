@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7357571617987395977}
   - component: {fileID: 1778451861219549891}
   - component: {fileID: 5981321808491106239}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ContactDamageCollider_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 5681914130881516806}
   - component: {fileID: 5892819072483611453}
   - component: {fileID: 8221049228153640064}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WormSegment
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,9 +219,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 4
-  m_AngularDrag: 2
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -273,7 +273,7 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 1
-  m_DampingRatio: 0
+  m_DampingRatio: 1
   m_Frequency: 1
 --- !u!114 &8221049228153640064
 MonoBehaviour:

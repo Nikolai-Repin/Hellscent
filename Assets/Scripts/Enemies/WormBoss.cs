@@ -15,6 +15,7 @@ public class WormBoss : Enemy
     [SerializeField] private GameObject turretPrefab;
     [SerializeField] private int segmentCount;
     [SerializeField] private GameObject segmentPrefab;
+    [SerializeField] private int lineCount;
     private Animator animator;
     private CinemachineVirtualCameraBase vCamera;
     private float lastAttackTime;
@@ -25,7 +26,8 @@ public class WormBoss : Enemy
         Awakening = 1,
         Wander = 2, //Wanders, while in this phase, will pick a new phase at random
         Rings = 3, //Each segment fires rings sequentially
-        Turrets = 7,
+        Turrets = 4,
+        Lines = 5, //Head fires line bursts of projectiles
     }
     public float lastPhaseChange;
     public float phaseCooldown = 10F;
@@ -34,6 +36,7 @@ public class WormBoss : Enemy
     private List<GameObject> bodySegments;
     private List<GameObject> turrets;
     private int firingSeg;
+    private int firedLines;
 
     // Start is called before the first frame update
     void Start()
@@ -100,6 +103,24 @@ public class WormBoss : Enemy
                 break;
             }
 
+            case Phase.Lines: {
+                if (Time.time >= lastAttackTime) {
+                    var dir = trackerController.target.transform.position - transform.position;
+                    var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+                    Quaternion fireAngle = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
+
+                    SlowingLineShot(projectileType, 8, 25, 5, fireAngle);
+                    firedLines++;
+                    Debug.Log(firedLines);
+                    lastAttackTime = Time.time + Mathf.Min(1.5F/firedLines,0.75F);
+
+                    if (firedLines >= lineCount) {
+                        ReturnToWander();
+                    }
+                }
+                break;
+            }
+
             //Pre fight, before anything happens, checks if the player is in range to begin fight
             case Phase.Sleep: {
                 GameObject closestPlayer = FindClosestPlayer();
@@ -152,7 +173,7 @@ public class WormBoss : Enemy
 
     //Picks the next phase
     public void PickPhase() {
-        int nextPhase = (int) Random.Range(0, 2);
+        int nextPhase = (int) Random.Range(0, 3);
         Debug.Log(nextPhase);
         switch (nextPhase) {
             case 0: {
@@ -165,6 +186,11 @@ public class WormBoss : Enemy
                     SetPhase(Phase.Rings);
                 }
                 SetPhase(Phase.Turrets);
+                break;
+            }
+
+            case 2: {
+                SetPhase(Phase.Lines);
                 break;
             }
         }
@@ -182,6 +208,12 @@ public class WormBoss : Enemy
                 curPhase = Phase.Turrets;
                 lastAttackTime = Time.time + 1;
                 animator.SetInteger("Phase", 1);
+                break;
+            }
+
+            case (Phase.Lines): {
+                firedLines = 0;
+                curPhase = Phase.Lines;
                 break;
             }
         }

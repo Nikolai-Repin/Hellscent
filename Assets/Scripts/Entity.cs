@@ -102,7 +102,6 @@ public class Entity : MonoBehaviour
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.team = "Enemy";
             float fireSpeed = startSpeed - speedChange*i;
-            //Debug.Log(fireSpeed);
             bulletScript.LaunchProjectile(angle, fireSpeed);
         }
     }
