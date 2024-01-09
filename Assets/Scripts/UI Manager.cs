@@ -19,7 +19,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Camera camera;
+    //[SerializeField] private Camera camera;
     
     [SerializeField] private Image ManaBar;
 
@@ -76,6 +76,14 @@ public class UIManager : MonoBehaviour
             heartContainerInsides[index].fillAmount = 0.5f;
         }
 
+    }
+
+    public void UpdateEntityHealthBar(Entity entity) {
+        
+        // Gets reference to the entity's canvas, which then gets reference to the image of the health bar. 
+        // Uses the health bar's reference to visually update how much health an entity has.
+        entity.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = (entity.GetHealthAmount()/entity.GetMaxHealthAmount());
+        
     }
 
 }

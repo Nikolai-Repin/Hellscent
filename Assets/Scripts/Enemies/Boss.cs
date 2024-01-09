@@ -7,6 +7,7 @@ public class Boss : Enemy
 {
     private Vector2 arenaCenter;
     [SerializeField] bool spawnPortal;
+    [SerializeField] bool page;
     [SerializeField] Vector2 arenaSize;
     [SerializeField] int numBombs;
     [SerializeField] public GameObject projectileType;
@@ -157,8 +158,11 @@ public class Boss : Enemy
                     vCamera.Follow = trackerController.target.transform;
                     Destroy(transform.gameObject);
                     Vector2 portalOffset = new Vector2(0, arenaSize.y*0.6F);
+                    Vector2 pageOffset = new Vector2(0, arenaSize.y*0.4F);
                     GameObject portal = Resources.Load<GameObject>("Prefabs/Entities/NextAreaPortal/NextAreaPortal"); //This line is bad, lmk if there's a better way to do this, p l e a s e
-                    Instantiate(portal, arenaCenter + portalOffset, new Quaternion());
+                    GameObject page = Resources.Load<GameObject>("Prefabs/Items/page item");
+                    Instantiate(portal, arenaCenter + portalOffset , new Quaternion());
+                    Instantiate(page, arenaCenter + pageOffset , new Quaternion());
                 }
                 break;
             }
@@ -231,7 +235,7 @@ public class Boss : Enemy
         dealDamageOnContact = true;
         intangible = false;
         trackerController.aiPath.maxSpeed = 5;
-        trackerController.SetAI(TrackerController.AI.Range);
+        trackerController.SetAI(TrackerController.AI.Melee);
         int numMinions = (int)(3*difficultyModifier);
         float rotationAmount = 6.283F/numMinions;
         GameObject minion;

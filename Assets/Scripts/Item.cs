@@ -14,15 +14,16 @@ public class Item : MonoBehaviour
     [SerializeField] private float bonusSpeed;
     [SerializeField] private float bonusManaRechargeSpeed;
     [SerializeField] private float bonusMaxHP;
+    [SerializeField] private float healHP;
     [SerializeField] private int weight;
     [SerializeField] private GameObject[] journalPage;
-    private static int pageIndex = 0;
     [SerializeField] private Journalnavigation pageManager;
 
     public ItemData data;
     [HideInInspector] public Rigidbody2D rb2d;
 
     void Start() {
+        pageManager = GameObject.Find("Main Camera").GetComponent<Journalnavigation>();
         playerCharacter = GameObject.FindWithTag("player");
         controller = playerCharacter.GetComponent<PlayerController>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
@@ -32,8 +33,9 @@ public class Item : MonoBehaviour
 
     // Triggers various item effects with if conditions when coming in contact with the player.
     // Every mention of controller is simply accessing the "controller" script within player, which just changes some values like damage and speed that the player has.
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("player")) {
+    void OnTriggerStay2D(Collider2D other) {
+        //Debug.Log("hello everyone]");
+        if (other.CompareTag("player") && Input.GetKey((KeyCode) PlayerPrefs.GetInt("Grab")) ) {
             
             if (bonusDamage > 0) {
                 controller.equippedWeapon.GetComponent<Weapon>().AddDamage(bonusDamage);
@@ -63,9 +65,15 @@ public class Item : MonoBehaviour
                 Debug.Log("Healed " + bonusMaxHP + " HP");
             }
 
-            if (journalPage != null) {
-                pageManager.texts[pageIndex + 2] = journalPage[pageIndex];
-                pageIndex++;
+            if (healHP > 0) {
+                controller.RestoreHP(healHP);
+                uiManager.updateHealth();
+                Debug.Log("Healed " + healHP + " HP");
+            }
+
+            if (journalPage.Length > 0 && pageManager.lastPage < 8) {
+                pageManager.texts[pageManager.lastPage + 4] = journalPage[pageManager.lastPage];
+                pageManager.lastPage++;
             }
 
             Destroy(gameObject);

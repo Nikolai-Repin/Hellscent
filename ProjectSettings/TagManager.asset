@@ -4,12 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Item
   - Enemy
   - player
   - Bullet
   - Dungeon
   - Journal
+  - Item Pickup
   layers:
   - Default
   - TransparentFX
@@ -56,6 +56,12 @@ TagManager:
   - name: Projectiles
     uniqueID: 3671666889
     locked: 0
+  - name: Walls
+    uniqueID: 3851371001
+    locked: 0
   - name: Journal
     uniqueID: 413302143
+    locked: 0
+  - name: HUD
+    uniqueID: 1203851725
     locked: 0
