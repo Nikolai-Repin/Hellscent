@@ -22,6 +22,14 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float mana;
     [SerializeField] private float manaRechargeDelay = 1;
 
+    [Space]
+    [SerializeField] public bool canCharge;
+    [SerializeField] public float chargeTime;
+    [SerializeField] public float incrementTime;
+    [SerializeField] public float maxManaUse;
+    [SerializeField] private float maxDamage;
+    [SerializeField] private float maxKickback;
+
     [SerializeField] private float lastFireTime;
 
     
@@ -123,6 +131,31 @@ public class Weapon : MonoBehaviour
         return true;
     }
 
+    public bool Fire(float timeCharged) {
+        if (timeCharged > chargeTime) {
+            timeCharged = chargeTime;
+        }
+        StartCoroutine(resetVars(manaCost, weaponDamage, kickback));
+        int maxIncrements = (int) (chargeTime / incrementTime);
+        int increments = (int) (timeCharged / incrementTime);
+        float oldCost = manaCost;
+        manaCost += (maxManaUse - manaCost) / maxIncrements * increments;
+        if (manaCost > maxMana) {
+            float targetIncrements = 1 / (((maxManaUse - oldCost) / maxIncrements) / manaCost);
+            return Fire(targetIncrements * incrementTime);
+        }
+        weaponDamage += (maxDamage - weaponDamage) / maxIncrements * increments;
+        kickback += (maxKickback - kickback) / maxIncrements * increments;
+        return Fire();
+    }
+
+    IEnumerator resetVars(float m, float d, float k) {
+        yield return null;
+        manaCost = m;
+        weaponDamage = d;
+        kickback = k;
+    }
+
     public bool GetControllerAndEquip() {
         if (transform.parent.gameObject.GetComponent<PlayerController>() != null) {
             controller = parent.GetComponent<Entity>();
@@ -215,12 +248,20 @@ public class Weapon : MonoBehaviour
         return mana/maxMana;
     }
 
-        public void AddMaxMana(float a) {
+    public float GetMaxMana() {
+        return maxMana;
+    }
+
+    public void AddMaxMana(float a) {
         maxMana += a;
     }
 
         public int GetWeight() {
         return weight;
+    }
+
+    public void StopRecharge() {
+        lastFireTime = Time.time + manaRechargeDelay;
     }
 
 }

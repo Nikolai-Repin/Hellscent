@@ -361,6 +361,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5855062828105437730, guid: 3bb062a79cac5cf4d8fb48587b9e8d2a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00021362305
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393973996110489197, guid: 3bb062a79cac5cf4d8fb48587b9e8d2a, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8017429825250672477, guid: 3bb062a79cac5cf4d8fb48587b9e8d2a, type: 3}
       propertyPath: m_Name
       value: UI Manager

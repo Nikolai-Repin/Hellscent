@@ -162,7 +162,7 @@ public class Boss : Enemy
                     GameObject portal = Resources.Load<GameObject>("Prefabs/Entities/NextAreaPortal/NextAreaPortal"); //This line is bad, lmk if there's a better way to do this, p l e a s e
                     GameObject page = Resources.Load<GameObject>("Prefabs/Items/page item");
                     Instantiate(portal, arenaCenter + portalOffset , new Quaternion());
-                    Instantiate(page, arenaCenter + pageOffset , new Quaternion());
+                    //Instantiate(page, arenaCenter + pageOffset , new Quaternion());
                 }
                 break;
             }
