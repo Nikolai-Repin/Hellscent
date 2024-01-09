@@ -8,26 +8,29 @@ public class Keybind : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI buttonAttack;
     [SerializeField] private TextMeshProUGUI buttonGrab;
     [SerializeField] private TextMeshProUGUI buttonSwap;
+    String defaultA = "Mouse0";
+    String defaultG = "E";
+    String defaultS = "R";
     
     private void Start () {
         if (PlayerPrefs.GetInt("Attack") == 0) {
 
             PlayerPrefs.SetInt("Attack", (int) KeyCode.Mouse0);
-            buttonAttack.text = "Mouse0";
+            buttonAttack.text = defaultA;
         } else {
 
             buttonAttack.text = PlayerPrefs.GetString("aText");
         } if (PlayerPrefs.GetInt("Grab") == 0) {
 
             PlayerPrefs.SetInt("Grab", (int) KeyCode.E);
-            buttonGrab.text = "E";
+            buttonGrab.text = defaultG;
         } else {
 
             buttonGrab.text = PlayerPrefs.GetString("gText");
         } if (PlayerPrefs.GetInt("Swap") == 0) {
             
             PlayerPrefs.SetInt("Swap", (int) KeyCode.R);
-            buttonSwap.text = "R";
+            buttonSwap.text = defaultS;
         } else {
 
             buttonSwap.text = PlayerPrefs.GetString("sText");
@@ -36,22 +39,31 @@ public class Keybind : MonoBehaviour {
 
     private void Update () {
         ChangeKey(buttonAttack, "Attack", "aText");
-        ChangeKey(buttonSwap, "Swap", "sText");
+        
         ChangeKey(buttonGrab, "Grab", "gText");
+        
+        ChangeKey(buttonSwap, "Swap", "sText");
         
     }
 
     public void ChangeAttackKey() {
-        buttonAttack.text = "Awaiting Input";
+        if (buttonGrab.text != "Awaiting Input" && buttonSwap.text != "Awaiting Input") {
+            buttonAttack.text = "Awaiting Input";
+        }
     }
 
     public void ChangeGrabKey() {
-        buttonGrab.text = "Awaiting Input";
+        if (buttonAttack.text != "Awaiting Input" && buttonSwap.text != "Awaiting Input") {
+            buttonGrab.text = "Awaiting Input";
+        }
     }
 
     public void ChangeSwapKey() {
-        buttonSwap.text = "Awaiting Input";
+        if (buttonGrab.text != "Awaiting Input" && buttonAttack.text != "Awaiting Input") {
+            buttonSwap.text = "Awaiting Input";
+        }
     }
+
 
     public void ChangeKey(TextMeshProUGUI button, String k, String t) {
         if (button.text == "Awaiting Input") {
@@ -59,13 +71,23 @@ public class Keybind : MonoBehaviour {
             foreach (KeyCode keycode in Enum.GetValues(typeof(KeyCode))) {
 
                 if (Input.GetKey(keycode)) {
-
+                    if ((int) keycode == PlayerPrefs.GetInt("Attack") || (int) keycode == PlayerPrefs.GetInt("Grab") || (int) keycode == PlayerPrefs.GetInt("Swap")) {
+                        if (k.Equals("Attack")) {
+                            button.text = PlayerPrefs.GetString("aText");
+                        } else if (k.Equals("Grab")) {
+                            button.text = PlayerPrefs.GetString("gText");
+                        } else if (k.Equals("Swap")) {
+                            button.text = PlayerPrefs.GetString("sText");
+                        }
+                        return;
+                    }
                     button.text = keycode.ToString();
                     PlayerPrefs.SetInt(k, (int) keycode);
                     PlayerPrefs.SetString(t, keycode.ToString());
                     PlayerPrefs.Save();
                                     
                 }
+                
             }
         }
     }
