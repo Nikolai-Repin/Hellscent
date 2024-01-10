@@ -140,7 +140,7 @@ public class Weapon : MonoBehaviour
         int increments = (int) (timeCharged / incrementTime);
         float oldCost = manaCost;
         manaCost += (maxManaUse - manaCost) / maxIncrements * increments;
-        if (manaCost > maxMana) {
+        if (manaCost > mana) {
             float targetIncrements = 1 / (((maxManaUse - oldCost) / maxIncrements) / manaCost);
             return Fire(targetIncrements * incrementTime);
         }

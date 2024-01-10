@@ -10157,7 +10157,7 @@ MonoBehaviour:
   - West
   - East
   doorOccupation: 00000000
-  trueOccupancy: 
+  trueOccupancy: 00000000
   locked: 1
   completed: 0
   spawners:

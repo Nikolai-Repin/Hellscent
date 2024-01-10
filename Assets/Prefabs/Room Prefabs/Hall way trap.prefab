@@ -3070,7 +3070,7 @@ MonoBehaviour:
   - East
   - West
   doorOccupation: 0000
-  trueOccupancy: 
+  trueOccupancy: 0000
   locked: 1
   completed: 0
   spawners:

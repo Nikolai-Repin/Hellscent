@@ -222,9 +222,7 @@ public class GenerateDungeon : MonoBehaviour
 			}
 		}
 		RoomInfo originData = origin.GetComponent<RoomInfo>();
-		if (nextRoom.GetComponent<RoomInfo>().oneDoor && originData.trueOccupancy.IndexOf(true) == -1) {
-			originData.trueOccupancy[originData.doorDirection.IndexOf(door)] = true;
-		}
+		originData.trueOccupancy[originData.doorDirection.IndexOf(door)] = true;
 		if (usedHallway) {
 			dungeon.Add(nextOrigin);
 		}
