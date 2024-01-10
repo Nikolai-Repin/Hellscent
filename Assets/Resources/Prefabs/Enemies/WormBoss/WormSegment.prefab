@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 833080864200419810}
   - component: {fileID: 3705355749953913100}
   - component: {fileID: 5681914130881516806}
-  - component: {fileID: 5892819072483611453}
   - component: {fileID: 8221049228153640064}
   m_Layer: 6
   m_Name: WormSegment
@@ -219,7 +218,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1
   m_LinearDrag: 4
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -254,27 +253,6 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 2
   m_MaxDistanceOnly: 0
---- !u!231 &5892819072483611453
-SpringJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3738482848794884670}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 0
-  m_Distance: 1
-  m_DampingRatio: 1
-  m_Frequency: 1
 --- !u!114 &8221049228153640064
 MonoBehaviour:
   m_ObjectHideFlags: 0
