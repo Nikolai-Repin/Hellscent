@@ -138,14 +138,16 @@ public class Weapon : MonoBehaviour
         StartCoroutine(resetVars(manaCost, weaponDamage, kickback));
         int maxIncrements = (int) (chargeTime / incrementTime);
         int increments = (int) (timeCharged / incrementTime);
-        float oldCost = manaCost;
-        manaCost += (maxManaUse - manaCost) / maxIncrements * increments;
-        if (manaCost > mana) {
-            float targetIncrements = 1 / (((maxManaUse - oldCost) / maxIncrements) / manaCost);
-            return Fire(targetIncrements * incrementTime);
+        float incrementRatio = timeCharged / chargeTime;
+        //float oldCost = manaCost;
+        float manaCostDiff = maxManaUse * incrementRatio;
+        //manaCost = maxManaUse / maxIncrements * increments;
+        if (manaCost + manaCostDiff > mana) {
+            return Fire(mana * chargeTime / maxManaUse);
         }
-        weaponDamage += (maxDamage - weaponDamage) / maxIncrements * increments;
-        kickback += (maxKickback - kickback) / maxIncrements * increments;
+        manaCost += manaCostDiff;
+        weaponDamage = maxDamage / maxIncrements * increments;
+        kickback = maxKickback / maxIncrements * increments;
         return Fire();
     }
 

@@ -134,9 +134,9 @@ public class PlayerController : Entity
                         if (timeCharged > w.chargeTime) {
                             timeCharged = w.chargeTime;
                         }
-                        int maxIncrements = (int) (w.chargeTime / w.incrementTime);
-                        int increments = (int) (timeCharged / w.incrementTime);
-                        chargeBar = w.GetManaCost() + ((w.maxManaUse - w.GetManaCost()) / maxIncrements * increments);
+                        float incrementRatio = timeCharged / w.chargeTime;
+                        float manaCostDiff = w.maxManaUse * incrementRatio;
+                        chargeBar = w.manaCost + manaCostDiff;
                      }
                      if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Attack"))) { 
                         chargeBar = 0;
