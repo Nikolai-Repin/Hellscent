@@ -17,6 +17,7 @@ public class Boss : Enemy
     private GameObject minionPrefab;
     private Animator animator;
     private CinemachineVirtualCameraBase vCamera;
+    private ParticleSystem particleRockBurst;
     private int firedBombs;
     private float lastAttackTime;
     
@@ -47,6 +48,7 @@ public class Boss : Enemy
         bombBPrefab = Resources.Load<GameObject>("Prefabs/Entities/PirateBomb/PirateBombLine");
         minionPrefab = Resources.Load<GameObject>("Prefabs/Enemies/PirateMinion/PirateMinion");
         vCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCameraBase>();
+        particleRockBurst = GameObject.Find("RockParticle").GetComponent<ParticleSystem>();
         dealDamageOnContact = false;
         invulnerable = true;
         intangible = true;
@@ -177,7 +179,10 @@ public class Boss : Enemy
         invulnerable = false;
         intangible = false;
         trackerController.SetAI(TrackerController.AI.Melee);
+        
         vCamera.Follow = trackerController.target.transform;
+        particleRockBurst.Play();
+
         ReturnToWander();
     }
 
@@ -236,6 +241,9 @@ public class Boss : Enemy
         intangible = false;
         trackerController.aiPath.maxSpeed = 5;
         trackerController.SetAI(TrackerController.AI.Melee);
+
+        particleRockBurst.Play();
+
         int numMinions = (int)(3*difficultyModifier);
         float rotationAmount = 6.283F/numMinions;
         GameObject minion;
