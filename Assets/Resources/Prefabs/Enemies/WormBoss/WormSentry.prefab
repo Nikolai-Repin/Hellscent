@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 9007378800958246689}
   - component: {fileID: 5847386174894935658}
   m_Layer: 6
-  m_Name: BurstSentry
+  m_Name: WormSentry
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
