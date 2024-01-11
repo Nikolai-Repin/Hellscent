@@ -128,15 +128,20 @@ public class PlayerController : Entity
                         holdTime = Time.time;
                      }
                      if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) {
+                        chargeBar = 0;
                         Weapon w = equippedWeapon.GetComponent<Weapon>();
-                        w.StopRecharge();
                         float timeCharged = (Time.time - holdTime);
                         if (timeCharged > w.chargeTime) {
                             timeCharged = w.chargeTime;
                         }
                         float incrementRatio = timeCharged / w.chargeTime;
-                        float manaCostDiff = w.maxManaUse * incrementRatio;
-                        chargeBar = w.manaCost + manaCostDiff;
+                        float manaCostDiff = w.extraManaUse * incrementRatio;
+                        if (w.CanShoot()) {
+                            chargeBar = w.manaCost + manaCostDiff;
+                        }
+                        if (chargeBar <= w.GetMana()) {
+                            w.StopRecharge();
+                        }
                      }
                      if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Attack"))) { 
                         chargeBar = 0;
@@ -148,6 +153,7 @@ public class PlayerController : Entity
                         }
                      }
                 } else {
+                    chargeBar = 0;
                     if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) {
                         if(equippedWeapon.GetComponent<Weapon>().Fire()) {
 

@@ -26,9 +26,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] public bool canCharge;
     [SerializeField] public float chargeTime;
     [SerializeField] public float incrementTime;
-    [SerializeField] public float maxManaUse;
-    [SerializeField] private float maxDamage;
-    [SerializeField] private float maxKickback;
+    [SerializeField] public float extraManaUse;
+    [SerializeField] private float extraDamage;
+    [SerializeField] private float extraKickback;
 
     [SerializeField] private float lastFireTime;
 
@@ -140,14 +140,17 @@ public class Weapon : MonoBehaviour
         int increments = (int) (timeCharged / incrementTime);
         float incrementRatio = timeCharged / chargeTime;
         //float oldCost = manaCost;
-        float manaCostDiff = maxManaUse * incrementRatio;
+        float manaCostDiff = extraManaUse * incrementRatio;
         //manaCost = maxManaUse / maxIncrements * increments;
         if (manaCost + manaCostDiff > mana) {
-            return Fire(mana * chargeTime / maxManaUse);
+            if (manaCost > mana) {
+                return false;
+            }
+            return Fire((mana - manaCost) * chargeTime / extraManaUse);
         }
         manaCost += manaCostDiff;
-        weaponDamage = maxDamage / maxIncrements * increments;
-        kickback = maxKickback / maxIncrements * increments;
+        weaponDamage += extraDamage * incrementRatio;
+        kickback += extraKickback * incrementRatio;
         return Fire();
     }
 
@@ -237,6 +240,10 @@ public class Weapon : MonoBehaviour
         return weaponDamage;
     }
 
+    public bool CanShoot() {
+        return cooldown <= 0;
+    }
+
     public void AddDamage(float bonusDamage) {
         weaponDamage += bonusDamage;
     }
@@ -252,6 +259,10 @@ public class Weapon : MonoBehaviour
 
     public float GetMaxMana() {
         return maxMana;
+    }
+
+    public float GetMana() {
+        return mana;
     }
 
     public void AddMaxMana(float a) {
