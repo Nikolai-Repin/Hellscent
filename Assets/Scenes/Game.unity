@@ -932,6 +932,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 2000546890}
     m_Modifications:
     - target: {fileID: 7182153838417077510, guid: 6070a2c47fa3b6740ba39725997f2d40, type: 3}
+      propertyPath: clip
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7182153838417077510, guid: 6070a2c47fa3b6740ba39725997f2d40, type: 3}
+      propertyPath: clipDelay
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7182153838417077510, guid: 6070a2c47fa3b6740ba39725997f2d40, type: 3}
       propertyPath: extraDamage
       value: 5
       objectReference: {fileID: 0}

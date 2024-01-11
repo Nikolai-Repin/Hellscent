@@ -139,7 +139,7 @@ public class PlayerController : Entity
                         if (w.CanShoot()) {
                             chargeBar = w.manaCost + manaCostDiff;
                         }
-                        if (chargeBar <= w.GetMana()) {
+                        if (chargeBar < w.GetMana()) {
                             w.StopRecharge();
                         }
                      }

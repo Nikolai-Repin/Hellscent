@@ -13,6 +13,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float cooldownTime = 0.5F;
     [SerializeField] public int bullets = 1;
     [SerializeField] public float accuracy = 10.0F;
+    [SerializeField] public int clip = 1;
+    [SerializeField] public int clipDelay;
 
     [SerializeField] private float weaponDamage;
 
@@ -30,6 +32,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float extraDamage;
     [SerializeField] private float extraKickback;
 
+    [Space]
     [SerializeField] private float lastFireTime;
 
     
@@ -104,9 +107,17 @@ public class Weapon : MonoBehaviour
     }
 
     //Fires the selected projectile
-    public bool Fire()
+    public bool Fire(bool useCooldown = true)
     {
-        if (cooldown > 0 || (useMana && mana < manaCost)) {return false;}
+        if (useCooldown && (cooldown > 0 || (useMana && mana < manaCost))) {return false;}
+
+        if (useCooldown && clip > 1) {
+            StartCoroutine(FireClip(clip)); 
+            lastFireTime = Time.time + manaRechargeDelay;
+            if (useMana) {mana -= manaCost;}
+            cooldown = cooldownTime;
+            return true;
+        }
 
         for (int i = 0; i < bullets+modBullets; i++)
         {
@@ -154,8 +165,22 @@ public class Weapon : MonoBehaviour
         return Fire();
     }
 
-    IEnumerator resetVars(float m, float d, float k) {
-        yield return null;
+    IEnumerator FireClip(int clipSize) {
+        StartCoroutine(resetVars(manaCost, weaponDamage, kickback, clipSize * clipDelay + 1));
+        if (clipSize > 0) {
+            for (int i = 0; i < clipSize; i++) {
+                for (int j = 0; j < clipDelay; j++) {
+                    yield return null;
+                }
+                Fire(false);
+            }
+        }
+    }
+
+    IEnumerator resetVars(float m, float d, float k, int frames = 1) {
+        for (int i = 0; i < frames; i++) {
+            yield return null;
+        }
         manaCost = m;
         weaponDamage = d;
         kickback = k;
