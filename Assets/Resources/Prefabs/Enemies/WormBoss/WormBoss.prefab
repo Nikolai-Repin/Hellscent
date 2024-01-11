@@ -90,7 +90,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 9}
-  m_LocalScale: {x: 8, y: 8, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2304237737648765076}
@@ -139,7 +139,7 @@ SpriteRenderer:
   m_SortingLayerID: 665226713
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 29d7fa8b8f3b9c0488b87e66b6ced73e, type: 3}
+  m_Sprite: {fileID: 1551513353, guid: 0bb4e2742ce22b44984e6674937802d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -276,6 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 0
   intangible: 0
+  hasHealthBar: 1
   maxHealthAmount: 750
   healthAmount: 750
   knockbackMult: 0.1
@@ -296,7 +297,7 @@ MonoBehaviour:
   segmentPrefab: {fileID: 3738482848794884670, guid: 378967b83e8a6e24b838f3e208c31bf2, type: 3}
   lineCount: 10
   lastPhaseChange: 0
-  phaseCooldown: 10
+  phaseCooldown: 5
   curPhase: 0
 --- !u!95 &8509469491263806437
 Animator:
@@ -353,7 +354,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.5
 --- !u!1 &8339871990052797388
 GameObject:
   m_ObjectHideFlags: 0

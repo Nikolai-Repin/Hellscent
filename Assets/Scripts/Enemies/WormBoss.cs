@@ -109,7 +109,7 @@ public class WormBoss : Enemy
                     var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
                     Quaternion fireAngle = Quaternion.AngleAxis(-angle + 90, Vector3.forward);
 
-                    SlowingLineShot(projectileType, 8, 25, 5, fireAngle);
+                    SlowingLineShot(projectileType, 8, 10+(firedLines*2.5F), 3+(firedLines*0.5F), fireAngle);
                     firedLines++;
                     Debug.Log(firedLines);
                     lastAttackTime = Time.time + Mathf.Min(1.5F/firedLines,0.75F);
@@ -175,6 +175,10 @@ public class WormBoss : Enemy
     public void PickPhase() {
         int nextPhase = (int) Random.Range(0, 3);
         Debug.Log(nextPhase);
+        if (turrets.Count == 0) {
+            SetPhase(Phase.Turrets);
+            return;
+        }
         switch (nextPhase) {
             case 0: {
                 SetPhase(Phase.Rings);
@@ -237,8 +241,10 @@ public class WormBoss : Enemy
         lastAttackTime = Time.time + 1F;
         vCamera.Follow = transform;
         animator.SetInteger("Phase", -1);
-        foreach (GameObject t in turrets) {
-            t.GetComponent<Entity>().Die();
+        for (int i = turrets.Count - 1; i >= 0; i--) {
+            turrets[i].GetComponent<Enemy>().QuietDie();
+            //Debug.Log(i+"    count:"+turrets.Count);
+            //turrets.RemoveAt(i);
         }
     }
 

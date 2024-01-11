@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
 
+    [SerializeField] protected bool hasHealthBar;
     [SerializeField] protected float maxHealthAmount;
     [SerializeField] public float healthAmount;
 
@@ -40,7 +41,7 @@ public class Entity : MonoBehaviour
 
         if (!invulnerable) {
             healthAmount -= damage;
-            uiManager.UpdateEntityHealthBar(gameObject.GetComponent<Entity>());
+            if (hasHealthBar) {uiManager.UpdateEntityHealthBar(gameObject.GetComponent<Entity>());}
             if (healthAmount <= 0) {
                 Die();
             }
@@ -138,6 +139,12 @@ public class Entity : MonoBehaviour
         Destroy(transform.gameObject);
     }
 
+    //Dies with no extra behaviors triggering
+    public void QuietDie() {
+        entityList.Remove(this);
+        Destroy(transform.gameObject);
+    }
+
     //Returns 0, mainly exists to be overridden in PlayerController so that weapons don't break
     public virtual float GetDamage() {
         return 0;
@@ -181,6 +188,10 @@ public class Entity : MonoBehaviour
 
     public void RestoreHP(float bonusHP) {
         healthAmount = (healthAmount + bonusHP > maxHealthAmount) ? maxHealthAmount : healthAmount + bonusHP;
+    }
+
+    public bool HasHealthBar() {
+        return hasHealthBar;
     }
 
     public float GetMaxHealthAmount() {

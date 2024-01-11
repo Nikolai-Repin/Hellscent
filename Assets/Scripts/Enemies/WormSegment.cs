@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WormSegment : Enemy
+public class WormSegment : Entity
 {
     public WormBoss head;
     private Entity headScript;
