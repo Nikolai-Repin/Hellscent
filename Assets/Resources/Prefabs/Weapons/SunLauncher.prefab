@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9f1a44a96814ba583364c39cc1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 20
+  weight: 10
   offset: 0.3
   projectileType: {fileID: 6942168956635508771, guid: 45417f9a9eea53a459be0d7aff50990f, type: 3}
   kickback: 5
@@ -108,15 +108,15 @@ MonoBehaviour:
   clipDelay: 0
   weaponDamage: 0
   useMana: 1
-  manaCost: 15
-  maxMana: 50
+  manaCost: 30
+  maxMana: 75
   mana: 0
   manaRechargeDelay: 1
   canCharge: 1
   chargeTime: 5
   incrementTime: 0.01
-  extraManaUse: 35
-  extraDamage: 85
+  extraManaUse: 45
+  extraDamage: 60
   extraKickback: 50
   extraClip: 0
   lastFireTime: 0
