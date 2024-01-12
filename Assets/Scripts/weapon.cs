@@ -31,6 +31,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float extraManaUse;
     [SerializeField] private float extraDamage;
     [SerializeField] private float extraKickback;
+    [SerializeField] private int extraClip;
 
     [Space]
     [SerializeField] private float lastFireTime;
@@ -136,8 +137,11 @@ public class Weapon : MonoBehaviour
         }
 
         lastFireTime = Time.time + manaRechargeDelay;
-        if (useMana) {mana -= manaCost;}
+        if (useCooldown && useMana) {mana -= manaCost;}
         cooldown = cooldownTime;
+        if (!useCooldown) {
+            transform.parent.gameObject.GetComponent<PlayerController>().doKickback();
+        }
 
         return true;
     }
@@ -146,10 +150,10 @@ public class Weapon : MonoBehaviour
         if (timeCharged > chargeTime) {
             timeCharged = chargeTime;
         }
-        StartCoroutine(resetVars(manaCost, weaponDamage, kickback));
         int maxIncrements = (int) (chargeTime / incrementTime);
         int increments = (int) (timeCharged / incrementTime);
         float incrementRatio = timeCharged / chargeTime;
+        StartCoroutine(resetVars(manaCost, weaponDamage, kickback, clip, (clip + (int) (extraClip * incrementRatio)) * clipDelay + 1));
         //float oldCost = manaCost;
         float manaCostDiff = extraManaUse * incrementRatio;
         //manaCost = maxManaUse / maxIncrements * increments;
@@ -162,11 +166,11 @@ public class Weapon : MonoBehaviour
         manaCost += manaCostDiff;
         weaponDamage += extraDamage * incrementRatio;
         kickback += extraKickback * incrementRatio;
+        clip += (int) (extraClip * incrementRatio);
         return Fire();
     }
 
     IEnumerator FireClip(int clipSize) {
-        StartCoroutine(resetVars(manaCost, weaponDamage, kickback, clipSize * clipDelay + 1));
         if (clipSize > 0) {
             for (int i = 0; i < clipSize; i++) {
                 for (int j = 0; j < clipDelay; j++) {
@@ -177,13 +181,14 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    IEnumerator resetVars(float m, float d, float k, int frames = 1) {
+    IEnumerator resetVars(float m, float d, float k, int c, int frames = 1) {
         for (int i = 0; i < frames; i++) {
             yield return null;
         }
         manaCost = m;
         weaponDamage = d;
         kickback = k;
+        clip = c;
     }
 
     public bool GetControllerAndEquip() {
