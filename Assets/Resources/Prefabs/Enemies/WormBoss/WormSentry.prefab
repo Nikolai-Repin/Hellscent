@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 0
   intangible: 0
+  hasHealthBar: 0
   maxHealthAmount: 15
   healthAmount: 15
   knockbackMult: 0
@@ -142,7 +143,7 @@ MonoBehaviour:
   weight: 0
   invulnTime: 0
   trackerController: {fileID: 0}
-  projectileType: {fileID: 6942168956635508771, guid: b576974dd58bb0345a6eca8e3824a21e, type: 3}
+  projectileType: {fileID: 6942168956635508771, guid: 423a773215c39aa459989111c7332786, type: 3}
   projectileCount: 4
   projectileDelay: 6
   projectileSpeed: 5

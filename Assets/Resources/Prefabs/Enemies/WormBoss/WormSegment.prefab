@@ -201,7 +201,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -229,11 +229,11 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!232 &5681914130881516806
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -268,15 +268,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 0
   intangible: 0
+  hasHealthBar: 0
   maxHealthAmount: 0
   healthAmount: 0
   knockbackMult: 0
-  dealDamageOnContact: 0
-  visRange: 0
-  iFrames: 0
-  weight: 0
-  invulnTime: 0
-  trackerController: {fileID: 0}
   head: {fileID: 0}
 --- !u!95 &1603378464818366547
 Animator:
