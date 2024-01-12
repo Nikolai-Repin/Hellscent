@@ -12,8 +12,10 @@ public class RoomInfo : MonoBehaviour
     [SerializeField] private List<Spawner> spawners;
     public List<GameObject> entities = new();
     private GenerateDungeon dungeon;
+    private GameManager dungeonManager;
     public bool fighting = false;
     public bool oneDoor = false;
+    [SerializeField] private bool bossRoom = false;
     [SerializeField] private bool activateLastEnemyEvent;
     [SerializeField] private GameObject closedCollisions;
 
@@ -21,6 +23,10 @@ public class RoomInfo : MonoBehaviour
     {
         trueOccupancy = new(doorOccupation);
         dungeon = transform.parent.gameObject.GetComponent<GenerateDungeon>();
+        dungeonManager = dungeon.dungeonManager;
+        if (bossRoom) {
+            spawners[0].enemyPool.RemoveAt(dungeonManager.getFloor() % 2);
+        }
     }
 
     void Update () {
