@@ -130,6 +130,9 @@ public class WormBoss : Enemy
                     lastAttackTime = Time.time + 2;
                     vCamera.Follow = transform;
                     curPhase = Phase.Awakening;
+                    foreach (GameObject s in bodySegments) {
+                        s.GetComponent<Animator>().SetTrigger("Awaken");
+                    }
                 }
                 break;
             }
