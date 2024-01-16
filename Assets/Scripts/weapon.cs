@@ -154,9 +154,7 @@ public class Weapon : MonoBehaviour
         int increments = (int) (timeCharged / incrementTime);
         float incrementRatio = timeCharged / chargeTime;
         StartCoroutine(resetVars(manaCost, weaponDamage, kickback, clip, (clip + (int) (extraClip * incrementRatio)) * clipDelay + 1));
-        //float oldCost = manaCost;
         float manaCostDiff = extraManaUse * incrementRatio;
-        //manaCost = maxManaUse / maxIncrements * increments;
         if (manaCost + manaCostDiff > mana) {
             if (manaCost > mana) {
                 return false;
