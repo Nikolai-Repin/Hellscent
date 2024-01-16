@@ -82,7 +82,7 @@ MonoBehaviour:
   offshootBranchCap: 3
   waitingFrames: 3
   onlyBranchRooms: 1
-  weight: 50
+  weight: 20
   tryRoomChance: 50
   roomChance: 66
   hallwayChance: 87

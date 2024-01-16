@@ -293,7 +293,7 @@ MonoBehaviour:
   dealDamageOnContact: 0
   visRange: 20
   iFrames: 0
-  weight: 80
+  weight: 0
   invulnTime: 0
   trackerController: {fileID: 0}
   weapon: {fileID: 470356897603892556}
