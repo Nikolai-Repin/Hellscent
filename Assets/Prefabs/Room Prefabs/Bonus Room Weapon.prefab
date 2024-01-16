@@ -3662,7 +3662,7 @@ MonoBehaviour:
   bossRoom: 0
   activateLastEnemyEvent: 0
   closedCollisions: {fileID: 0}
-  openedCollisions: {fileID: 591444220007892331}
+  openedCollisions: {fileID: 5025484656967226678}
 --- !u!19719996 &3248416161270277016
 TilemapCollider2D:
   m_ObjectHideFlags: 0

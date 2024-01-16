@@ -25,8 +25,8 @@ public class RoomInfo : MonoBehaviour
     {
         trueOccupancy = new(doorOccupation);
         dungeon = transform.parent.gameObject.GetComponent<GenerateDungeon>();
-        dungeonManager = dungeon.dungeonManager;
         if (bossRoom) {
+            dungeonManager = dungeon.dungeonManager;
             spawners[0].enemyPool.RemoveAt(dungeonManager.getFloor() % 2);
         }
         AdjustColors();

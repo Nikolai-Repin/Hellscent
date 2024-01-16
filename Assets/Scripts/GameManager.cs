@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public bool hide = false;
 
     void Start() {
-        floor = 0;
+        floor = 0;  
         StartCoroutine(RunGame());
     }
 
