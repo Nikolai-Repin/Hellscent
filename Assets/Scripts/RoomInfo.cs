@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RoomInfo : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class RoomInfo : MonoBehaviour
     [SerializeField] private bool bossRoom = false;
     [SerializeField] private bool activateLastEnemyEvent;
     [SerializeField] private GameObject closedCollisions;
+    [SerializeField] private GameObject openedCollisions;
 
     void Start()
     {
@@ -27,6 +29,7 @@ public class RoomInfo : MonoBehaviour
         if (bossRoom) {
             spawners[0].enemyPool.RemoveAt(dungeonManager.getFloor() % 2);
         }
+        AdjustColors();
     }
 
     void Update () {
@@ -41,6 +44,13 @@ public class RoomInfo : MonoBehaviour
                 Debug.Log(entities);
             }
         } 
+    }
+
+    private void AdjustColors() {
+        Tilemap floor = transform.gameObject.GetComponent<Tilemap>();
+        Tilemap walls = openedCollisions.GetComponent<Tilemap>();
+        floor.color = dungeon.floorColor;
+        walls.color = dungeon.floorColor;
     }
 
     public IEnumerator Lock() {

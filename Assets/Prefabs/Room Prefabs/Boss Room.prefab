@@ -19404,6 +19404,7 @@ MonoBehaviour:
   bossRoom: 1
   activateLastEnemyEvent: 0
   closedCollisions: {fileID: 1231828663717551461}
+  openedCollisions: {fileID: 1150104017400181853}
 --- !u!50 &1390453384946475634
 Rigidbody2D:
   serializedVersion: 4

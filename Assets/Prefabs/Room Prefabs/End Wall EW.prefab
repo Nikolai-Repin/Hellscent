@@ -287,8 +287,10 @@ MonoBehaviour:
   entities: []
   fighting: 0
   oneDoor: 1
+  bossRoom: 0
   activateLastEnemyEvent: 0
   closedCollisions: {fileID: 0}
+  openedCollisions: {fileID: 7662808374561010124}
 --- !u!1 &7662808374561010124
 GameObject:
   m_ObjectHideFlags: 0

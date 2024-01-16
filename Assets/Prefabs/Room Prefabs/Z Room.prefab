@@ -8799,8 +8799,10 @@ MonoBehaviour:
   entities: []
   fighting: 0
   oneDoor: 0
+  bossRoom: 0
   activateLastEnemyEvent: 1
   closedCollisions: {fileID: 2803763007910523012}
+  openedCollisions: {fileID: 4679151713269977419}
 --- !u!19719996 &4855585715806175721
 TilemapCollider2D:
   m_ObjectHideFlags: 0

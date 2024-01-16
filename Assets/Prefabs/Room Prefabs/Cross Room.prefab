@@ -6818,8 +6818,10 @@ MonoBehaviour:
   entities: []
   fighting: 0
   oneDoor: 0
+  bossRoom: 0
   activateLastEnemyEvent: 1
   closedCollisions: {fileID: 3689170724979174760}
+  openedCollisions: {fileID: 3070743612702095299}
 --- !u!50 &957136910335481896
 Rigidbody2D:
   serializedVersion: 4

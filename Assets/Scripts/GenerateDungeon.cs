@@ -23,6 +23,7 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField, Range(0, 100)] private int roomChance;
 	[SerializeField, Range(0, 100)] private int hallwayChance;
 	[SerializeField] private List<GameObject> gauranteedBonus = new();
+	[SerializeField] public Color floorColor;
 	public bool dungeonOver = false;
 
 	private bool go = true;
