@@ -9,8 +9,10 @@ public class Entity : MonoBehaviour
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
 
+    [SerializeField] public bool hasHealthBar;
+
     [SerializeField] protected float maxHealthAmount;
-    [SerializeField] public float healthAmount;
+    [SerializeField] private float healthAmount;
 
     protected UIManager uiManager;
 
@@ -22,7 +24,7 @@ public class Entity : MonoBehaviour
     protected virtual void Start() {
         sr = GetComponent<SpriteRenderer>();
         Register();
-        
+        healthAmount = maxHealthAmount;
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
 
     }
@@ -134,6 +136,7 @@ public class Entity : MonoBehaviour
 
     //Destroys the entity
     public virtual void Die () {
+        GameObject.Find("Camera Target").GetComponent<ChangeCameraTarget>().RemoveCameraTargets(gameObject);
         entityList.Remove(this);
         if (room != null) {room.RemoveEntity(this);}
         Destroy(transform.gameObject);

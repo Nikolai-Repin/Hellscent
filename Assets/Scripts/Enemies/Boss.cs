@@ -138,7 +138,7 @@ public class Boss : Enemy
                     arenaCenter = transform.position;
                     trackerController.SetTarget(closestPlayer.transform);
                     lastAttackTime = Time.time + 2;
-                    vCamera.Follow = transform;
+                    //vCamera.Follow = transform;
                     curPhase = Phase.Awakening;
                 }
                 break;
@@ -177,8 +177,7 @@ public class Boss : Enemy
         invulnerable = false;
         intangible = false;
         trackerController.SetAI(TrackerController.AI.Melee);
-        vCamera.Follow = trackerController.target.transform;
-        ReturnToWander();
+        
     }
 
     //Picks the next phase
@@ -267,7 +266,7 @@ public class Boss : Enemy
         trackerController.aiPath.maxSpeed = 0;
         curPhase = Phase.Death;
         lastAttackTime = Time.time + 1F;
-        vCamera.Follow = transform;
+        GameObject.Find("Camera Target").GetComponent<ChangeCameraTarget>().RemoveCameraTargets(gameObject);
         animator.SetInteger("Phase", -1);
     
 

@@ -17,10 +17,15 @@ public class RoomInfo : MonoBehaviour
     [SerializeField] private bool activateLastEnemyEvent;
     [SerializeField] private GameObject closedCollisions;
 
+
+    // Domingo experimental code
+    [SerializeField] GameObject cameraTarget;
+
     void Start()
     {
         trueOccupancy = new(doorOccupation);
         dungeon = transform.parent.gameObject.GetComponent<GenerateDungeon>();
+        
     }
 
     void Update () {
@@ -38,6 +43,9 @@ public class RoomInfo : MonoBehaviour
     }
 
     public IEnumerator Lock() {
+
+        cameraTarget = GameObject.Find("Camera Target");
+
         if (locked) {
             closedCollisions.SetActive(true);
             dungeon.LockRoom(transform.gameObject);
@@ -46,6 +54,12 @@ public class RoomInfo : MonoBehaviour
             yield return StartCoroutine(s.SpawnEnemies());
         }
         fighting = true;
+
+        // trying to make the camera focus on every enemy in the room.
+        for (int i = 0; i < entities.Count; i++) {
+            cameraTarget.GetComponent<ChangeCameraTarget>().AddCameraTargets(entities[i]);
+        }
+
     }
 
     public void RemoveEntity(Entity e) {

@@ -231,9 +231,9 @@ public class PlayerController : Entity
     //Deals damage to entity if vulnerable, returns true if damage was dealt
     public override bool TakeDamage(float damage) {
         if (!invulnerable && Time.time >= invulnTime) {
-            healthAmount -= damage;
+            SubHealth(damage);
             uiManager.updateHealth();
-            if (healthAmount <= 0) {
+            if (GetHealthAmount() <= 0) {
                 Die();
             }
             invulnTime = Time.time + 1F;
@@ -305,7 +305,7 @@ public class PlayerController : Entity
     }
 
     public bool alive {
-        get {return healthAmount>0;}
+        get {return GetHealthAmount()>0;}
     }
 
 }
