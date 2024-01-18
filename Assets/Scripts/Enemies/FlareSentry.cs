@@ -8,9 +8,9 @@ public class FlareSentry : Enemy
     [SerializeField] public GameObject projectileType;
     [SerializeField] private int projectileCount;
     [SerializeField] private float projectileDelay;
-    [SerializeField] private float projectileSpeed;
-    [SerializeField] private float rotationOffset;
-    [SerializeField] private float rotationSpeed;
+    [SerializeField] protected float projectileSpeed;
+    [SerializeField] protected float rotationOffset;
+    [SerializeField] protected float rotationSpeed;
     [SerializeField] private int burstLength;
     [SerializeField] private float burstDelay;
 

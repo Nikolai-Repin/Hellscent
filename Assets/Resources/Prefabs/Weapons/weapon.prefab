@@ -97,19 +97,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9f1a44a96814ba583364c39cc1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 90
+  weight: 70
   offset: 0.3
   projectileType: {fileID: 6942168956635508771, guid: deb5f71d6141a4c43a11e4fbb2295da7, type: 3}
   kickback: 0.5
   cooldownTime: 0.1
   bullets: 1
   accuracy: 3
+  clip: 1
+  clipDelay: 0
   weaponDamage: 0
   useMana: 1
   manaCost: 1
   maxMana: 20
   mana: 0
   manaRechargeDelay: 1
+  canCharge: 0
+  chargeTime: 0
+  incrementTime: 0
+  extraManaUse: 0
+  extraDamage: 0
+  extraKickback: 0
+  extraClip: 0
   lastFireTime: 0
   cooldown: 0
   quality: 0

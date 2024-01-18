@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9215686754380215263}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 0}
   m_ConstrainProportionsScale: 0
@@ -97,19 +97,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9f1a44a96814ba583364c39cc1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
+  weight: 10
   offset: 0.3
   projectileType: {fileID: 6942168956635508771, guid: 45417f9a9eea53a459be0d7aff50990f, type: 3}
   kickback: 5
   cooldownTime: 2
   bullets: 1
   accuracy: 0
+  clip: 1
+  clipDelay: 0
   weaponDamage: 0
   useMana: 1
-  manaCost: 50
-  maxMana: 50
+  manaCost: 30
+  maxMana: 75
   mana: 0
   manaRechargeDelay: 1
+  canCharge: 1
+  chargeTime: 5
+  incrementTime: 0.01
+  extraManaUse: 45
+  extraDamage: 60
+  extraKickback: 50
+  extraClip: 0
   lastFireTime: 0
   cooldown: 0
   quality: 0

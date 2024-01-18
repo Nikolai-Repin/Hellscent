@@ -366,6 +366,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4975518250227407712, guid: 3bb062a79cac5cf4d8fb48587b9e8d2a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4975518250227407712, guid: 3bb062a79cac5cf4d8fb48587b9e8d2a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.99991
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855062828105437730, guid: 3bb062a79cac5cf4d8fb48587b9e8d2a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00021362305
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393973996110489197, guid: 3bb062a79cac5cf4d8fb48587b9e8d2a, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8017429825250672477, guid: 3bb062a79cac5cf4d8fb48587b9e8d2a, type: 3}
       propertyPath: m_Name
       value: UI Manager
@@ -1821,9 +1837,45 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 17455363067179574}
     - target: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
+      propertyPath: presets.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
+      propertyPath: repeats.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
       propertyPath: presets.Array.data[0]
       value: 
+      objectReference: {fileID: 2166620911071576543, guid: d0c14ef6a61ff43cd880db6eca3ec7fb, type: 3}
+    - target: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
+      propertyPath: presets.Array.data[1]
+      value: 
       objectReference: {fileID: 7673825623514623661, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+    - target: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
+      propertyPath: presets.Array.data[2]
+      value: 
+      objectReference: {fileID: 7673825623514623661, guid: 7389216724eae47efa163477fb50ab15, type: 3}
+    - target: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
+      propertyPath: presets.Array.data[3]
+      value: 
+      objectReference: {fileID: 2166620911071576543, guid: e26506f3763384697a3da9680359ca1f, type: 3}
+    - target: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
+      propertyPath: repeats.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
+      propertyPath: repeats.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
+      propertyPath: repeats.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
+      propertyPath: repeats.Array.data[3]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3003248417482913115, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
       propertyPath: m_LocalPosition.x
       value: -106.680016
