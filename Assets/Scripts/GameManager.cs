@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int[] repeats;
     [SerializeField] private Transform player;
     [SerializeField] private GameObject endScreen;
-    [SerializeField] private Color averageColor = new Vector4(0.8f, 0.8f, 0.8f, 1f);
     private int floor = 0;
     public bool hide = false;
 
@@ -27,7 +26,7 @@ public class GameManager : MonoBehaviour
             hide = true;
             floor++;
             GameObject dungeon = Instantiate(presets[repeatLevel], new Vector2(), new Quaternion());
-            GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = (dungeon.GetComponent<GenerateDungeon>().floorColor + averageColor)/2;
+            GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = dungeon.GetComponent<GenerateDungeon>().backgroundColor;
             while (dungeon.GetComponent<GenerateDungeon>().finished != true) {
                 yield return null;
             }
