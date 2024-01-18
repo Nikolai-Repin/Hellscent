@@ -53,7 +53,11 @@ public class Spawner : MonoBehaviour
         int i = 0;
         while (i < 200 && count < 100) {
             index = Random.Range(0, enemyPool.Count);
-            count += enemyPool[index].GetComponent<Enemy>().GetWeight() + addedWeight;
+            int weight = enemyPool[index].GetComponent<Enemy>().GetWeight();
+            if (weight < 60) {
+                weight += addedWeight;
+            }
+            count += weight;
             i++;
         }
         return index;
