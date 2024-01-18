@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1873123448988247675}
   - component: {fileID: 2956597972415591225}
   - component: {fileID: -1309961850721114743}
-  - component: {fileID: 6445545438761241917}
+  - component: {fileID: 3465672066862675836}
   m_Layer: 0
   m_Name: Test Stone Item
   m_TagString: Untagged
@@ -172,7 +172,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6445545438761241917
+--- !u!114 &3465672066862675836
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,8 +181,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1446218500392795296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ddddb336f901fb4abe5d78e969d10b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d754b11d7c350046bfa5b23e719b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  bonusDamage: 0
+  bonusMaxMana: 0
+  bonusSpeed: 0
+  bonusManaRechargeSpeed: 0
+  bonusMaxHP: 0
+  weight: 0
+  journalPage: []
+  pageManager: {fileID: 0}
+  data: {fileID: 11400000, guid: 725c187ed5cc59f4c997c4ec774e9bc7, type: 2}
   rb2d: {fileID: 0}

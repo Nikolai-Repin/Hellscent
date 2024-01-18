@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2372858399045359308}
   - component: {fileID: 1439137330403257745}
   - component: {fileID: 8621681747534549582}
-  - component: {fileID: 8731253830781452043}
+  - component: {fileID: 3146726680561592923}
   m_Layer: 0
   m_Name: Test Axe Item
   m_TagString: Untagged
@@ -172,7 +172,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8731253830781452043
+--- !u!114 &3146726680561592923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,8 +181,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 9193315736720810564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ddddb336f901fb4abe5d78e969d10b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d754b11d7c350046bfa5b23e719b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  bonusDamage: 0
+  bonusMaxMana: 0
+  bonusSpeed: 0
+  bonusManaRechargeSpeed: 0
+  bonusMaxHP: 0
+  weight: 0
+  journalPage: []
+  pageManager: {fileID: 0}
+  data: {fileID: 11400000, guid: ee48aebc8d8f2964fb90868424d3bbca, type: 2}
   rb2d: {fileID: 0}

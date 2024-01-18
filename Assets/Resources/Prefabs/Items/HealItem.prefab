@@ -148,7 +148,8 @@ MonoBehaviour:
   bonusSpeed: 0
   bonusManaRechargeSpeed: 0
   bonusMaxHP: 0
-  regenHearts: 1
   weight: 50
-  data: {fileID: 0}
+  journalPage: []
+  pageManager: {fileID: 0}
+  data: {fileID: 11400000, guid: 236b00f6cf297cb4b907ea38d6c0dcf7, type: 2}
   rb2d: {fileID: 0}
