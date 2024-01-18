@@ -22,6 +22,7 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField, Range(0, 100)] private int tryRoomChance;
 	[SerializeField, Range(0, 100)] private int roomChance;
 	[SerializeField, Range(0, 100)] private int hallwayChance;
+	[SerializeField] private List<GameObject> gauranteedBonus = new();
 	public bool dungeonOver = false;
 
 	private bool go = true;
@@ -142,7 +143,7 @@ public class GenerateDungeon : MonoBehaviour
 			}
 			nextMainBranch--;
         }
-		else if (branchCap > 0 && Random.Range(0, 101) <= roomChance)
+		else if (branchCap > 0 && (gauranteedBonus.Count > 0 || Random.Range(0, 101) <= roomChance))
         {
 			nextMainBranch = 0;
 			continueDungeon = true;
@@ -153,7 +154,7 @@ public class GenerateDungeon : MonoBehaviour
 			RoomInfo origin_data = origin.GetComponent<RoomInfo>();
 			string hallDir = origin_data.doorDirection[FindAvailableDoor(origin_data)];
 			GameObject nextHallway = CreateRoom(hallways[hallDir == "North" || hallDir == "South" ? 1 : 0]);
-			door = AlignRooms(nextOrigin.transform, nextHallway.transform, roomSpacing, hallDir/*over here do stuff*/);
+			door = AlignRooms(nextOrigin.transform, nextHallway.transform, roomSpacing, hallDir);
 
 			yield return StartCoroutine(waitFrames(waitingFrames));		
 			foreach (GameObject dr in dungeon)
@@ -181,7 +182,18 @@ public class GenerateDungeon : MonoBehaviour
 			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[0] = true;
 			nextOrigin.GetComponent<RoomInfo>().trueOccupancy[1] = true;
 		}
-		GameObject nextRoom = CreateRoom(branchCap == 1 && mainBranch == 0 ? rooms[rooms.Length - 1] : (boss ? bossRoom : rooms[Random.Range(0, rooms.Length - (mainBranch > 0 ? onlyBranchRooms : 0))]));
+		GameObject queued;
+		if (branchCap == 1 && mainBranch == 0) {
+			if (gauranteedBonus.Count > 0) {
+				queued = gauranteedBonus[gauranteedBonus.Count - 1];
+				gauranteedBonus.RemoveAt(gauranteedBonus.Count - 1);
+			} else {
+				queued = rooms[rooms.Length - 1];
+			}
+		} else {
+			queued = boss ? bossRoom : rooms[Random.Range(0, rooms.Length - (mainBranch > 0 ? onlyBranchRooms : 0))];
+		}
+		GameObject nextRoom = CreateRoom(queued);
 		string hallDoor = AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
 		if (!usedHallway) {
 			door = hallDoor;
@@ -195,17 +207,17 @@ public class GenerateDungeon : MonoBehaviour
 				}
 				Destroy(nextRoom);
 				if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0) {
-						yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
-					} else if (mainBranch > 0) {
-						int nextIndex = dungeon.IndexOf(origin) - 1;
-						for (int i = nextIndex; i >= 0; i--) {
-							if (!dungeon[i].GetComponent<RoomInfo>().oneDoor && GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
-								yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
-								yield break;
-							}
+					yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
+				} else if (mainBranch > 0) {
+					int nextIndex = dungeon.IndexOf(origin) - 1;
+					for (int i = nextIndex; i >= 0; i--) {
+						if (!dungeon[i].GetComponent<RoomInfo>().oneDoor && GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
+							yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
+							yield break;
 						}
-						success = false;
 					}
+					success = false;
+				}
 				yield break;
 			}
 		}
@@ -215,11 +227,11 @@ public class GenerateDungeon : MonoBehaviour
 			dungeon.Add(nextOrigin);
 		}
 		dungeon.Add(nextRoom);
-		if (continueDungeon) 
+		if (!nextRoom.GetComponent<RoomInfo>().oneDoor && continueDungeon) 
 		{
 			yield return StartCoroutine(CreateDungeon(nextRoom, nextMainBranch, nextBranchCap));
 		}
-		if (!origin.GetComponent<RoomInfo>().oneDoor && GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0 && Random.Range(0, 101) <= tryRoomChance) 
+		if (!origin.GetComponent<RoomInfo>().oneDoor && GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0 && (gauranteedBonus.Count > 0 || Random.Range(0, 101) <= tryRoomChance)) 
 		{
 			yield return StartCoroutine(CreateDungeon(origin, 0, branchCap));
 		} 

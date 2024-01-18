@@ -680,8 +680,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -443596295
+  m_SortingLayer: 3
   m_SortingOrder: 10
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -3042,6 +3042,8 @@ MonoBehaviour:
   entities: []
   fighting: 0
   oneDoor: 0
+  activateLastEnemyEvent: 0
+  closedCollisions: {fileID: 0}
 --- !u!19719996 &1446512325769732199
 TilemapCollider2D:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ MonoBehaviour:
   knockbackMult: 0
   maxLife: 5
   bulletDamage: 1
-  projectileSpeed: 30
+  projectileSpeed: 20
   knockback: 0
   pierce: 1
   reflectable: 1

@@ -43,6 +43,7 @@ public class EnemyShooter : Enemy
     // Update is called once per frame
     new void Update()
     {
+
         base.Update();
         if (target != null) {
             if (ammo > 0 && Time.time > reloadLastTime && (target.transform.position - transform.position).sqrMagnitude <= 2500) {
