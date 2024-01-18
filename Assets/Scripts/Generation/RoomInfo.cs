@@ -20,16 +20,20 @@ public class RoomInfo : MonoBehaviour
     [SerializeField] private bool activateLastEnemyEvent;
     [SerializeField] private GameObject closedCollisions;
     [SerializeField] private GameObject openedCollisions;
+    [SerializeField] private bool doColorAdjustment = true;
 
     void Start()
     {
         trueOccupancy = new(doorOccupation);
+        openedCollisions = GetChildGameObject(transform.gameObject, "Collisions");
         dungeon = transform.parent.gameObject.GetComponent<GenerateDungeon>();
         if (bossRoom) {
             dungeonManager = dungeon.dungeonManager;
             spawners[0].enemyPool.RemoveAt(dungeonManager.getFloor() % 2);
         }
-        AdjustColors();
+        if (doColorAdjustment) {
+            AdjustColors();
+        }
     }
 
     void Update () {
@@ -44,6 +48,17 @@ public class RoomInfo : MonoBehaviour
                 Debug.Log(entities);
             }
         } 
+    }
+
+    private GameObject GetChildGameObject(GameObject fromGameObject, string withName)
+    {
+        var allKids = fromGameObject.GetComponentsInChildren<Transform>();
+        foreach (Transform k in allKids) {
+            if (k.name == withName) {
+                return k.gameObject;
+            }
+        }
+        return null;
     }
 
     private void AdjustColors() {
