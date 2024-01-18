@@ -78,7 +78,7 @@ MonoBehaviour:
   - {fileID: 4939090538623454192, guid: 69948bad601b6564abb00271df454539, type: 3}
   - {fileID: 6862288333110420476, guid: f37c4eadd351efa4eb6ccb109a3d33e8, type: 3}
   roomSpacing: 1.0001
-  mainBranchLength: 7
+  mainBranchLength: 6
   offshootBranchCap: 2
   waitingFrames: 3
   onlyBranchRooms: 1
@@ -90,8 +90,8 @@ MonoBehaviour:
   - {fileID: 6227156363105034367, guid: 401b3bfbc44399f41a67b93527aa095d, type: 3}
   - {fileID: 6227156363105034367, guid: 401b3bfbc44399f41a67b93527aa095d, type: 3}
   - {fileID: 6227156363105034367, guid: 5f429db36a57c22419a16ad54c88ccc5, type: 3}
-  floorColor: {r: 0.8679245, g: 0.40507692, b: 0.11053756, a: 1}
-  backgroundColor: {r: 0.5, g: 0.34282777, b: 0.23349056, a: 1}
+  floorColor: {r: 0.7075472, g: 0.4233504, b: 0.23696157, a: 1}
+  backgroundColor: {r: 0.5660378, g: 0.4215005, b: 0.32840872, a: 1}
   dungeonOver: 0
   dungeonManager: {fileID: 0}
   finished: 0
