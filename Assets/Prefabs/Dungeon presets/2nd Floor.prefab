@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2166620911071576543
+--- !u!1 &7673825623514623661
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6217894379342784912}
-  - component: {fileID: 1588208625494465651}
-  - component: {fileID: 193651356559496781}
+  - component: {fileID: 1469216794410421582}
+  - component: {fileID: 8467133392958881966}
+  - component: {fileID: 4640099341569176059}
   m_Layer: 0
-  m_Name: Regular Dungeon
+  m_Name: 2nd Floor
   m_TagString: Dungeon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6217894379342784912
+--- !u!4 &1469216794410421582
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2166620911071576543}
+  m_GameObject: {fileID: 7673825623514623661}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,25 +33,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!156049354 &1588208625494465651
+--- !u!156049354 &8467133392958881966
 Grid:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2166620911071576543}
+  m_GameObject: {fileID: 7673825623514623661}
   m_Enabled: 1
   m_CellSize: {x: 1, y: 1, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &193651356559496781
+--- !u!114 &4640099341569176059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2166620911071576543}
+  m_GameObject: {fileID: 7673825623514623661}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb8dc4277dbb788448eb5307ab52a886, type: 3}
@@ -62,9 +62,9 @@ MonoBehaviour:
   - {fileID: 398384071107680236, guid: 78f7edb7004194a43aab8932077e6005, type: 3}
   - {fileID: 3114142269086657357, guid: 56b033766dcc8154b81127bcd3572c7a, type: 3}
   - {fileID: 398384071107680236, guid: 22581e11fa28c41419e01a63d93465f2, type: 3}
-  - {fileID: 398384071107680236, guid: 5670a5b7cc496484fb77684f210a879b, type: 3}
-  - {fileID: 398384071107680236, guid: e50f43d2ef605a847acf0a9fba7610e6, type: 3}
   - {fileID: 398384071107680236, guid: f4359761e13cee14a848bde7cb3f4408, type: 3}
+  - {fileID: 398384071107680236, guid: e50f43d2ef605a847acf0a9fba7610e6, type: 3}
+  - {fileID: 398384071107680236, guid: 5670a5b7cc496484fb77684f210a879b, type: 3}
   - {fileID: 6227156363105034367, guid: ce979fb8476d0457188008daa9649dd1, type: 3}
   hallways:
   - {fileID: 7564696797152967632, guid: 9ccd97415ada88442bf31f3ad28c86fd, type: 3}
@@ -78,20 +78,20 @@ MonoBehaviour:
   - {fileID: 4939090538623454192, guid: 69948bad601b6564abb00271df454539, type: 3}
   - {fileID: 6862288333110420476, guid: f37c4eadd351efa4eb6ccb109a3d33e8, type: 3}
   roomSpacing: 1.0001
-  mainBranchLength: 7
-  offshootBranchCap: 3
+  mainBranchLength: 6
+  offshootBranchCap: 1
   waitingFrames: 3
   onlyBranchRooms: 1
-  weight: 20
-  tryRoomChance: 50
-  roomChance: 66
+  weight: 0
+  tryRoomChance: 40
+  roomChance: 40
   hallwayChance: 87
   gauranteedBonus:
   - {fileID: 6227156363105034367, guid: 401b3bfbc44399f41a67b93527aa095d, type: 3}
   - {fileID: 6227156363105034367, guid: 401b3bfbc44399f41a67b93527aa095d, type: 3}
   - {fileID: 6227156363105034367, guid: 5f429db36a57c22419a16ad54c88ccc5, type: 3}
-  floorColor: {r: 0.47450984, g: 0.19215688, b: 0.227451, a: 1}
-  backgroundColor: {r: 0.38679248, g: 0.19522074, b: 0.20889105, a: 1}
+  floorColor: {r: 0.4745098, g: 0.19215687, b: 0.22745098, a: 1}
+  backgroundColor: {r: 0.3882353, g: 0.19607843, b: 0.20784314, a: 1}
   dungeonOver: 0
   dungeonManager: {fileID: 0}
   finished: 0
