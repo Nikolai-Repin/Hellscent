@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
+    [SerializeField] GameObject cameraTarget;
 
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
 
-    [SerializeField] public bool hasHealthBar;
-
+    [SerializeField] protected bool hasHealthBar;
     [SerializeField] protected float maxHealthAmount;
     [SerializeField] private float healthAmount;
 
@@ -25,7 +25,14 @@ public class Entity : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         Register();
         healthAmount = maxHealthAmount;
-        uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+
+        if (HasHealthBar()) {
+            uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+
+            cameraTarget = GameObject.Find("Camera Target");
+            cameraTarget.GetComponent<ChangeCameraTarget>().AddCameraTargets(gameObject);
+
+        }
 
     }
 
@@ -42,7 +49,7 @@ public class Entity : MonoBehaviour
 
         if (!invulnerable) {
             healthAmount -= damage;
-            uiManager.UpdateEntityHealthBar(gameObject.GetComponent<Entity>());
+            if (hasHealthBar) {uiManager.UpdateEntityHealthBar(gameObject.GetComponent<Entity>());}
             if (healthAmount <= 0) {
                 Die();
             }
@@ -104,7 +111,6 @@ public class Entity : MonoBehaviour
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.team = "Enemy";
             float fireSpeed = startSpeed - speedChange*i;
-            //Debug.Log(fireSpeed);
             bulletScript.LaunchProjectile(angle, fireSpeed);
         }
     }
@@ -139,6 +145,12 @@ public class Entity : MonoBehaviour
         GameObject.Find("Camera Target").GetComponent<ChangeCameraTarget>().RemoveCameraTargets(gameObject);
         entityList.Remove(this);
         if (room != null) {room.RemoveEntity(this);}
+        Destroy(transform.gameObject);
+    }
+
+    //Dies with no extra behaviors triggering
+    public void QuietDie() {
+        entityList.Remove(this);
         Destroy(transform.gameObject);
     }
 
@@ -185,6 +197,10 @@ public class Entity : MonoBehaviour
 
     public void RestoreHP(float bonusHP) {
         healthAmount = (healthAmount + bonusHP > maxHealthAmount) ? maxHealthAmount : healthAmount + bonusHP;
+    }
+
+    public bool HasHealthBar() {
+        return hasHealthBar;
     }
 
     public float GetMaxHealthAmount() {

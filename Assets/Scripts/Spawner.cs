@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private float radius;
-    [SerializeField] private List<GameObject> enemyPool;
+    [SerializeField] public List<GameObject> enemyPool;
     [SerializeField] private int enemyCount;
     [SerializeField] private bool point = false;
     [SerializeField] private GameObject target;

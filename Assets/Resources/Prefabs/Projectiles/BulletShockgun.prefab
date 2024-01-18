@@ -53,7 +53,7 @@ MonoBehaviour:
   healthAmount: 0
   knockbackMult: 0
   maxLife: 5
-  bulletDamage: 3
+  bulletDamage: 4
   projectileSpeed: 30
   knockback: 0
   pierce: 1

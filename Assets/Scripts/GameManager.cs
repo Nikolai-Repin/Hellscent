@@ -8,9 +8,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int[] repeats;
     [SerializeField] private Transform player;
     [SerializeField] private GameObject endScreen;
+    private int floor = 0;
     public bool hide = false;
 
     void Start() {
+        floor = 0;
         StartCoroutine(RunGame());
     }
 
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
             }
             player.position = new();
             hide = true;
+            floor++;
             GameObject dungeon = Instantiate(presets[repeatLevel], new Vector2(), new Quaternion());
             while (dungeon.GetComponent<GenerateDungeon>().finished != true) {
                 yield return null;
@@ -33,5 +36,9 @@ public class GameManager : MonoBehaviour
             Destroy(dungeon);
         }
         endScreen.SetActive(true);
+    }
+
+    public int getFloor() {
+        return floor;
     }
 }

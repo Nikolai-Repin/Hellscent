@@ -11,21 +11,27 @@ public class RoomInfo : MonoBehaviour
     public bool completed = false;
     [SerializeField] private List<Spawner> spawners;
     public List<GameObject> entities = new();
-    private GenerateDungeon dungeon;
+
+    [SerializeField] private GenerateDungeon dungeon;
+    [SerializeField] private GameManager dungeonManager;
+    
     public bool fighting = false;
     public bool oneDoor = false;
+    [SerializeField] private bool bossRoom = false;
     [SerializeField] private bool activateLastEnemyEvent;
     [SerializeField] private GameObject closedCollisions;
 
-
-    // Domingo experimental code
-    [SerializeField] GameObject cameraTarget;
 
     void Start()
     {
         trueOccupancy = new(doorOccupation);
         dungeon = transform.parent.gameObject.GetComponent<GenerateDungeon>();
-        
+
+        if (bossRoom) {
+            dungeonManager = dungeon.dungeonManager;
+            spawners[0].enemyPool.RemoveAt(dungeonManager.getFloor() % 2);
+        }
+
     }
 
     void Update () {
@@ -34,7 +40,9 @@ public class RoomInfo : MonoBehaviour
                 completed = true;
                 dungeon.UnlockRooms();
                 closedCollisions.SetActive(false);
-            }   else if (activateLastEnemyEvent &&  entities.Count == 1) {
+            }
+            
+            else if (activateLastEnemyEvent &&  entities.Count == 1) {
                 entities[0].GetComponent<Entity>().LastEntityEvent();
                 activateLastEnemyEvent = false;
                 Debug.Log(entities);
@@ -44,8 +52,6 @@ public class RoomInfo : MonoBehaviour
 
     public IEnumerator Lock() {
 
-        cameraTarget = GameObject.Find("Camera Target");
-
         if (locked) {
             closedCollisions.SetActive(true);
             dungeon.LockRoom(transform.gameObject);
@@ -54,11 +60,6 @@ public class RoomInfo : MonoBehaviour
             yield return StartCoroutine(s.SpawnEnemies());
         }
         fighting = true;
-
-        // trying to make the camera focus on every enemy in the room.
-        for (int i = 0; i < entities.Count; i++) {
-            cameraTarget.GetComponent<ChangeCameraTarget>().AddCameraTargets(entities[i]);
-        }
 
     }
 

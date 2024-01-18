@@ -27,6 +27,7 @@ public class GenerateDungeon : MonoBehaviour
 
 	private bool go = true;
 	private bool success = true;
+	public GameManager dungeonManager;
 	public bool finished = false;
 
     private List<GameObject> dungeon = new();
@@ -41,6 +42,11 @@ public class GenerateDungeon : MonoBehaviour
 	};
 
     private readonly List<string> directionNumber = new() { "North", "West", "South", "East" };
+
+	void Start()
+    {
+        dungeonManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
 	void Update() {
 		if (go) {

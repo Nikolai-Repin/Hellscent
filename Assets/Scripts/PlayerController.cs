@@ -139,7 +139,7 @@ public class PlayerController : Entity
                         if (w.CanShoot()) {
                             chargeBar = w.manaCost + manaCostDiff;
                         }
-                        if (chargeBar <= w.GetMana()) {
+                        if (chargeBar < w.GetMana()) {
                             w.StopRecharge();
                         }
                      }
@@ -147,9 +147,7 @@ public class PlayerController : Entity
                         chargeBar = 0;
                         if(equippedWeapon.GetComponent<Weapon>().Fire(Time.time - holdTime)) {
                             //Kickback from successful shot
-                            Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
-                            kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
-                            rb.velocity += kbVector;
+                            doKickback();
                         }
                      }
                 } else {
@@ -158,9 +156,7 @@ public class PlayerController : Entity
                         if(equippedWeapon.GetComponent<Weapon>().Fire()) {
 
                             //Kickback from successful shot
-                            Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
-                            kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
-                            rb.velocity += kbVector;
+                            doKickback();
                         }
                     }
                 }
@@ -172,6 +168,12 @@ public class PlayerController : Entity
         rb.velocity += direction * speed * Time.deltaTime; 
 
         base.Update();
+    }
+
+    public void doKickback() {
+        Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
+        kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
+        rb.velocity += kbVector;
     }
 
 

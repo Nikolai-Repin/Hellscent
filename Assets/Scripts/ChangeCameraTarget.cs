@@ -24,7 +24,9 @@ public class ChangeCameraTarget : MonoBehaviour
     }
 
     public void AddCameraTargets(GameObject enemy) {
-        targetGroup.AddMember(enemy.transform, 3f, 3f);
+        if (enemy.GetComponent<Enemy>().HasHealthBar()){
+            targetGroup.AddMember(enemy.transform, 2f, 2f);
+        }
     }
 
     public void RemoveCameraTargets(GameObject enemy) {

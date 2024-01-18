@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_LocalScale: {x: 5, y: 5, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,14 +49,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 1
   intangible: 1
+  hasHealthBar: 0
   maxHealthAmount: 0
   healthAmount: 0
   knockbackMult: 0
   maxLife: 30
-  bulletDamage: 50
-  projectileSpeed: 2
+  bulletDamage: 15
+  projectileSpeed: 7
   knockback: 0
-  pierce: 1000
+  pierce: 1
   reflectable: 1
   setDamage: 0
   rotate: 0
