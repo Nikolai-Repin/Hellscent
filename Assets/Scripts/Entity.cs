@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
 
+    [SerializeField] protected bool hasHealthBar;
     [SerializeField] protected float maxHealthAmount;
     [SerializeField] public float healthAmount;
 
@@ -40,7 +41,7 @@ public class Entity : MonoBehaviour
 
         if (!invulnerable) {
             healthAmount -= damage;
-            uiManager.UpdateEntityHealthBar(gameObject.GetComponent<Entity>());
+            if (hasHealthBar) {uiManager.UpdateEntityHealthBar(gameObject.GetComponent<Entity>());}
             if (healthAmount <= 0) {
                 Die();
             }
@@ -102,7 +103,6 @@ public class Entity : MonoBehaviour
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.team = "Enemy";
             float fireSpeed = startSpeed - speedChange*i;
-            //Debug.Log(fireSpeed);
             bulletScript.LaunchProjectile(angle, fireSpeed);
         }
     }
@@ -136,6 +136,12 @@ public class Entity : MonoBehaviour
     public virtual void Die () {
         entityList.Remove(this);
         if (room != null) {room.RemoveEntity(this);}
+        Destroy(transform.gameObject);
+    }
+
+    //Dies with no extra behaviors triggering
+    public void QuietDie() {
+        entityList.Remove(this);
         Destroy(transform.gameObject);
     }
 
@@ -182,6 +188,10 @@ public class Entity : MonoBehaviour
 
     public void RestoreHP(float bonusHP) {
         healthAmount = (healthAmount + bonusHP > maxHealthAmount) ? maxHealthAmount : healthAmount + bonusHP;
+    }
+
+    public bool HasHealthBar() {
+        return hasHealthBar;
     }
 
     public float GetMaxHealthAmount() {

@@ -13,6 +13,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float cooldownTime = 0.5F;
     [SerializeField] public int bullets = 1;
     [SerializeField] public float accuracy = 10.0F;
+    [SerializeField] public int clip = 1;
+    [SerializeField] public int clipDelay;
 
     [SerializeField] private float weaponDamage;
 
@@ -22,6 +24,16 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float mana;
     [SerializeField] private float manaRechargeDelay = 1;
 
+    [Space]
+    [SerializeField] public bool canCharge;
+    [SerializeField] public float chargeTime;
+    [SerializeField] public float incrementTime;
+    [SerializeField] public float extraManaUse;
+    [SerializeField] private float extraDamage;
+    [SerializeField] private float extraKickback;
+    [SerializeField] private int extraClip;
+
+    [Space]
     [SerializeField] private float lastFireTime;
 
     
@@ -96,9 +108,17 @@ public class Weapon : MonoBehaviour
     }
 
     //Fires the selected projectile
-    public bool Fire()
+    public bool Fire(bool useCooldown = true)
     {
-        if (cooldown > 0 || (useMana && mana < manaCost)) {return false;}
+        if (useCooldown && (cooldown > 0 || (useMana && mana < manaCost))) {return false;}
+
+        if (useCooldown && clip > 1) {
+            StartCoroutine(FireClip(clip)); 
+            lastFireTime = Time.time + manaRechargeDelay;
+            if (useMana) {mana -= manaCost;}
+            cooldown = cooldownTime;
+            return true;
+        }
 
         for (int i = 0; i < bullets+modBullets; i++)
         {
@@ -117,10 +137,56 @@ public class Weapon : MonoBehaviour
         }
 
         lastFireTime = Time.time + manaRechargeDelay;
-        if (useMana) {mana -= manaCost;}
+        if (useCooldown && useMana) {mana -= manaCost;}
         cooldown = cooldownTime;
+        if (!useCooldown) {
+            transform.parent.gameObject.GetComponent<PlayerController>().doKickback();
+        }
 
         return true;
+    }
+
+    public bool Fire(float timeCharged) {
+        if (timeCharged > chargeTime) {
+            timeCharged = chargeTime;
+        }
+        int maxIncrements = (int) (chargeTime / incrementTime);
+        int increments = (int) (timeCharged / incrementTime);
+        float incrementRatio = timeCharged / chargeTime;
+        StartCoroutine(resetVars(manaCost, weaponDamage, kickback, clip, (clip + (int) (extraClip * incrementRatio)) * clipDelay + 1));
+        float manaCostDiff = extraManaUse * incrementRatio;
+        if (manaCost + manaCostDiff > mana) {
+            if (manaCost > mana) {
+                return false;
+            }
+            return Fire((mana - manaCost) * chargeTime / extraManaUse);
+        }
+        manaCost += manaCostDiff;
+        weaponDamage += extraDamage * incrementRatio;
+        kickback += extraKickback * incrementRatio;
+        clip += (int) (extraClip * incrementRatio);
+        return Fire();
+    }
+
+    IEnumerator FireClip(int clipSize) {
+        if (clipSize > 0) {
+            for (int i = 0; i < clipSize; i++) {
+                for (int j = 0; j < clipDelay; j++) {
+                    yield return null;
+                }
+                Fire(false);
+            }
+        }
+    }
+
+    IEnumerator resetVars(float m, float d, float k, int c, int frames = 1) {
+        for (int i = 0; i < frames; i++) {
+            yield return null;
+        }
+        manaCost = m;
+        weaponDamage = d;
+        kickback = k;
+        clip = c;
     }
 
     public bool GetControllerAndEquip() {
@@ -202,6 +268,10 @@ public class Weapon : MonoBehaviour
         return weaponDamage;
     }
 
+    public bool CanShoot() {
+        return cooldown <= 0;
+    }
+
     public void AddDamage(float bonusDamage) {
         weaponDamage += bonusDamage;
     }
@@ -215,12 +285,24 @@ public class Weapon : MonoBehaviour
         return mana/maxMana;
     }
 
-        public void AddMaxMana(float a) {
+    public float GetMaxMana() {
+        return maxMana;
+    }
+
+    public float GetMana() {
+        return mana;
+    }
+
+    public void AddMaxMana(float a) {
         maxMana += a;
     }
 
         public int GetWeight() {
         return weight;
+    }
+
+    public void StopRecharge() {
+        lastFireTime = Time.time + manaRechargeDelay;
     }
 
 }

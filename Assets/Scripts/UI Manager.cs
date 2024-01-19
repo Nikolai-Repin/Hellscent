@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     //[SerializeField] private Camera camera;
     
     [SerializeField] private Image ManaBar;
+    [SerializeField] private Image ChargeBar;
 
     [SerializeField] private Image heartContainer;
     [SerializeField] private List<Image> heartContainerOutlines = new List<Image>();
@@ -41,7 +42,8 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ManaBar.fillAmount = controller.GetManaPercent();
+        ManaBar.fillAmount = 1 - controller.GetManaPercent();
+        ChargeBar.fillAmount = ManaBar.fillAmount + controller.GetChargePercent();
     }
 
     // Updates the amount of health you have displayed
