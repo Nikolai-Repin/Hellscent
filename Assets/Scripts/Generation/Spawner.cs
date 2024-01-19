@@ -47,12 +47,17 @@ public class Spawner : MonoBehaviour
     }
 
     private int SelectEnemy() {
-        int count = transform.parent.parent.GetComponent<GenerateDungeon>().GetWeight();
+        int addedWeight = transform.parent.parent.GetComponent<GenerateDungeon>().GetWeight();
+        int count = 0;
         int index = 0;
         int i = 0;
         while (i < 200 && count < 100) {
             index = Random.Range(0, enemyPool.Count);
-            count += enemyPool[index].GetComponent<Enemy>().GetWeight();
+            int weight = enemyPool[index].GetComponent<Enemy>().GetWeight();
+            if (weight < 60) {
+                weight += addedWeight;
+            }
+            count += weight;
             i++;
         }
         return index;

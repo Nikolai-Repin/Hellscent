@@ -18,6 +18,7 @@ public class Journalnavigation : MonoBehaviour
     private int page = 0;
     //half the value of the length of texts due to every increase will display 2 pages at once
     private int text = 0;
+    private int cover = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class Journalnavigation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.J) && false){
+        if(Input.GetKeyDown(KeyCode.J)){
             journalOpen = !journalOpen;
             OpenBook();
             Debug.Log("book is opened");
@@ -36,22 +37,30 @@ public class Journalnavigation : MonoBehaviour
 
         if(isOpen){
             if(Input.GetKeyDown(KeyCode.RightArrow)){ 
-                text++;
-                if (text > texts.Length / 2) {
-                    text = texts.Length / 2;
+                page++;
+                if (page > texts.Length / 2 + 1) {
+                    page = texts.Length / 2 + 1;
                 }
                 ChangePage();
-                ChangeText();
+                if (page < texts.Length / 2 + 1 && page > 0) {
+                    ChangeText();
+                } else {
+                    RemoveText();
+                }
                 Debug.Log("page: " + page + ", text: " + text);
             }
 
             if(Input.GetKeyDown(KeyCode.LeftArrow)){ 
-                text--;
-                if (text < 0) {
-                    text = 0;
-                } 
+                page--;
+                if (page < 0) {
+                    page = 0;
+                }
                 ChangePage();
-                ChangeText();
+                if (page < texts.Length / 2 + 1 && page > 0) {
+                    ChangeText();
+                } else {
+                    RemoveText();
+                }
                 Debug.Log("page: " + page + ", text: " + text);
             }
         }
@@ -60,6 +69,7 @@ public class Journalnavigation : MonoBehaviour
             RemoveText();
             text = 0;
             page = 0;
+            cover = 0;
         }
     }
 
@@ -88,20 +98,23 @@ public class Journalnavigation : MonoBehaviour
     private void ChangePage(){
         Destroy(book);
         RemoveText();
-        if (text == 0) {
-            page = 0;
-        } else if (text == texts.Length / 2) {
-            page = 2;
-        } else {
-            page = 1;
+        if (page == 0) {
+            cover = 0;
         }
-        book = Instantiate(pages[page], new Vector2(0, 0), transform.rotation);
+        else if (page == texts.Length / 2 + 1) {
+            cover = 2;
+        }
+        else {
+            cover = 1;
+        }
+        book = Instantiate(pages[cover], new Vector2(0, 0), transform.rotation);
         book.transform.SetParent(transform, false);
         book.transform.Translate(new Vector3(0, 0, 1));
     }
 
     private void ChangeText(){
         RemoveText();
+        text = (page - 1);
         textLeft = Instantiate(texts[text * 2], new Vector2(0, 0), transform.rotation);
         textLeft.transform.SetParent(transform, false);
         textLeft.transform.Translate(new Vector3(0, 0, 1));

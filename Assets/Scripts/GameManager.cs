@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool hide = false;
 
     void Start() {
-        floor = 0;
+        floor = 0;  
         StartCoroutine(RunGame());
     }
 
@@ -26,13 +26,18 @@ public class GameManager : MonoBehaviour
             hide = true;
             floor++;
             GameObject dungeon = Instantiate(presets[repeatLevel], new Vector2(), new Quaternion());
+            GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = dungeon.GetComponent<GenerateDungeon>().backgroundColor;
             while (dungeon.GetComponent<GenerateDungeon>().finished != true) {
                 yield return null;
             }
             hide = false;
             while (!dungeon.GetComponent<GenerateDungeon>().dungeonOver) {
                 yield return null;
-            }   
+            }
+            GameObject residualPage = GameObject.Find("page item(Clone)");
+            if (residualPage != null) {
+                Destroy(residualPage);
+            }
             Destroy(dungeon);
         }
         endScreen.SetActive(true);

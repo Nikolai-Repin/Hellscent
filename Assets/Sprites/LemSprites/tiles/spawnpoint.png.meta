@@ -189,8 +189,8 @@ TextureImporter:
       name: spawnpoint_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 48
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -210,7 +210,7 @@ TextureImporter:
       name: spawnpoint_4
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 32
         width: 16
         height: 16
@@ -231,7 +231,7 @@ TextureImporter:
       name: spawnpoint_5
       rect:
         serializedVersion: 2
-        x: 32
+        x: 16
         y: 32
         width: 16
         height: 16
@@ -252,8 +252,8 @@ TextureImporter:
       name: spawnpoint_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
+        x: 32
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -273,8 +273,8 @@ TextureImporter:
       name: spawnpoint_7
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
+        x: 48
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -294,7 +294,7 @@ TextureImporter:
       name: spawnpoint_8
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 16
         width: 16
         height: 16
@@ -315,8 +315,8 @@ TextureImporter:
       name: spawnpoint_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 16
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -336,8 +336,8 @@ TextureImporter:
       name: spawnpoint_10
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 32
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -357,8 +357,8 @@ TextureImporter:
       name: spawnpoint_11
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
+        x: 48
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -370,6 +370,69 @@ TextureImporter:
       bones: []
       spriteID: 34962e4920ad13048a27adf9cd914a47
       internalID: -988396887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spawnpoint_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 650176077dfb5034bbac77a9bc716629
+      internalID: -648897347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spawnpoint_13
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00c15f7eaca6a8e428307a1d9df91480
+      internalID: 1280393753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spawnpoint_14
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26543ee775c7b1245b1d6e4e5477016e
+      internalID: 920499337
       vertices: []
       indices: 
       edges: []
@@ -389,6 +452,9 @@ TextureImporter:
       spawnpoint_1: 755378721
       spawnpoint_10: 525811237
       spawnpoint_11: -988396887
+      spawnpoint_12: -648897347
+      spawnpoint_13: 1280393753
+      spawnpoint_14: 920499337
       spawnpoint_2: 427870574
       spawnpoint_3: -759500854
       spawnpoint_4: 434113032

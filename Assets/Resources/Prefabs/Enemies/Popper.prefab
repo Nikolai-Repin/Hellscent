@@ -289,10 +289,10 @@ MonoBehaviour:
   maxHealthAmount: 10
   healthAmount: 10
   knockbackMult: 1
-  dealDamageOnContact: 0
+  dealDamageOnContact: 1
   visRange: 20
   iFrames: 0
-  weight: 80
+  weight: 70
   invulnTime: 0
   trackerController: {fileID: 0}
   weapon: {fileID: 470356897603892556}

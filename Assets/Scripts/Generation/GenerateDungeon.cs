@@ -23,6 +23,8 @@ public class GenerateDungeon : MonoBehaviour
 	[SerializeField, Range(0, 100)] private int roomChance;
 	[SerializeField, Range(0, 100)] private int hallwayChance;
 	[SerializeField] private List<GameObject> gauranteedBonus = new();
+	[SerializeField] public Color floorColor;
+	[SerializeField] public Color backgroundColor;
 	public bool dungeonOver = false;
 
 	private bool go = true;
@@ -165,7 +167,7 @@ public class GenerateDungeon : MonoBehaviour
 			yield return StartCoroutine(waitFrames(waitingFrames));		
 			foreach (GameObject dr in dungeon)
 			{
-				if (nextHallway.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
+				if (CheckColliding(nextHallway, dr))
 				{
 					Destroy(nextHallway);
 					if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0) {
@@ -206,7 +208,7 @@ public class GenerateDungeon : MonoBehaviour
 		}
 		yield return StartCoroutine(waitFrames(waitingFrames));
 		foreach (GameObject dr in dungeon) {
-			if (nextRoom.GetComponent<CompositeCollider2D>().bounds.Intersects(dr.GetComponent<CompositeCollider2D>().bounds))
+			if (CheckColliding(nextRoom, dr))
 			{
 				if (usedHallway) {
 					Destroy(nextOrigin);
@@ -242,6 +244,10 @@ public class GenerateDungeon : MonoBehaviour
 			yield return StartCoroutine(CreateDungeon(origin, 0, branchCap));
 		} 
     }
+
+	private bool CheckColliding(GameObject room, GameObject otherRoom) {
+		return room.GetComponent<CompositeCollider2D>().bounds.Intersects(otherRoom.GetComponent<CompositeCollider2D>().bounds);
+	}
 
 	private void CapDoors() {
 		foreach (GameObject dr in dungeon) {
