@@ -145,13 +145,14 @@ public class WormBoss : Enemy
             //Death animation, cleans up the boss's attacks
             case Phase.Death: {
                 if (Time.time > lastAttackTime) {
-                    Destroy(transform.gameObject, 1);
+
                     Vector2 portalOffset = new Vector2(0, arenaSize.y*0.6F);
                     Vector2 pageOffset = new Vector2(0, arenaSize.y*0.4F);
                     GameObject portal = Resources.Load<GameObject>("Prefabs/Entities/NextAreaPortal/NextAreaPortal"); //This line is bad, lmk if there's a better way to do this, p l e a s e
                     GameObject page = Resources.Load<GameObject>("Prefabs/Items/page item");
                     Instantiate(portal, arenaCenter + portalOffset , new Quaternion());
                     Instantiate(page, arenaCenter + pageOffset , new Quaternion());
+                    base.Die();
                 }
                 break;
             }
