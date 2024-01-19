@@ -114,6 +114,7 @@ public class PlayerController : Entity
                 }
                 if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                     if ((Time.time - rHoldTime)<0.5) {
+                        holdTime = Time.time;
                         ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
                         //Drop held weapon if r was held for longer
                     }
