@@ -17,7 +17,6 @@ public class WormBoss : Enemy
     [SerializeField] private GameObject segmentPrefab;
     [SerializeField] private int lineCount;
     private Animator animator;
-    private CinemachineVirtualCameraBase vCamera;
     private float lastAttackTime;
     public enum Phase
     {
@@ -44,7 +43,6 @@ public class WormBoss : Enemy
         phaseCooldownRandom = phaseCooldown;
         curPhase = Phase.Sleep;
         arenaCenter = transform.position;
-        vCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCameraBase>();
         dealDamageOnContact = false;
         invulnerable = true;
         intangible = true;
@@ -128,7 +126,6 @@ public class WormBoss : Enemy
                     arenaCenter = transform.position;
                     trackerController.SetTarget(closestPlayer.transform);
                     lastAttackTime = Time.time + 2;
-                    vCamera.Follow = transform;
                     curPhase = Phase.Awakening;
                     foreach (GameObject s in bodySegments) {
                         s.GetComponent<Animator>().SetTrigger("Awaken");
@@ -148,7 +145,7 @@ public class WormBoss : Enemy
             //Death animation, cleans up the boss's attacks
             case Phase.Death: {
                 if (Time.time > lastAttackTime) {
-                    vCamera.Follow = trackerController.target.transform;
+
                     Vector2 portalOffset = new Vector2(0, arenaSize.y*0.6F);
                     Vector2 pageOffset = new Vector2(0, arenaSize.y*0.4F);
                     GameObject portal = Resources.Load<GameObject>("Prefabs/Entities/NextAreaPortal/NextAreaPortal"); //This line is bad, lmk if there's a better way to do this, p l e a s e
@@ -170,7 +167,6 @@ public class WormBoss : Enemy
         invulnerable = false;
         intangible = false;
         trackerController.SetAI(TrackerController.AI.Melee);
-        vCamera.Follow = trackerController.target.transform;
         ReturnToWander();
     }
 
@@ -242,7 +238,6 @@ public class WormBoss : Enemy
         trackerController.aiPath.maxSpeed = 0;
         curPhase = Phase.Death;
         lastAttackTime = Time.time + 1F;
-        vCamera.Follow = transform;
         animator.SetInteger("Phase", -1);
         for (int i = turrets.Count - 1; i >= 0; i--) {
             turrets[i].GetComponent<Enemy>().QuietDie();

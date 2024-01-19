@@ -16,7 +16,6 @@ public class Boss : Enemy
     private GameObject bombBPrefab;
     private GameObject minionPrefab;
     private Animator animator;
-    private CinemachineVirtualCameraBase vCamera;
     private ParticleSystem particleRockBurst;
     private int firedBombs;
     private float lastAttackTime;
@@ -47,7 +46,6 @@ public class Boss : Enemy
         bombPrefab = Resources.Load<GameObject>("Prefabs/Entities/PirateBomb/PirateBomb");
         bombBPrefab = Resources.Load<GameObject>("Prefabs/Entities/PirateBomb/PirateBombLine");
         minionPrefab = Resources.Load<GameObject>("Prefabs/Enemies/PirateMinion/PirateMinion");
-        vCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCameraBase>();
         particleRockBurst = GameObject.Find("RockParticle").GetComponent<ParticleSystem>();
         dealDamageOnContact = false;
         invulnerable = true;
@@ -140,7 +138,6 @@ public class Boss : Enemy
                     arenaCenter = transform.position;
                     trackerController.SetTarget(closestPlayer.transform);
                     lastAttackTime = Time.time + 2;
-                    vCamera.Follow = transform;
                     curPhase = Phase.Awakening;
                 }
                 break;
@@ -157,7 +154,7 @@ public class Boss : Enemy
             //Death animation, cleans up the boss's attacks
             case Phase.Death: {
                 if (Time.time > lastAttackTime) {
-                    vCamera.Follow = trackerController.target.transform;
+
                     Vector2 portalOffset = new Vector2(0, arenaSize.y*0.6F);
                     Vector2 pageOffset = new Vector2(0, arenaSize.y*0.4F);
                     GameObject portal = Resources.Load<GameObject>("Prefabs/Entities/NextAreaPortal/NextAreaPortal"); //This line is bad, lmk if there's a better way to do this, p l e a s e
@@ -179,8 +176,6 @@ public class Boss : Enemy
         invulnerable = false;
         intangible = false;
         trackerController.SetAI(TrackerController.AI.Melee);
-        
-        vCamera.Follow = trackerController.target.transform;
         particleRockBurst.Play();
 
         ReturnToWander();
@@ -275,7 +270,7 @@ public class Boss : Enemy
         trackerController.aiPath.maxSpeed = 0;
         curPhase = Phase.Death;
         lastAttackTime = Time.time + 1F;
-        vCamera.Follow = transform;
+        GameObject.Find("Camera Target").GetComponent<ChangeCameraTarget>().RemoveCameraTargets(gameObject);
         animator.SetInteger("Phase", -1);
     
 
