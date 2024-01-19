@@ -18,7 +18,7 @@ public class Enemy : Entity
     { 
         base.Update();
         GameObject closestPlayer = FindClosestPlayer();
-        if (closestPlayer != null) {
+        if (closestPlayer != null && trackerController != null) {
             trackerController.SetTarget(closestPlayer.transform);
         }
     }
