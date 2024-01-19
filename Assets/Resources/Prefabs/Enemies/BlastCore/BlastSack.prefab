@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 3955087765442714262}
   - component: {fileID: 5312439343345860918}
   - component: {fileID: 208737942569589933}
+  - component: {fileID: 7965209838405739559}
   m_Layer: 6
   m_Name: BlastSack
   m_TagString: Enemy
@@ -402,11 +403,32 @@ MonoBehaviour:
   weight: 20
   invulnTime: 0
   trackerController: {fileID: 0}
-  fuse: 1.5
+  fuse: 1
   projectileType: {fileID: 6942168956635508771, guid: 510769cf04792ed45ba62fbb8b216951, type: 3}
   projectileCount: 8
   rotationOffset: 0
   rings: 2
+--- !u!95 &7965209838405739559
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8131431801803962105}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 39e670084bb27cc4fa6d28aa47dbf698, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2132158374419294889
 PrefabInstance:
   m_ObjectHideFlags: 0

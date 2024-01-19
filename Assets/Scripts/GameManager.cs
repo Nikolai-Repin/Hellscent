@@ -33,7 +33,11 @@ public class GameManager : MonoBehaviour
             hide = false;
             while (!dungeon.GetComponent<GenerateDungeon>().dungeonOver) {
                 yield return null;
-            }   
+            }
+            GameObject residualPage = GameObject.Find("page item(Clone)");
+            if (residualPage != null) {
+                Destroy(residualPage);
+            }
             Destroy(dungeon);
         }
         endScreen.SetActive(true);

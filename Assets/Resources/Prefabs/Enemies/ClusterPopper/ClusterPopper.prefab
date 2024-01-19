@@ -290,7 +290,7 @@ MonoBehaviour:
   maxHealthAmount: 40
   healthAmount: 40
   knockbackMult: 1
-  dealDamageOnContact: 0
+  dealDamageOnContact: 1
   visRange: 20
   iFrames: 0
   weight: 0
