@@ -1921,6 +1921,10 @@ PrefabInstance:
       propertyPath: presets.Array.data[0]
       value: 
       objectReference: {fileID: 7673825623514623661, guid: 65034de6bcd19439aa93b466c226fe62, type: 3}
+    - target: {fileID: 974735522545942603, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
+      propertyPath: presets.Array.data[1]
+      value: 
+      objectReference: {fileID: 5619592986337435809, guid: 304511d3c6a8f47f786a6b3a8cd4e1a2, type: 3}
     - target: {fileID: 3003248417482913115, guid: 72caaa71acbf28d4fb4af24ca5112e79, type: 3}
       propertyPath: m_LocalPosition.x
       value: -106.680016
