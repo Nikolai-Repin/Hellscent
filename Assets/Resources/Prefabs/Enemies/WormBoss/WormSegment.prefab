@@ -67,7 +67,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 2
 --- !u!114 &5981321808491106239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +272,12 @@ MonoBehaviour:
   maxHealthAmount: 0
   healthAmount: 0
   knockbackMult: 0
+  dealDamageOnContact: 1
+  visRange: 0
+  iFrames: 0
+  weight: 0
+  invulnTime: 0
+  trackerController: {fileID: 0}
   head: {fileID: 0}
 --- !u!95 &1603378464818366547
 Animator:

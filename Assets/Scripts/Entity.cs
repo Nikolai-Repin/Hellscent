@@ -16,6 +16,7 @@ public class Entity : MonoBehaviour
     protected UIManager uiManager;
 
     [SerializeField] public float knockbackMult;
+    [SerializeField] protected bool dealDamageOnContact;
     public static List<Entity> entityList = new List<Entity>();
     private RoomInfo room;
     protected SpriteRenderer sr;
@@ -130,6 +131,16 @@ public class Entity : MonoBehaviour
     //Finds the closest game object from a list of collider2D and their distance from Vector3 origin
     public GameObject FindClosest (List<Collider2D> targets, Vector3 origin) {
         return FindClosest(targets.ToArray(), origin);
+    }
+
+    public virtual void DealContactDamage(Collider2D other) {
+        Debug.Log("b");
+        if (other.gameObject.tag == "player") {
+            if (dealDamageOnContact) {
+                Debug.Log("c");
+                other.GetComponent<PlayerController>().TakeDamage(1);
+            }
+        }
     }
 
     //Destroys the entity
