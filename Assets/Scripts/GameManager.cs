@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
             while (!dungeon.GetComponent<GenerateDungeon>().dungeonOver) {
                 yield return null;
             }
-            GameObject residualPage = GameObject.Find("page item(Clone)"); 
+            GameObject residualPage = GameObject.Find("page item(Clone)");
             if (residualPage != null) {
                 Destroy(residualPage);
             }
