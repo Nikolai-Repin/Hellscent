@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sr: {fileID: 851333429}
   skins:
+  - {fileID: -1302518060, guid: 74d00a27dc006514b99d77ed1770e86c, type: 3}
   - {fileID: -594407397, guid: 45c98744e2883c24dbd101842a65be06, type: 3}
   - {fileID: -591047396, guid: 45c98744e2883c24dbd101842a65be06, type: 3}
   playerskin: {fileID: 851333428}
@@ -1132,8 +1133,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1150,13 +1151,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1370,7 +1371,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 200, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 97, y: 98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362473821
 MonoBehaviour:
@@ -1448,8 +1449,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6f2b27d52e24a1b458d7d0446f4c4e0d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1980,7 +1981,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -200, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 97, y: 98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &594836863
 MonoBehaviour:
@@ -2058,8 +2059,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6f2b27d52e24a1b458d7d0446f4c4e0d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4216,8 +4217,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294835709
+  m_fontColor: {r: 0.990566, g: 0.990566, b: 0.990566, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4234,13 +4235,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5473,11 +5474,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5663219147167691172, guid: 7b3c9fb7166e3084f99fa1373fd0125d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 259.5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5663219147167691172, guid: 7b3c9fb7166e3084f99fa1373fd0125d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 259.5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5663219147167691172, guid: 7b3c9fb7166e3084f99fa1373fd0125d, type: 3}
       propertyPath: m_LocalScale.z
@@ -5527,6 +5528,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: selectedskin
       objectReference: {fileID: 0}
+    - target: {fileID: 9161752604140825507, guid: 7b3c9fb7166e3084f99fa1373fd0125d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1302518060, guid: 74d00a27dc006514b99d77ed1770e86c, type: 3}
     - target: {fileID: 9161752604140825507, guid: 7b3c9fb7166e3084f99fa1373fd0125d, type: 3}
       propertyPath: m_SortingOrder
       value: 2
