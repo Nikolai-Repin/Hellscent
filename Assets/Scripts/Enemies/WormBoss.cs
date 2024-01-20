@@ -9,8 +9,8 @@ public class WormBoss : Enemy
     [SerializeField] bool spawnPortal;
     [SerializeField] bool page;
     [SerializeField] Vector2 arenaSize;
+    [Space]
     [SerializeField] public GameObject projectileType;
-    [SerializeField] private float difficultyModifier = 1;
     [SerializeField] private int maxTurrets;
     [SerializeField] private GameObject turretPrefab;
     [SerializeField] private int segmentCount;
@@ -18,6 +18,8 @@ public class WormBoss : Enemy
     [SerializeField] private int lineCount;
     private Animator animator;
     private float lastAttackTime;
+    [Space]
+    [SerializeField] public bool blueMode;
     public enum Phase
     {
         Death = -1,
@@ -55,6 +57,7 @@ public class WormBoss : Enemy
 
         animator = GetComponent<Animator>();
         animator.SetInteger("Phase", 0);
+        animator.SetBool("Blue", blueMode);
         
         base.Start();
     }
