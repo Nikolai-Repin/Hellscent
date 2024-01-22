@@ -8,7 +8,6 @@ public class Item : MonoBehaviour
     private PlayerController controller;
     private UIManager uiManager;
 
-
     [SerializeField] private float bonusDamage;
     [SerializeField] private int bonusMaxMana;
     [SerializeField] private float bonusSpeed;
