@@ -103,7 +103,7 @@ MonoBehaviour:
   kickback: 5
   cooldownTime: 0.5
   bullets: 1
-  accuracy: 3
+  accuracy: 1
   clip: 3
   clipDelay: 20
   weaponDamage: 0

@@ -36,6 +36,7 @@ public class ContactDamageCollider : MonoBehaviour
         switch (detectionType) {
             case (DetectionType.damage): {
                 owner.DealContactDamage(other);
+                Debug.Log("a");
                 break;
             } 
 

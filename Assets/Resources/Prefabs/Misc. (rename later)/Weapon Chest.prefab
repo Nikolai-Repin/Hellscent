@@ -109,6 +109,7 @@ MonoBehaviour:
   - {fileID: 9215686754380215263, guid: 0ea1e78253ab778429102350bc93aa79, type: 3}
   - {fileID: 9215686754380215263, guid: 344e129a626c49f449539189aa0d4f91, type: 3}
   - {fileID: 5293375490468015970, guid: 255aacfcc04547a4d8c1020351cd6d7a, type: 3}
+  - {fileID: 9215686754380215263, guid: bbb2ca9446fb88e4282ca2145a7179fe, type: 3}
   itemPool: []
   droppedItem: {fileID: 3501811076503607432, guid: 45b87eb4f484d9c409b8a977f24a6b9c, type: 3}
   open: {fileID: 21300000, guid: 7db7aefa82b9b1643a629963b13d5d03, type: 3}

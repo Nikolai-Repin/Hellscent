@@ -9,6 +9,7 @@ public class BlastSack : Enemy
     [SerializeField] private int projectileCount;
     [SerializeField] private float rotationOffset;
     [SerializeField] private int rings;
+    private Animator animator;
     private enum Phase {
         Wander = 1,
         Detonation = 2
@@ -19,6 +20,7 @@ public class BlastSack : Enemy
     void Start() {
         DetonationTime = Time.time + 5;
         curPhase = Phase.Wander;
+        animator = GetComponent<Animator>();
         base.Start();
     }
 
@@ -34,8 +36,13 @@ public class BlastSack : Enemy
             }
 
             case (Phase.Detonation): {
-                FireInRings(projectileType, projectileCount, 360/projectileCount, rotationOffset, rings);
-                Die();
+                if(Time.time >= DetonationTime - 0.5) {
+                    animator.SetBool("collapsing", true);
+                }
+                if(Time.time >= DetonationTime) {
+                    FireInRings(projectileType, projectileCount, 360/projectileCount, rotationOffset, rings);
+                    Die();
+                }
                 break;
             }
         }
@@ -44,6 +51,7 @@ public class BlastSack : Enemy
     public override void TriggerEvent(Collider2D other) {
         if (other.gameObject.tag == "player" &&  curPhase == Phase.Wander) {
             DetonationTime = Time.time + fuse;
+            trackerController.aiPath.maxAcceleration /= 2;
             curPhase = Phase.Detonation;
         }
     }

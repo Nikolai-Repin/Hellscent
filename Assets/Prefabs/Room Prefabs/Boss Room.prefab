@@ -19405,6 +19405,7 @@ MonoBehaviour:
   activateLastEnemyEvent: 0
   closedCollisions: {fileID: 1231828663717551461}
   openedCollisions: {fileID: 1150104017400181853}
+  doColorAdjustment: 1
 --- !u!50 &1390453384946475634
 Rigidbody2D:
   serializedVersion: 4
@@ -19515,7 +19516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[0]
@@ -19525,6 +19526,14 @@ PrefabInstance:
       propertyPath: enemyPool.Array.data[1]
       value: 
       objectReference: {fileID: 3451969200785984078, guid: a1d345e78f9d2f84f9b9a5890bd3af07, type: 3}
+    - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
+      propertyPath: enemyPool.Array.data[2]
+      value: 
+      objectReference: {fileID: 3451969200785984078, guid: 5875ed9aca8c563449e9377d145ee7f0, type: 3}
+    - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
+      propertyPath: enemyPool.Array.data[3]
+      value: 
+      objectReference: {fileID: 3451969200785984078, guid: e0e41d6b509ade04fb91ecf60bc8d17b, type: 3}
     - target: {fileID: 7171132799731802128, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: m_LocalPosition.x
       value: 94.5
