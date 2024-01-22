@@ -31,7 +31,7 @@ public class RoomInfo : MonoBehaviour
         dungeon = transform.parent.gameObject.GetComponent<GenerateDungeon>();
         if (bossRoom) {
             dungeonManager = dungeon.dungeonManager;
-            spawners[0].enemyPool.RemoveAt(dungeonManager.getFloor() % 2);
+            spawners[0].enemyPool = new() {spawners[0].enemyPool[dungeonManager.getFloor() - 1]};
         }
         if (doColorAdjustment) {
             AdjustColors();
@@ -73,8 +73,8 @@ public class RoomInfo : MonoBehaviour
     }
 
     public IEnumerator Lock() {
-        minimap.SetActive(false);
         if (locked) {
+            minimap.SetActive(false);
             closedCollisions.SetActive(true);
             dungeon.LockRoom(transform.gameObject);
         }

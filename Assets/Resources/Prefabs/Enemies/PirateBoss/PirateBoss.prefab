@@ -340,6 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301215306ab51ed469ceecff03dd8d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTarget: {fileID: 0}
   invulnerable: 0
   intangible: 0
   hasHealthBar: 1
@@ -5454,6 +5455,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 931891049558171980, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 931891049558171980, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
@@ -5563,7 +5568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 700
+      value: 325
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.y
@@ -5571,15 +5576,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -13.999889
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 475
+      value: -157
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 700
+      value: 325
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.y
@@ -5587,11 +5592,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 475
+      value: -157
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

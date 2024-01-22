@@ -2941,7 +2941,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HellScent
+  m_text: HellSent
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f862247728227f34393a3167096000c5, type: 2}
   m_sharedMaterial: {fileID: -4213889260866660745, guid: f862247728227f34393a3167096000c5, type: 2}
