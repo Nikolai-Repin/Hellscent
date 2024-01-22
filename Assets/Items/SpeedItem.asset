@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f234c0b865f7a46bebc3d86e4c037f, type: 3}
   m_Name: SpeedItem
   m_EditorClassIdentifier: 
-  itemName: SpeedItem
-  icon: {fileID: 21300000, guid: 0c0696e594a9fbc409abe87f2fac52e7, type: 3}
+  itemName: Speed Item
+  icon: {fileID: 21300000, guid: ffaf25e0a15bbd04ba7ed986e71ae067, type: 3}
   description: Gain speed.

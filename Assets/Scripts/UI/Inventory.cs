@@ -16,10 +16,10 @@ public class Inventory
         public Sprite icon;
 
         public Slot() {
+            icon = null;
             itemName = "";
             description = "";
             count = 0;
-            // Max item stack
             maxAllowed = 10;
         }
 

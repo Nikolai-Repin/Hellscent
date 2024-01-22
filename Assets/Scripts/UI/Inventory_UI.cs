@@ -7,16 +7,16 @@ using UnityEngine.EventSystems;
 public class Inventory_UI : MonoBehaviour
 {
     public GameObject inventoryPanel;
-    public GameObject descriptionPanel;
+    public ItemDescription_UI descriptionUI;
     public string inventoryName;
     public List<Slot_UI> slots = new List<Slot_UI>();
+    public Sprite emptyIcon;
 
     [SerializeField] private Canvas canvas;
 
     private Slot_UI selectedSlot;
     private bool dragSingle;
     private Inventory inventory;
-    private ItemDescription_UI descriptionUI;
 
     private void Awake() {
         canvas = transform.root.GetComponent<Canvas>();
@@ -109,10 +109,14 @@ public class Inventory_UI : MonoBehaviour
         if(slots.Count == 28) {
             if(selectedSlot != null) {
                 selectedSlot.SetHighlight(false);
-                descriptionUI.SetDescription(inventory.slots[index].itemIcon, inventory.slots[index].itemName, inventory.slots[index].description);
+            }
+
+            if(inventory.slots[index].icon == null) {
+                inventory.slots[index].icon = emptyIcon;
             }
             selectedSlot = slots[index];
             selectedSlot.SetHighlight(true);
+            descriptionUI.SetDescription(inventory.slots[index].icon, inventory.slots[index].itemName, inventory.slots[index].description);
         }
     }
 
