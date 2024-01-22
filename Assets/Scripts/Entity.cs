@@ -5,17 +5,19 @@ using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
+    [SerializeField] GameObject cameraTarget;
 
     [SerializeField] protected bool invulnerable;
     [SerializeField] protected bool intangible;
 
     [SerializeField] protected bool hasHealthBar;
     [SerializeField] protected float maxHealthAmount;
-    [SerializeField] public float healthAmount;
+    [SerializeField] private float healthAmount;
 
     protected UIManager uiManager;
 
     [SerializeField] public float knockbackMult;
+    [SerializeField] protected bool dealDamageOnContact;
     public static List<Entity> entityList = new List<Entity>();
     private RoomInfo room;
     protected SpriteRenderer sr;
@@ -23,8 +25,15 @@ public class Entity : MonoBehaviour
     protected virtual void Start() {
         sr = GetComponent<SpriteRenderer>();
         Register();
-        
-        uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+        healthAmount = maxHealthAmount;
+
+        if (HasHealthBar()) {
+            uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+
+            cameraTarget = GameObject.Find("Camera Target");
+            cameraTarget.GetComponent<ChangeCameraTarget>().AddCameraTargets(gameObject);
+
+        }
 
     }
 
@@ -132,8 +141,19 @@ public class Entity : MonoBehaviour
         return FindClosest(targets.ToArray(), origin);
     }
 
+    public virtual void DealContactDamage(Collider2D other) {
+        Debug.Log("b");
+        if (other.gameObject.tag == "player") {
+            if (dealDamageOnContact) {
+                Debug.Log("c");
+                other.GetComponent<PlayerController>().TakeDamage(1);
+            }
+        }
+    }
+
     //Destroys the entity
     public virtual void Die () {
+        GameObject.Find("Camera Target").GetComponent<ChangeCameraTarget>().RemoveCameraTargets(gameObject);
         entityList.Remove(this);
         if (room != null) {room.RemoveEntity(this);}
         Destroy(transform.gameObject);

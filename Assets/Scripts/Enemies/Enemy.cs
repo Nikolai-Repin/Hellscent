@@ -5,7 +5,6 @@ using UnityEngine;
 public class Enemy : Entity
 {
 
-    [SerializeField] protected bool dealDamageOnContact;
     [SerializeField] protected float visRange;
     [SerializeField] public float iFrames;
     [SerializeField] private int weight;
@@ -18,7 +17,7 @@ public class Enemy : Entity
     { 
         base.Update();
         GameObject closestPlayer = FindClosestPlayer();
-        if (closestPlayer != null) {
+        if (closestPlayer != null && trackerController != null) {
             trackerController.SetTarget(closestPlayer.transform);
         }
     }
@@ -42,14 +41,6 @@ public class Enemy : Entity
     //Returns closest player in visRange
     public GameObject FindClosestPlayer() {
         return FindClosestPlayer(visRange);
-    }
-
-    public virtual void DealContactDamage(Collider2D other) {
-        if (other.gameObject.tag == "player") {
-            if (dealDamageOnContact) {
-                other.GetComponent<PlayerController>().TakeDamage(1);
-            }
-        }
     }
 
     public virtual void TriggerEvent(Collider2D other) {

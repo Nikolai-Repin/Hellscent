@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
             if (i + 1 > repeats[repeatLevel]) {
                 repeatLevel++;
             }
-            player.position = new();
+            //player.position = new();
             hide = true;
             floor++;
             GameObject dungeon = Instantiate(presets[repeatLevel], new Vector2(), new Quaternion());
@@ -33,7 +33,11 @@ public class GameManager : MonoBehaviour
             hide = false;
             while (!dungeon.GetComponent<GenerateDungeon>().dungeonOver) {
                 yield return null;
-            }   
+            }
+            GameObject residualPage = GameObject.Find("page item(Clone)");
+            if (residualPage != null) {
+                Destroy(residualPage);
+            }
             Destroy(dungeon);
         }
         endScreen.SetActive(true);

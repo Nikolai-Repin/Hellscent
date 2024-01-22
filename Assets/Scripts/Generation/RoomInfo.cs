@@ -21,6 +21,8 @@ public class RoomInfo : MonoBehaviour
     [SerializeField] private GameObject closedCollisions;
     [SerializeField] private GameObject openedCollisions;
     [SerializeField] private bool doColorAdjustment = true;
+    
+    private GameObject minimap;
 
     void Start()
     {
@@ -29,16 +31,18 @@ public class RoomInfo : MonoBehaviour
         dungeon = transform.parent.gameObject.GetComponent<GenerateDungeon>();
         if (bossRoom) {
             dungeonManager = dungeon.dungeonManager;
-            spawners[0].enemyPool.RemoveAt(dungeonManager.getFloor() % 2);
+            spawners[0].enemyPool = new() {spawners[0].enemyPool[dungeonManager.getFloor() - 1]};
         }
         if (doColorAdjustment) {
             AdjustColors();
         }
+        minimap = GameObject.Find("Minimap");
     }
 
     void Update () {
         if (completed == false && fighting) {
             if (entities.Count == 0) {
+                minimap.SetActive(true);
                 completed = true;
                 dungeon.UnlockRooms();
                 closedCollisions.SetActive(false);
@@ -70,6 +74,7 @@ public class RoomInfo : MonoBehaviour
 
     public IEnumerator Lock() {
         if (locked) {
+            minimap.SetActive(false);
             closedCollisions.SetActive(true);
             dungeon.LockRoom(transform.gameObject);
         }

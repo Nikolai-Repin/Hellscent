@@ -71,7 +71,7 @@ public class Item : MonoBehaviour
             }
 
             if (journalPage.Length > 0 && pageManager.lastPage < 8) {
-                pageManager.texts[pageManager.lastPage + 4] = journalPage[pageManager.lastPage];
+                pageManager.texts[pageManager.lastPage + 2] = journalPage[pageManager.lastPage];
                 pageManager.lastPage++;
             }
 

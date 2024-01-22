@@ -10165,6 +10165,8 @@ MonoBehaviour:
   - {fileID: 3504099161397743111}
   - {fileID: 3891860426480672916}
   entities: []
+  dungeon: {fileID: 0}
+  dungeonManager: {fileID: 0}
   fighting: 0
   oneDoor: 0
   bossRoom: 0
@@ -12324,11 +12326,11 @@ PrefabInstance:
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[0]
       value: 
-      objectReference: {fileID: 2512800558875698722, guid: 4a2412241139af9479c6e835cdf54e82, type: 3}
+      objectReference: {fileID: 524291347114557407, guid: 02b412ad3c1b8bc4cacb024ecf5ac1ff, type: 3}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[1]
       value: 
-      objectReference: {fileID: 524291347114557407, guid: 92b3d4912843a0248a8b289366a29797, type: 3}
+      objectReference: {fileID: 524291347114557407, guid: 02b412ad3c1b8bc4cacb024ecf5ac1ff, type: 3}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[2]
       value: 
@@ -12445,7 +12447,7 @@ PrefabInstance:
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[1]
       value: 
-      objectReference: {fileID: 524291347114557407, guid: 92b3d4912843a0248a8b289366a29797, type: 3}
+      objectReference: {fileID: 524291347114557407, guid: 02b412ad3c1b8bc4cacb024ecf5ac1ff, type: 3}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[2]
       value: 
