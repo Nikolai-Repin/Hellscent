@@ -101,6 +101,12 @@ MonoBehaviour:
   spawners: []
   entities: []
   fighting: 0
+  oneDoor: 0
+  bossRoom: 0
+  activateLastEnemyEvent: 0
+  closedCollisions: {fileID: 0}
+  openedCollisions: {fileID: 0}
+  doColorAdjustment: 0
 --- !u!50 &8692260294398891765
 Rigidbody2D:
   serializedVersion: 4
@@ -286,6 +292,12 @@ MonoBehaviour:
   spawners: []
   entities: []
   fighting: 0
+  oneDoor: 0
+  bossRoom: 0
+  activateLastEnemyEvent: 0
+  closedCollisions: {fileID: 0}
+  openedCollisions: {fileID: 0}
+  doColorAdjustment: 0
 --- !u!50 &987383674030358560
 Rigidbody2D:
   serializedVersion: 4
@@ -471,6 +483,12 @@ MonoBehaviour:
   spawners: []
   entities: []
   fighting: 0
+  oneDoor: 0
+  bossRoom: 0
+  activateLastEnemyEvent: 0
+  closedCollisions: {fileID: 0}
+  openedCollisions: {fileID: 0}
+  doColorAdjustment: 0
 --- !u!50 &1890217544435200257
 Rigidbody2D:
   serializedVersion: 4
@@ -656,6 +674,12 @@ MonoBehaviour:
   spawners: []
   entities: []
   fighting: 0
+  oneDoor: 0
+  bossRoom: 0
+  activateLastEnemyEvent: 0
+  closedCollisions: {fileID: 0}
+  openedCollisions: {fileID: 0}
+  doColorAdjustment: 0
 --- !u!50 &322250600592013342
 Rigidbody2D:
   serializedVersion: 4

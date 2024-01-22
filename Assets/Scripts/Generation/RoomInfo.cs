@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RoomInfo : MonoBehaviour
 {
@@ -12,15 +13,27 @@ public class RoomInfo : MonoBehaviour
     [SerializeField] private List<Spawner> spawners;
     public List<GameObject> entities = new();
     private GenerateDungeon dungeon;
+    private GameManager dungeonManager;
     public bool fighting = false;
     public bool oneDoor = false;
+    [SerializeField] private bool bossRoom = false;
     [SerializeField] private bool activateLastEnemyEvent;
     [SerializeField] private GameObject closedCollisions;
+    [SerializeField] private GameObject openedCollisions;
+    [SerializeField] private bool doColorAdjustment = true;
 
     void Start()
     {
         trueOccupancy = new(doorOccupation);
+        openedCollisions = GetChildGameObject(transform.gameObject, "Collisions");
         dungeon = transform.parent.gameObject.GetComponent<GenerateDungeon>();
+        if (bossRoom) {
+            dungeonManager = dungeon.dungeonManager;
+            spawners[0].enemyPool.RemoveAt(dungeonManager.getFloor() % 2);
+        }
+        if (doColorAdjustment) {
+            AdjustColors();
+        }
     }
 
     void Update () {
@@ -35,6 +48,24 @@ public class RoomInfo : MonoBehaviour
                 Debug.Log(entities);
             }
         } 
+    }
+
+    private GameObject GetChildGameObject(GameObject fromGameObject, string withName)
+    {
+        var allKids = fromGameObject.GetComponentsInChildren<Transform>();
+        foreach (Transform k in allKids) {
+            if (k.name == withName) {
+                return k.gameObject;
+            }
+        }
+        return null;
+    }
+
+    private void AdjustColors() {
+        Tilemap floor = transform.gameObject.GetComponent<Tilemap>();
+        Tilemap walls = openedCollisions.GetComponent<Tilemap>();
+        floor.color = dungeon.floorColor;
+        walls.color = dungeon.floorColor;
     }
 
     public IEnumerator Lock() {

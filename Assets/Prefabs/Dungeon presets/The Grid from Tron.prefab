@@ -90,5 +90,8 @@ MonoBehaviour:
   - {fileID: 6227156363105034367, guid: 401b3bfbc44399f41a67b93527aa095d, type: 3}
   - {fileID: 6227156363105034367, guid: 401b3bfbc44399f41a67b93527aa095d, type: 3}
   - {fileID: 6227156363105034367, guid: 5f429db36a57c22419a16ad54c88ccc5, type: 3}
+  floorColor: {r: 0.47450984, g: 0.19215688, b: 0.227451, a: 1}
+  backgroundColor: {r: 0.3882353, g: 0.19607843, b: 0.20784314, a: 1}
   dungeonOver: 0
+  dungeonManager: {fileID: 0}
   finished: 0

@@ -12,11 +12,13 @@ public class ContactDamageCollider : MonoBehaviour
     }
     [SerializeField] private DetectionType detectionType;
     [SerializeField] private bool PushOtherEntities;
+    private bool isParentAI;
 
     // Start is called before the first frame update
     void Start() {
         owner = transform.parent.GetComponent<Enemy>();
         Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        isParentAI = (owner.GetComponent<AIBase>() != null);
     }
 
     protected void OnTriggerStay2D(Collider2D other) {
@@ -25,7 +27,11 @@ public class ContactDamageCollider : MonoBehaviour
             float forceMulti = 0.5f;
 
             Vector2 pushVector = (-1 * (other.transform.position - transform.position).normalized * forceMulti);
-            owner.GetComponent<AIBase>().velocity2D += pushVector;
+            if (isParentAI) {
+                owner.GetComponent<AIBase>().velocity2D += pushVector;
+            } else {
+                owner.GetComponent<Rigidbody2D>().velocity += pushVector;
+            }
         }
         switch (detectionType) {
             case (DetectionType.damage): {

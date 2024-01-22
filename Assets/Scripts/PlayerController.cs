@@ -22,6 +22,7 @@ public class PlayerController : Entity
     [SerializeField] private float manaRechargeSpeed = 5;
     private int weaponIndex;
     private double rHoldTime;
+    private float holdTime;
     private bool hasWeapon = false;
     public GameObject equippedWeapon;
     public List<GameObject> heldWeapons;
@@ -33,6 +34,8 @@ public class PlayerController : Entity
 
     private float pickupDistance;
     private ContactFilter2D itemContactFilter;
+
+    private float chargeBar;
 
 
     //private UIManager uiManager;
@@ -120,13 +123,41 @@ public class PlayerController : Entity
                     }
                 }
                 
-                if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) {
-                    if(equippedWeapon.GetComponent<Weapon>().Fire()) {
+                if (equippedWeapon.GetComponent<Weapon>().canCharge) {
+                     if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Attack"))) {
+                        holdTime = Time.time;
+                     }
+                     if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) {
+                        chargeBar = 0;
+                        Weapon w = equippedWeapon.GetComponent<Weapon>();
+                        float timeCharged = (Time.time - holdTime);
+                        if (timeCharged > w.chargeTime) {
+                            timeCharged = w.chargeTime;
+                        }
+                        float incrementRatio = timeCharged / w.chargeTime;
+                        float manaCostDiff = w.extraManaUse * incrementRatio;
+                        if (w.CanShoot()) {
+                            chargeBar = w.manaCost + manaCostDiff;
+                        }
+                        if (chargeBar < w.GetMana()) {
+                            w.StopRecharge();
+                        }
+                     }
+                     if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Attack"))) { 
+                        chargeBar = 0;
+                        if(equippedWeapon.GetComponent<Weapon>().Fire(Time.time - holdTime)) {
+                            //Kickback from successful shot
+                            doKickback();
+                        }
+                     }
+                } else {
+                    chargeBar = 0;
+                    if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) {
+                        if(equippedWeapon.GetComponent<Weapon>().Fire()) {
 
-                        //Kickback from successful shot
-                        Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
-                        kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
-                        rb.velocity += kbVector;
+                            //Kickback from successful shot
+                            doKickback();
+                        }
                     }
                 }
             }
@@ -137,6 +168,12 @@ public class PlayerController : Entity
         rb.velocity += direction * speed * Time.deltaTime; 
 
         base.Update();
+    }
+
+    public void doKickback() {
+        Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
+        kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
+        rb.velocity += kbVector;
     }
 
 
@@ -225,6 +262,10 @@ public class PlayerController : Entity
     //Returns percentage of current mana out of maxMana
     public float GetManaPercent() {
         return equippedWeapon != null ? equippedWeapon.GetComponent<Weapon>().GetManaPercent() : 100;
+    }
+
+    public float GetChargePercent() {
+        return equippedWeapon != null ? chargeBar / equippedWeapon.GetComponent<Weapon>().GetMaxMana() : 0;
     }
 
     //Returns mana recharge speed

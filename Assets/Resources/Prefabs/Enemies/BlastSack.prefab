@@ -392,6 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 0
   intangible: 0
+  hasHealthBar: 1
   maxHealthAmount: 25
   healthAmount: 25
   knockbackMult: 0.3
