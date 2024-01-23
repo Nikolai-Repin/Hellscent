@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // Inventory
+    // -------------------------------------------------------------------------------------
     public InventoryManager inventory;
 
     private void Awake() {

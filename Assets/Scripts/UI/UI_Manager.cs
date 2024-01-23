@@ -28,8 +28,8 @@ public class UI_Manager : MonoBehaviour
     }
 
     private void Update() {
-        // Press TAB or B to open and close inventory
-        if(Input.GetKeyDown(KeyCode.Tab)) {
+        // Press B to open and close inventory
+        if(Input.GetKeyDown(KeyCode.B)) {
             ToggleInventoryUI();
         }
 

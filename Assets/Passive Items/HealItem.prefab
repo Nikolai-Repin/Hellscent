@@ -148,9 +148,16 @@ MonoBehaviour:
   bonusSpeed: 0
   bonusManaRechargeSpeed: 0
   bonusMaxHP: 0
+<<<<<<< HEAD:Assets/Resources/Prefabs/Items/HealItem.prefab
+  weight: 50
+  journalPage: []
+  pageManager: {fileID: 0}
+  data: {fileID: 11400000, guid: 236b00f6cf297cb4b907ea38d6c0dcf7, type: 2}
+=======
   healHP: 2
   weight: 50
   journalPage: []
   pageManager: {fileID: 0}
   data: {fileID: 0}
+>>>>>>> 941f50636c1fbb5d2d27dbeea07598aecb0d7f19:Assets/Passive Items/HealItem.prefab
   rb2d: {fileID: 0}
