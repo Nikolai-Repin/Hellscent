@@ -10,6 +10,7 @@ public class WormSegment : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<Animator>().SetBool("Blue", head.blueMode);
         base.Start();
     }
 

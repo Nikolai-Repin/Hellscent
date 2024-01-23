@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
             if (i + 1 > repeats[repeatLevel]) {
                 repeatLevel++;
             }
-            player.position = new();
+            //player.position = new();
             hide = true;
             floor++;
             GameObject dungeon = Instantiate(presets[repeatLevel], new Vector2(), new Quaternion());
