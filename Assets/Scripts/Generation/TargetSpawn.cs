@@ -9,6 +9,7 @@ public class TargetSpawn : MonoBehaviour
     }
 
     public IEnumerator Spawn(GameObject entity, float spawnTime, RoomInfo room, GameObject tar) {
+        // Waits until its enemy is supposed to spawn and spawns it
         yield return new WaitForSeconds(spawnTime);
         GameObject spawned = Instantiate(entity, tar.transform.position, Quaternion.Euler(0, 0, 0));
         spawned.GetComponent<Entity>().SetRoom(room);
