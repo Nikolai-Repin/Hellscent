@@ -8797,14 +8797,13 @@ MonoBehaviour:
   - {fileID: 4694294259338973833}
   - {fileID: 2380332994802893068}
   entities: []
-  dungeon: {fileID: 0}
-  dungeonManager: {fileID: 0}
   fighting: 0
   oneDoor: 0
   bossRoom: 0
   activateLastEnemyEvent: 1
   closedCollisions: {fileID: 2803763007910523012}
   openedCollisions: {fileID: 3070743612702095299}
+  doColorAdjustment: 1
 --- !u!19719996 &4855585715806175721
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -12744,7 +12743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[0]
@@ -12757,7 +12756,7 @@ PrefabInstance:
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[2]
       value: 
-      objectReference: {fileID: 524291347114557407, guid: 0523a685fdd71f64eb0e0c961138461c, type: 3}
+      objectReference: {fileID: 5010791337478828397, guid: 13f98f07acea19141bac1dc1c05083aa, type: 3}
     - target: {fileID: 7171132799731802128, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16
@@ -12962,7 +12961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[0]
@@ -12975,7 +12974,7 @@ PrefabInstance:
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[2]
       value: 
-      objectReference: {fileID: 524291347114557407, guid: 0523a685fdd71f64eb0e0c961138461c, type: 3}
+      objectReference: {fileID: 5010791337478828397, guid: 13f98f07acea19141bac1dc1c05083aa, type: 3}
     - target: {fileID: 7171132799731802128, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6

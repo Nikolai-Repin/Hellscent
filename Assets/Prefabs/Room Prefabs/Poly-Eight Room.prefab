@@ -4062,14 +4062,13 @@ MonoBehaviour:
   - {fileID: 6294074159659403163}
   - {fileID: 5725407189669441432}
   entities: []
-  dungeon: {fileID: 0}
-  dungeonManager: {fileID: 0}
   fighting: 0
   oneDoor: 0
   bossRoom: 0
   activateLastEnemyEvent: 0
   closedCollisions: {fileID: 1800189830727384796}
   openedCollisions: {fileID: 3070743612702095299}
+  doColorAdjustment: 1
 --- !u!19719996 &4855585715806175721
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -6990,7 +6989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[0]
@@ -7008,6 +7007,10 @@ PrefabInstance:
       propertyPath: enemyPool.Array.data[3]
       value: 
       objectReference: {fileID: 524291347114557407, guid: c237605e2594b7e408ff17d6da1b1879, type: 3}
+    - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
+      propertyPath: enemyPool.Array.data[4]
+      value: 
+      objectReference: {fileID: 5010791337478828397, guid: 13f98f07acea19141bac1dc1c05083aa, type: 3}
     - target: {fileID: 7171132799731802128, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.75
