@@ -40,6 +40,7 @@ public class RoomInfo : MonoBehaviour
     }
 
     void Update () {
+        // Figures out if the room is active and how many enemies are lefta nd what to do in each case
         if (completed == false && fighting) {
             if (entities.Count == 0) {
                 minimap.SetActive(true);
@@ -56,6 +57,7 @@ public class RoomInfo : MonoBehaviour
 
     private GameObject GetChildGameObject(GameObject fromGameObject, string withName)
     {
+        // Finds the child of this object with a specified name
         var allKids = fromGameObject.GetComponentsInChildren<Transform>();
         foreach (Transform k in allKids) {
             if (k.name == withName) {
@@ -66,6 +68,7 @@ public class RoomInfo : MonoBehaviour
     }
 
     private void AdjustColors() {
+        // Asjusts the colors of the room based on the floor
         Tilemap floor = transform.gameObject.GetComponent<Tilemap>();
         Tilemap walls = openedCollisions.GetComponent<Tilemap>();
         floor.color = dungeon.floorColor;
@@ -73,6 +76,7 @@ public class RoomInfo : MonoBehaviour
     }
 
     public IEnumerator Lock() {
+        // Locks the room and spawns enemies
         if (locked) {
             minimap.SetActive(false);
             closedCollisions.SetActive(true);
@@ -85,6 +89,7 @@ public class RoomInfo : MonoBehaviour
     }
 
     public void RemoveEntity(Entity e) {
+        // Removes an entity from the room
         entities.Remove(e.gameObject);
     }
 }

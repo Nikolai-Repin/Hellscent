@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] public int bullets = 1;
     [SerializeField] public float accuracy = 10.0F;
     [SerializeField] public int clip = 1;
-    [SerializeField] public int clipDelay;
+    [SerializeField] public float clipDelay;
 
     [SerializeField] private float weaponDamage;
 
@@ -113,6 +113,7 @@ public class Weapon : MonoBehaviour
         if (useCooldown && (cooldown > 0 || (useMana && mana < manaCost))) {return false;}
 
         if (useCooldown && clip > 1) {
+            // Checks weather a clip shot should be fired
             StartCoroutine(FireClip(clip)); 
             lastFireTime = Time.time + manaRechargeDelay;
             if (useMana) {mana -= manaCost;}
@@ -147,20 +148,26 @@ public class Weapon : MonoBehaviour
     }
 
     public bool Fire(float timeCharged) {
+        //Overloaded method for fire that takes care of charged weapons
         if (timeCharged > chargeTime) {
             timeCharged = chargeTime;
         }
+        // Determines the amount of upgrades based on charge time
         int maxIncrements = (int) (chargeTime / incrementTime);
         int increments = (int) (timeCharged / incrementTime);
         float incrementRatio = timeCharged / chargeTime;
-        StartCoroutine(resetVars(manaCost, weaponDamage, kickback, clip, (clip + (int) (extraClip * incrementRatio)) * clipDelay + 1));
         float manaCostDiff = extraManaUse * incrementRatio;
         if (manaCost + manaCostDiff > mana) {
+            // Checks is mana cost is too high and if so, tries again with tweaked charge time
             if (manaCost > mana) {
                 return false;
             }
             return Fire((mana - manaCost) * chargeTime / extraManaUse);
         }
+        Debug.Log((clip + (int) (extraClip * incrementRatio)) * clipDelay);
+        // Schedules reset of weapon values after charge shot has been executed
+        StartCoroutine(resetVars(manaCost, weaponDamage, kickback, clip, (clip + (int) (extraClip * incrementRatio)) * clipDelay));
+        // Modifies values before firing
         manaCost += manaCostDiff;
         weaponDamage += extraDamage * incrementRatio;
         kickback += extraKickback * incrementRatio;
@@ -169,20 +176,21 @@ public class Weapon : MonoBehaviour
     }
 
     IEnumerator FireClip(int clipSize) {
+        // Fires bullets in sequence with delay in between
         if (clipSize > 0) {
             for (int i = 0; i < clipSize; i++) {
-                for (int j = 0; j < clipDelay; j++) {
-                    yield return null;
-                }
+                yield return new WaitForSeconds(clipDelay);
                 Fire(false);
             }
         }
     }
 
-    IEnumerator resetVars(float m, float d, float k, int c, int frames = 1) {
-        for (int i = 0; i < frames; i++) {
-            yield return null;
+    IEnumerator resetVars(float m, float d, float k, int c, float delay = 0) {
+        // Resets weapon stats after set time
+        if (delay > 0) {
+            yield return new WaitForSeconds(delay);
         }
+        yield return null;
         manaCost = m;
         weaponDamage = d;
         kickback = k;

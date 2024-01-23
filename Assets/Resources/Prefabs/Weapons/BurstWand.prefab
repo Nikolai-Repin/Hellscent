@@ -105,7 +105,7 @@ MonoBehaviour:
   bullets: 1
   accuracy: 1
   clip: 3
-  clipDelay: 20
+  clipDelay: 0.05
   weaponDamage: 0
   useMana: 1
   manaCost: 5
