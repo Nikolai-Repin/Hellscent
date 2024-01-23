@@ -11,10 +11,14 @@ public class Boss : Enemy
     [SerializeField] Vector2 arenaSize;
     [SerializeField] int numBombs;
     [SerializeField] public GameObject projectileType;
-    [SerializeField] private float difficultyModifier = 1;
+    [SerializeField] private GameObject ringBombs;
+    [SerializeField] private GameObject lineBombs;
+    [SerializeField] private GameObject minionPrefab;
+    [SerializeField] private int minionCount;
+    [Space]
+    [SerializeField] public bool hardMode;
     private GameObject bombPrefab;
     private GameObject bombBPrefab;
-    private GameObject minionPrefab;
     private Animator animator;
     private ParticleSystem particleRockBurst;
     private int firedBombs;
@@ -43,9 +47,8 @@ public class Boss : Enemy
         phaseCooldownRandom = phaseCooldown;
         curPhase = Phase.Sleep;
         arenaCenter = transform.position;
-        bombPrefab = Resources.Load<GameObject>("Prefabs/Entities/PirateBomb/PirateBomb");
-        bombBPrefab = Resources.Load<GameObject>("Prefabs/Entities/PirateBomb/PirateBombLine");
-        minionPrefab = Resources.Load<GameObject>("Prefabs/Enemies/PirateMinion/PirateMinion");
+        bombPrefab = ringBombs;
+        bombBPrefab = lineBombs;
         particleRockBurst = GameObject.Find("RockParticle").GetComponent<ParticleSystem>();
         dealDamageOnContact = false;
         invulnerable = true;
@@ -53,6 +56,7 @@ public class Boss : Enemy
 
         animator = GetComponent<Animator>();
         animator.SetInteger("Phase", 0);
+        animator.SetBool("Hard", hardMode);
         
         base.Start();
     }
@@ -106,7 +110,7 @@ public class Boss : Enemy
                     //ClaimEntity(bullet);
                 }
 
-                if (firedBombs >= numBombs*difficultyModifier) {
+                if (firedBombs >= numBombs) {
                     ReturnToWander();
                 }
                 break;
@@ -125,7 +129,7 @@ public class Boss : Enemy
                     //ClaimEntity(bullet);
                 }
 
-                if (firedBombs >= numBombs*difficultyModifier) {
+                if (firedBombs >= numBombs) {
                     ReturnToWander();
                 }
                 break;
@@ -239,10 +243,10 @@ public class Boss : Enemy
 
         particleRockBurst.Play();
 
-        int numMinions = (int)(3*difficultyModifier);
-        float rotationAmount = 6.283F/numMinions;
+        //int numMinions = (int)(3);
+        float rotationAmount = 6.283F/minionCount;
         GameObject minion;
-        for (int i = 0; i < numMinions; i++) {
+        for (int i = 0; i < minionCount; i++) {
             minion = Instantiate(minionPrefab, transform.position + new Vector3(3*Mathf.Cos(rotationAmount*i), 3*Mathf.Sin(rotationAmount*i), 0), new Quaternion());
 
             //Supposed to mark attack entites as something to destroy when the boss dies, but I need to have it handle entities that have been destroyed
@@ -256,7 +260,7 @@ public class Boss : Enemy
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.team = "Enemy";
             Quaternion fireAngle = Quaternion.Euler(new Vector3(0, 0, (rotationAmount*i)));
-            bulletScript.LaunchProjectile(fireAngle, 10*difficultyModifier);
+            bulletScript.LaunchProjectile(fireAngle, 10);
 
             //Supposed to mark attack entites as something to destroy when the boss dies, but I need to have it handle entities that have been destroyed
             //ClaimEntity(bulletScript);

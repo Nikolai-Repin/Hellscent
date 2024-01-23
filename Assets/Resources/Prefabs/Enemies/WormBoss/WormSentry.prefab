@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb694842d02629647bb3fda6f3124e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTarget: {fileID: 0}
   invulnerable: 0
   intangible: 0
   hasHealthBar: 0
@@ -151,6 +152,7 @@ MonoBehaviour:
   rotationSpeed: 15
   burstLength: 3
   burstDelay: 0
+  detonateOnDeath: 1
   alternateDirections: 0
   creator: {fileID: 0}
 --- !u!95 &5674207675458563046

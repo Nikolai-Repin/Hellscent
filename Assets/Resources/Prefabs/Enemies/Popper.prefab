@@ -283,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169d6401ec8c88f4b8595f6b944f6152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTarget: {fileID: 0}
   invulnerable: 0
   intangible: 0
   hasHealthBar: 1
@@ -290,7 +291,7 @@ MonoBehaviour:
   healthAmount: 10
   knockbackMult: 1
   dealDamageOnContact: 1
-  visRange: 20
+  visRange: 50
   iFrames: 0
   weight: 70
   invulnTime: 0

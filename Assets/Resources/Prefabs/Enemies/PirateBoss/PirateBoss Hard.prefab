@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 2624813158360482559}
   - component: {fileID: 8509469491263806437}
   m_Layer: 6
-  m_Name: PirateBoss
+  m_Name: PirateBoss Hard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,7 +140,7 @@ SpriteRenderer:
   m_SortingLayerID: 665226713
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: f1b42a57d07d2464aa52d237054374d5, type: 3}
+  m_Sprite: {fileID: 1450022840, guid: a9b635dc37b30ce418c8f76ac66242c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -344,8 +344,8 @@ MonoBehaviour:
   invulnerable: 0
   intangible: 0
   hasHealthBar: 1
-  maxHealthAmount: 750
-  healthAmount: 750
+  maxHealthAmount: 1500
+  healthAmount: 1500
   knockbackMult: 0.05
   dealDamageOnContact: 1
   visRange: 10
@@ -356,12 +356,12 @@ MonoBehaviour:
   spawnPortal: 0
   page: 0
   arenaSize: {x: 15, y: 15}
-  numBombs: 6
+  numBombs: 12
   projectileType: {fileID: 6942168956635508771, guid: 2ffa203c2970a08409e070e3f820d93d, type: 3}
-  ringBombs: {fileID: 63225623565367379, guid: 4c0b23fbf9522714c95ba23dcccc3d1b, type: 3}
+  ringBombs: {fileID: 63225623565367379, guid: 1608574c5085c5c418998459049c31c8, type: 3}
   lineBombs: {fileID: 63225623565367379, guid: 05e9a25f59a8ef341b10f6e5a5155b99, type: 3}
-  minionPrefab: {fileID: 561994129611895650, guid: ae6699d173155c54ab5567fa531319ed, type: 3}
-  minionCount: 3
+  minionPrefab: {fileID: 561994129611895650, guid: e49732a40fd7d33469b841c902c61700, type: 3}
+  minionCount: 6
   hardMode: 0
   lastPhaseChange: 0
   phaseCooldown: 10
@@ -5459,10 +5459,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 931891049558171980, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 931891049558171980, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
@@ -5572,7 +5568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 325
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.y
@@ -5580,15 +5576,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -13.999889
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -157
+      value: 475
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 325
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.y
@@ -5596,11 +5592,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -157
+      value: 475
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
