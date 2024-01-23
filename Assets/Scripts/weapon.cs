@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] public int bullets = 1;
     [SerializeField] public float accuracy = 10.0F;
     [SerializeField] public int clip = 1;
-    [SerializeField] public int clipDelay;
+    [SerializeField] public float clipDelay;
 
     [SerializeField] private float weaponDamage;
 
@@ -153,7 +153,6 @@ public class Weapon : MonoBehaviour
         int maxIncrements = (int) (chargeTime / incrementTime);
         int increments = (int) (timeCharged / incrementTime);
         float incrementRatio = timeCharged / chargeTime;
-        StartCoroutine(resetVars(manaCost, weaponDamage, kickback, clip, (clip + (int) (extraClip * incrementRatio)) * clipDelay + 1));
         float manaCostDiff = extraManaUse * incrementRatio;
         if (manaCost + manaCostDiff > mana) {
             if (manaCost > mana) {
@@ -161,6 +160,8 @@ public class Weapon : MonoBehaviour
             }
             return Fire((mana - manaCost) * chargeTime / extraManaUse);
         }
+        Debug.Log((clip + (int) (extraClip * incrementRatio)) * clipDelay);
+        StartCoroutine(resetVars(manaCost, weaponDamage, kickback, clip, (clip + (int) (extraClip * incrementRatio)) * clipDelay));
         manaCost += manaCostDiff;
         weaponDamage += extraDamage * incrementRatio;
         kickback += extraKickback * incrementRatio;
@@ -171,18 +172,17 @@ public class Weapon : MonoBehaviour
     IEnumerator FireClip(int clipSize) {
         if (clipSize > 0) {
             for (int i = 0; i < clipSize; i++) {
-                for (int j = 0; j < clipDelay; j++) {
-                    yield return null;
-                }
+                yield return new WaitForSeconds(clipDelay);
                 Fire(false);
             }
         }
     }
 
-    IEnumerator resetVars(float m, float d, float k, int c, int frames = 1) {
-        for (int i = 0; i < frames; i++) {
-            yield return null;
+    IEnumerator resetVars(float m, float d, float k, int c, float delay = 0) {
+        if (delay > 0) {
+            yield return new WaitForSeconds(delay);
         }
+        yield return null;
         manaCost = m;
         weaponDamage = d;
         kickback = k;
