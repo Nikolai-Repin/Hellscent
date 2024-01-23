@@ -13,6 +13,7 @@ public class FlareSentry : Enemy
     [SerializeField] protected float rotationSpeed;
     [SerializeField] private int burstLength;
     [SerializeField] private float burstDelay;
+    [SerializeField] private bool detonateOnDeath;
 
     [SerializeField] private bool alternateDirections;
     private int firedShots;
@@ -46,7 +47,10 @@ public class FlareSentry : Enemy
     public override void Die() {
         dealDamageOnContact = false;
         intangible = true;
-        CircleShot(projectileType, projectileCount*2, 0, projectileSpeed);
+        if (detonateOnDeath) {
+            CircleShot(projectileType, projectileCount*2, 0, projectileSpeed);
+        }
+        
         base.Die();
     }
 
