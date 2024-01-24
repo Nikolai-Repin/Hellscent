@@ -62,6 +62,7 @@ public class EnemyShooter : Enemy
                 reloadLastTime = Time.time + Random.Range(reloadTime, reloadTime+(reloadTime/3));
 
                 if (sType == ShooterType.Shooter) { 
+                    Debug.Log(shooterCount);
                     reloadLastTime += (shooterIndex%shooterCount)*0.5F;
                 }
             }

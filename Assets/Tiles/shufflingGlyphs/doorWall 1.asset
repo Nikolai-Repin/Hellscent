@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: RuneGlyphs
+  m_Name: doorWall 1
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 0}
   m_DefaultGameObject: {fileID: 0}
@@ -23,12 +23,12 @@ MonoBehaviour:
     - {fileID: 1010795645, guid: 7f22ee64cb2a554419fadca2db5ffa69, type: 3}
     - {fileID: -1275301953, guid: 7f22ee64cb2a554419fadca2db5ffa69, type: 3}
     m_GameObject: {fileID: 0}
-    m_MinAnimationSpeed: 1
-    m_MaxAnimationSpeed: 1
-    m_PerlinScale: 0.999
-    m_Output: 1
+    m_MinAnimationSpeed: 5
+    m_MaxAnimationSpeed: 15
+    m_PerlinScale: 0.5
+    m_Output: 2
     m_ColliderType: 1
-    m_RandomTransform: 4
+    m_RandomTransform: 0
     m_Neighbors: 
     m_NeighborPositions:
     - {x: -1, y: 1, z: 0}
