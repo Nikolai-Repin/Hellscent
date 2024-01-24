@@ -340,11 +340,11 @@ MonoBehaviour:
   invulnTime: 0
   trackerController: {fileID: 0}
   projectileType: {fileID: 6942168956635508771, guid: b576974dd58bb0345a6eca8e3824a21e, type: 3}
-  projectileCount: 4
+  projectileCount: 5
   projectileDelay: 2
   projectileSpeed: 5
   rotationOffset: 45
-  rotationSpeed: 45
+  rotationSpeed: 36
   burstLength: 1
   burstDelay: 0
   detonateOnDeath: 0

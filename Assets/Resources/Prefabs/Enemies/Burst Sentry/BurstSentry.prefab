@@ -330,8 +330,8 @@ MonoBehaviour:
   invulnerable: 0
   intangible: 0
   hasHealthBar: 1
-  maxHealthAmount: 200
-  healthAmount: 200
+  maxHealthAmount: 75
+  healthAmount: 75
   knockbackMult: 0
   dealDamageOnContact: 1
   visRange: 20
