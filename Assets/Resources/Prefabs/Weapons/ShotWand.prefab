@@ -102,14 +102,23 @@ MonoBehaviour:
   projectileType: {fileID: 6942168956635508771, guid: 920cfc9e5d8cc7b4195d0e9faf474df4, type: 3}
   kickback: 2
   cooldownTime: 0.5
-  bullets: 5
+  bullets: 10
   accuracy: 10
+  clip: 1
+  clipDelay: 0
   weaponDamage: 0
   useMana: 1
   manaCost: 5
   maxMana: 50
   mana: 0
   manaRechargeDelay: 1
+  canCharge: 0
+  chargeTime: 0
+  incrementTime: 0
+  extraManaUse: 0
+  extraDamage: 0
+  extraKickback: 0
+  extraClip: 0
   lastFireTime: 0
   cooldown: 0
   quality: 0
