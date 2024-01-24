@@ -46,7 +46,9 @@ public class RoomInfo : MonoBehaviour
                 minimap.SetActive(true);
                 completed = true;
                 dungeon.UnlockRooms();
-                closedCollisions.SetActive(false);
+                if (closedCollisions != null) {
+                    closedCollisions.SetActive(false);
+                }
             }   else if (activateLastEnemyEvent &&  entities.Count == 1) {
                 entities[0].GetComponent<Entity>().LastEntityEvent();
                 activateLastEnemyEvent = false;
