@@ -19,13 +19,9 @@ public class ChangeCameraTarget : MonoBehaviour
         
     }
 
-    public string SaySomething() {
-        return "bug fan";
-    }
-
     public void AddCameraTargets(GameObject enemy) {
         if (enemy.GetComponent<Enemy>().HasHealthBar()){
-            targetGroup.AddMember(enemy.transform, 2f, 2f);
+            targetGroup.AddMember(enemy.transform, 2f, 0.5f);
         }
     }
 
