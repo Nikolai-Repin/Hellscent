@@ -62,6 +62,10 @@ public class EnemyShooter : Enemy
                 reloadLastTime = Time.time + Random.Range(reloadTime, reloadTime+(reloadTime/3));
 
                 if (sType == ShooterType.Shooter) { 
+                    Debug.Log(shooterCount);
+                    if (shooterCount <= 0) {
+                        shooterCount += 1; //This may cause some unintended side effects, but this should counterract a divide by zero error from the modulo
+                    }
                     reloadLastTime += (shooterIndex%shooterCount)*0.5F;
                 }
             }

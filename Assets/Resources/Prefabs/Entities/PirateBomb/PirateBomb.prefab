@@ -98,11 +98,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f23a22591e29e48a6b9e35dc77519c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTarget: {fileID: 0}
   invulnerable: 1
   intangible: 0
+  hasHealthBar: 0
   maxHealthAmount: 0
   healthAmount: 0
   knockbackMult: 0
+  dealDamageOnContact: 0
+  fuse: 3
   projectileType: {fileID: 6942168956635508771, guid: 2ffa203c2970a08409e070e3f820d93d, type: 3}
   creator: {fileID: 0}
   bombType: 1
