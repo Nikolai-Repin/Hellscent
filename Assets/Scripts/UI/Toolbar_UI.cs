@@ -16,6 +16,7 @@ public class Toolbar_UI : MonoBehaviour
         CheckAlphaNumericKeys();
     }
 
+    // Turns on the highlight of the slot when selected/clicked on
     public void SelectSlot(int index) {
         if(toolbarSlots.Count == 2) {
             if(selectedSlot != null) {
@@ -25,7 +26,8 @@ public class Toolbar_UI : MonoBehaviour
             selectedSlot.SetHighlight(true);
         }
     }
-    // Switch from first slot to second slot
+
+    // Switch from first slot to second slot with the 1 and 2 key
     private void CheckAlphaNumericKeys() {
         if(Input.GetKeyDown(KeyCode.Alpha1)) {
             SelectSlot(0);

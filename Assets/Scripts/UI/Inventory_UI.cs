@@ -74,6 +74,7 @@ public class Inventory_UI : MonoBehaviour
     public void SlotBeginDrag(Slot_UI slot) {
         UI_Manager.draggedSlot = slot;
 
+        // Makes a copy of the Item icon to be able to be dragged around
         UI_Manager.draggedIcon = Instantiate(slot.itemIcon);
         UI_Manager.draggedIcon.raycastTarget = false;
         UI_Manager.draggedIcon.rectTransform.sizeDelta = new Vector2(50, 50);
@@ -82,15 +83,18 @@ public class Inventory_UI : MonoBehaviour
         MoveToMousePosition(UI_Manager.draggedIcon.gameObject);
     }
 
+    // Item follows the mouse cursor when being dragged around
     public void SlotDrag() {
         MoveToMousePosition(UI_Manager.draggedIcon.gameObject);
     }
 
+    // Copy of the icon of the item gets destroyed when dragging is stopped
     public void SlotEndDrag() {
         Destroy(UI_Manager.draggedIcon.gameObject);
         UI_Manager.draggedIcon = null;
     }
 
+    // If the Item is dragged to a slot, the Item then moves to that slot
     public void SlotDrop(Slot_UI slot) {
         if(UI_Manager.dragSingle) {
             UI_Manager.draggedSlot.inventory.MoveSlot(UI_Manager.draggedSlot.slotID, slot.slotID, slot.inventory);
@@ -105,6 +109,8 @@ public class Inventory_UI : MonoBehaviour
         
     }
 
+    // Click to select that slot and highlights the slot when selected, also sets the Item Description
+    // to have the details of that item
     public void SelectSlot(int index) {
         if(slots.Count == 28) {
             if(selectedSlot != null) {

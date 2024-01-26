@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
         inventory = GetComponent<InventoryManager>();
     }
 
+    // Item spawns in a random location around the player when dropped
     public void DropItem(Item item) {
         Vector2 spawnLocation = transform.position;
 

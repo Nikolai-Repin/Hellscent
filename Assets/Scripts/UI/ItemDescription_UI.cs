@@ -26,6 +26,7 @@ public class ItemDescription_UI : MonoBehaviour
         }
     }
 
+    // Turns on and off the Item Description UI with the Inventory UI
     public void ToggleDescriptionUI() {
         if(descriptionPanel != null) {
             if(!descriptionPanel.activeSelf) {
@@ -38,12 +39,14 @@ public class ItemDescription_UI : MonoBehaviour
         }
     }
 
+    // Resets the Item Description UI to show nothing
     public void ResetDescription() {
         this.itemImage.gameObject.SetActive(false);
         this.title.text = "";
         this.description.text = "";
     }
 
+    // Sets the Item Description UI to the details of the item
     public void SetDescription(Sprite sprite, string itemName, string itemDescription) {
         this.itemImage.gameObject.SetActive(true);
         this.itemImage.sprite = sprite;

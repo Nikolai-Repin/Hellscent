@@ -24,6 +24,7 @@ public class Inventory
             maxAllowed = 10;
         }
 
+        // Checks if the slot is empty or has nothing it in
         public bool isEmpty {
             get {
                 if(itemName == "" && count == 0) {
@@ -33,7 +34,7 @@ public class Inventory
             }
         }
 
-        // Checks to see if can add item to that stack
+        // Checks to see if it can add item to that stack
         public bool CanAddItem(string itemName) {
             if(this.itemName == itemName && count < maxAllowed) {
                 return true;
