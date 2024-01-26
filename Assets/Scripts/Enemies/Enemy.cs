@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : Entity
 {
 
-    [SerializeField] protected float visRange;
+    [SerializeField] protected float visRange; //Range of finding a new target
     [SerializeField] public float iFrames;
     [SerializeField] private int weight;
     public float invulnTime;
@@ -23,7 +23,8 @@ public class Enemy : Entity
     }
 
     //Returns closest player in range
-    public GameObject FindClosestPlayer(float range) {
+    public GameObject FindClosestPlayer(float range) 
+    {
         Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, range);
         List<Collider2D> players = new List<Collider2D>();
         for (int i = 0; i < results.Length; i++) {
@@ -39,21 +40,29 @@ public class Enemy : Entity
     }
 
     //Returns closest player in visRange
-    public GameObject FindClosestPlayer() {
+    public GameObject FindClosestPlayer() 
+    {
         return FindClosestPlayer(visRange);
     }
 
-    public virtual void TriggerEvent(Collider2D other) {
+    //Function to be overridden, called by contact damage collider when set to trigger
+    public virtual void TriggerEvent(Collider2D other) 
+    {
         return;
     }
 
-    public override bool TakeDamage(float damage) {
+    //Deals damage to the enemy
+    public override bool TakeDamage(float damage) 
+    {
         if (Time.time < invulnTime) {
             return false;
         }
         return base.TakeDamage(damage);
     }
-    public int GetWeight() {
+
+
+    public int GetWeight() 
+    {
         return weight;
     }
 }

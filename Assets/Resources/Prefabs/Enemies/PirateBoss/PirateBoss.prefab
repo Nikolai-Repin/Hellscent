@@ -356,7 +356,7 @@ MonoBehaviour:
   spawnPortal: 0
   page: 0
   arenaSize: {x: 15, y: 15}
-  numBombs: 6
+  numBombs: 4
   projectileType: {fileID: 6942168956635508771, guid: 2ffa203c2970a08409e070e3f820d93d, type: 3}
   ringBombs: {fileID: 63225623565367379, guid: 4c0b23fbf9522714c95ba23dcccc3d1b, type: 3}
   lineBombs: {fileID: 63225623565367379, guid: 05e9a25f59a8ef341b10f6e5a5155b99, type: 3}
@@ -5572,35 +5572,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 325
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -13.999889
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3561838813970909413, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -157
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 325
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6225587507169369044, guid: 8305f1787ef957d459234f2e01b0ac29, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -157
+      value: -200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

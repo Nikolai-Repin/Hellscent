@@ -341,7 +341,7 @@ MonoBehaviour:
   trackerController: {fileID: 0}
   projectileType: {fileID: 6942168956635508771, guid: b576974dd58bb0345a6eca8e3824a21e, type: 3}
   projectileCount: 5
-  projectileDelay: 1
+  projectileDelay: 1.5
   projectileSpeed: 5
   rotationOffset: 45
   rotationSpeed: 36
