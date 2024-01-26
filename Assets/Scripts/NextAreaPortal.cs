@@ -15,6 +15,7 @@ public class NextAreaPortal : Entity
         active = false;
         timeTillActive = activationDelay;
         animator = gameObject.GetComponent<Animator>();
+        uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
     }
     // Start is called before the first frame update
     void Update()
@@ -37,6 +38,7 @@ public class NextAreaPortal : Entity
     protected void OnTriggerEnter2D(Collider2D other) {
         if(active && other.gameObject.tag == "player") {
             other.gameObject.GetComponent<PlayerController>().RestoreHP(1);
+            uiManager.updateHealth();
             active = false;
             dungeon.dungeonOver = true;
             Entity.ResetAll();
