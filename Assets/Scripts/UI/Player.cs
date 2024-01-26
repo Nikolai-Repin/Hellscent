@@ -8,8 +8,11 @@ public class Player : MonoBehaviour
     // -------------------------------------------------------------------------------------
     public InventoryManager inventory;
 
+    public Item starterWeapon;
+
     private void Awake() {
         inventory = GetComponent<InventoryManager>();
+        inventory.Add("Backpack", starterWeapon);
     }
 
     // Item spawns in a random location around the player when dropped

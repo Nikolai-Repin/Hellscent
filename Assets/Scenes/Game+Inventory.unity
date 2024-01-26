@@ -221,6 +221,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3246128399018723868, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2000546894}
+    - targetCorrespondingSourceObject: {fileID: 7254836270727516316, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1058435511}
   m_SourcePrefab: {fileID: 100100000, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
 --- !u!1 &23606053 stripped
 GameObject:
@@ -1276,6 +1279,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051429144}
   m_CullTransparentMesh: 1
+--- !u!1 &1058435507 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7254836270727516316, guid: f8d244ab03d5f1f428bd99860240031f, type: 3}
+  m_PrefabInstance: {fileID: 23606052}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1058435511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058435507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d754b11d7c350046bfa5b23e719b242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusDamage: 0
+  bonusMaxMana: 0
+  bonusSpeed: 0
+  bonusManaRechargeSpeed: 0
+  bonusMaxHP: 0
+  healHP: 0
+  weight: 0
+  journalPage: []
+  pageManager: {fileID: 0}
+  data: {fileID: 11400000, guid: 12996773c51ff38469c32600446a29dc, type: 2}
+  rb2d: {fileID: 0}
 --- !u!1 &1156051953 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8342203362399255047, guid: 1b11ea2c53f33a44d944662249491036, type: 3}
@@ -4990,6 +5021,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7944418963015366916, guid: 2113fdfe2ab180a478fe34689e3ddc6a, type: 3}
+      propertyPath: inventoryName
+      value: Backpack
+      objectReference: {fileID: 0}
     - target: {fileID: 7954432150916242229, guid: 2113fdfe2ab180a478fe34689e3ddc6a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5432,6 +5467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
+  starterWeapon: {fileID: 1058435511}
 --- !u!114 &2000546894
 MonoBehaviour:
   m_ObjectHideFlags: 0
