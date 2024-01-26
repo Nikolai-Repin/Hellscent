@@ -8,6 +8,7 @@ public class Inventory
     [System.Serializable]
     public class Slot
     {
+        // Basic details of an item in a slot
         public string itemName;
         public int count;
         public int maxAllowed;

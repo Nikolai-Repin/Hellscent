@@ -4,7 +4,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Item))]
 public class Collectable : MonoBehaviour
-{
+{   
+    // When player collides with a "collectable," they pick it up and adds it to Inventory
     private void OnTriggerEnter2D(Collider2D collision) {
         Player player = collision.GetComponent<Player>();
 
