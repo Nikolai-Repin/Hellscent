@@ -12,23 +12,31 @@ public class SkinManager : MonoBehaviour
     public GameObject playerskin;
 
     public void NextOption() {
+        //goes to next skin in list
         selectedSkin++;
+        //cycles back around if reached last skin
         if (selectedSkin == skins.Count) {
             selectedSkin = 0;
         }
+        //sets skin to chosen skin
         sr.sprite = skins[selectedSkin];
     }
 
     public void BackOption() {
+        //goes to previous skin in list
         selectedSkin--;
+        //cycles to back if past first skin
         if (selectedSkin<0) {
             selectedSkin = skins.Count -1;
         }
+        //sets skin to chosen skin
         sr.sprite = skins[selectedSkin];
     }
 
     public void PlayGame() {
+        //saves skin as prefab to use in game
         PrefabUtility.SaveAsPrefabAsset(playerskin, "Assets/Resources/Prefabs/Player/selectedskin.prefab");
+        //loads game
         SceneManager.LoadScene("Game");
     }
 }
