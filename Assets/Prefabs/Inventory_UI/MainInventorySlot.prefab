@@ -427,7 +427,7 @@ MonoBehaviour:
     slots: []
   itemIcon: {fileID: 1954141476843718929}
   quantityText: {fileID: 4375623670570643877}
-  highlight: {fileID: 0}
+  highlight: {fileID: 5294083945300329364}
 --- !u!114 &274075334592029036
 MonoBehaviour:
   m_ObjectHideFlags: 0
