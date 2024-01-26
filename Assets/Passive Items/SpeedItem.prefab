@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4664564932054966712}
   - component: {fileID: 9070105676625007913}
   - component: {fileID: 3184595881427512715}
+  - component: {fileID: -8719160177933129902}
+  - component: {fileID: -1936777567816060163}
   m_Layer: 0
   m_Name: SpeedItem
   m_TagString: Item Pickup
@@ -152,5 +154,44 @@ MonoBehaviour:
   weight: 60
   journalPage: []
   pageManager: {fileID: 0}
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: c2f1fa5db6025d74294dbfcf67fce07c, type: 2}
   rb2d: {fileID: 0}
+--- !u!114 &-8719160177933129902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582206641080860920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6227a03517164144483bfc0b6d10be9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &-1936777567816060163
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582206641080860920}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

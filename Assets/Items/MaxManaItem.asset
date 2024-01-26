@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6f234c0b865f7a46bebc3d86e4c037f, type: 3}
-  m_Name: HealItem
+  m_Name: MaxManaItem
   m_EditorClassIdentifier: 
-  itemName: HealItem
-  icon: {fileID: 21300000, guid: fb8ba5c3c17422543a8bb0d4b9244e17, type: 3}
-  description: Heals health.
+  itemName: Max Mana Potion
+  icon: {fileID: 21300000, guid: b52792628a952a44ebc75807761aeabf, type: 3}
+  description: Increases the limit of your mana.
