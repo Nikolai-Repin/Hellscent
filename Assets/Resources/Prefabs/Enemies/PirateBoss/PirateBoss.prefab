@@ -176,7 +176,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!60 &139982767930078538
 PolygonCollider2D:
@@ -356,9 +356,13 @@ MonoBehaviour:
   spawnPortal: 0
   page: 0
   arenaSize: {x: 15, y: 15}
-  numBombs: 10
+  numBombs: 6
   projectileType: {fileID: 6942168956635508771, guid: 2ffa203c2970a08409e070e3f820d93d, type: 3}
-  difficultyModifier: 1
+  ringBombs: {fileID: 63225623565367379, guid: 4c0b23fbf9522714c95ba23dcccc3d1b, type: 3}
+  lineBombs: {fileID: 63225623565367379, guid: 05e9a25f59a8ef341b10f6e5a5155b99, type: 3}
+  minionPrefab: {fileID: 561994129611895650, guid: ae6699d173155c54ab5567fa531319ed, type: 3}
+  minionCount: 3
+  hardMode: 0
   lastPhaseChange: 0
   phaseCooldown: 10
   curPhase: 0
@@ -1418,7 +1422,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 15
+        scalar: 45
         minScalar: 30
         maxCurve:
           serializedVersion: 2

@@ -127,7 +127,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -148,7 +148,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 128
         width: 64
         height: 64
       alignment: 0
@@ -160,6 +160,48 @@ TextureImporter:
       bones: []
       spriteID: 20372dad30cc17d4e99888e7303a911b
       internalID: -591047396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STOIC KNIGHT WITH 2_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c6842e3bc8ad4b4198951e542b6f0d5
+      internalID: -575929480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STOIC KNIGHT WITH 2_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a25f56aabd8ec09438a2ee90318c3e3f
+      internalID: -1542557827
       vertices: []
       indices: 
       edges: []
@@ -177,6 +219,8 @@ TextureImporter:
     nameFileIdTable:
       STOIC KNIGHT WITH 2_0: -594407397
       STOIC KNIGHT WITH 2_1: -591047396
+      STOIC KNIGHT WITH 2_2: -575929480
+      STOIC KNIGHT WITH 2_3: -1542557827
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -99,12 +99,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666317ef1be0e934ba0fce0e099bbd28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTarget: {fileID: 0}
   invulnerable: 1
   intangible: 1
+  hasHealthBar: 0
+  maxHealthAmount: 0
   healthAmount: 0
+  knockbackMult: 0
+  dealDamageOnContact: 0
   maxLife: 0.2
-  damage: 50
+  bulletDamage: 0
   projectileSpeed: 0
+  knockback: 0
   pierce: 1000
   reflectable: 0
   setDamage: 0
@@ -135,7 +141,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &2442598743670585494
 BoxCollider2D:

@@ -116,7 +116,7 @@ MonoBehaviour:
   chargeTime: 5
   incrementTime: 0.01
   extraManaUse: 45
-  extraDamage: 60
+  extraDamage: 100
   extraKickback: 50
   extraClip: 0
   lastFireTime: 0

@@ -7,15 +7,15 @@ using UnityEngine.EventSystems;
 public class Inventory_UI : MonoBehaviour
 {
     public GameObject inventoryPanel;
-
+    public ItemDescription_UI descriptionUI;
     public string inventoryName;
-
     public List<Slot_UI> slots = new List<Slot_UI>();
+    public Sprite emptyIcon;
 
     [SerializeField] private Canvas canvas;
 
+    private Slot_UI selectedSlot;
     private bool dragSingle;
-
     private Inventory inventory;
 
     private void Awake() {
@@ -100,8 +100,24 @@ public class Inventory_UI : MonoBehaviour
             UI_Manager.draggedSlot.inventory.MoveSlot(UI_Manager.draggedSlot.slotID, slot.slotID, slot.inventory,
                 UI_Manager.draggedSlot.inventory.slots[UI_Manager.draggedSlot.slotID].count);
         }
+        SelectSlot(slot.slotID);
         UIGameManager.instance.uiManager.RefreshAll();
         
+    }
+
+    public void SelectSlot(int index) {
+        if(slots.Count == 28) {
+            if(selectedSlot != null) {
+                selectedSlot.SetHighlight(false);
+            }
+
+            if(inventory.slots[index].icon == null) {
+                inventory.slots[index].icon = emptyIcon;
+            }
+            selectedSlot = slots[index];
+            selectedSlot.SetHighlight(true);
+            descriptionUI.SetDescription(inventory.slots[index].icon, inventory.slots[index].itemName, inventory.slots[index].description);
+        }
     }
 
     // Item follows mouse cursor while dragging

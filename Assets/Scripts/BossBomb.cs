@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BossBomb : Entity
 {
-    private float fuse = 3F;
-
+    [SerializeField] private float fuse;
     [SerializeField] public GameObject projectileType;
     public Boss creator;
     private Animator animator;

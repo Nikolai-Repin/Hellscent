@@ -104,12 +104,21 @@ MonoBehaviour:
   cooldownTime: 2
   bullets: 5
   accuracy: 180
+  clip: 1
+  clipDelay: 0
   weaponDamage: 0
   useMana: 0
   manaCost: 1
   maxMana: 0
   mana: 0
   manaRechargeDelay: 1
+  canCharge: 0
+  chargeTime: 0
+  incrementTime: 0
+  extraManaUse: 0
+  extraDamage: 0
+  extraKickback: 0
+  extraClip: 0
   lastFireTime: 0
   cooldown: 0
   quality: 0
@@ -238,7 +247,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 7
 --- !u!60 &9045450324629134525
 PolygonCollider2D:
@@ -317,16 +326,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb8be72ddf0b094caf08a8d41c5b37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTarget: {fileID: 0}
   invulnerable: 0
   intangible: 0
   hasHealthBar: 1
-  maxHealthAmount: 20
-  healthAmount: 20
+  maxHealthAmount: 75
+  healthAmount: 75
   knockbackMult: 0
   dealDamageOnContact: 1
   visRange: 20
   iFrames: 0
-  weight: 30
+  weight: 0
   invulnTime: 0
   trackerController: {fileID: 0}
   projectileType: {fileID: 6942168956635508771, guid: b576974dd58bb0345a6eca8e3824a21e, type: 3}
@@ -337,6 +347,7 @@ MonoBehaviour:
   rotationSpeed: 0
   burstLength: 1
   burstDelay: 0
+  detonateOnDeath: 1
   alternateDirections: 0
 --- !u!95 &5674207675458563046
 Animator:
