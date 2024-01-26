@@ -50,14 +50,17 @@ public class GenerateDungeon : MonoBehaviour
         dungeonManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-	void Update() {
-		if (go) {
+	void Update() 
+	{
+		if (go) 
+		{
 			// Starts generation of dungeon
 			go = false;
 			finished = false;
 			GameObject limits = Instantiate(dungeonLimits, new Vector2(), new Quaternion());
 			limits.transform.SetParent(transform);
-			foreach (string lim in directionNumber) {
+			foreach (string lim in directionNumber) 
+			{
 				dungeon.Add(limits.transform.Find("Limit " + lim).gameObject);
 			}
 			GameObject startRoom = CreateRoom(spawnRoom);
@@ -65,7 +68,8 @@ public class GenerateDungeon : MonoBehaviour
 
 			//Disabling control for player so they cannot leave the dungeon while it's generating
 			GameObject[] players = GameObject.FindGameObjectsWithTag("player");
-			foreach (GameObject p in players) {
+			foreach (GameObject p in players) 
+			{
 				p.GetComponent<PlayerController>().SetControl(false);
 			}
 
@@ -74,24 +78,31 @@ public class GenerateDungeon : MonoBehaviour
 		}
 	}
 
-	IEnumerator detectEnd() {
+	IEnumerator detectEnd() 
+	{
 		// Detects when the dungoen finsihes generation
 		bool end = false;
-		while (!end) {
+		while (!end) 
+		{
 			int start = dungeon.Count;
 			yield return StartCoroutine(waitFrames(waitingFrames * 10));
-			if (start == dungeon.Count) {
+			if (start == dungeon.Count) 
+			{
 				end = true;
 			}
 		}
-		if (success) {
-			foreach (GameObject dr in dungeon) {
-				if (dr.name == bossRoom.name + "(Clone)") {
+		if (success) 
+		{
+			foreach (GameObject dr in dungeon) 
+			{
+				if (dr.name == bossRoom.name + "(Clone)") 
+				{
 					CapDoors();
 					yield return null;
 					AstarPath.active.Scan();
 					GameObject[] players = GameObject.FindGameObjectsWithTag("player");
-					foreach (GameObject p in players) {
+					foreach (GameObject p in players) 
+					{
 						p.GetComponent<PlayerController>().SetControl(true);
 					}
 					finished = true;
@@ -100,14 +111,16 @@ public class GenerateDungeon : MonoBehaviour
 			}
 		}
 		// tries again if generation fails
-		foreach (GameObject dr in dungeon) {
+		foreach (GameObject dr in dungeon) 
+		{
 			Destroy(dr);
 		}
 		dungeon = new();
 		finished = false;
 		GameObject limits = Instantiate(dungeonLimits, new Vector2(), new Quaternion());
 		limits.transform.SetParent(transform);
-		foreach (string lim in directionNumber) {
+		foreach (string lim in directionNumber) 
+		{
 			dungeon.Add(limits.transform.Find("Limit " + lim).gameObject);
 		}
 		GameObject startRoom = CreateRoom(spawnRoom);
@@ -117,7 +130,8 @@ public class GenerateDungeon : MonoBehaviour
 		StartCoroutine(detectEnd());
 	}
 
-	IEnumerator CreateDungeon(GameObject origin, int mainBranch, int branchCap) {
+	IEnumerator CreateDungeon(GameObject origin, int mainBranch, int branchCap) 
+	{
 		// Generates dungeon
 		int nextMainBranch = mainBranch;
 		int nextBranchCap = branchCap;
@@ -126,11 +140,15 @@ public class GenerateDungeon : MonoBehaviour
 		string door = "";
 		bool boss = false;
 		GameObject nextOrigin = origin;
-		if (GetNumAvailable(origin.GetComponent<RoomInfo>()) == 0) {
-			if (mainBranch > 1) {
+		if (GetNumAvailable(origin.GetComponent<RoomInfo>()) == 0)
+		{
+			if (mainBranch > 1) 
+			{
 				int nextIndex = dungeon.IndexOf(origin) - 1;
-				for (int i = nextIndex; i >= 0; i--) {
-					if (GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
+				for (int i = nextIndex; i >= 0; i--) 
+				{
+					if (GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) 
+					{
 						yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
 						yield break;
 					}
@@ -146,10 +164,12 @@ public class GenerateDungeon : MonoBehaviour
 		}
 		if (mainBranch > 0)
         {
-			if (mainBranch == 1) {
+			if (mainBranch == 1) 
+			{
 				boss = true;
 			}
-			else {
+			else 
+			{
 				continueDungeon = true;
 			}
 			nextMainBranch--;
@@ -175,12 +195,17 @@ public class GenerateDungeon : MonoBehaviour
 				if (CheckColliding(nextHallway, dr))
 				{
 					Destroy(nextHallway);
-					if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0) {
+					if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0) 
+					{
 						yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
-					} else if (mainBranch > 0) {
+					} 
+					else if (mainBranch > 0) 
+					{
 						int nextIndex = dungeon.IndexOf(origin) - 1;
-						for (int i = nextIndex; i >= 0; i--) {
-							if (!dungeon[i].GetComponent<RoomInfo>().oneDoor && GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
+						for (int i = nextIndex; i >= 0; i--) 
+						{
+							if (!dungeon[i].GetComponent<RoomInfo>().oneDoor && GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) 
+							{
 								yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
 								yield break;
 							}
@@ -197,37 +222,51 @@ public class GenerateDungeon : MonoBehaviour
 		}
 		// Determines what room should be created
 		GameObject queued;
-		if (branchCap == 1 && mainBranch == 0) {
-			if (gauranteedBonus.Count > 0) {
+		if (branchCap == 1 && mainBranch == 0) 
+		{
+			if (gauranteedBonus.Count > 0) 
+			{
 				queued = gauranteedBonus[gauranteedBonus.Count - 1];
 				gauranteedBonus.RemoveAt(gauranteedBonus.Count - 1);
-			} else {
+			} 
+			else 
+			{
 				queued = rooms[rooms.Length - 1];
 			}
-		} else {
+		} 
+		else 
+		{
 			queued = boss ? bossRoom : rooms[Random.Range(0, rooms.Length - (mainBranch > 0 ? onlyBranchRooms : 0))];
 		}
 		// Creates and sets up room to be created
 		GameObject nextRoom = CreateRoom(queued);
 		string hallDoor = AlignRooms(nextOrigin.transform, nextRoom.transform, roomSpacing);
-		if (!usedHallway) {
+		if (!usedHallway) 
+		{
 			door = hallDoor;
 		}
 		yield return StartCoroutine(waitFrames(waitingFrames));
-		foreach (GameObject dr in dungeon) {
+		foreach (GameObject dr in dungeon) 
+		{
 			// Detects if the room interferes with other objects
 			if (CheckColliding(nextRoom, dr))
 			{
-				if (usedHallway) {
+				if (usedHallway) 
+				{
 					Destroy(nextOrigin);
 				}
 				Destroy(nextRoom);
-				if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0) {
+				if (GetNumAvailable(origin.GetComponent<RoomInfo>()) > 0) 
+				{
 					yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
-				} else if (mainBranch > 0) {
+				} 
+				else if (mainBranch > 0) 
+				{
 					int nextIndex = dungeon.IndexOf(origin) - 1;
-					for (int i = nextIndex; i >= 0; i--) {
-						if (!dungeon[i].GetComponent<RoomInfo>().oneDoor && GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) {
+					for (int i = nextIndex; i >= 0; i--) 
+					{
+						if (!dungeon[i].GetComponent<RoomInfo>().oneDoor && GetNumAvailable(dungeon[i].GetComponent<RoomInfo>()) > 0) 
+						{
 							yield return StartCoroutine(CreateDungeon(origin, mainBranch, branchCap));
 							yield break;
 						}
@@ -240,7 +279,8 @@ public class GenerateDungeon : MonoBehaviour
 		// Figures out where the next room will stem from
 		RoomInfo originData = origin.GetComponent<RoomInfo>();
 		originData.trueOccupancy[originData.doorDirection.IndexOf(door)] = true;
-		if (usedHallway) {
+		if (usedHallway) 
+		{
 			dungeon.Add(nextOrigin);
 		}
 		dungeon.Add(nextRoom);
@@ -254,18 +294,23 @@ public class GenerateDungeon : MonoBehaviour
 		} 
     }
 
-	private bool CheckColliding(GameObject room, GameObject otherRoom) {
+	private bool CheckColliding(GameObject room, GameObject otherRoom) 
+	{
 		// Checks collisions with other rooms
 		return room.GetComponent<CompositeCollider2D>().bounds.Intersects(otherRoom.GetComponent<CompositeCollider2D>().bounds);
 	}
 
-	private void CapDoors() {
+	private void CapDoors() 
+	{
 		// Puts walls over unused doors
-		foreach (GameObject dr in dungeon) {
+		foreach (GameObject dr in dungeon) 
+		{
 			RoomInfo data = dr.GetComponent<RoomInfo>();
-			for (int i = 0; i < data.trueOccupancy.Count; i++) {
+			for (int i = 0; i < data.trueOccupancy.Count; i++) 
+			{
 				bool o = data.trueOccupancy[i];
-				if (!o) {
+				if (!o) 
+				{
 					GameObject cap = Instantiate(endCap[data.doorDirection[i] == "North" || data.doorDirection[i] == "South" ? 1 : 0], new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
 					cap.transform.SetParent(transform, false);
 					AlignRooms(dr.transform, cap.transform, 0, data.doorDirection[i]);
@@ -358,19 +403,24 @@ public class GenerateDungeon : MonoBehaviour
 		return count;
     }
 
-	IEnumerator waitFrames(int frames) {
+	IEnumerator waitFrames(int frames)
+	{
 		// Waits a number of frames
-		for (int i = 0; i < frames; i++) {
+		for (int i = 0; i < frames; i++) 
+		{
 			yield return null;
 		}
 	}
 
-	public void LockRoom(GameObject room) {
+	public void LockRoom(GameObject room) 
+	{
 		// Locks room when a player enters
 		RoomInfo data = room.GetComponent<RoomInfo>();
-		for (int i = 0; i < data.trueOccupancy.Count; i++) {
+		for (int i = 0; i < data.trueOccupancy.Count; i++) 
+		{
 			bool o = data.trueOccupancy[i];
-			if (o) {
+			if (o) 
+			{
 				GameObject cap = Instantiate(closedDoor[data.doorDirection[i] == "North" || data.doorDirection[i] == "South" ? 1 : 0], new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
 				cap.transform.SetParent(transform, false);
 				closedDoors.Add(cap);
@@ -379,17 +429,21 @@ public class GenerateDungeon : MonoBehaviour
 		}
 	}
 
-	public void UnlockRooms() {
+	public void UnlockRooms() 
+	{
 		// Unlocks room after a romm is cleared
-		foreach (GameObject part in closedDoors) {
-			if (part.name == "Closed Door EW(Clone)" || part.name == "Closed Door NS(Clone)") {
+		foreach (GameObject part in closedDoors)
+		{
+			if (part.name == "Closed Door EW(Clone)" || part.name == "Closed Door NS(Clone)") 
+			{
 				Destroy(part);
 			}
 		}
 		closedDoors.Clear();
 	}
 
-	public int GetWeight() {
+	public int GetWeight() 
+	{
 		// Gets the dungeons weight
 		return weight;
 	}
