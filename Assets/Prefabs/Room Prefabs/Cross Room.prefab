@@ -34,6 +34,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6939957084566488978}
   - {fileID: 4003120510117840987}
   - {fileID: 6507772152002883894}
   - {fileID: 9075739419366635730}
@@ -5569,6 +5570,7 @@ MonoBehaviour:
   closedCollisions: {fileID: 3689170724979174760}
   openedCollisions: {fileID: 3070743612702095299}
   doColorAdjustment: 1
+  healPoint: {fileID: 6939957084566488978}
 --- !u!50 &957136910335481896
 Rigidbody2D:
   serializedVersion: 4
@@ -8707,6 +8709,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4826809302651600852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6939957084566488978}
+  m_Layer: 0
+  m_Name: HealPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6939957084566488978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4826809302651600852}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.08, y: -2.51, z: 0.0100399405}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7184201303866268875}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6584479741547754104
 GameObject:
   m_ObjectHideFlags: 0
@@ -8929,7 +8962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[0]
@@ -8947,6 +8980,10 @@ PrefabInstance:
       propertyPath: enemyPool.Array.data[3]
       value: 
       objectReference: {fileID: 524291347114557407, guid: c237605e2594b7e408ff17d6da1b1879, type: 3}
+    - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
+      propertyPath: enemyPool.Array.data[4]
+      value: 
+      objectReference: {fileID: 2512800558875698722, guid: b1351bc9bea3aa646b390cffb9180383, type: 3}
     - target: {fileID: 7171132799731802128, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.43
@@ -9155,7 +9192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: enemyPool.Array.data[0]
@@ -9173,6 +9210,10 @@ PrefabInstance:
       propertyPath: enemyPool.Array.data[3]
       value: 
       objectReference: {fileID: 524291347114557407, guid: c237605e2594b7e408ff17d6da1b1879, type: 3}
+    - target: {fileID: 6060784635270432267, guid: 9f70dad296420d948b903845186c4178, type: 3}
+      propertyPath: enemyPool.Array.data[4]
+      value: 
+      objectReference: {fileID: 2512800558875698722, guid: b1351bc9bea3aa646b390cffb9180383, type: 3}
     - target: {fileID: 7171132799731802128, guid: 9f70dad296420d948b903845186c4178, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5

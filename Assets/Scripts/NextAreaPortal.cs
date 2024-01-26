@@ -36,6 +36,7 @@ public class NextAreaPortal : Entity
 
     protected void OnTriggerEnter2D(Collider2D other) {
         if(active && other.gameObject.tag == "player") {
+            other.gameObject.GetComponent<PlayerController>().RestoreHP(1);
             active = false;
             dungeon.dungeonOver = true;
             Entity.ResetAll();

@@ -59,6 +59,9 @@ public class FlareSentry : Enemy
             rotationSpeed = 10;
             projectileDelay = 0.5F;
         }
+        if (Random.Range(0, 101) <= 10) {
+            Instantiate(Resources.Load<GameObject>("Prefabs/Items/HealItem"), transform);
+        }
         return;
     }
 }

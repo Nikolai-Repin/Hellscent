@@ -21,6 +21,7 @@ public class RoomInfo : MonoBehaviour
     [SerializeField] private GameObject closedCollisions;
     [SerializeField] private GameObject openedCollisions;
     [SerializeField] private bool doColorAdjustment = true;
+    [SerializeField] private Transform healPoint;
     
     private GameObject minimap;
 
@@ -45,6 +46,9 @@ public class RoomInfo : MonoBehaviour
             if (entities.Count == 0) {
                 minimap.SetActive(true);
                 completed = true;
+                if (healPoint != null && Random.Range(0, 101) <= 10) {
+                    Instantiate(Resources.Load<GameObject>("Prefabs/Items/HealItem"), healPoint);
+                }
                 dungeon.UnlockRooms();
                 if (closedCollisions != null) {
                     closedCollisions.SetActive(false);

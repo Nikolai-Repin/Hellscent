@@ -263,7 +263,7 @@ MonoBehaviour:
   dealDamageOnContact: 1
   visRange: 20
   iFrames: 0
-  weight: 70
+  weight: 0
   invulnTime: 0
   trackerController: {fileID: 0}
   size: 2
