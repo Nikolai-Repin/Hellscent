@@ -8,7 +8,6 @@ public class Item : MonoBehaviour
     private PlayerController controller;
     private UIManager uiManager;
 
-
     [SerializeField] private float bonusDamage;
     [SerializeField] private int bonusMaxMana;
     [SerializeField] private float bonusSpeed;
@@ -79,21 +78,6 @@ public class Item : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    /* We have an issue with two classes having the same name but different purposes, have Gabe and Dom resolve these
-
-
-[RequireComponent(typeof(Rigidbody2D))]
-public class Item : MonoBehaviour
-{
-    
-
-    private void Awake() {
-        
-    }
-}
-*/
-
 
     public int GetWeight() {
         return weight;

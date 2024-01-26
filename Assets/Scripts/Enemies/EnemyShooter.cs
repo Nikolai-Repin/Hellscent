@@ -65,8 +65,9 @@ public class EnemyShooter : Enemy
                     Debug.Log(shooterCount);
                     if (shooterCount <= 0) {
                         shooterCount += 1; //This may cause some unintended side effects, but this should counterract a divide by zero error from the modulo
+                    } else {
+                        reloadLastTime += (shooterIndex%shooterCount)*0.5F;
                     }
-                    reloadLastTime += (shooterIndex%shooterCount)*0.5F;
                 }
             }
 

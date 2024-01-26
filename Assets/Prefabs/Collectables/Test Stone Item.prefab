@@ -181,8 +181,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1446218500392795296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5afa0733aae27fc478195d4660596b84, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d754b11d7c350046bfa5b23e719b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bonusDamage: 0
+  bonusMaxMana: 0
+  bonusSpeed: 0
+  bonusManaRechargeSpeed: 0
+  bonusMaxHP: 0
+  weight: 0
+  journalPage: []
+  pageManager: {fileID: 0}
   data: {fileID: 11400000, guid: 725c187ed5cc59f4c997c4ec774e9bc7, type: 2}
   rb2d: {fileID: 0}
