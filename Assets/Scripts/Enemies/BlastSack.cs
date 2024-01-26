@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BlastSack : Enemy
 {
-    [SerializeField] private float fuse;
-    [SerializeField] public GameObject projectileType;
-    [SerializeField] private int projectileCount;
-    [SerializeField] private float rotationOffset;
-    [SerializeField] private int rings;
+    [SerializeField] private float fuse; //Time till detonation after player gets in range
+    [SerializeField] public GameObject projectileType; //Projectile fired upon detonation
+    [SerializeField] private int projectileCount; // Number of projectiles in each ring
+    [SerializeField] private float rotationOffset; 
+    [SerializeField] private int rings; // Number of projectile rings
     private Animator animator;
     private enum Phase {
         Wander = 1,
@@ -17,14 +17,16 @@ public class BlastSack : Enemy
     private Phase curPhase;
     private float DetonationTime;
 
-    void Start() {
+    void Start() 
+    {
         DetonationTime = Time.time + 5;
         curPhase = Phase.Wander;
         animator = GetComponent<Animator>();
         base.Start();
     }
 
-    void Update() {
+    void Update() 
+    {
         switch (curPhase) {
 
             case (Phase.Wander): {
@@ -48,7 +50,8 @@ public class BlastSack : Enemy
         }
     }
 
-    public override void TriggerEvent(Collider2D other) {
+    public override void TriggerEvent(Collider2D other) 
+    {
         if (other.gameObject.tag == "player" &&  curPhase == Phase.Wander) {
             DetonationTime = Time.time + fuse;
             trackerController.aiPath.maxAcceleration /= 2;
