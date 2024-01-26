@@ -47,13 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ba1dc8c0b46274ca825bede3f379f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTarget: {fileID: 0}
   invulnerable: 1
   intangible: 1
+  hasHealthBar: 0
   maxHealthAmount: 0
   healthAmount: 0
   knockbackMult: 0
+  dealDamageOnContact: 0
   maxLife: 5
-  bulletDamage: 4
+  bulletDamage: 2
   projectileSpeed: 30
   knockback: 0
   pierce: 1
