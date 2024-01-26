@@ -30,30 +30,39 @@ public class RoomInfo : MonoBehaviour
         trueOccupancy = new(doorOccupation);
         openedCollisions = GetChildGameObject(transform.gameObject, "Collisions");
         dungeon = transform.parent.gameObject.GetComponent<GenerateDungeon>();
-        if (bossRoom) {
+        if (bossRoom) 
+        {
             dungeonManager = dungeon.dungeonManager;
             spawners[0].enemyPool = new() {spawners[0].enemyPool[dungeonManager.getFloor() - 1]};
         }
-        if (doColorAdjustment) {
+        if (doColorAdjustment) 
+        {
             AdjustColors();
         }
         minimap = GameObject.Find("Minimap");
     }
 
-    void Update () {
+    void Update () 
+    {
         // Figures out if the room is active and how many enemies are lefta nd what to do in each case
-        if (completed == false && fighting) {
-            if (entities.Count == 0) {
+        if (completed == false && fighting) 
+        {
+            if (entities.Count == 0) 
+            {
                 minimap.SetActive(true);
                 completed = true;
-                if (healPoint != null && Random.Range(0, 101) <= 10) {
+                if (healPoint != null && Random.Range(0, 101) <= 10) 
+                {
                     Instantiate(Resources.Load<GameObject>("Prefabs/Items/HealItem"), healPoint);
                 }
                 dungeon.UnlockRooms();
-                if (closedCollisions != null) {
+                if (closedCollisions != null) 
+                {
                     closedCollisions.SetActive(false);
                 }
-            }   else if (activateLastEnemyEvent &&  entities.Count == 1) {
+            }   
+            else if (activateLastEnemyEvent &&  entities.Count == 1)
+            {
                 entities[0].GetComponent<Entity>().LastEntityEvent();
                 activateLastEnemyEvent = false;
                 Debug.Log(entities);
@@ -65,15 +74,18 @@ public class RoomInfo : MonoBehaviour
     {
         // Finds the child of this object with a specified name
         var allKids = fromGameObject.GetComponentsInChildren<Transform>();
-        foreach (Transform k in allKids) {
-            if (k.name == withName) {
+        foreach (Transform k in allKids) 
+        {
+            if (k.name == withName) 
+            {
                 return k.gameObject;
             }
         }
         return null;
     }
 
-    private void AdjustColors() {
+    private void AdjustColors() 
+    {
         // Asjusts the colors of the room based on the floor
         Tilemap floor = transform.gameObject.GetComponent<Tilemap>();
         Tilemap walls = openedCollisions.GetComponent<Tilemap>();
@@ -81,20 +93,24 @@ public class RoomInfo : MonoBehaviour
         walls.color = dungeon.floorColor;
     }
 
-    public IEnumerator Lock() {
+    public IEnumerator Lock() 
+    {
         // Locks the room and spawns enemies
-        if (locked) {
+        if (locked) 
+        {
             minimap.SetActive(false);
             closedCollisions.SetActive(true);
             dungeon.LockRoom(transform.gameObject);
         }
-        foreach (Spawner s in spawners) {
+        foreach (Spawner s in spawners) 
+        {
             yield return StartCoroutine(s.SpawnEnemies());
         }
         fighting = true;
     }
 
-    public void RemoveEntity(Entity e) {
+    public void RemoveEntity(Entity e) 
+    {
         // Removes an entity from the room
         entities.Remove(e.gameObject);
     }

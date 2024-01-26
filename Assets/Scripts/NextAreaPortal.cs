@@ -10,7 +10,8 @@ public class NextAreaPortal : Entity
     private Animator animator;
     [SerializeField] private float activationDelay;
     private float timeTillActive;
-    void Start() {
+    void Start() 
+    {
         Register();
         active = false;
         timeTillActive = activationDelay;
@@ -20,23 +21,28 @@ public class NextAreaPortal : Entity
     // Start is called before the first frame update
     void Update()
     {
-        if(dungeon == null) {
+        if(dungeon == null) 
+        {
             dList = GameObject.FindGameObjectsWithTag("Dungeon");
             if (dList.Length > 0) {
                 dungeon = dList[0].GetComponent<GenerateDungeon>();
             }
             
-        } else {
+        } else 
+        {
             timeTillActive -= Time.deltaTime;
-            if (timeTillActive <= 0) {
+            if (timeTillActive <= 0) 
+            {
                 active = true;
                 animator.SetTrigger("Idling");
             }
         }
     }
 
-    protected void OnTriggerEnter2D(Collider2D other) {
-        if(active && other.gameObject.tag == "player") {
+    protected void OnTriggerEnter2D(Collider2D other) 
+    {
+        if(active && other.gameObject.tag == "player") 
+        {
             other.gameObject.GetComponent<PlayerController>().RestoreHP(1);
             uiManager.updateHealth();
             active = false;
