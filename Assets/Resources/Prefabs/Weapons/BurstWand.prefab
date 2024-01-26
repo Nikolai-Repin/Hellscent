@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 30
   offset: 1
-  projectileType: {fileID: 6942168956635508771, guid: 920cfc9e5d8cc7b4195d0e9faf474df4, type: 3}
+  projectileType: {fileID: 6942168956635508771, guid: b9eccc72429c1d54e925dc7ae6fb8eff, type: 3}
   kickback: 5
   cooldownTime: 0.5
   bullets: 1
