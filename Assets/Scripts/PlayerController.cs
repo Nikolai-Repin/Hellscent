@@ -103,9 +103,8 @@ public class PlayerController : Entity
             {
                 rb.velocity += saved_direction * ((dash*speed));//* Time.deltaTime;
             }
-
-            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Grab"))) 
-            {
+            //uses saved keybind for grab
+            if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Grab"))) {
                 Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
                 if (results.Length > 0) {
                     PickupWeapon(FindClosest(results, transform.position));
@@ -114,8 +113,8 @@ public class PlayerController : Entity
 
 
             if (hasWeapon) {
-                if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) 
-                {
+                //uses saved keybind for swap
+                if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                     rHoldTime = Time.time;
                 }
                 if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Swap"))) 
@@ -159,8 +158,8 @@ public class PlayerController : Entity
                             w.StopRecharge();
                         }
                      }
-                     if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Attack"))) 
-                     { 
+                     //uses saved keybind for attack
+                     if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Attack"))) { 
                         chargeBar = 0;
                         if(equippedWeapon.GetComponent<Weapon>().Fire(Time.time - holdTime)) 
                         {
