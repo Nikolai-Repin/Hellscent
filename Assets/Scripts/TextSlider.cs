@@ -14,6 +14,7 @@ public class TextSlider : MonoBehaviour
     }
 
     void Update() {
+        //sets volume slider value to master volume
         sliderText.text = slider.value.ToString();
     }
 }

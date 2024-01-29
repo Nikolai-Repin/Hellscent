@@ -8,11 +8,12 @@ public class GameSkin : MonoBehaviour
     public GameObject Player;
 
     private Sprite playersprite;
-    // Start is called before the first frame update
+    
     void Start()
     {
+        //sets ingame skin to saved saved sprite prefab
         playersprite = selectedskin.GetComponent<SpriteRenderer>().sprite;
-
+        //saves that sprite with the player
         Player.GetComponent<SpriteRenderer>().sprite = playersprite;
     }
 

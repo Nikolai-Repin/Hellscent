@@ -99,7 +99,7 @@ public class PlayerController : Entity
             if (Input.GetKeyDown(KeyCode.Space)) {
                 rb.velocity += saved_direction * ((dash*speed));//* Time.deltaTime;
             }
-
+            //uses saved keybind for grab
             if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Grab"))) {
                 Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, pickupDistance, LayerMask.GetMask("Items"));
                 if (results.Length > 0) {
@@ -109,6 +109,7 @@ public class PlayerController : Entity
 
 
             if (hasWeapon) {
+                //uses saved keybind for swap
                 if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                     rHoldTime = Time.time;
                 }
@@ -144,6 +145,7 @@ public class PlayerController : Entity
                             w.StopRecharge();
                         }
                      }
+                     //uses saved keybind for attack
                      if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Attack"))) { 
                         chargeBar = 0;
                         if(equippedWeapon.GetComponent<Weapon>().Fire(Time.time - holdTime)) {

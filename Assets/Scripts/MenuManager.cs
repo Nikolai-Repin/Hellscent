@@ -8,11 +8,13 @@ public class MenuManager : MonoBehaviour
     public int gameStartScene;
 
     public void QuitGame() {
+        //closes running game
         Application.Quit();
     }
     
     public void StartGame()
     {
+        //changes to main game scene
         SceneManager.LoadScene(gameStartScene);
     }
 }
