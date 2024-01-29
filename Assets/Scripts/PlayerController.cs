@@ -63,7 +63,8 @@ public class PlayerController : Entity
         base.Start();
     }
 
-    void FixedUpdate(){
+    void FixedUpdate()
+    {
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Vector2 finaldir = direction - rb.position;
@@ -82,7 +83,8 @@ public class PlayerController : Entity
         direction = new Vector2(0.0f, 0.0f);
         bool keypressed = false;
 
-        if (canControl) {
+        if (canControl) 
+        {
 
             float controlx = Input.GetAxisRaw("Horizontal");
             float controly = Input.GetAxisRaw("Vertical");
@@ -91,12 +93,14 @@ public class PlayerController : Entity
             keypressed = controlx != 0 || controly != 0;
             direction = direction.normalized;
 
-            if (keypressed) {
+            if (keypressed) 
+            {
                 saved_direction = direction;
             }
 
             // Makes the player dash. Dash scales with speed and dash variables.
-            if (Input.GetKeyDown(KeyCode.Space)) {
+            if (Input.GetKeyDown(KeyCode.Space)) 
+            {
                 rb.velocity += saved_direction * ((dash*speed));//* Time.deltaTime;
             }
             //uses saved keybind for grab
@@ -113,50 +117,64 @@ public class PlayerController : Entity
                 if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Swap"))) {
                     rHoldTime = Time.time;
                 }
-                if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Swap"))) {
-                    if ((Time.time - rHoldTime)<0.5) {
+                if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Swap"))) 
+                {
+                    if ((Time.time - rHoldTime)<0.5) 
+                    {
                         holdTime = Time.time;
                         ChangeWeapon((weaponIndex+1)%(heldWeapons.Count));
                         //Drop held weapon if r was held for longer
                     }
 
-                    else {
+                    else 
+                    {
                         DropWeapon(weaponIndex);
                     }
                 }
                 
-                if (equippedWeapon.GetComponent<Weapon>().canCharge) {
-                     if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Attack"))) {
+                if (equippedWeapon.GetComponent<Weapon>().canCharge) 
+                {
+                     if (Input.GetKeyDown((KeyCode) PlayerPrefs.GetInt("Attack"))) 
+                     {
                         holdTime = Time.time;
                      }
-                     if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) {
+                     if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) 
+                     {
                         chargeBar = 0;
                         Weapon w = equippedWeapon.GetComponent<Weapon>();
                         float timeCharged = (Time.time - holdTime);
-                        if (timeCharged > w.chargeTime) {
+                        if (timeCharged > w.chargeTime) 
+                        {
                             timeCharged = w.chargeTime;
                         }
                         float incrementRatio = timeCharged / w.chargeTime;
                         float manaCostDiff = w.extraManaUse * incrementRatio;
-                        if (w.CanShoot()) {
+                        if (w.CanShoot()) 
+                        {
                             chargeBar = w.manaCost + manaCostDiff;
                         }
-                        if (chargeBar < w.GetMana()) {
+                        if (chargeBar < w.GetMana()) 
+                        {
                             w.StopRecharge();
                         }
                      }
                      //uses saved keybind for attack
                      if (Input.GetKeyUp((KeyCode) PlayerPrefs.GetInt("Attack"))) { 
                         chargeBar = 0;
-                        if(equippedWeapon.GetComponent<Weapon>().Fire(Time.time - holdTime)) {
+                        if(equippedWeapon.GetComponent<Weapon>().Fire(Time.time - holdTime)) 
+                        {
                             //Kickback from successful shot
                             doKickback();
                         }
                      }
-                } else {
+                } 
+                else 
+                {
                     chargeBar = 0;
-                    if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) {
-                        if(equippedWeapon.GetComponent<Weapon>().Fire()) {
+                    if (Input.GetKey((KeyCode) PlayerPrefs.GetInt("Attack"))) 
+                    {
+                        if(equippedWeapon.GetComponent<Weapon>().Fire()) 
+                        {
 
                             //Kickback from successful shot
                             doKickback();
@@ -173,7 +191,8 @@ public class PlayerController : Entity
         base.Update();
     }
 
-    public void doKickback() {
+    public void doKickback() 
+    {
         Vector2 kbVector = new Vector2(Mathf.Cos(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad), Mathf.Sin(equippedWeapon.transform.rotation.eulerAngles.z*Mathf.Deg2Rad)).normalized;
         kbVector *= equippedWeapon.GetComponent<Weapon>().kickback*-1;
         rb.velocity += kbVector;
@@ -181,8 +200,10 @@ public class PlayerController : Entity
 
 
     //Changes the currently held weapon to index i in heldWeapons
-    public void ChangeWeapon(int i) {
-        if (equippedWeapon != null) {
+    public void ChangeWeapon(int i) 
+    {
+        if (equippedWeapon != null) 
+        {
             equippedWeapon.GetComponent<SpriteRenderer>().enabled = false;
         }
         weaponIndex = i;
@@ -191,12 +212,17 @@ public class PlayerController : Entity
     }
 
     //Drops the weapon at index i in heldWeapons
-    public void DropWeapon(int i) {
+    public void DropWeapon(int i) 
+    {
         //Handling what happens to the selected weapon if it's being dropped
-        if (equippedWeapon == heldWeapons[i]) {
-            if (heldWeapons.Count > 1) {
+        if (equippedWeapon == heldWeapons[i]) 
+        {
+            if (heldWeapons.Count > 1) 
+            {
                 ChangeWeapon((weaponIndex+1)%(heldWeapons.Count-1));
-            } else {
+            } 
+            else 
+            {
                 hasWeapon = false;
             }
         }
@@ -212,7 +238,8 @@ public class PlayerController : Entity
         heldWeapons.RemoveAt(i);
     }
     //Registers a new weapon in the player's list of held weapons
-    public void NewWeapon(GameObject weapon) {
+    public void NewWeapon(GameObject weapon) 
+    {
         hasWeapon = true;
         weapon.transform.SetParent(transform);
         weapon.GetComponent<Weapon>().GetControllerAndEquip();
@@ -221,7 +248,8 @@ public class PlayerController : Entity
     }
 
     //Picks up target dropped item off the ground
-    public void PickupWeapon(GameObject target) {
+    public void PickupWeapon(GameObject target) 
+    {
 
         //Add the weapon to the arsonal
         GameObject newWeapon = Instantiate(target.GetComponent<PickupItem>().GetItem(), transform.position, new Quaternion());
@@ -234,11 +262,14 @@ public class PlayerController : Entity
     }
 
     //Deals damage to entity if vulnerable, returns true if damage was dealt
-    public override bool TakeDamage(float damage) {
-        if (!invulnerable && Time.time >= invulnTime) {
+    public override bool TakeDamage(float damage) 
+    {
+        if (!invulnerable && Time.time >= invulnTime) 
+        {
             SubHealth(damage);
             uiManager.updateHealth();
-            if (GetHealthAmount() <= 0) {
+            if (GetHealthAmount() <= 0) 
+            {
                 Die();
             }
             invulnTime = Time.time + 1F;
@@ -249,7 +280,8 @@ public class PlayerController : Entity
    }
 
     //Overrides Die() in Entity so player isn't destroyed on death
-    public override void Die () {
+    public override void Die () 
+    {
         canControl = false;
         uiManager.gameObject.SetActive(false);
         deathScreen.SetActive(true);
@@ -257,59 +289,71 @@ public class PlayerController : Entity
         return;
     }
 
-    public void Restart () {
+    public void Restart () 
+    {
         SceneManager.LoadScene(gameScene);
         Time.timeScale = 1;
     }
 
     //Returns percentage of current mana out of maxMana
-    public float GetManaPercent() {
+    public float GetManaPercent() 
+    {
         return equippedWeapon != null ? equippedWeapon.GetComponent<Weapon>().GetManaPercent() : 100;
     }
 
-    public float GetChargePercent() {
+    public float GetChargePercent() 
+    {
         return equippedWeapon != null ? chargeBar / equippedWeapon.GetComponent<Weapon>().GetMaxMana() : 0;
     }
 
     //Returns mana recharge speed
-    public float GetManaRechargeSpeed() {
+    public float GetManaRechargeSpeed() 
+    {
         return manaRechargeSpeed;
     }
 
     //Returns damage bonus
-    public override float GetDamage() {
+    public override float GetDamage() 
+    {
         return damage;
     }
 
     // Changes the damage that the player deals using a weapon.
-    public void AddDamage(float bonusDamage) {
+    public void AddDamage(float bonusDamage) 
+    {
         damage += bonusDamage;
     }
 
     // Changes the player's speed
-    public void AddSpeed(float bonusSpeed) {
+    public void AddSpeed(float bonusSpeed) 
+    {
         speed += bonusSpeed;
     }
 
     // Changes the Player's max mana
-    public void AddMaxMana(float bonusMaxMana) {
+    public void AddMaxMana(float bonusMaxMana) 
+    {
         equippedWeapon.GetComponent<Weapon>().AddMaxMana(bonusMaxMana);
     }
 
-    public void AddManaRechargeSpeed(float bonus) {
+    public void AddManaRechargeSpeed(float bonus) 
+    {
         manaRechargeSpeed += bonus;
     }
 
-    public override void Reset() {
+    public override void Reset() 
+    {
         transform.position = Vector3.zero;
         rb.velocity = Vector2.zero;
     }
 
-    public void SetControl(bool c) {
+    public void SetControl(bool c) 
+    {
         canControl = c;
     }
 
-    public bool alive {
+    public bool alive 
+    {
         get {return GetHealthAmount()>0;}
     }
 

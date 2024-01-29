@@ -30,12 +30,14 @@ public class TrackerController : MonoBehaviour
         transform.parent.GetComponent<Enemy>().trackerController = this;
         aiPath = transform.parent.GetComponent<AIPath>();
         switch (ai) {
-            case AI.Melee: {
+            case AI.Melee: 
+            {
                 aiPath.endReachedDistance = endReachedDistanceMelee;
                 break;
             }
 
-            case AI.Range: {
+            case AI.Range: 
+            {
                 aiPath.endReachedDistance = endReachedDistanceRange;
                 break;
             }
@@ -80,11 +82,13 @@ public class TrackerController : MonoBehaviour
         }
     }
 
-    public void SetTarget(Transform newTarget) {
+    public void SetTarget(Transform newTarget) 
+    {
         target = newTarget;
     }
 
-    public void SetAI(AI newAI) {
+    public void SetAI(AI newAI) 
+    {
         ai = newAI;
         if (ai == AI.Melee)
         {
