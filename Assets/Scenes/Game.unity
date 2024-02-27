@@ -1157,7 +1157,7 @@ PrefabInstance:
       objectReference: {fileID: 2000546890}
     - target: {fileID: 3452925525337207898, guid: af490b9ed21ccf84b96a9cf306781233, type: 3}
       propertyPath: m_Targets.Array.data[0].weight
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3452925525337207898, guid: af490b9ed21ccf84b96a9cf306781233, type: 3}
       propertyPath: m_Targets.Array.data[1].radius
