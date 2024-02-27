@@ -1,19 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Item : MonoBehaviour
 {
     private GameObject playerCharacter;
     private PlayerController controller;
     private UIManager uiManager;
-
-    [SerializeField] private float bonusDamage;
-    [SerializeField] private int bonusMaxMana;
-    [SerializeField] private float bonusSpeed;
-    [SerializeField] private float bonusManaRechargeSpeed;
-    [SerializeField] private float bonusMaxHP;
-    [SerializeField] private float healHP;
+    
+    [SerializeField] private List<ItemEffect> effects;
     [SerializeField] private int weight;
     [SerializeField] private GameObject[] journalPage;
     [SerializeField] private Journalnavigation pageManager;
@@ -36,39 +32,12 @@ public class Item : MonoBehaviour
         //Debug.Log("hello everyone]");
         if (other.CompareTag("player") && Input.GetKey((KeyCode) PlayerPrefs.GetInt("Grab")) ) {
             
-            if (bonusDamage > 0) {
-                controller.equippedWeapon.GetComponent<Weapon>().AddDamage(bonusDamage);
-                Debug.Log("Damage increased by " + bonusDamage);
+            foreach (ItemEffect i in effects) {
+                i.Apply(controller);
+                Debug.Log(i);
             }
 
-            if (bonusMaxMana > 0) {
-                controller.AddMaxMana(bonusMaxMana);
-                Debug.Log("Max Mana increased by " + bonusMaxMana);
-            }
-
-            if (bonusSpeed > 0) {
-                controller.AddSpeed(bonusSpeed);
-                Debug.Log("Speed increased by " + bonusSpeed);
-            }
-
-            if (bonusManaRechargeSpeed > 0) {
-                controller.AddManaRechargeSpeed(bonusManaRechargeSpeed);
-                Debug.Log("Mana recovery increased by " + bonusManaRechargeSpeed);
-            }
-
-            if (bonusMaxHP > 0) {
-                controller.AddMaxHP(bonusMaxHP);
-                controller.RestoreHP(bonusMaxHP);
-                uiManager.updateHealth();
-                Debug.Log("Max Hp increased by " + bonusMaxHP);
-                Debug.Log("Healed " + bonusMaxHP + " HP");
-            }
-
-            if (healHP > 0) {
-                controller.RestoreHP(healHP);
-                uiManager.updateHealth();
-                Debug.Log("Healed " + healHP + " HP");
-            }
+            uiManager.updateHealth();
 
             if (journalPage.Length > 0 && pageManager.lastPage < 8) {
                 pageManager.texts[pageManager.lastPage + 2] = journalPage[pageManager.lastPage];
@@ -81,5 +50,102 @@ public class Item : MonoBehaviour
 
     public int GetWeight() {
         return weight;
+    }
+}
+
+[System.Serializable]
+public class ItemEffect
+{
+    private enum ModifyType {
+        none,
+        additive,
+        multiplicative,
+        exponential,
+    }
+
+    private enum Stat {
+        damage,
+        fireDelay,
+        chargeSpeed,
+        maxMana,
+        manaRechargeSpeed,
+        HP,
+        maxHP,
+        moveSpeed,
+    }
+
+    [SerializeField] private ModifyType modType;
+    [SerializeField] private Stat statType;
+    [SerializeField] private float amount;
+
+    public void Apply(PlayerController target) {
+        switch (statType) {
+            case Stat.damage: {
+                Weapon targetWeapon = target.equippedWeapon.GetComponent<Weapon>();
+                targetWeapon.Damage = ModifyStat(targetWeapon.Damage, amount, modType);
+                break;
+            }
+
+            case Stat.fireDelay: {
+                Weapon targetWeapon = target.equippedWeapon.GetComponent<Weapon>();
+                targetWeapon.cooldownTime = ModifyStat(targetWeapon.cooldownTime, amount, modType);
+                break;
+            }
+
+            case Stat.chargeSpeed: {
+                Weapon targetWeapon = target.equippedWeapon.GetComponent<Weapon>();
+                targetWeapon.chargeTime = ModifyStat(targetWeapon.chargeTime, amount, modType);
+                break;
+            }
+
+            case Stat.maxMana: {
+                target.AddMaxMana(amount);
+                break;
+            }
+
+            case Stat.manaRechargeSpeed: {
+                target.AddManaRechargeSpeed(amount);
+                break;
+            }
+
+            case Stat.HP: {
+                target.RestoreHP(amount);
+                break;
+            }
+
+            case Stat.maxHP: {
+                target.AddMaxHP(amount);
+                break;
+            }
+
+            case Stat.moveSpeed: {
+                target.AddSpeed(amount);
+                break;
+            }
+        }
+    }
+
+    // Method to modify a stat based on the given ModifyType
+    private static float ModifyStat(float baseValue, float modifier, ModifyType modifyType)
+    {
+        switch (modifyType)
+        {
+            case ModifyType.none:
+                return baseValue; // No modification
+                break;
+            case ModifyType.additive:
+                return baseValue + modifier; // Additive modification
+                break;
+            case ModifyType.multiplicative:
+                return baseValue * modifier; // Multiplicative modification
+                break;
+            case ModifyType.exponential:
+                return Mathf.Pow(baseValue, modifier); // Exponential modification
+                break;
+            default:
+                return baseValue;
+                Debug.Log("Invalid ModifyType");
+                break;
+        }
     }
 }

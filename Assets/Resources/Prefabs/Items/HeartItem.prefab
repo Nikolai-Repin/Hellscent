@@ -143,7 +143,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d754b11d7c350046bfa5b23e719b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusDamage: 0
+  effects:
+  - modType: 1
+    statType: 6
+    amount: 1
+  - modType: 1
+    statType: 5
+    amount: 1
   bonusMaxMana: 0
   bonusSpeed: 0
   bonusManaRechargeSpeed: 0

@@ -283,6 +283,11 @@ public class Weapon : MonoBehaviour
     public void AddDamage(float bonusDamage) {
         weaponDamage += bonusDamage;
     }
+    
+    public float Damage {
+        get { return weaponDamage; }
+        set { weaponDamage = value; }
+    }
 
     public GameObject GetParent() {
         return parent;

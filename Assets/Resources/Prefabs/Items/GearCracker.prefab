@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4404471730189426087}
   - component: {fileID: 2040377620340065699}
   - component: {fileID: 7948933430450900912}
-  - component: {fileID: 7101743176883867621}
+  - component: {fileID: 1867568364223122560}
   m_Layer: 0
-  m_Name: DamageItem
+  m_Name: GearCracker
   m_TagString: Item Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 665226713
   m_SortingLayer: 1
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 2cef635b9a09c164ca2855b303be24b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11f85044b134776438a33c1c7ba908bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,7 +118,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.012570411, y: -0.04040493}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -129,9 +129,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.39887327, y: 0.47813383}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &7101743176883867621
+--- !u!114 &1867568364223122560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,16 +144,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effects:
-  - modType: 1
+  - modType: 2
     statType: 0
-    amount: 2
-  bonusDamage: 0
-  bonusMaxMana: 0
-  bonusSpeed: 0
-  bonusManaRechargeSpeed: 0
-  bonusMaxHP: 0
-  healHP: 0
-  weight: 30
+    amount: 1.3
+  - modType: 2
+    statType: 1
+    amount: 1.5
+  - modType: 2
+    statType: 2
+    amount: 1.5
+  weight: 10
   journalPage: []
   pageManager: {fileID: 0}
   data: {fileID: 0}
