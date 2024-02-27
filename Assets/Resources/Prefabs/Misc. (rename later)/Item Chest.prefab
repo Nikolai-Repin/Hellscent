@@ -143,11 +143,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ef9fdfcfee82245b07dc793332c502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTarget: {fileID: 0}
   invulnerable: 0
   intangible: 1
+  hasHealthBar: 0
   maxHealthAmount: 0
   healthAmount: 0
   knockbackMult: 0
+  dealDamageOnContact: 0
   weaponPool: []
   itemPool:
   - {fileID: 1945771043983452121, guid: 9d611537894d591499a39211dc5b48e1, type: 3}
@@ -155,6 +158,7 @@ MonoBehaviour:
   - {fileID: 7477404385308204958, guid: 48ab060fb47e08a45a2c528fee0b2291, type: 3}
   - {fileID: 7809032127312759129, guid: a293cefd8410a1e42bc94ba986b96aa3, type: 3}
   - {fileID: 1582206641080860920, guid: 8acaa7744a2a3ec4092daa16e403b6f6, type: 3}
+  - {fileID: 1945771043983452121, guid: f0b57b2a29be5f44ab2cd983d5c7638a, type: 3}
   - {fileID: 7251219752739850235, guid: 271a40d0d873a9640802a9e4c58d221d, type: 3}
   droppedItem: {fileID: 3501811076503607432, guid: 45b87eb4f484d9c409b8a977f24a6b9c, type: 3}
   open: {fileID: 21300000, guid: 7fe959e875fa93d4f99ab02570e58db8, type: 3}

@@ -145,13 +145,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects:
   - modType: 1
-    statType: 0
+    statType: 7
     amount: 20
-  bonusMaxMana: 0
-  bonusSpeed: 20
-  bonusManaRechargeSpeed: 0
-  bonusMaxHP: 0
-  healHP: 0
   weight: 60
   journalPage: []
   pageManager: {fileID: 0}
