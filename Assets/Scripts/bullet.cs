@@ -22,7 +22,7 @@ public class Bullet : Entity {
 
     //Defines how the bullet should move when the bullet is first fired
     public virtual void LaunchProjectile(Quaternion rotation) {
-        SetProjectileVelocity(rotation, projectileSpeed*wc.modProjectileSpeed);
+        SetProjectileVelocity(rotation, projectileSpeed);
     }
 
     //Defines how the bullet should move when the bullet is first fired using custom speed
@@ -88,11 +88,7 @@ public class Bullet : Entity {
 
     // Sets values like damage and bullet size whenever a bullet spawns
     public void SetStartingValues() {
-        if (setDamage) {
-            bulletDamage = creator.GetComponent<Weapon>().GetDamage();
-        } else {
-            bulletDamage += creator.GetComponent<Weapon>().GetDamage();
-        }
+        bulletDamage = creator.GetComponent<Weapon>().GetDamage();
 
         //if (setScale) {
             //changes the scale based on damage (change the values of the denominators if you wanna change how much the size scales).
@@ -115,6 +111,11 @@ public class Bullet : Entity {
     public void AddDamage(float damage, bool updateScale) {
         bulletDamage += creator.GetComponent<Weapon>().GetDamage();
         if (updateScale) {transform.localScale += new Vector3(damage/30, damage/30, 0f);}
+    }
+
+    public float damage {
+        get { return bulletDamage; }
+        set { bulletDamage = value; }
     }
 
     public float getProjectileSpeed() {

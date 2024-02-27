@@ -43,22 +43,11 @@ public class Weapon : MonoBehaviour
     protected Entity controller; //change to Player controller if needed
     protected Vector2 target;
 
-    //Rand Stats
-    public float quality = 0.0F;
-    [SerializeField] public bool randomize;
-    public float modCooldownTime = 1.0F;
-    public float modDamage = 0F;
-    public float modProjectileSpeed = 1.0F;
-    public float modAccuracy = 1.0F;
-    public int modBullets = 0;
-    public float modManaCost = 1.0F;
-
     // Start is called before the first frame update
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
 
-        cooldownTime *= modCooldownTime;
         cooldown = 0;
 
         if (transform.parent != null) {
@@ -88,12 +77,6 @@ public class Weapon : MonoBehaviour
             UpdateAngleAndPosition(target);
         }
 
-        //If weapon is marked for randomization, randomize modifiers. Dangerous to call more than once on a weapon
-        if (randomize) {
-            modManaCost = RandomizeMods(1.0F, quality);
-            randomize = false;
-        }
-
         if (useMana && Time.time>lastFireTime) {
             if (mana < maxMana) {
                 mana += parent.GetComponent<PlayerController>().GetManaRechargeSpeed()*Time.deltaTime;
@@ -121,17 +104,18 @@ public class Weapon : MonoBehaviour
             return true;
         }
 
-        for (int i = 0; i < bullets+modBullets; i++)
+        for (int i = 0; i < bullets; i++)
         {
             GameObject bullet = Instantiate(projectileType, transform.position, new Quaternion());
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.UpdateCreator(transform.gameObject);
             bulletScript.team = parent.tag;
 
-            Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F* accuracy*modAccuracy, accuracy*modAccuracy));
+            Vector3 inaccuracy = new Vector3(0, 0, Random.Range(-1.0F * accuracy, accuracy));
             Quaternion fireAngle = Quaternion.Euler(transform.rotation.eulerAngles + inaccuracy);
 
             bulletScript.LaunchProjectile(fireAngle);
+            //bulletScript.damage = this.weaponDamage;
             bullet.GetComponent<Rigidbody2D>().velocity += parent.GetComponent<Rigidbody2D>().velocity.normalized;
 
             bulletScript.SetStartingValues();
@@ -232,20 +216,6 @@ public class Weapon : MonoBehaviour
         parent = transform.parent.gameObject;
     }
 
-    public float RandomizeMods(float variance, float quality) {
-        modCooldownTime += (Random.Range(-variance, variance) + quality) *1.0F; 
-        modDamage += (Random.Range(-variance, variance) + quality) *1.0F; 
-        modProjectileSpeed += (Random.Range(-variance, variance) + quality) *1.0F; 
-        modAccuracy += (Random.Range(-variance, variance) + quality) *1.0F; 
-
-        while (Random.Range(0, variance*10) <= quality && modBullets < 3) {
-            modBullets++;
-        }
-
-        //Replace the number at the end with how many modifiers there are - Currently 5
-        return 1.0F+(((modCooldownTime-1)+(modDamage-1)+(modProjectileSpeed-1)+((modAccuracy*-1.0F)-1)+modBullets)/5.0F);
-    }
-
     public void UpdateTarget() {
         if (transform.parent != null) {
             parent = transform.parent.gameObject;
@@ -269,7 +239,7 @@ public class Weapon : MonoBehaviour
     }
 
     public float GetManaCost() {
-        return manaCost*modManaCost;
+        return manaCost;
     }
 
     public float GetDamage() {

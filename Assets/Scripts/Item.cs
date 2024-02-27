@@ -72,6 +72,7 @@ public class ItemEffect
         HP,
         maxHP,
         moveSpeed,
+        kickback,
     }
 
     [SerializeField] private ModifyType modType;
@@ -120,6 +121,12 @@ public class ItemEffect
 
             case Stat.moveSpeed: {
                 target.AddSpeed(amount);
+                break;
+            }
+
+            case Stat.kickback: {
+                Weapon targetWeapon = target.equippedWeapon.GetComponent<Weapon>();
+                targetWeapon.kickback = ModifyStat(targetWeapon.kickback, amount, modType);
                 break;
             }
         }

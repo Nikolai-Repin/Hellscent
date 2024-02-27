@@ -104,19 +104,20 @@ MonoBehaviour:
   cooldownTime: 0.5
   bullets: 1
   accuracy: 1
-  weaponDamage: 0
+  clip: 1
+  clipDelay: 0
+  weaponDamage: 7
   useMana: 1
   manaCost: 1
   maxMana: 25
   mana: 0
   manaRechargeDelay: 1
+  canCharge: 0
+  chargeTime: 0
+  incrementTime: 0
+  extraManaUse: 0
+  extraDamage: 0
+  extraKickback: 0
+  extraClip: 0
   lastFireTime: 0
   cooldown: 0
-  quality: 0
-  randomize: 0
-  modCooldownTime: 1
-  modDamage: 1
-  modProjectileSpeed: 1
-  modAccuracy: 1
-  modBullets: 0
-  modManaCost: 1

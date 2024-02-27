@@ -106,7 +106,7 @@ MonoBehaviour:
   accuracy: 10
   clip: 1
   clipDelay: 0
-  weaponDamage: 0
+  weaponDamage: 2
   useMana: 1
   manaCost: 5
   maxMana: 50
@@ -121,11 +121,3 @@ MonoBehaviour:
   extraClip: 0
   lastFireTime: 0
   cooldown: 0
-  quality: 0
-  randomize: 0
-  modCooldownTime: 1
-  modDamage: 1
-  modProjectileSpeed: 1
-  modAccuracy: 1
-  modBullets: 0
-  modManaCost: 1

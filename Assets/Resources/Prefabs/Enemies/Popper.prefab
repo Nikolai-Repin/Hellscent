@@ -567,6 +567,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7182153838417077510, guid: 344e129a626c49f449539189aa0d4f91, type: 3}
+      propertyPath: weaponDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7182153838417077510, guid: 344e129a626c49f449539189aa0d4f91, type: 3}
       propertyPath: projectileType
       value: 
       objectReference: {fileID: 6942168956635508771, guid: 10b2e3e16ebb7d24fa9c6928737d3b86, type: 3}
